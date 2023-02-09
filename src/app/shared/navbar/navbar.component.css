@@ -1,0 +1,111 @@
+
+.preNavBar{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 35px;
+
+    width: 100%;
+    background-color: rgb(231, 86, 86);
+    color: white;
+    height: 35px;
+}
+
+.miNavbar{
+    background-color: rgb(255, 255, 255);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    height: 90px;
+
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: rgb(192, 192, 192);
+}
+
+.divLeft{
+    text-align: left;
+    vertical-align: middle;
+    line-height: 90px;
+
+    margin-left: 10px;
+    color: rgb(0, 0, 0);
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.divMiddle{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 90px;
+
+    color: rgb(0, 0, 0);
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.divRight{
+    text-align: right;
+    vertical-align: middle;
+    line-height: 90px;
+
+    margin-right:10px;
+    color: rgb(0, 0, 0);
+    grid-area: 1 / 3 / 2 / 4;
+}
+
+.logo{
+    height: 75px;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: #1A1E23;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  list-style-type: none;
+}
+  li {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+    a {
+      position: relative;
+      display: block;
+      padding: 4px 0;
+      font-family: Lato, sans-serif;
+      color: #000000;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: 0.5s;
+    }
+      a:after {
+        position: absolute;
+        content: "";
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: #3498db;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.5s;
+      }
+
+      a:hover {
+        color: #000000;
+      }
+
+      a:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+  
+
