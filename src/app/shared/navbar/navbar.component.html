@@ -1,16 +1,40 @@
 
-<div class="preNavBar">Informacion cualquiera</div>
-<div class="miNavbar">
+<div class="preNavBar">Informacion cualquiera
+</div>
+<div class="miNavbar sticky-top" >
     <div class="divLeft">
         <img src="../../../assets/logo-sin-letras.png" class="logo">
     </div>
     <div class="divMiddle">
         <ul>
-            <li><a href="#">home</a></li>
-            <li><a href="#">archives</a></li>
-            <li><a href="#">tags</a></li>
-            <li><a href="#">categories</a></li>
+            <li><a class="enlace-navbar" [routerLink]="['/home']" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+            <li>
+                <a class="enlace-navbar" [routerLink]="['/products/all']" routerLinkActive="activo">Productos</a>
+                <div class="menu-productos">
+                    <a href="#" class="enlace-div"><div class="menu-productos-categoria-1">
+                        <img class="img-categoria" src="../../../assets/ejemplo.jpg">
+                        <p>Categoria 1</p>
+                    </div></a>
+                    <a href="#" class="enlace-div"><div class="menu-productos-categoria-2">
+                        <img class="img-categoria" src="../../../assets/ejemplo.jpg">
+                        <p>Categoria 2</p>
+                    </div></a>
+                    <a href="#" class="enlace-div"><div class="menu-productos-categoria-3">
+                        <img class="img-categoria" src="../../../assets/ejemplo.jpg">
+                        <p>Categoria 3</p>
+                    </div></a>
+                    <a href="#" class="enlace-div"><div class="menu-productos-categoria-4">
+                        <img class="img-categoria" src="../../../assets/ejemplo.jpg">
+                        <p>Categoria 4</p>
+                    </div></a>
+                </div>
+            </li>
+            <li><a class="enlace-navbar" [routerLink]="['/contact']" routerLinkActive="activo">Contacto</a></li>
+            <li><a class="enlace-navbar" [routerLink]="['/about']" routerLinkActive="activo">Sobre nosotros</a></li>
         </ul>
     </div>
-    <div class="divRight">CARRITO Y USUARIO</div>
+    <div class="divRight">
+        <img class="img-carrito" src="../../../assets/carrito.png">
+        <img class="img-usuario" src="../../../assets/user.png">
+    </div>
 </div>

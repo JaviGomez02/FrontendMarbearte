@@ -62,18 +62,23 @@
     font-weight: bold;
     margin-top: 50px;
     margin-bottom: 20px;
+
+    text-transform: uppercase;
 }
 
 .div-enlace-footer{
     margin: 15px;
+    
 }
 
 .enlace-footer{
     
     text-decoration:none;
-    color: black;
+    text-transform: uppercase;
+    color: #707070;
 
 }
 
-a:link, a:visited, a:active {
+.enlace-footer:hover{
+    color: black;
 }
