@@ -18,11 +18,14 @@
 .grid-productos-home{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: 100px;
+    margin-bottom: 70px;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 .img-producto{
-    width: 200px;
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -34,9 +37,6 @@
     font-weight: normal;
 }
 
-.producto{
-    height: 400px;
-}
 
 .boton-producto{
     position: relative;
@@ -54,6 +54,10 @@
     display: none;
 }
 
+.producto{
+    height: 400px;
+}
+
 .boton-producto{
     display: none;
 }
@@ -61,24 +65,60 @@
 .boton{
     position: relative;
     padding: 1em 20px;
-    border-color: #0000003b;
+    border-color: rgb(231, 86, 86);
+    color: rgb(231, 86, 86);;
     font-size: 12px;
     transition: all .1s ease-out;
-    width: 50%;
+    width: 100%;
     background-color: white;
     border-width: 1px;
     border-radius: 5px;
 }
 
+.boton:hover{
+    color: white;
+    border-color: white;
+    background-color: rgb(231, 86, 86);
+}
+
 .categorias-producto{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 50px;
     text-align: center;
     margin-top: 70px;
     margin-bottom: 70px;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 .img-categoria{
-    width: 300px;
+    width: 100%;
+}
+
+.categoria:hover .img-categoria{
+    filter: blur(2px);
+}
+
+.categoria:hover .texto-categoria{
+    visibility: visible;
+}
+
+.categoria{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    
+    cursor: pointer;
+}
+
+.texto-categoria{
+    visibility: hidden;
+    color: white;
+    font-size: 28px;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
