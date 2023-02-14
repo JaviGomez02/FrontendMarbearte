@@ -1,42 +1,39 @@
 
 
 
-<div style="margin: 100px;">
-  <h1>Login</h1>
-  <form class="form-login" (ngSubmit)="signIn()" #myForm="ngForm">
-    <input type="text" 
-            placeholder="Nombre"
-            [ngModel]="initForm.username"
-            name="username"
-            required
-            minlength="3">
-            <span class="form-text text-danger" *ngIf="notValid('username')">
-                  Debe de ser de 3 letras
-            </span><br><br>
-    <input type="text" 
-            placeholder="Contraseña"
-            name="password"
-            [ngModel]="initForm.password"
-            required
-            minlength="3">
-    <span class="form-text text-danger" *ngIf="notValid('password')">
-      Debe de ser de 3 letras
-    </span><br><br>
-    <button type="submit"
-            class="btn btn-primary float-end"
-            [disabled]="myForm.invalid">Enviar
-    </button>
-  </form>
+<div class="container-login">
+  <div class="container-form">
+    <p class="titulo-login">Login</p>
+    <p class="info-login">Por favor introduce tu usuario y contraseña.</p>
 
-  <span>Valid</span>
-        <pre>{{myForm.valid}}</pre>
-
-        <span>Pristine</span>
-        <pre>{{myForm.pristine}}</pre>
-
-        <span>Touched</span>
-        <pre>{{myForm.touched}}</pre>
-
-        <span>Value</span>
-        <pre>{{myForm.value | json}}</pre>
+    <form class="form-login" (ngSubmit)="signIn()" #myForm="ngForm">
+      <div class="elemento-form">
+        <input type="text" 
+              placeholder="Nombre de usuario"
+              [ngModel]="initForm.username"
+              name="username"
+              required
+              minlength="4">
+              <p class="form-text text-danger" *ngIf="notValid('username')">
+                    El nombre de usuario debe tener al menos 4 letras.
+              </p>
+      </div>
+      <div class="elemento-form">
+        <input type="text" 
+                placeholder="********"
+                name="password"
+                [ngModel]="initForm.password"
+                required
+                minlength="3">
+        <p class="form-text text-danger" *ngIf="notValid('password')">
+          La contraseña debe tener al menos 3 letras.
+        </p>
+      </div>
+      <p><button type="submit" class="boton"
+              [disabled]="myForm.invalid">Enviar
+      </button></p>
+      <p class="info-registro">No tienes ninguna cuenta? <a href="#">Regístrate</a></p>
+    </form>
+  </div>
 </div>
+
