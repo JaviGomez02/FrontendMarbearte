@@ -10,10 +10,10 @@ import { AboutRoutingModule } from './about-routing.module';
   ],
   imports: [
     CommonModule,
+    AboutRoutingModule
   ],
   exports: [
-    AboutComponent,
-    AboutRoutingModule
+    AboutComponent
   ]
 })
 export class AboutModule { }

@@ -9,6 +9,7 @@ import { ProductsModule } from './products/products.module';
 import { AboutModule } from './about/about.module';
 import { ContactModule } from './contact/contact.module';
 import { AccountModule } from './account/account.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AccountModule } from './account/account.module';
     ProductsModule,
     AboutModule,
     ContactModule,
-    AccountModule
+    AccountModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
