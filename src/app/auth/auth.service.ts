@@ -19,6 +19,8 @@ export class authService{
 
     
     login(username: string, password: string):Observable<boolean>{
+        console.log(username)
+        console.log(password)
         return this.http.post<AuthResponse>(this.url, {username, password},this.httpOptions)
         .pipe( switchMap(token => {
                 localStorage.setItem('token', token.access_token);
