@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms' 
 import { authService } from 'src/app/auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -44,9 +45,19 @@ export class LoginComponent implements OnInit {
       next: (resp) => {
         if (resp) {
           this.isLoggedIn=true;
+          Swal.fire({
+            icon: 'success',
+            title: 'Login correcto',
+            timer: 1500
+          })
+          
         }
         else {
-          confirm('Email o contraseña incorrectos');
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Usuario y/o contraseña incorrectos'
+          })
         }
       }
     })

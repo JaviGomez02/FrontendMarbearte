@@ -10,7 +10,7 @@ import { AuthResponse } from '../interfaces/token.interface';
 
 export class authService{
 
-    url:string = 'http://localhost:8082/signin'
+    url:string = 'http://localhost:8082/auth/login'
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
@@ -23,7 +23,7 @@ export class authService{
         console.log(password)
         return this.http.post<AuthResponse>(this.url, {username, password},this.httpOptions)
         .pipe( switchMap(token => {
-                localStorage.setItem('token', token.access_token);
+                localStorage.setItem('token', token.token);
                 return of(true);
             }),catchError(error => {
                 localStorage.removeItem('token');
