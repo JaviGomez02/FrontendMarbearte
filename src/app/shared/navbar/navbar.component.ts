@@ -12,4 +12,20 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  search:boolean = false;
+  cart:boolean = false;
+  color:string = 'white';
+
+  showSearchBar():void{
+    this.search = !this.search;
+    if(this.color==='white')
+      this.color= 'black';
+    else
+    this.color= 'white';
+  }
+
+  showCart():void{
+    this.cart = !this.cart
+  }
+
 }

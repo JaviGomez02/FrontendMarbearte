@@ -27,7 +27,7 @@ input, textarea{
     border: solid;
     border-width: 1px;
     border-color: rgb(207, 206, 206);
-    
+    resize: none;
     border-radius: 2px;
 }
 

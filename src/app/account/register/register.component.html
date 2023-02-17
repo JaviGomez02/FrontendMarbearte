@@ -1,0 +1,72 @@
+
+
+
+<div class="container-login">
+    <div class="container-form">
+      <p class="titulo-login">Registro</p>
+      <p class="info-login">Por favor rellene todos los campos.</p>
+  
+      <form class="form-login" (ngSubmit)="registerSubmit()"  #myForm="ngForm">
+        <div class="elemento-form">
+          <input type="text" 
+                placeholder="Nombre de usuario"
+                [ngModel]="initForm.username"
+                name="username"
+                required
+                minlength="4">
+                <p class="form-text text-danger" *ngIf="notValid('username')">
+                      El nombre de usuario debe tener al menos 4 letras.
+                </p>
+        </div>
+        <div class="elemento-form">
+          <input type="text" 
+                placeholder="Nombre y apellidos"
+                [ngModel]="initForm.nombre"
+                name="nombre"
+                required
+                minlength="4">
+                <p class="form-text text-danger" *ngIf="notValid('nombre')">
+                      El nombre de usuario debe tener al menos 4 letras.
+                </p>
+        </div>
+        <div class="elemento-form">
+          <input type="text" 
+                placeholder="Email"
+                [ngModel]="initForm.email"
+                name="email"
+                required
+                minlength="4">
+                <p class="form-text text-danger" *ngIf="notValid('email')">
+                      El nombre de usuario debe tener al menos 4 letras.
+                </p>
+        </div>
+        <div class="elemento-form">
+          <input type="password" 
+                  placeholder="Contraseña"
+                  name="password"
+                  [ngModel]="initForm.password"
+                  required
+                  minlength="3">
+          <p class="form-text text-danger" *ngIf="notValid('password')">
+            La contraseña debe tener al menos 3 letras.
+          </p>
+        </div>
+        <div class="elemento-form">
+          <input type="password" 
+                  placeholder="Repetir contraseña"
+                  name="passwordRepeat"
+                  required
+                  minlength="3">
+          <p class="form-text text-danger" *ngIf="notValid('passwordRepeat')">
+            La contraseña debe tener al menos 3 letras.
+          </p>
+        </div>
+        <p><button type="submit" class="boton"
+                [disabled]="myForm.invalid">Entrar
+        </button></p>
+        <p class="info-registro">Ya estás registrado? <a href="#" [routerLink]="['/account/login']">Volver al login</a></p>
+      </form>
+    </div>
+  </div>
+  
+  

@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms' 
-import { authService } from 'src/app/auth/auth.service';
+import { NgForm } from '@angular/forms';
+import { authService } from '../../auth/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   constructor(private authService:authService) { }
 
@@ -16,7 +16,9 @@ export class LoginComponent implements OnInit {
 
   initForm = {
     username: "",
-    password: ""
+    password: "",
+    email: "",
+    nombre: ""
   }
   isLoggedIn!: boolean;
   
@@ -33,22 +35,17 @@ export class LoginComponent implements OnInit {
       this.myForm?.controls[campo]?.touched
   }
 
-  // notValid(campo: string): boolean{
-  //   return this.myForm?.controls[campo]?.invalid &&
-  //     this.myForm?.controls[campo]?.touched
-  // }
-
-  signIn():void{
-    // console.log('Username: ', this.myForm.value.username, 'Password: ', this.myForm.value.password)
-    this.authService.login(this.myForm.value.username,this.myForm.value.password)
+  registerSubmit():void{
+    console.log(this.myForm.value.username,this.myForm.value.email, this.myForm.value.password, this.myForm.value.nombre)
+    this.authService.register(this.myForm.value.username,this.myForm.value.email, this.myForm.value.password, this.myForm.value.nombre )
     .subscribe({
       next: (resp) => {
         if (resp) {
           this.isLoggedIn=true;
           Swal.fire({
             icon: 'success',
-            title: 'Login correcto',
-            timer: 1500
+            title: 'Registrado correctamente',
+            text: 'Le hemos mandado un correo de verificación. Compruebe su bandeja de entrada'
           })
           
         }
@@ -56,17 +53,12 @@ export class LoginComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Usuario y/o contraseña incorrectos'
+            text: 'Algo ha ido mal. Inténtelo de nuevo'
           })
         }
       }
     })
-    
-  }
-  
-  logOut():void{
-    this.authService.logout();
-    this.isLoggedIn=false;
+
   }
 
 }

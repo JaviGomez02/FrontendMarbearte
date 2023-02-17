@@ -19,7 +19,7 @@
               </p>
       </div>
       <div class="elemento-form">
-        <input type="text" 
+        <input type="password" 
                 placeholder="********"
                 name="password"
                 [ngModel]="initForm.password"
@@ -32,7 +32,8 @@
       <p><button type="submit" class="boton"
               [disabled]="myForm.invalid">Entrar
       </button></p>
-      <p class="info-registro">No tienes ninguna cuenta? <a href="#">Regístrate</a></p>
+      <p class="info-registro">No tienes ninguna cuenta? <a href="#" [routerLink]="['/account/register']">Regístrate</a></p>
+     
     </form>
   </div>
 </div>
