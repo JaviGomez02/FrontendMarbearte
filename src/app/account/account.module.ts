@@ -6,6 +6,7 @@ import { AccountRoutingModule } from './account-routing.module';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { VerifyComponent } from './verify/verify.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -19,7 +20,8 @@ import { VerifyComponent } from './verify/verify.component';
   imports: [
     CommonModule,
     FormsModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    RouterModule
   ],
   exports: [
     AccountComponent,

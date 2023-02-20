@@ -30,12 +30,13 @@ input{
     border: solid;
     border-width: 1px;
     border-color: rgb(207, 206, 206);
-    border-radius: 5px;
+    border-radius: 2px;
     width: 300px;
+    height: 35px;
 }
 
 .elemento-form{
-    height: 60px;
+    height: 70px;
 }
 
 input:hover{
