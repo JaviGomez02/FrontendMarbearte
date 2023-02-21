@@ -25,7 +25,8 @@ export class VerifyComponent implements OnInit {
         if (resp) {
           Swal.fire({
             icon: 'success',
-            title: 'Usuario verificado'
+            title: 'Usuario verificado',
+            text: 'Ya puede iniciar sesión'
           })
           
         }

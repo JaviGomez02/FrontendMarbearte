@@ -29,7 +29,7 @@ export class authService{
     }
 
     verify(code: string, username: string):Observable<boolean>{
-        return this.http.get<any>('http://localhost:8082/verify', {"code":code, "username":username}, this.httpOptions)
+        return this.http.get<any>('http://localhost:8082/verify?code='+code+'&username='+username, this.httpOptions)
         .pipe( switchMap(resp => {
                 return of(true);
             }),catchError(error => {
