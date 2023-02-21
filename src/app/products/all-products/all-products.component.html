@@ -106,8 +106,8 @@
       
     </div>
     <div class="pagination" >
-      <a href="#">&laquo;</a>
+      <a (click)="previousPageNumber()">&laquo;</a>
       <a *ngFor="let item of listaPagination" (click)="setPageNumber(item)">{{item}}</a>
-      <a href="#">&raquo;</a>
+      <a (click)="nextPageNumber()">&raquo;</a>
     </div>
   </div>

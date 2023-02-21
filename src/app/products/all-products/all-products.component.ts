@@ -27,7 +27,6 @@ export class AllProductsComponent implements OnInit {
     this.servicio.getProducts(this.pageNumber, this.sizeNumber)
     .subscribe({
       next: (resp)=>{
-        console.log(resp)
         this.lista=resp.content
         this.totalPages=resp.totalPages
 
@@ -42,13 +41,46 @@ export class AllProductsComponent implements OnInit {
   
   }
 
+  previousPageNumber(){
+    if(this.pageNumber>1){
+      this.pageNumber=this.pageNumber-1
+
+      this.servicio.getProducts(this.pageNumber, this.sizeNumber)
+    .subscribe({
+      next: (resp)=>{
+        this.lista=resp.content
+      },
+      error: (error)=>{
+        
+      }
+    })
+    }
+    
+  }
+
+  nextPageNumber(){
+    if(this.pageNumber<this.totalPages){
+      this.pageNumber=this.pageNumber+1
+
+      this.servicio.getProducts(this.pageNumber, this.sizeNumber)
+      .subscribe({
+      next: (resp)=>{
+        this.lista=resp.content
+      },
+      error: (error)=>{
+        
+      }
+    })
+    }
+    
+  }
+
   setPageNumber(numero:number){
     this.pageNumber=numero
 
     this.servicio.getProducts(this.pageNumber, this.sizeNumber)
     .subscribe({
       next: (resp)=>{
-        console.log(resp)
         this.lista=resp.content
       },
       error: (error)=>{
