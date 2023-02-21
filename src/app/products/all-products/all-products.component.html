@@ -103,5 +103,11 @@
         <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
         <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
       </div> -->
+      
+    </div>
+    <div class="pagination" >
+      <a href="#">&laquo;</a>
+      <a *ngFor="let item of listaPagination" (click)="setPageNumber(item)">{{item}}</a>
+      <a href="#">&raquo;</a>
     </div>
   </div>
