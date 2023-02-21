@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   isLoggedIn!: boolean;
   
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isAuthenticated();
+    // this.isLoggedIn = this.authService.isAuthenticated();
   }
 
   save(){

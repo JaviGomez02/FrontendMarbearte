@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { of, Observable, switchMap, catchError } from 'rxjs';
 import { AuthResponse } from '../interfaces/token.interface';
+import { CookieService } from 'ngx-cookie-service';
+import jwt_decode from "jwt-decode";
+import { DecodeToken } from '../interfaces/decode-token.interface';
+
 
 
 @Injectable({
@@ -15,7 +19,7 @@ export class authService{
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient, private cookieService:CookieService){}
 
 
     register(username: string, email:string, contrasena:string, nombre:string):Observable<boolean>{
@@ -44,21 +48,27 @@ export class authService{
         // console.log(password)
         return this.http.post<AuthResponse>(this.url+"/login", {username, password},this.httpOptions)
         .pipe( switchMap(token => {
-                localStorage.setItem('token', token.token);
+                this.cookieService.set('token', token.token)
                 return of(true);
             }),catchError(error => {
-                localStorage.removeItem('token');
+                this.cookieService.delete('token');
                 return of(false);
             })
         )
     }
 
     logout() {
-        localStorage.setItem('authenticated', 'false');
-        localStorage.removeItem('rol'); 
+        this.cookieService.delete('token')
+    }
+
+    decodeJwt(jwt: string): DecodeToken{
+        return jwt_decode(jwt)
     }
 
     isAuthenticated() {
-        return localStorage.getItem('authenticated')==='true'
+        // return localStorage.getItem('authenticated')==='true'
+        //Hacer la peticion en la api
     }
+
+
 }

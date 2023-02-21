@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { productService } from '../../services/product.service';
 import { Product } from '../../interfaces/product.interface';
 import { Content } from '../../interfaces/page.interface';
+import { CookieService } from 'ngx-cookie-service';
+import { authService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-all-products',
@@ -10,7 +12,11 @@ import { Content } from '../../interfaces/page.interface';
 })
 export class AllProductsComponent implements OnInit {
 
-  constructor(private servicio:productService) { }
+  constructor(private servicio:productService, private cookieService:CookieService, private authService: authService) { }
+
+  isAdmin:boolean=false
+
+
 
   lista:Content[]=[]
 
@@ -38,6 +44,10 @@ export class AllProductsComponent implements OnInit {
         
       }
     })
+
+    if(this.authService.decodeJwt(this.cookieService.get('token')).role=='ADMIN'){
+      this.isAdmin=true;
+    }
   
   }
 
