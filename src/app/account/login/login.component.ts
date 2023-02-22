@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms' 
 import { authService } from 'src/app/auth/auth.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService:authService) { }
+  constructor(private authService:authService, private route:Router) { }
 
   @ViewChild('myForm') myForm!: NgForm;
 
@@ -50,6 +51,7 @@ export class LoginComponent implements OnInit {
             title: 'Login correcto',
             timer: 1500
           })
+          this.route.navigate(["/account"])
           
         }
         else {

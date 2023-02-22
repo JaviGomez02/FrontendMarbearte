@@ -16,8 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     ProductsRoutingModule,
-    DataTablesModule,
-    HttpClientModule
+    DataTablesModule
+    
   ],
   exports:[
     AllProductsComponent

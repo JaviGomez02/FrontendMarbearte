@@ -1,0 +1,21 @@
+<form [formGroup]="myForm" autocomplete="off">
+    <input type="text"
+    placeholder="Nombre de la nueva categoria"
+    formControlName="nombre">
+    <span class="form-text text-danger"
+        *ngIf="isValidField('nombre')">
+         	Debe tener 3 caracteres como mínimo
+    </span><br><br>
+
+
+    <input type="text"
+    placeholder="Descripcion de la nueva categoria"
+    formControlName="descripcion">
+    <span class="form-text text-danger"
+        *ngIf="isValidField('descripcion')">
+         	Debe tener 10 caracteres como mínimo
+    </span><br><br>
+    <button type="submit" [disabled]="myForm.invalid">Crear</button>
+
+
+</form>

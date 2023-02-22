@@ -1,1 +1,26 @@
-<p>all-categorias works!</p>
+
+
+<div class="productos-home-1">
+    <p class="titulo-productos">Listado de categorias</p>
+    <div class="div-boton">
+        <button class="boton" [routerLink]="['/categoria/add']">Añadir nueva categoria</button>
+    </div>
+    <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Productos</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let post of lista">
+        <td>{{ post.id }}</td>
+        <td>{{ post.nombre }}</td>
+        <td>{{ post.descripcion }}</td>
+        <td><a href="#">Ver productos</a></td>
+        </tr>
+    </tbody>
+    </table>
+</div>

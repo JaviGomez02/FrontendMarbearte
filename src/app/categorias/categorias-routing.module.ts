@@ -2,6 +2,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllCategoriasComponent } from './all-categorias/all-categorias.component';
+import { AddCategoriaComponent } from './add-categoria/add-categoria.component';
 
 
 const routes: Routes = [
@@ -9,6 +10,10 @@ const routes: Routes = [
     path: '',
     component: AllCategoriasComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'add',
+    component: AddCategoriaComponent
   }
 ];
 
