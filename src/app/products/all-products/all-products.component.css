@@ -21,10 +21,7 @@
     margin-right: 40px;
 }
 
-.img-producto{
-    width: 100%;
-    margin-bottom: 20px;
-}
+
 
 .nombre-producto{
     font-weight: bold;
@@ -53,6 +50,13 @@
 
 .producto{
     height: 400px;
+    object-fit: contain;
+}
+
+.img-producto{
+    width: 200px;
+    height: 400px;
+    margin-bottom: 20px;
 }
 
 .boton-producto{

@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { ProductsRoutingModule } from './products-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { DatatableProductComponent } from './datatable-product/datatable-product.component';
 
 
 
 @NgModule({
   declarations: [
-    AllProductsComponent
+    AllProductsComponent,
+    DatatableProductComponent
   ],
   imports: [
     CommonModule,
