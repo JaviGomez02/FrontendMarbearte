@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddCategoriaComponent } from './add-categoria/add-categoria.component';
 import { UpdateCategoriaComponent } from './update-categoria/update-categoria.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CategoriasRoutingModule,
     DataTablesModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
 
   ],
   exports:[
