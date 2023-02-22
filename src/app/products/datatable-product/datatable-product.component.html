@@ -1,1 +1,27 @@
-<p>datatable-product works!</p>
+<div class="productos-home-1">
+    <p class="titulo-productos">Todos nuestros productos</p>
+    <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Categoria</th>
+        <th>Imagenes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let post of lista">
+        <td>{{ post.id }}</td>
+        <td>{{ post.nombre }}</td>
+        <td>{{ post.descripcion }}</td>
+        <td>{{ post.price }}</td>
+        <td>{{ post.stock }}</td>
+        <td>{{ post.categoria.nombre }}</td>
+        <td><a href="#">Ver imagenes</a></td>
+        </tr>
+    </tbody>
+    </table>
+</div>

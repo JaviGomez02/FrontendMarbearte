@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { ProductsRoutingModule } from './products-routing.module';
 import { DatatableProductComponent } from './datatable-product/datatable-product.component';
+import { DataTablesModule } from 'angular-datatables';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -13,7 +15,9 @@ import { DatatableProductComponent } from './datatable-product/datatable-product
   ],
   imports: [
     CommonModule,
-    ProductsRoutingModule
+    ProductsRoutingModule,
+    DataTablesModule,
+    HttpClientModule
   ],
   exports:[
     AllProductsComponent
