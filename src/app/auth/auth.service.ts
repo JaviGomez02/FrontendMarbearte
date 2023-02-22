@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { of, Observable, switchMap, catchError } from 'rxjs';
+import { of, Observable, switchMap, catchError, BehaviorSubject } from 'rxjs';
 import { AuthResponse } from '../interfaces/token.interface';
 import { CookieService } from 'ngx-cookie-service';
 import jwt_decode from "jwt-decode";
@@ -65,10 +65,6 @@ export class authService{
         return jwt_decode(jwt)
     }
 
-    isAuthenticated() {
-        // return localStorage.getItem('authenticated')==='true'
-        //Hacer la peticion en la api
-    }
 
 
 }

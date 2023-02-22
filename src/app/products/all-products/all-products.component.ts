@@ -16,7 +16,7 @@ export class AllProductsComponent implements OnInit {
 
   isAdmin:boolean=false
 
-
+  token:string=""
 
   lista:Content[]=[]
 
@@ -45,7 +45,8 @@ export class AllProductsComponent implements OnInit {
       }
     })
 
-    if(this.authService.decodeJwt(this.cookieService.get('token')).role=='ADMIN'){
+    this.token = this.cookieService.get('token')
+    if(this.token && this.authService.decodeJwt(this.token).role=='ADMIN'){
       this.isAdmin=true;
     }
   

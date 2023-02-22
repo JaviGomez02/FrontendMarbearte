@@ -10,6 +10,8 @@ import { AboutModule } from './about/about.module';
 import { ContactModule } from './contact/contact.module';
 import { AccountModule } from './account/account.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorService } from './auth-interceptor.service';
+import { CategoriasModule } from './categorias/categorias.module';
 
 @NgModule({
   declarations: [
@@ -24,9 +26,10 @@ import { HttpClientModule } from '@angular/common/http';
     AboutModule,
     ContactModule,
     AccountModule,
-    HttpClientModule
+    HttpClientModule,
+    CategoriasModule
   ],
-  providers: [],
+  providers: [AuthInterceptorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

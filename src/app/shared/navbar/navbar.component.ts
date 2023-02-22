@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { authService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,25 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+
+
+  constructor(private cookieService: CookieService, private authService:authService) { }
 
   ngOnInit(): void {
   }
 
-  search:boolean = false;
-  cart:boolean = false;
-  color:string = 'white';
-
-  showSearchBar():void{
-    this.search = !this.search;
-    if(this.color==='white')
-      this.color= 'black';
-    else
-    this.color= 'white';
-  }
-
-  showCart():void{
-    this.cart = !this.cart
-  }
 
 }
