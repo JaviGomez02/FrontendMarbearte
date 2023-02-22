@@ -1,1 +1,34 @@
-<p>update-categoria works!</p>
+
+
+<div class="container-login">
+    <div class="container-form">
+      <p class="titulo-login">Editar categoria</p>
+  
+      <form class="form-login" (ngSubmit)="editarCategoria()" [formGroup]="myForm" autocomplete="off">
+        <div class="elemento-form">
+            <input type="text"
+            class="input-nombre"
+            placeholder="Nombre de la categoria"
+            formControlName="nombre">
+            <p class="form-text text-danger"
+                *ngIf="isValidField('nombre')">
+                     Debe tener 3 caracteres como mínimo
+            </p>
+        </div>
+        <div class="elemento-form-textarea">
+            <textarea type="text"
+            placeholder="Descripcion de la categoria"
+            formControlName="descripcion"></textarea>
+            <p class="form-text text-danger"
+                *ngIf="isValidField('descripcion')">
+                    Debe tener 10 caracteres como mínimo
+            </p>
+        </div>
+        <p><button class="boton" type="submit" [disabled]="myForm.invalid" >Editar categoria</button></p>
+        <p class="info-registro"><a href="#" [routerLink]="['/categoria']">Volver a la lista</a></p>
+
+      </form>
+    </div>
+  </div>
+  
+  

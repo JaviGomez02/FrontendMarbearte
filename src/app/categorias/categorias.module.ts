@@ -7,7 +7,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
 import { AddCategoriaComponent } from './add-categoria/add-categoria.component';
 import { UpdateCategoriaComponent } from './update-categoria/update-categoria.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 
@@ -24,7 +24,8 @@ import { RouterModule } from '@angular/router';
     DataTablesModule,
     HttpClientModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    FormsModule
 
   ],
   exports:[

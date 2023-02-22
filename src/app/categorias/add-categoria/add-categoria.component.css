@@ -23,7 +23,7 @@
     margin: 0px auto;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
-    width: 450px;
+    width: 800px;
 }
 
 input{
@@ -31,7 +31,7 @@ input{
     border-width: 1px;
     border-color: rgb(207, 206, 206);
     border-radius: 2px;
-    width: 300px;
+    width: 600px;
     height: 35px;
 }
 
@@ -57,7 +57,7 @@ input:hover{
     background-color: rgb(231, 86, 86);
     font-size: 14px;
     transition: all .1s ease-out;
-    width: 300px;
+    width: 600px;
     border: solid;
     border-width: 1px;
     border-radius: 5px;
@@ -74,7 +74,7 @@ textarea{
     border-color: rgb(207, 206, 206);
     resize: none;
     border-radius: 2px;
-    width: 300px;
+    width: 600px;
     height: 200px;
 }
 

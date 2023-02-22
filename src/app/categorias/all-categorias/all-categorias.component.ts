@@ -3,6 +3,7 @@ import { Categoria } from '../../interfaces/categoria.interface';
 import { categoriaService } from '../../services/categoria.service';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-all-categorias',
@@ -11,12 +12,18 @@ import Swal from 'sweetalert2';
 })
 export class AllCategoriasComponent implements OnInit{
 
-  constructor(private categoriaService:categoriaService){}
+  constructor(private categoriaService:categoriaService, private fb:FormBuilder){}
+
+
+
+  nombreCategoria:string=""
 
   lista:Categoria[]=[]
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
+
+
 
   ngOnInit(): void {
 
@@ -30,7 +37,6 @@ export class AllCategoriasComponent implements OnInit{
       .subscribe({
         next: (resp)=>{
           this.lista=resp
-          console.log(resp)
         },
         error: (error)=>{
           
@@ -41,6 +47,8 @@ export class AllCategoriasComponent implements OnInit{
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
+
+
 
   deleteCategoria(nombre:string, id:number){
     Swal.fire({
