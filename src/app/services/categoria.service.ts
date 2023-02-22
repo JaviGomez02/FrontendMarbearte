@@ -26,6 +26,17 @@ export class categoriaService{
       })
       )
     }
+
+
+    deleteCategoria(id:number):Observable<boolean>{
+      return this.http.delete<any>(this.url+'/'+id)
+      .pipe( switchMap(resp => {
+        return of(true);
+      }),catchError(error => {
+          return of(false);
+      })
+      )
+    }
     
 
 

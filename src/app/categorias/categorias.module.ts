@@ -5,7 +5,6 @@ import { CategoriasRoutingModule } from './categorias-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
-import { BorrarCategoriaComponent } from './borrar-categoria/borrar-categoria.component';
 import { AddCategoriaComponent } from './add-categoria/add-categoria.component';
 import { UpdateCategoriaComponent } from './update-categoria/update-categoria.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AllCategoriasComponent,
-    BorrarCategoriaComponent,
     AddCategoriaComponent,
     UpdateCategoriaComponent
   ],

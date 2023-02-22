@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Categoria } from '../../interfaces/categoria.interface';
 import { categoriaService } from '../../services/categoria.service';
 import { Subject } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-all-categorias',
@@ -41,5 +42,37 @@ export class AllCategoriasComponent implements OnInit{
     this.dtTrigger.unsubscribe();
   }
 
+  deleteCategoria(nombre:string, id:number){
+    Swal.fire({
+      title: '¿Seguro que desea borrar la categoria '+nombre+'?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, Borrar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.categoriaService.deleteCategoria(id)
+        .subscribe({
+          next: (resp)=>{
+            Swal.fire(
+              'Borrado!',
+              'La categoría ha sido borrada.',
+              'success'
+            )
+          },
+          error: (error)=>{
+            Swal.fire(
+              'Oops!',
+              'Ocurrió un error inesperado.',
+              'error'
+            )
+          }
+        })
+        
+      }
+    })
+  }
 
 }
