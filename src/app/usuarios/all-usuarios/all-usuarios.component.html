@@ -1,0 +1,30 @@
+
+
+<div class="productos-home-1">
+    <p class="titulo-productos">Listado de usuarios</p>
+
+    <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+        <tr>
+        <th>Username</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Cuenta activada</th>
+        <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let usuario of lista">
+        <td>{{ usuario.username }}</td>
+        <td>
+            {{usuario.nombre}}
+        </td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.role }}</td>
+        <td>{{ usuario.enable }}</td>
+        <td></td>
+        </tr>
+    </tbody>
+    </table>
+</div>

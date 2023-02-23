@@ -68,10 +68,9 @@ export class AllCategoriasComponent implements OnInit{
               'Borrado!',
               'La categoría ha sido borrada.',
               'success'
-            )
-            setTimeout(() => {
+            ).then((resp)=>{
               window.location.reload()
-            }, 1500);
+            })
           },
           error: (error)=>{
             Swal.fire(

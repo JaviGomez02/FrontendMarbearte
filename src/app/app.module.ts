@@ -12,6 +12,7 @@ import { AccountModule } from './account/account.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { CategoriasModule } from './categorias/categorias.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CategoriasModule } from './categorias/categorias.module';
     ContactModule,
     AccountModule,
     HttpClientModule,
-    CategoriasModule
+    CategoriasModule,
+    UsuariosModule
   ],
   providers: [AuthInterceptorService],
   bootstrap: [AppComponent]
