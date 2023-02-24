@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AllProductsComponent,
     DatatableProductComponent
+    
   ],
   imports: [
     CommonModule,
