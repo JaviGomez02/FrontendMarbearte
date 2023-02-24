@@ -49,13 +49,13 @@
 }
 
 .producto{
-    height: 400px;
+    height: 300px;
     object-fit: contain;
 }
 
 .img-producto{
     width: 200px;
-    height: 400px;
+    height: 300px;
     margin-bottom: 20px;
 }
 
