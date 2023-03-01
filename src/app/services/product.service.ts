@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, switchMap, of, catchError } from 'rxjs';
 import { Product } from '../interfaces/product.interface';
 import { Page } from '../interfaces/page.interface';
 
@@ -22,6 +22,16 @@ export class productService{
         return this.http.get<Page>(this.url+'?pageNumber='+pageNumber+'&sizeNumber='+sizeNumber)
 
       }
+    }
+
+    deleteArticulo(id:number):Observable<boolean>{
+      return this.http.delete<any>(this.url+'/'+id)
+      .pipe( switchMap(resp => {
+        return of(true);
+      }),catchError(error => {
+          return of(false);
+      })
+      )
     }
 
 
