@@ -26,7 +26,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
     };
 
 
-    this.productService.getProducts(1, 999)
+    this.productService.getProducts(1, 999, -1)
     .subscribe({
       next: (resp)=>{
         this.lista=resp.content

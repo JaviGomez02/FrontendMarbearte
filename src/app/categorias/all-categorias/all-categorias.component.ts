@@ -4,6 +4,7 @@ import { categoriaService } from '../../services/categoria.service';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-categorias',
@@ -12,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AllCategoriasComponent implements OnInit{
 
-  constructor(private categoriaService:categoriaService, private fb:FormBuilder){}
+  constructor(private categoriaService:categoriaService, private fb:FormBuilder, private route:Router){}
 
 
 
@@ -37,6 +38,7 @@ export class AllCategoriasComponent implements OnInit{
       .subscribe({
         next: (resp)=>{
           this.lista=resp
+          this.dtTrigger.next(this.lista)
         },
         error: (error)=>{
           
@@ -48,6 +50,10 @@ export class AllCategoriasComponent implements OnInit{
     this.dtTrigger.unsubscribe();
   }
 
+
+  verProductos(idCategoria:number){
+    this.route.navigateByUrl("/products/all?idCategoria="+idCategoria)
+  }
 
 
   deleteCategoria(nombre:string, id:number){

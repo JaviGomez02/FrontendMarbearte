@@ -29,8 +29,13 @@ export class AllProductsComponent implements OnInit {
 
   pageNumber:number=1
 
+  idCategoria!:number
+
   ngOnInit(): void {
-      this.servicio.getProducts(this.pageNumber, this.sizeNumber)
+
+    this.idCategoria=this.route.snapshot.queryParams['idCategoria']
+
+      this.servicio.getProducts(this.pageNumber, this.sizeNumber, this.idCategoria)
       .subscribe({
       next: (resp)=>{
         this.lista=resp.content
@@ -58,7 +63,7 @@ export class AllProductsComponent implements OnInit {
     if(this.pageNumber>1){
       this.pageNumber=this.pageNumber-1
 
-      this.servicio.getProducts(this.pageNumber, this.sizeNumber)
+      this.servicio.getProducts(this.pageNumber, this.sizeNumber, this.idCategoria)
     .subscribe({
       next: (resp)=>{
         this.lista=resp.content
@@ -75,7 +80,7 @@ export class AllProductsComponent implements OnInit {
     if(this.pageNumber<this.totalPages){
       this.pageNumber=this.pageNumber+1
 
-      this.servicio.getProducts(this.pageNumber, this.sizeNumber)
+      this.servicio.getProducts(this.pageNumber, this.sizeNumber, this.idCategoria)
       .subscribe({
       next: (resp)=>{
         this.lista=resp.content
@@ -91,7 +96,7 @@ export class AllProductsComponent implements OnInit {
   setPageNumber(numero:number){
     this.pageNumber=numero
 
-    this.servicio.getProducts(this.pageNumber, this.sizeNumber)
+    this.servicio.getProducts(this.pageNumber, this.sizeNumber, this.idCategoria)
     .subscribe({
       next: (resp)=>{
         this.lista=resp.content

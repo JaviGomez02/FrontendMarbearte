@@ -173,4 +173,5 @@ ul li:hover .menu-productos{
 .img-usuario{
   width: 32px;
   margin-right: 30px;
+  cursor: pointer;
 }
