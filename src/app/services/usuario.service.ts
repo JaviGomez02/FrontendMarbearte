@@ -32,4 +32,24 @@ export class UsuarioService{
       )
     }
 
+    changeToAdmin(username:string):Observable<boolean>{
+      return this.http.put<any>(this.url+'/changeToAdmin/'+username, undefined)
+      .pipe( switchMap(resp => {
+        return of(true);
+      }),catchError(error => {
+          return of(false);
+      })
+      )
+    }
+
+    changeToUser(username:string):Observable<boolean>{
+      return this.http.put<any>(this.url+'/changeToUser/'+username, undefined)
+      .pipe( switchMap(resp => {
+        return of(true);
+      }),catchError(error => {
+          return of(false);
+      })
+      )
+    }
+
 }

@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { productService } from '../../services/product.service';
 import { Content } from '../../interfaces/page.interface';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-datatable-product',
@@ -11,12 +12,18 @@ import Swal from 'sweetalert2';
 })
 export class DatatableProductComponent implements OnInit, OnDestroy {
 
-  constructor(private productService:productService) { }
+  constructor(private productService:productService, private route:ActivatedRoute) { }
+
+  @Input() listaProductos!:Content[]
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
 
+
   lista:Content[]=[]
+
+  idCategoria!:number
+
 
   ngOnInit(): void {
     
@@ -26,8 +33,9 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
       processing: true
     };
 
+    this.idCategoria=this.route.snapshot.queryParams['idCategoria']
 
-    this.productService.getProducts(1, 999, -1)
+    this.productService.getProducts(1, 999, this.idCategoria)
     .subscribe({
       next: (resp)=>{
         this.lista=resp.content

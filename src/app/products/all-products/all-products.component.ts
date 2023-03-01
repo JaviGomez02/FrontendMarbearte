@@ -34,7 +34,7 @@ export class AllProductsComponent implements OnInit {
   ngOnInit(): void {
 
     this.idCategoria=this.route.snapshot.queryParams['idCategoria']
-
+    console.log(this.idCategoria)
       this.servicio.getProducts(this.pageNumber, this.sizeNumber, this.idCategoria)
       .subscribe({
       next: (resp)=>{

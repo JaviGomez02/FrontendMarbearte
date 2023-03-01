@@ -16,6 +16,8 @@ export class AllUsuariosComponent implements OnInit{
   dtTrigger: Subject<any> = new Subject<any>();
   constructor(private usuarioService:UsuarioService){}
 
+
+
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -39,6 +41,79 @@ export class AllUsuariosComponent implements OnInit{
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
+
+  changeToUser(username:string){
+    Swal.fire({
+      title: '¿Cambiar el rol de '+username+' a USER?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Actualizar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuarioService.changeToUser(username)
+        .subscribe({
+          next: (resp)=>{
+            Swal.fire(
+              'Exito!',
+              'Se ha cambiado el rol correctamente.',
+              'success'
+            ).then((resp)=>{
+              window.location.reload()
+            })
+          },
+          error:(error)=>{
+            Swal.fire(
+              'Oops!',
+              'Ocurrió un error inesperado.',
+              'error'
+            )
+          }
+        })
+        
+      }
+    })
+  }
+
+
+  changeToAdmin(username:string){
+    Swal.fire({
+      title: '¿Cambiar el rol de '+username+' a ADMIN?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Actualizar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuarioService.changeToAdmin(username)
+        .subscribe({
+          next: (resp)=>{
+            Swal.fire(
+              'Exito!',
+              'Se ha cambiado el rol correctamente.',
+              'success'
+            ).then((resp)=>{
+              window.location.reload()
+            })
+          },
+          error:(error)=>{
+            Swal.fire(
+              'Oops!',
+              'Ocurrió un error inesperado.',
+              'error'
+            )
+          }
+        })
+        
+      }
+    })
+  }
+
+
 
   deleteUsuario(username:string){
     Swal.fire({
