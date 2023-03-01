@@ -23,6 +23,9 @@ export class LoginComponent implements OnInit {
   
   ngOnInit(): void {
     // this.isLoggedIn = this.authService.isAuthenticated();
+    if(this.authService.isLoggedIn()){
+      this.route.navigateByUrl("/account")
+    }
   }
 
   save(){
@@ -40,6 +43,8 @@ export class LoginComponent implements OnInit {
   // }
 
   signIn():void{
+
+    
     // console.log('Username: ', this.myForm.value.username, 'Password: ', this.myForm.value.password)
     this.authService.login(this.myForm.value.username,this.myForm.value.password)
     .subscribe({

@@ -21,6 +21,11 @@ export class authService{
 
     constructor(private http: HttpClient, private cookieService:CookieService){}
 
+    private admin = new BehaviorSubject<boolean> (false);
+
+    get isAdmin() {
+        return this.admin.asObservable();
+      }
 
     register(username: string, email:string, contrasena:string, nombre:string):Observable<boolean>{
         return this.http.post<any>(this.url+"/register", {"username":username, "contrasena":contrasena, "nombre":nombre, "email":email},this.httpOptions)
@@ -49,6 +54,9 @@ export class authService{
         return this.http.post<AuthResponse>(this.url+"/login", {username, password},this.httpOptions)
         .pipe( switchMap(token => {
                 this.cookieService.set('token', token.token)
+                if(this.decodeJwt(token.token).role=='ADMIN'){
+                    this.admin.next(true)
+                }
                 return of(true);
             }),catchError(error => {
                 this.cookieService.delete('token');
@@ -59,6 +67,16 @@ export class authService{
 
     logout() {
         this.cookieService.delete('token')
+        this.admin.next(false)
+    }
+
+    isLoggedIn(){
+        if(this.cookieService.get('token')){
+            return true
+        }
+        else{
+            return false
+        }
     }
 
     decodeJwt(jwt: string): DecodeToken{

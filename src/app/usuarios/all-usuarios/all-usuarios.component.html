@@ -10,7 +10,7 @@
         <th>Nombre</th>
         <th>Email</th>
         <th>Rol</th>
-        <th>Cuenta activada</th>
+        <th>Estado de la cuenta</th>
         <th>Acciones</th>
         </tr>
     </thead>
@@ -36,7 +36,10 @@
                  </svg> 
               </button>
         </td>
-        <td>{{ usuario.enable }}</td>
+        <td>
+            <span *ngIf="usuario.enable==true">Activada</span>
+            <span *ngIf="!usuario.enable==true">No activada</span>
+        </td>
         <td>
             
        

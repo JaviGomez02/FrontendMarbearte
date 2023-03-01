@@ -28,8 +28,10 @@
                     </div></a>
                 </div>
             </li>
-            <li><a class="enlace-navbar" [routerLink]="['/contact']" routerLinkActive="activo">Contacto</a></li>
-            <li><a class="enlace-navbar" [routerLink]="['/about']" routerLinkActive="activo">Sobre nosotros</a></li>
+            <li *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/contact']" routerLinkActive="activo">Contacto</a></li>
+            <li *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/about']" routerLinkActive="activo">Sobre nosotros</a></li>
+            <li *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/categoria']" routerLinkActive="activo">Categorias</a></li>
+            <li *ngIf="isAdmin$|async" ><a class="enlace-navbar" [routerLink]="['/usuarios']" routerLinkActive="activo">Usuarios</a></li>
         </ul>
     </div>
     <div class="divRight">
