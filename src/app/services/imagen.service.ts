@@ -16,9 +16,33 @@ export class imagenService{
     httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
+
+    httpMultipartHeader = {
+      headers: new HttpHeaders({'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>'})
+    }
    
     getImagenesByProduct(idProducto:number):Observable<Imagen[]>{
         return this.http.get<Imagen[]>(this.url+'/'+idProducto)
+    }
+
+    deleteImagen(idImagen:number):Observable<boolean>{
+      return this.http.delete<any>(this.url+'/'+idImagen)
+      .pipe( switchMap(resp => {
+        return of(true);
+      }),catchError(error => {
+          return of(false);
+      })
+      )
+    }
+
+    addImagen(file:File, idProducto:number):Observable<boolean>{
+      return this.http.post<any>(this.url+"/"+idProducto,{"imagen":{}, "file":file}, this.httpMultipartHeader)
+      .pipe( switchMap(resp => {
+        return of(true);
+      }),catchError(error => {
+          return of(false);
+      })
+      )
     }
 
 

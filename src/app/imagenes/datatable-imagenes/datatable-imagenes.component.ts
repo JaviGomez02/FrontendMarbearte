@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { productService } from '../../services/product.service';
 import { Product } from '../../interfaces/product.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-datatable-imagenes',
@@ -40,7 +41,7 @@ export class DatatableImagenesComponent implements OnInit {
         this.producto=resp
       },
       error: (error)=>{
-        
+
       }
     })
 
@@ -57,6 +58,77 @@ export class DatatableImagenesComponent implements OnInit {
   }
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  async addImagen(){
+    const { value: file } = await Swal.fire({
+      title: 'Select image',
+      input: 'file',
+      inputAttributes: {
+        'accept': 'image/*',
+        'aria-label': 'Upload your profile picture'
+      }
+    })
+    
+    if (file) {
+      
+      console.log(file)
+      this.servicioImagen.addImagen(file, this.idProducto)
+      .subscribe({
+        next: (resp)=>{
+          Swal.fire(
+            'Añadido!',
+            'La imagen ha sido añadida correctamente.',
+            'success'
+          ).then((resp)=>{
+            window.location.reload()
+          })
+        },
+        error: (error)=>{
+          Swal.fire(
+            'Oops!',
+            'Ocurrió un error inesperado.',
+            'error'
+          )
+        }
+      })
+    }
+
+  }
+
+  deleteImagen(imagen:Imagen){
+    Swal.fire({
+      title: '¿Seguro que desea borrar la imagen?',
+      imageUrl: imagen.img,
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, Borrar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.servicioImagen.deleteImagen(imagen.id)
+        .subscribe({
+          next: (resp)=>{
+            Swal.fire(
+              'Borrado!',
+              'La imagen ha sido borrada.',
+              'success'
+            ).then((resp)=>{
+              window.location.reload()
+            })
+          },
+          error: (error)=>{
+            Swal.fire(
+              'Oops!',
+              'Ocurrió un error inesperado.',
+              'error'
+            )
+          }
+        })
+        
+      }
+    })
   }
 
 }
