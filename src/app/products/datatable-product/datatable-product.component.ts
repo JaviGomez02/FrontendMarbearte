@@ -3,7 +3,7 @@ import { productService } from '../../services/product.service';
 import { Content } from '../../interfaces/page.interface';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-datatable-product',
@@ -12,13 +12,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DatatableProductComponent implements OnInit, OnDestroy {
 
-  constructor(private productService:productService, private route:ActivatedRoute) { }
+  constructor(private productService:productService, private route:ActivatedRoute, private router:Router) { }
 
-  @Input() listaProductos!:Content[]
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
-
 
   lista:Content[]=[]
 
@@ -42,6 +40,10 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
         this.dtTrigger.next(this.lista);
       }
     })
+  }
+
+  verImagenes(idProducto:number){
+    this.router.navigateByUrl("/images?idProducto="+idProducto)
   }
 
   ngOnDestroy(): void {

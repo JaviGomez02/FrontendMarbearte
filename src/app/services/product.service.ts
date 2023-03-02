@@ -24,6 +24,10 @@ export class productService{
       }
     }
 
+    getProducto(idProducto:number):Observable<Product>{
+      return this.http.get<Product>(this.url+'/'+idProducto)
+    }
+
     deleteArticulo(id:number):Observable<boolean>{
       return this.http.delete<any>(this.url+'/'+id)
       .pipe( switchMap(resp => {

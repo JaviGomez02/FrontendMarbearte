@@ -1,0 +1,24 @@
+
+
+<div class="productos-home-1">
+    <p class="titulo-productos">Imagenes del producto: <span>{{producto.nombre}}</span></p>
+    <div class="div-boton">
+        <button class="boton" [routerLink]="['/categoria/add']">Añadir nueva categoria</button>
+    </div>
+    <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+        <tr>
+        <th>Imagen</th>
+        <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let imagen of lista">
+        <td><img src="{{imagen.img}}" width="500"></td>
+        <td>
+
+        </td>
+        </tr>
+    </tbody>
+    </table>
+</div>

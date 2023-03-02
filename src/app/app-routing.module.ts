@@ -37,6 +37,10 @@ const routes: Routes = [
     loadChildren: () => import('./usuarios/usuarios.module').then(m => m.UsuariosModule)
   },
   {
+    path: 'images',
+    loadChildren: () => import('./imagenes/imagenes.module').then(m => m.ImagenesModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
