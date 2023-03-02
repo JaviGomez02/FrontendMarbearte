@@ -30,12 +30,30 @@ export interface Content {
     categoria:   Categoria;
     imagenes:    Imagene[];
     compras:     any[];
+    colores:     Colore[];
 }
 
 export interface Categoria {
     id:          number;
-    nombre:      string;
-    descripcion: string;
+    nombre:      Nombre;
+    descripcion: Descripcion;
+}
+
+export enum Descripcion {
+    Prueba = "prueba",
+}
+
+export enum Nombre {
+    Categoria1 = "categoria1",
+}
+
+export interface Colore {
+    color: Color;
+}
+
+export interface Color {
+    color:  string;
+    nombre: string;
 }
 
 export interface Imagene {
@@ -240,16 +258,24 @@ const typeMap: any = {
         { json: "id", js: "id", typ: 0 },
         { json: "nombre", js: "nombre", typ: "" },
         { json: "descripcion", js: "descripcion", typ: "" },
-        { json: "price", js: "price", typ: 0 },
+        { json: "price", js: "price", typ: 3.14 },
         { json: "stock", js: "stock", typ: 0 },
         { json: "categoria", js: "categoria", typ: r("Categoria") },
         { json: "imagenes", js: "imagenes", typ: a(r("Imagene")) },
         { json: "compras", js: "compras", typ: a("any") },
+        { json: "colores", js: "colores", typ: a(r("Colore")) },
     ], false),
     "Categoria": o([
         { json: "id", js: "id", typ: 0 },
+        { json: "nombre", js: "nombre", typ: r("Nombre") },
+        { json: "descripcion", js: "descripcion", typ: r("Descripcion") },
+    ], false),
+    "Colore": o([
+        { json: "color", js: "color", typ: r("Color") },
+    ], false),
+    "Color": o([
+        { json: "color", js: "color", typ: "" },
         { json: "nombre", js: "nombre", typ: "" },
-        { json: "descripcion", js: "descripcion", typ: "" },
     ], false),
     "Imagene": o([
         { json: "id", js: "id", typ: 0 },
@@ -268,4 +294,10 @@ const typeMap: any = {
         { json: "sorted", js: "sorted", typ: true },
         { json: "unsorted", js: "unsorted", typ: true },
     ], false),
+    "Descripcion": [
+        "prueba",
+    ],
+    "Nombre": [
+        "categoria1",
+    ],
 };

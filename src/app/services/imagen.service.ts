@@ -36,7 +36,12 @@ export class imagenService{
     }
 
     addImagen(file:File, idProducto:number):Observable<boolean>{
-      return this.http.post<any>(this.url+"/"+idProducto,{"imagen":{}, "file":file}, this.httpMultipartHeader)
+
+      const datos:FormData = new FormData()
+      datos.append("imagen", new Blob([JSON.stringify({})], {type: 'application/json'}))
+      datos.append("file", file)
+      console.log(datos)
+      return this.http.post<any>(this.url+"/"+idProducto,datos)
       .pipe( switchMap(resp => {
         return of(true);
       }),catchError(error => {

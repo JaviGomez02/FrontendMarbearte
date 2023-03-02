@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { productService } from '../../services/product.service';
 import { Product } from '../../interfaces/product.interface';
 import Swal from 'sweetalert2';
+import { Color } from 'src/app/interfaces/page.interface';
 
 @Component({
   selector: 'app-datatable-imagenes',
@@ -15,6 +16,7 @@ import Swal from 'sweetalert2';
 export class DatatableImagenesComponent implements OnInit {
 
   lista:Imagen[]=[]
+
 
   producto!:Product
 

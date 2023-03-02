@@ -9,6 +9,7 @@
         <th>Precio</th>
         <th>Stock</th>
         <th>Categoria</th>
+        <th>Colores</th>
         <th>Imagenes</th>
         <th>Acciones</th>
         </tr>
@@ -21,6 +22,11 @@
         <td>{{ post.price }}</td>
         <td>{{ post.stock }}</td>
         <td>{{ post.categoria.nombre }}</td>
+        <td>
+            <span *ngFor="let color of post.colores; let i = index"><div style="width: 15px; height: 15px; background-color: {{color.color.color}}; margin-bottom: 5px;"></div></span>
+            <button type="button" (click)="asignarColor(post.id)">Asignar color</button>
+        </td>
+        
         <td><button type="button" (click)="verImagenes(post.id)" class="btn btn-outline-primary">Ver imagenes</button></td>
         <td>
             <button type="button" (click)="deleteProducto(post.nombre, post.id)" class="btn btn-outline-danger" style="margin-left: 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">

@@ -28,6 +28,16 @@ export class productService{
       return this.http.get<Product>(this.url+'/'+idProducto)
     }
 
+    asignarColor(idProducto:number, codigoColor:string):Observable<boolean>{
+      return this.http.put<any>(this.url+"/asignarColor/"+idProducto, {"color": codigoColor})
+      .pipe( switchMap(resp => {
+        return of(true);
+      }),catchError(error => {
+          return of(false);
+      })
+      )
+    }
+
     deleteArticulo(id:number):Observable<boolean>{
       return this.http.delete<any>(this.url+'/'+id)
       .pipe( switchMap(resp => {

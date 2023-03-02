@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { productService } from '../../services/product.service';
-import { Content } from '../../interfaces/page.interface';
+import { Color, Content } from '../../interfaces/page.interface';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,6 +19,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
   dtTrigger: Subject<any> = new Subject<any>();
 
   lista:Content[]=[]
+
 
   idCategoria!:number
 
@@ -40,6 +41,10 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
         this.dtTrigger.next(this.lista);
       }
     })
+  }
+
+  async asignarColor(idProducto:number){
+    this.router.navigateByUrl('/products/color?idProducto='+idProducto);
   }
 
   verImagenes(idProducto:number){
