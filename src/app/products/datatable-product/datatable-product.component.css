@@ -28,3 +28,31 @@
     grid-area: 1/2/2/3;
     text-align: right;
 }
+
+
+.div-boton2{
+    text-align: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.boton{
+    text-transform: uppercase;
+    grid-area: 3/1/4/3;
+    position: relative;
+    padding: 1em 20px;
+    
+    color: white;
+    border-color: white;
+    background-color: rgb(231, 86, 86);
+    font-size: 13px;
+    transition: all .1s ease-out;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+
+}
+
+.boton:hover{
+    background-color: rgb(205, 72, 72);
+}

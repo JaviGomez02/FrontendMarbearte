@@ -1,5 +1,8 @@
 <div class="productos-home-1">
     <p class="titulo-productos">Todos nuestros productos</p>
+    <div class="div-boton2">
+        <button class="boton" [routerLink]="['/categoria/add']">Añadir nuevo producto</button>
+    </div>
     <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead>
         <tr>
@@ -25,9 +28,9 @@
         <td>
             <div class="grid-pequeñito" *ngFor="let color of post.colores; let i = index">
                 <div class="div-color" style="background-color: {{color.color.color}};"></div>
-                <div class="div-boton"><button class="btn btn-outline-danger" type="button" (click)="designarColor(post.id, color.color.color)">Designar</button></div>
+                <div class="div-boton"><button class="btn btn-outline-danger" type="button" (click)="designarColor(post.id, color.color.color)">x</button></div>
             </div>
-            <button type="button" class="btn btn-outline-dark" (click)="asignarColor(post.id)">Asignar color</button>
+            <button type="button" class="btn btn-outline-dark" (click)="asignarColor(post.id)">Añadir color</button>
         </td>
         
         <td><button type="button" (click)="verImagenes(post.id)" class="btn btn-outline-primary">Ver imagenes</button></td>
