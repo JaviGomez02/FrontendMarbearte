@@ -63,14 +63,14 @@ export class AllProductsComponent implements OnInit {
       this.pageNumber=this.pageNumber-1
 
       this.servicio.getProducts(this.pageNumber, this.sizeNumber, this.idCategoria)
-    .subscribe({
-      next: (resp)=>{
-        this.lista=resp.content
-      },
-      error: (error)=>{
-        
-      }
-    })
+      .subscribe({
+        next: (resp)=>{
+          this.lista=resp.content
+        },
+        error: (error)=>{
+          
+        }
+      })
     }
     
   }

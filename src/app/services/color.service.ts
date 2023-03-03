@@ -19,4 +19,5 @@ export class colorService{
     getColores():Observable<Color[]>{
       return this.http.get<Color[]>(this.url)
     }
+
 }

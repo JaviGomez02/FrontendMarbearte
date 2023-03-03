@@ -1,10 +1,8 @@
 <h1>Colores disponibles</h1>
 
-<form [formGroup]="myForm" (ngSubmit)="save()">
     <span *ngFor="let color of listaColores; let i = index">
         <div style="width: 50px; height: 50px; background-color: {{color.color}}; margin-bottom: 5px;"></div>
         
-        <input type="checkbox" id="color.color" value="color.color">{{color.nombre}}
+        <input type="checkbox" id="color.color" value="color.color" (change)="onCheckboxPressed(color,$event.target)">{{color.nombre}}
     </span><br>
-    <button type="submit">Añadir</button>
-</form>
+    <button type="button" (click)="save()">Añadir</button>
