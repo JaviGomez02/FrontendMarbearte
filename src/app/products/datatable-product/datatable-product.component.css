@@ -9,3 +9,22 @@
     font-weight: bold;
     margin-bottom: 50px;
 }
+
+.grid-pequeñito{
+    display: grid;
+    grid-template-columns: 1/4fr, 1fr;
+    grid-template-rows: 1fr;
+    gap: 5px;
+    margin: 5px;
+}
+
+.div-color{
+    grid-area: 1/1/2/2;
+    width: 100%;
+    height: 100%;
+}
+
+.div-boton{
+    grid-area: 1/2/2/3;
+    text-align: right;
+}

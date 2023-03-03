@@ -23,8 +23,11 @@
         <td>{{ post.stock }}</td>
         <td>{{ post.categoria.nombre }}</td>
         <td>
-            <span *ngFor="let color of post.colores; let i = index"><div style="width: 15px; height: 15px; background-color: {{color.color.color}}; margin-bottom: 5px;"></div></span>
-            <button type="button" (click)="asignarColor(post.id)">Asignar color</button>
+            <div class="grid-pequeñito" *ngFor="let color of post.colores; let i = index">
+                <div class="div-color" style="background-color: {{color.color.color}};"></div>
+                <div class="div-boton"><button class="btn btn-outline-danger" type="button" (click)="designarColor(post.id, color.color.color)">Designar</button></div>
+            </div>
+            <button type="button" class="btn btn-outline-dark" (click)="asignarColor(post.id)">Asignar color</button>
         </td>
         
         <td><button type="button" (click)="verImagenes(post.id)" class="btn btn-outline-primary">Ver imagenes</button></td>

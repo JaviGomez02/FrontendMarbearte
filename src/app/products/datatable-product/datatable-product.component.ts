@@ -43,7 +43,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
     })
   }
 
-  async asignarColor(idProducto:number){
+  asignarColor(idProducto:number){
     this.router.navigateByUrl('/products/color?idProducto='+idProducto);
   }
 
@@ -53,6 +53,30 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
+  }
+
+  designarColor(idProducto:number, codigoColor:string){
+    this.productService.designarColor(idProducto, codigoColor)
+    .subscribe({
+      next: (resp)=>{
+        if(resp){
+          Swal.fire(
+            'Designado!',
+            'Se ha designado el color correctamente.',
+            'success'
+          ).then((resp)=>{
+            window.location.reload()
+          })
+        }
+        else{
+          Swal.fire(
+            'Oops!',
+            'Ocurrió un error inesperado.',
+            'error'
+          )
+        }
+      }
+    })
   }
 
   deleteProducto(nombre:string, id:number){
@@ -69,13 +93,22 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
         this.productService.deleteArticulo(id)
         .subscribe({
           next: (resp)=>{
-            Swal.fire(
-              'Borrado!',
-              'El producto ha sido borrado.',
-              'success'
-            ).then((resp)=>{
-              window.location.reload()
-            })
+            if(resp){
+              Swal.fire(
+                'Borrado!',
+                'El producto ha sido borrado.',
+                'success'
+              ).then((resp)=>{
+                window.location.reload()
+              })
+            }
+            else{
+              Swal.fire(
+                'Oops!',
+                'Ocurrió un error inesperado.',
+                'error'
+              )
+            }
           },
           error: (error)=>{
             Swal.fire(
