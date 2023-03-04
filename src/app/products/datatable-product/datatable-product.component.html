@@ -26,10 +26,16 @@
         <td>{{ post.stock }}</td>
         <td>{{ post.categoria.nombre }}</td>
         <td>
-            <div class="grid-pequeñito" *ngFor="let color of post.colores; let i = index">
+            <div class="grid-colores">
+                <div class="color" style="background-color: {{color.color.color}};" *ngFor="let color of post.colores">
+                    <div class="x-color" (click)="eliminarColor(post.id, color.color.color)"><img src="../../../assets/x.png" class="img-x"></div>
+                </div>
+                
+            </div>
+            <!-- <div class="grid-pequeñito" *ngFor="let color of post.colores; let i = index">
                 <div class="div-color" style="background-color: {{color.color.color}};"></div>
                 <div class="div-boton"><button class="btn btn-outline-danger" type="button" (click)="designarColor(post.id, color.color.color)">x</button></div>
-            </div>
+            </div> -->
             <button type="button" class="btn btn-outline-dark" (click)="asignarColor(post.id)">Añadir color</button>
         </td>
         

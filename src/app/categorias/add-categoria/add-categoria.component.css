@@ -24,6 +24,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     width: 800px;
+    
 }
 
 input{
@@ -46,27 +47,6 @@ input{
 input:hover{
     border-color: rgb(131, 131, 131);;
 }
-
-.boton{
-    text-transform: uppercase;
-    position: relative;
-    padding: 1em 20px;
-    margin-bottom: 30px;
-    color: white;
-    border-color: white;
-    background-color: rgb(231, 86, 86);
-    font-size: 14px;
-    transition: all .1s ease-out;
-    width: 600px;
-    border: solid;
-    border-width: 1px;
-    border-radius: 5px;
-}
-
-.boton:hover{
-    background-color: rgb(205, 72, 72);
-}
-
 
 textarea{
     border: solid;
@@ -91,4 +71,58 @@ p{
 .info-registro{
     font-size: 13px;
     padding-bottom: 40px;
+}
+
+.grid-botones{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 20px;
+    width: 600px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+
+.boton{
+    grid-area: 1/1/2/2;
+    text-transform: uppercase;
+    position: relative;
+    padding: 1em 20px;
+    margin-bottom: 30px;
+    color: white;
+    border-color: white;
+    background-color: rgb(231, 86, 86);
+    font-size: 14px;
+    transition: all .1s ease-out;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.boton:hover{
+    background-color: rgb(205, 72, 72);
+}
+
+
+.boton-cancelar{
+    grid-area: 1/2/2/3;
+    text-transform: uppercase;
+    position: relative;
+    padding: 1em 20px;
+    margin-bottom: 30px;
+    color: white;
+    border-color: white;
+    background-color: rgb(231, 86, 86);
+    font-size: 14px;
+    transition: all .1s ease-out;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.boton-cancelar:hover{
+    background-color: rgb(205, 72, 72);
 }

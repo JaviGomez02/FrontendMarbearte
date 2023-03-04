@@ -55,14 +55,14 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
     this.dtTrigger.unsubscribe();
   }
 
-  designarColor(idProducto:number, codigoColor:string){
-    this.productService.designarColor(idProducto, codigoColor)
+  eliminarColor(idProducto:number, codigoColor:string){
+    this.productService.eliminarColor(idProducto, codigoColor)
     .subscribe({
       next: (resp)=>{
         if(resp){
           Swal.fire(
-            'Designado!',
-            'Se ha designado el color correctamente.',
+            'Desasignado!',
+            'Se ha eliminado el color correctamente.',
             'success'
           ).then((resp)=>{
             window.location.reload()

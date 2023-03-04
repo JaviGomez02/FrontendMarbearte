@@ -38,8 +38,8 @@ export class productService{
       )
     }
 
-    designarColor(idProducto:number, codigoColor:string):Observable<boolean>{
-      return this.http.put<any>(this.url+"/designarColor/"+idProducto, {"color": codigoColor})
+    eliminarColor(idProducto:number, codigoColor:string):Observable<boolean>{
+      return this.http.put<any>(this.url+"/desasignarColor/"+idProducto, {"color": codigoColor})
       .pipe( switchMap(resp => {
         return of(true);
       }),catchError(error => {

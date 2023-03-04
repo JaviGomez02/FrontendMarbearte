@@ -77,7 +77,7 @@ export class ColorProductoComponent implements OnInit {
           next: (resp)=>{
             Swal.fire(
               'Añadido!',
-              'El color ha sido añadido correctamente.',
+              'El color/colores ha sido añadido correctamente.',
               'success'
             ).then((resp)=>{
               this.router.navigateByUrl('/products/all')
