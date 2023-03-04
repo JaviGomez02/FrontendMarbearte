@@ -7,6 +7,8 @@ import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
 import { ColorProductoComponent } from './color-producto/color-producto.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProductsAddComponent } from './products-add/products-add.component';
+import { ProductsEditComponent } from './products-edit/products-edit.component';
 
 
 
@@ -14,7 +16,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [
     AllProductsComponent,
     DatatableProductComponent,
-    ColorProductoComponent
+    ColorProductoComponent,
+    ProductsAddComponent,
+    ProductsEditComponent
     
   ],
   imports: [

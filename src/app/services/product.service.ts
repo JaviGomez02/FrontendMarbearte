@@ -28,6 +28,24 @@ export class productService{
       return this.http.get<Product>(this.url+'/'+idProducto)
     }
 
+    addProduct(nombre:string, descripcion:string, price:number, stock:number, idCategoria:number):Observable<boolean>{
+      return this.http.post<any>(this.url, {
+        "nombre": nombre,
+        "descripcion":descripcion,
+        "price": price,
+        "stock": stock,
+        "categoria":{
+          "id": idCategoria
+        }
+      })
+      .pipe( switchMap(resp => {
+        return of(true);
+      }),catchError(error => {
+          return of(false);
+      })
+      )
+    }
+
     asignarColor(idProducto:number, codigoColor:string):Observable<boolean>{
       return this.http.put<any>(this.url+"/asignarColor/"+idProducto, {"color": codigoColor})
       .pipe( switchMap(resp => {

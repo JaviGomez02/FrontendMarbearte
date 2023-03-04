@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllProductsComponent } from './all-products/all-products.component';
 import { ColorProductoComponent } from './color-producto/color-producto.component';
+import { ProductsAddComponent } from './products-add/products-add.component';
+import { ProductsEditComponent } from './products-edit/products-edit.component';
 
 const routes: Routes = [
     {
@@ -11,7 +13,15 @@ const routes: Routes = [
     {
         path: 'color',
         component: ColorProductoComponent
-    }   
+    },
+    {
+        path: 'add',
+        component: ProductsAddComponent
+    },
+    {
+        path: 'edit/:id',
+        component: ProductsEditComponent
+    }
 ]
 
 @NgModule({

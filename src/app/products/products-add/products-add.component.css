@@ -1,0 +1,134 @@
+.container-login{
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.titulo-login{
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-top: 30px;
+}
+
+.info-login{
+    color: #707070;
+    font-size: 13px;
+    margin-bottom: 40px;
+}
+
+.container-form{
+    margin: 0px auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    width: 800px;
+    
+}
+
+input{
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(207, 206, 206);
+    border-radius: 2px;
+    width: 600px;
+    height: 35px;
+}
+
+.elemento-form{
+    height: 80px;
+}
+
+.elemento-form-textarea{
+    height: 240px;
+}
+
+.elemento-form-select{
+    height: 80px;
+    text-align: left;
+    margin-left: 100px;
+}
+
+input:hover{
+    border-color: rgb(131, 131, 131);;
+}
+
+textarea{
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(207, 206, 206);
+    resize: none;
+    border-radius: 2px;
+    width: 600px;
+    height: 200px;
+}
+
+textarea:hover{
+    border-color: rgb(131, 131, 131);;
+    
+    border-radius: 2px;
+}
+p{
+    margin:0;
+    padding: 0;
+}
+
+.info-registro{
+    font-size: 13px;
+    padding-bottom: 40px;
+}
+
+.grid-botones{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 20px;
+    width: 600px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+
+.boton{
+    grid-area: 1/1/2/2;
+    text-transform: uppercase;
+    position: relative;
+    padding: 1em 20px;
+    margin-bottom: 30px;
+    color: white;
+    border-color: white;
+    background-color: rgb(231, 86, 86);
+    font-size: 14px;
+    transition: all .1s ease-out;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.boton:hover{
+    background-color: rgb(205, 72, 72);
+}
+
+
+.boton-cancelar{
+    grid-area: 1/2/2/3;
+    text-transform: uppercase;
+    position: relative;
+    padding: 1em 20px;
+    margin-bottom: 30px;
+    color: white;
+    border-color: white;
+    background-color: rgb(231, 86, 86);
+    font-size: 14px;
+    transition: all .1s ease-out;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.boton-cancelar:hover{
+    background-color: rgb(205, 72, 72);
+}

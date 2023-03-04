@@ -12,8 +12,6 @@ import { Router } from '@angular/router';
 })
 export class AddCategoriaComponent {
 
-  nuevaCategoria:Categoria={nombre:"", descripcion: "", id: 0}
-
   constructor(private fb: FormBuilder, private categoriaService:categoriaService, private route:Router) { }
 
   myForm: FormGroup = this.fb.group({
