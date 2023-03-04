@@ -60,7 +60,7 @@
 
 
 
-ul {
+.ul {
   display: flex;
   flex-direction: row;
   align-items: start;
@@ -71,7 +71,7 @@ ul {
 
 }
   
-    li .enlace-navbar {
+    .li .enlace-navbar {
       position: relative;
       font-family: Lato, sans-serif;
       color: #000000;
@@ -81,7 +81,7 @@ ul {
       padding-bottom: 20px;
       padding-top: 36px;
     }
-    li .enlace-navbar:after {
+    .li .enlace-navbar:after {
         position: absolute;
         content: "";
         top: 100%;
@@ -94,11 +94,11 @@ ul {
         transition: transform 0.5s;
       }
 
-      li .enlace-navbar:hover {
+      .li .enlace-navbar:hover {
         color: #000000;
       }
 
-      li .enlace-navbar:hover::after {
+      .li .enlace-navbar:hover::after {
         
         transform: scaleX(1);
         transform-origin: left;
@@ -121,7 +121,7 @@ ul {
   
 }
 
-ul li:hover .menu-productos{
+.ul .li:hover .menu-productos{
   visibility: visible;
   z-index: 10;
 }
@@ -166,12 +166,10 @@ ul li:hover .menu-productos{
 
 .img-carrito{
   width: 32px;
-
   margin-right: 30px;
 }
 
 .img-usuario{
   width: 32px;
-  margin-right: 30px;
   cursor: pointer;
 }

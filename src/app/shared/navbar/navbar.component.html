@@ -5,9 +5,9 @@
         <img src="../../../assets/logo-sin-letras.png" class="logo">
     </div>
     <div class="divMiddle">
-        <ul>
-            <li><a class="enlace-navbar" [routerLink]="['/home']" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
-            <li>
+        <ul class="ul">
+            <li class="li"><a class="enlace-navbar" [routerLink]="['/home']" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+            <li class="li">
                 <a class="enlace-navbar" [routerLink]="['/products/all']" routerLinkActive="activo">Productos</a>
                 <div class="menu-productos">
                     <a href="#" class="enlace-div"><div class="menu-productos-categoria-1">
@@ -28,14 +28,22 @@
                     </div></a>
                 </div>
             </li>
-            <li *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/contact']" routerLinkActive="activo">Contacto</a></li>
-            <li *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/about']" routerLinkActive="activo">Sobre nosotros</a></li>
-            <li *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/categoria']" routerLinkActive="activo">Categorias</a></li>
-            <li *ngIf="isAdmin$|async" ><a class="enlace-navbar" [routerLink]="['/usuarios']" routerLinkActive="activo">Usuarios</a></li>
+            <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/contact']" routerLinkActive="activo">Contacto</a></li>
+            <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/about']" routerLinkActive="activo">Sobre nosotros</a></li>
+            <li class="li" *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/categoria']" routerLinkActive="activo">Categorias</a></li>
+            <li class="li" *ngIf="isAdmin$|async" ><a class="enlace-navbar" [routerLink]="['/usuarios']" routerLinkActive="activo">Usuarios</a></li>
         </ul>
     </div>
     <div class="divRight">
-        <img class="img-carrito" src="../../../assets/carrito.png">
-        <img [routerLink]="['/account/login']" class="img-usuario" src="../../../assets/user.png">
+        <div class="dropdown">
+            <button class="btn btn-info dropdown-toggle" style="background-color: white;border-color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="../../../assets/user.png" class="img-usuario">
+            </button>
+            <ul class="dropdown-menu">
+              <li *ngIf="!(isLoged$|async)"><a class="dropdown-item" [routerLink]="['/account/login']">Iniciar sesión</a></li>
+              <li *ngIf="isLoged$|async"><a class="dropdown-item" (click)="logout()">Logout</a></li>
+            </ul>
+          </div>
+        
     </div>
 </div>

@@ -11,6 +11,8 @@ export class categoriaService{
 
     url:string='http://localhost:8082/categoria'
 
+    
+
     constructor(private http:HttpClient){}
 
     httpOptions = {

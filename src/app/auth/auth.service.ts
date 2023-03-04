@@ -19,13 +19,35 @@ export class authService{
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    constructor(private http: HttpClient, private cookieService:CookieService){}
+    httpHeaderAuth = {
+        headers: new HttpHeaders({ 'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJKYXZpR29tZXoiLCJleHAiOjE2ODA1NDE4ODYsInJvbGUiOiJBRE1JTiIsImVtYWlsIjoiamF2aWdvbWV6MDU1QGdtYWlsLmNvbSJ9.45wSZ4qbKcpebGWll9AFGfdEw_McLqu9Ko6WexmHaHsGpeOa-LGu_BB4UjjLs5lk' })
+    }
+
+    constructor(private http: HttpClient, private cookieService:CookieService){
+        // this.http.get('http://localhost:8082/jwt')
+        // .subscribe({
+        //     next:()=>this.loged.next(true),
+        //     error:()=>this.loged.next(false)
+        // })
+
+        // this.http.get('http://localhost:8082/jwtAdmin')
+        // .subscribe({
+        //     next:()=>this.admin.next(true),
+        //     error:()=>this.admin.next(false)
+        // })
+    }
 
     private admin = new BehaviorSubject<boolean> (false);
+
+    private loged = new BehaviorSubject<boolean> (false);
 
     get isAdmin() {
         return this.admin.asObservable();
       }
+
+    get isLoged(){
+        return this.loged.asObservable();
+    }
 
     register(username: string, email:string, contrasena:string, nombre:string):Observable<boolean>{
         return this.http.post<any>(this.url+"/register", {"username":username, "contrasena":contrasena, "nombre":nombre, "email":email},this.httpOptions)
@@ -57,6 +79,7 @@ export class authService{
                 if(this.decodeJwt(token.token).role=='ADMIN'){
                     this.admin.next(true)
                 }
+                this.loged.next(true)
                 return of(true);
             }),catchError(error => {
                 this.cookieService.delete('token');
@@ -68,6 +91,7 @@ export class authService{
     logout() {
         this.cookieService.delete('token')
         this.admin.next(false)
+        this.loged.next(false)
     }
 
     isLoggedIn(){

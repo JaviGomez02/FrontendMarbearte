@@ -9,10 +9,10 @@ import { ProductsModule } from './products/products.module';
 import { AboutModule } from './about/about.module';
 import { ContactModule } from './contact/contact.module';
 import { AccountModule } from './account/account.module';
-import { HttpClientModule } from '@angular/common/http';
-import { AuthInterceptorService } from './auth-interceptor.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CategoriasModule } from './categorias/categorias.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { AuthInterceptorService } from './auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,11 @@ import { UsuariosModule } from './usuarios/usuarios.module';
     CategoriasModule,
     UsuariosModule
   ],
-  providers: [AuthInterceptorService],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

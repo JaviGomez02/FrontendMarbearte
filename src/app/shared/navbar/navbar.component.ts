@@ -16,9 +16,17 @@ export class NavbarComponent implements OnInit {
 
   isAdmin$!:Observable<boolean> 
 
+  isLoged$!:Observable<boolean>
+
   ngOnInit(): void {
-    this.isAdmin$=this.authService.isAdmin;
-    console.log(this.isAdmin$)
+    this.isAdmin$=this.authService.isAdmin; 
+
+    this.isLoged$=this.authService.isLoged;
+  }
+
+  logout(){
+    this.authService.logout()
+    window.location.reload()
   }
 
 
