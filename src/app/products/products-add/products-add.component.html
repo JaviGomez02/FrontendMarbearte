@@ -6,6 +6,7 @@
   
       <form class="form-login" (ngSubmit)="addProduct()"  [formGroup]="myForm" autocomplete="off">
         <div class="elemento-form">
+            <p class="nombre-campo">Nombre</p>
             <input type="text"
             class="input-nombre"
             placeholder="Nombre del producto"
@@ -16,6 +17,7 @@
             </p>
         </div>
         <div class="elemento-form">
+            <p class="nombre-campo">Precio</p>
             <input type="number"
             class="input-nombre"
             placeholder="Precio del producto"
@@ -26,6 +28,7 @@
             </p>
         </div>
         <div class="elemento-form">
+            <p class="nombre-campo">Stock</p>
             <input type="number"
             class="input-nombre"
             placeholder="Stock del producto"
@@ -33,6 +36,17 @@
             <p class="form-text text-danger"
                 *ngIf="isValidField('stock')">
                      El stock no puede ser inferior a 0
+            </p>
+        </div>
+        
+        <div class="elemento-form-textarea">
+            <p class="nombre-campo">Descripcion</p>
+            <textarea type="text"
+            placeholder="Descripcion del producto"
+            formControlName="descripcion"></textarea>
+            <p class="form-text text-danger"
+                *ngIf="isValidField('descripcion')">
+                    La descripción debe tener 10 caracteres como mínimo
             </p>
         </div>
         <div class="elemento-form-select">
@@ -44,15 +58,6 @@
             <p class="form-text text-danger"
                 *ngIf="isValidField('opcionCategoria')">
                      Debe elegir una categoría
-            </p>
-        </div>
-        <div class="elemento-form-textarea">
-            <textarea type="text"
-            placeholder="Descripcion del producto"
-            formControlName="descripcion"></textarea>
-            <p class="form-text text-danger"
-                *ngIf="isValidField('descripcion')">
-                    La descripción debe tener 10 caracteres como mínimo
             </p>
         </div>
         <div class="grid-botones">

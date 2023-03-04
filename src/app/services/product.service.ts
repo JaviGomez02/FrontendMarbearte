@@ -66,6 +66,24 @@ export class productService{
       )
     }
 
+    updateProduct(idProducto:number, nombre:string, descripcion:string, price:number, stock:number, idCategoria:number):Observable<boolean>{
+      return this.http.put<any>(this.url+'/'+idProducto, {
+        "nombre": nombre,
+        "descripcion":descripcion,
+        "price": price,
+        "stock": stock,
+        "categoria":{
+          "id": idCategoria
+          }
+        })
+        .pipe( switchMap(resp => {
+          return of(true);
+        }),catchError(error => {
+            return of(false);
+        })
+        )
+    }
+
     deleteArticulo(id:number):Observable<boolean>{
       return this.http.delete<any>(this.url+'/'+id)
       .pipe( switchMap(resp => {

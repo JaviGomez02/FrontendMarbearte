@@ -50,6 +50,11 @@ input{
     margin-left: 100px;
 }
 
+.nombre-campo{
+    margin-top: 10px;
+    margin-bottom:2px ;
+}
+
 input:hover{
     border-color: rgb(131, 131, 131);;
 }

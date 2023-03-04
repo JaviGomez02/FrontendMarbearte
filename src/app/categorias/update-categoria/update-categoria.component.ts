@@ -30,18 +30,29 @@ export class UpdateCategoriaComponent implements OnInit {
       this.categoriaService.getCategoriaById(this.activatedRoute.snapshot.params['id'])
       .subscribe({
         next: (resp)=>{
-          this.myForm.reset({
-            nombre: resp.nombre,
-            descripcion:resp.descripcion
-          })
-        },error: (error)=>{
-          setTimeout(() => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Algo ha ido mal, volviendo'
+          if(resp){
+            this.myForm.reset({
+              nombre: resp.nombre,
+              descripcion:resp.descripcion
             })
-          }, 1500);
+          }
+          else{
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Algo ha ido mal'
+              }).then((resp)=>{
+                this.route.navigateByUrl('/categoria')
+              })
+          }
+        },error: (error)=>{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo ha ido mal'
+          }).then((resp)=>{
+            this.route.navigateByUrl('/categoria')
+          })
         }
       })
     
