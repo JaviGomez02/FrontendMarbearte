@@ -18,7 +18,8 @@ export class RegisterComponent implements OnInit {
     username: "",
     password: "",
     email: "",
-    nombre: ""
+    nombre: "",
+    passwordRepeat:""
   }
   isLoggedIn!: boolean;
   
@@ -36,6 +37,7 @@ export class RegisterComponent implements OnInit {
   }
 
   registerSubmit():void{
+
     console.log(this.myForm.value.username,this.myForm.value.email, this.myForm.value.password, this.myForm.value.nombre)
     this.authService.register(this.myForm.value.username,this.myForm.value.email, this.myForm.value.password, this.myForm.value.nombre )
     .subscribe({

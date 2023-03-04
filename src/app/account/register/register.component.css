@@ -36,11 +36,28 @@ input{
 }
 
 .elemento-form{
-    height: 70px;
+    height: 100px;
 }
 
 input:hover{
     border-color: rgb(131, 131, 131);;
+}
+
+.boton-disable{
+    text-transform: uppercase;
+    grid-area: 3/1/4/3;
+    position: relative;
+    padding: 1em 20px;
+    cursor: not-allowed;
+    color: white;
+    border-color: white;
+    background-color: rgb(231, 86, 86);
+    font-size: 15px;
+    transition: all .1s ease-out;
+    width: 100px;
+    border: solid;
+    border-width: 1px;
+    border-radius: 5px;
 }
 
 .boton{

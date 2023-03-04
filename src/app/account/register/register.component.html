@@ -13,9 +13,9 @@
                 [ngModel]="initForm.username"
                 name="username"
                 required
-                minlength="4">
+                minlength="6">
                 <p class="form-text text-danger" *ngIf="notValid('username')">
-                      El nombre de usuario debe tener al menos 4 letras.
+                      El nombre de usuario debe tener al menos 6 letras
                 </p>
         </div>
         <div class="elemento-form">
@@ -24,20 +24,20 @@
                 [ngModel]="initForm.nombre"
                 name="nombre"
                 required
-                minlength="4">
+                minlength="6">
                 <p class="form-text text-danger" *ngIf="notValid('nombre')">
-                      El nombre de usuario debe tener al menos 4 letras.
+                      El nombre y/o apellidos debe tener al menos 6 letras
                 </p>
         </div>
         <div class="elemento-form">
-          <input type="text" 
+          <input type="email" 
                 placeholder="Email"
                 [ngModel]="initForm.email"
                 name="email"
-                required
-                minlength="4">
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                required>
                 <p class="form-text text-danger" *ngIf="notValid('email')">
-                      El nombre de usuario debe tener al menos 4 letras.
+                      Email no válido
                 </p>
         </div>
         <div class="elemento-form">
@@ -46,9 +46,9 @@
                   name="password"
                   [ngModel]="initForm.password"
                   required
-                  minlength="3">
-          <p class="form-text text-danger" *ngIf="notValid('password')">
-            La contraseña debe tener al menos 3 letras.
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+          <p class="form-text text-danger" style="margin-left: 20px; margin-right: 20px;" *ngIf="notValid('password')">
+            La contraseña debe contener un número, una mayúscula, una minúscula, y al menos 8 o más carácteres
           </p>
         </div>
         <div class="elemento-form">
@@ -56,17 +56,20 @@
                   placeholder="Repetir contraseña"
                   name="passwordRepeat"
                   required
-                  minlength="3">
-          <p class="form-text text-danger" *ngIf="notValid('passwordRepeat')">
-            La contraseña debe tener al menos 3 letras.
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  [ngModel]="initForm.passwordRepeat">
+          <p class="form-text text-danger" *ngIf="myForm.value.password!=myForm.value.passwordRepeat">
+            Las contraseñas no coinciden
           </p>
+          
         </div>
         <p><button type="submit" class="boton"
-                [disabled]="myForm.invalid">Entrar
+                [disabled]="myForm.invalid || myForm.value.password!=myForm.value.passwordRepeat"
+                [className]="myForm.invalid || myForm.value.password!=myForm.value.passwordRepeat ? 'boton-disable': 'boton'"
+                >Entrar
         </button></p>
         <p class="info-registro">Ya estás registrado? <a href="#" [routerLink]="['/account/login']">Volver al login</a></p>
       </form>
     </div>
   </div>
-  
   

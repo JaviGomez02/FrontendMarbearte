@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // this.isLoggedIn = this.authService.isAuthenticated();
     if(this.authService.isLoggedIn()){
-      this.route.navigateByUrl("/account")
+      this.route.navigateByUrl("/")
     }
   }
 
@@ -54,9 +54,11 @@ export class LoginComponent implements OnInit {
           Swal.fire({
             icon: 'success',
             title: 'Login correcto',
+            text: 'Redirigiendo a home...',
             timer: 1500
+          }).then((resp)=>{         
+            this.route.navigate(["/"])
           })
-          this.route.navigate(["/account"])
           
         }
         else {
