@@ -26,15 +26,15 @@ export class authService{
     constructor(private http: HttpClient, private cookieService:CookieService){
         // this.http.get('http://localhost:8082/jwt')
         // .subscribe({
-        //     next:()=>this.loged.next(true),
-        //     error:()=>this.loged.next(false)
-        // })
+        //      next:()=>this.loged.next(true),
+        //      error:()=>this.loged.next(false)
+        //  })
 
         // this.http.get('http://localhost:8082/jwtAdmin')
         // .subscribe({
-        //     next:()=>this.admin.next(true),
-        //     error:()=>this.admin.next(false)
-        // })
+        //      next:()=>this.admin.next(true),
+        //       error:()=>this.admin.next(false)
+        //  })
     }
 
     private admin = new BehaviorSubject<boolean> (false);

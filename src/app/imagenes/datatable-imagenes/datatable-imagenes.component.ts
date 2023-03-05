@@ -64,7 +64,7 @@ export class DatatableImagenesComponent implements OnInit {
 
   async addImagen(){
     const { value: file } = await Swal.fire({
-      title: 'Select image',
+      title: 'Selecciona la imagen',
       input: 'file',
       inputAttributes: {
         'accept': 'image/*',
@@ -73,7 +73,6 @@ export class DatatableImagenesComponent implements OnInit {
     })
     
     if (file) {
-      
       console.log(file)
       this.servicioImagen.addImagen(file, this.idProducto)
       .subscribe({

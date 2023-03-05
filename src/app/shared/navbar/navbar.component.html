@@ -40,8 +40,8 @@
               <img src="../../../assets/user.png" class="img-usuario">
             </button>
             <ul class="dropdown-menu">
-              <li *ngIf="!(isLoged$|async)"><a class="dropdown-item" [routerLink]="['/account/login']">Iniciar sesión</a></li>
-              <li *ngIf="isLoged$|async"><a class="dropdown-item" (click)="logout()">Logout</a></li>
+              <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/login']">Iniciar sesión</a></li>
+              <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="logout()">Logout</a></li>
             </ul>
           </div>
         
