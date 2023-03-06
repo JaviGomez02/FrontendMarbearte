@@ -8,24 +8,13 @@
         <ul class="ul">
             <li class="li"><a class="enlace-navbar" [routerLink]="['/home']" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
             <li class="li">
-                <a class="enlace-navbar" [routerLink]="['/products/all']" routerLinkActive="activo">Productos</a>
-                <div class="menu-productos">
-                    <a href="#" class="enlace-div"><div class="menu-productos-categoria-1">
+                <a class="enlace-navbar"  [routerLink]="['/products/all']" routerLinkActive="activo">Productos</a>
+                <div class="menu-productos" >
+                    <a class="enlace-div" *ngFor="let categoria of listaCategorias" (click)="verProductos(categoria.id)"><div class="menu-productos-categoria-1" >
                         <img class="img-categoria" src="../../../assets/ejemplo.jpg">
-                        <p>Categoria 1</p>
+                        <p>{{categoria.nombre}}</p>
                     </div></a>
-                    <a href="#" class="enlace-div"><div class="menu-productos-categoria-2">
-                        <img class="img-categoria" src="../../../assets/ejemplo.jpg">
-                        <p>Categoria 2</p>
-                    </div></a>
-                    <a href="#" class="enlace-div"><div class="menu-productos-categoria-3">
-                        <img class="img-categoria" src="../../../assets/ejemplo.jpg">
-                        <p>Categoria 3</p>
-                    </div></a>
-                    <a href="#" class="enlace-div"><div class="menu-productos-categoria-4">
-                        <img class="img-categoria" src="../../../assets/ejemplo.jpg">
-                        <p>Categoria 4</p>
-                    </div></a>
+                    
                 </div>
             </li>
             <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/contact']" routerLinkActive="activo">Contacto</a></li>
@@ -42,6 +31,8 @@
             <ul class="dropdown-menu">
               <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/login']">Iniciar sesión</a></li>
               <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="logout()">Logout</a></li>
+              <li *ngIf="isLoged$|async"><hr class="dropdown-divider"></li>
+              <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="updateUsuario()">Ver mis datos</a></li>
             </ul>
           </div>
         

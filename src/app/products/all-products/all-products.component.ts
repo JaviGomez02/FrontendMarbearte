@@ -13,7 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AllProductsComponent implements OnInit {
 
-  constructor(private servicio:productService, private cookieService:CookieService, private authService: authService, private route: ActivatedRoute) { }
+  constructor(private servicio:productService, private cookieService:CookieService, private authService: authService, private route: ActivatedRoute) {
+   }
 
   isAdmin:boolean=false
 
@@ -32,6 +33,7 @@ export class AllProductsComponent implements OnInit {
   idCategoria!:number
 
   ngOnInit(): void {
+
 
     this.idCategoria=this.route.snapshot.queryParams['idCategoria']
       this.servicio.getProducts(this.pageNumber, this.sizeNumber, this.idCategoria)

@@ -23,105 +23,30 @@
 <div class="productos-home-1">
   <p class="titulo-productos">Nuevos productos</p>
   <div class="grid-productos-home">
-    <div class="producto">
-        <img class="img-producto" src="../../../assets/ejemplo.jpg">
-        <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
+    <div class="producto" *ngFor="let item of nuevosProductos">
+        <img class="img-producto" *ngIf="item.imagenes[0]" src="{{item.imagenes[0].img}}">
+        <img class="img-producto" *ngIf="!item.imagenes[0]" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1674909028/jphna9wcvkpwwkwmqz3u.jpg">
+        <p class="nombre-producto">{{item.nombre}} <span class="precio-producto">| {{item.price}}€</span></p>
         <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
     </div>
-    <div class="producto">
-      <img class="img-producto" src="../../../assets/ejemplo.jpg">
-      <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-        <img class="img-producto" src="../../../assets/ejemplo.jpg">
-        <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-        <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-      <img class="img-producto" src="../../../assets/ejemplo.jpg">
-      <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-      <img class="img-producto" src="../../../assets/ejemplo.jpg">
-      <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-      <img class="img-producto" src="../../../assets/ejemplo.jpg">
-      <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-      <img class="img-producto" src="../../../assets/ejemplo.jpg">
-      <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-      <img class="img-producto" src="../../../assets/ejemplo.jpg">
-      <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
+    
   </div>
 </div>
 
 <div class="categorias-producto">
-  <div class="categoria">
+  <div class="categoria" *ngFor="let categoria of listaCategorias" (click)="verProductos(categoria.id)">
     <img class="img-categoria" src="../../../assets/ejemplo.jpg">
-    <p class="texto-categoria">Categoria 1</p>
-  </div>
-  <div class="categoria">
-    <img class="img-categoria" src="../../../assets/ejemplo.jpg">
-    <p class="texto-categoria">Categoria 1</p>
-  </div>
-  <div class="categoria">
-    <img class="img-categoria" src="../../../assets/ejemplo.jpg">
-    <p class="texto-categoria">Categoria 1</p>
+    <p class="texto-categoria">{{categoria.nombre}}</p>
   </div>
 </div>
 
-<div class="productos-home-1">
+<div class="productos-home-1" *ngIf="masVendidos.length">
   <p class="titulo-productos">Los más vendidos</p>
   <div class="grid-productos-home">
-    <div class="producto">
-        <img class="img-producto" src="../../../assets/ejemplo.jpg">
-        <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-        <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-      <img class="img-producto" src="../../../assets/ejemplo.jpg">
-      <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-        <img class="img-producto" src="../../../assets/ejemplo.jpg">
-        <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-        <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-      <img class="img-producto" src="../../../assets/ejemplo.jpg">
-      <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-      <img class="img-producto" src="../../../assets/ejemplo.jpg">
-      <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-      <img class="img-producto" src="../../../assets/ejemplo.jpg">
-      <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-      <img class="img-producto" src="../../../assets/ejemplo.jpg">
-      <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
-    <div class="producto">
-      <img class="img-producto" src="../../../assets/ejemplo.jpg">
-      <p class="nombre-producto">Producto 1 <span class="precio-producto">| 50€</span></p>
+    <div class="producto" *ngFor="let producto of masVendidos">
+      <img class="img-producto" *ngIf="producto.imagenes[0]" src="{{producto.imagenes[0].img}}">
+      <img class="img-producto" *ngIf="!producto.imagenes[0]" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1674909028/jphna9wcvkpwwkwmqz3u.jpg">
+      <p class="nombre-producto">{{producto.nombre}} <span class="precio-producto">| {{producto.price}}€</span></p>
       <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
     </div>
   </div>

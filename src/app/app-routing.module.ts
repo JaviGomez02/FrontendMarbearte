@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth-guard.guard';
+import { RolGuard } from './rol-guard.guard';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 
 const routes: Routes = [
@@ -17,28 +19,28 @@ const routes: Routes = [
     loadChildren: () => import('./account/account.module').then(m => m.AccountModule)
   },
   {
-    path: 'cart',
-    loadChildren: () => import('./carrito/carrito.module').then(m => m.CarritoModule)
-  },
-  {
     path: 'contact',
     loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
   },
   {
     path: 'products',
-    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+    loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
+    canActivate:[AuthGuard]
   },
   {
     path: 'categoria',
-    loadChildren: () => import('./categorias/categorias.module').then(m => m.CategoriasModule)
+    loadChildren: () => import('./categorias/categorias.module').then(m => m.CategoriasModule),
+    canActivate:[RolGuard]
   },
   {
     path: 'usuarios',
-    loadChildren: () => import('./usuarios/usuarios.module').then(m => m.UsuariosModule)
+    loadChildren: () => import('./usuarios/usuarios.module').then(m => m.UsuariosModule),
+    canActivate:[RolGuard]
   },
   {
     path: 'images',
-    loadChildren: () => import('./imagenes/imagenes.module').then(m => m.ImagenesModule)
+    loadChildren: () => import('./imagenes/imagenes.module').then(m => m.ImagenesModule),
+    canActivate:[RolGuard]
   },
   {
     path: '',

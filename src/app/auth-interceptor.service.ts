@@ -24,7 +24,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     if (token) {
       request = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`
+          Authorization: "Bearer "+token
         }
       });
     }
@@ -33,7 +33,7 @@ export class AuthInterceptorService implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
 
         if (err.status === 401) {
-          // this.router.navigateByUrl('/');
+          // this.router.navigateByUrl('/account/login');
         }
 
         return throwError( ()=>err );

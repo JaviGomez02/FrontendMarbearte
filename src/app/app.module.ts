@@ -13,6 +13,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CategoriasModule } from './categorias/categorias.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { AuthInterceptorService } from './auth-interceptor.service';
+import { AuthGuard } from './auth-guard.guard';
+import { RolGuard } from './rol-guard.guard';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { AuthInterceptorService } from './auth-interceptor.service';
     CategoriasModule,
     UsuariosModule
   ],
-  providers: [{
+  providers: [AuthGuard, RolGuard,{
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
     multi: true

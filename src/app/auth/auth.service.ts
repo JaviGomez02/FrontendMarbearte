@@ -24,17 +24,17 @@ export class authService{
     }
 
     constructor(private http: HttpClient, private cookieService:CookieService){
-        // this.http.get('http://localhost:8082/jwt')
-        // .subscribe({
-        //      next:()=>this.loged.next(true),
-        //      error:()=>this.loged.next(false)
-        //  })
+        this.http.get('http://localhost:8082/jwt')
+        .subscribe({
+             next:()=>this.loged.next(true),
+             error:()=>this.loged.next(false)
+         })
 
-        // this.http.get('http://localhost:8082/jwtAdmin')
-        // .subscribe({
-        //      next:()=>this.admin.next(true),
-        //       error:()=>this.admin.next(false)
-        //  })
+        this.http.get('http://localhost:8082/jwtAdmin')
+        .subscribe({
+             next:()=>this.admin.next(true),
+              error:()=>this.admin.next(false)
+         })
     }
 
     private admin = new BehaviorSubject<boolean> (false);
@@ -103,10 +103,21 @@ export class authService{
         }
     }
 
+    isAdminGuard(){
+        let token=this.cookieService.get('token')
+        if(token){
+            let rol=this.decodeJwt(token).role
+            if(rol=='ADMIN'){
+                return true
+            }
+        }
+            return false
+        
+    }
+
     decodeJwt(jwt: string): DecodeToken{
         return jwt_decode(jwt)
     }
-
 
 
 }

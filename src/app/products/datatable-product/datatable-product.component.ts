@@ -34,7 +34,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
 
     this.idCategoria=this.route.snapshot.queryParams['idCategoria']
 
-    this.productService.getProducts(1, 999, this.idCategoria)
+    this.productService.getProducts(1, 9999, this.idCategoria)
     .subscribe({
       next: (resp)=>{
         this.lista=resp.content

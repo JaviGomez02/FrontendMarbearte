@@ -14,7 +14,7 @@ export class productService{
 
     constructor(private http:HttpClient){}
 
-    getProducts(pageNumber:number, sizeNumber:number, idCategoria:number):Observable<Page>{
+    getProducts(pageNumber:number, sizeNumber:number, idCategoria:number | null):Observable<Page>{
       if(idCategoria){
         return this.http.get<Page>(this.url+'?pageNumber='+pageNumber+'&sizeNumber='+sizeNumber+'&idCategoria='+idCategoria)
       }

@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, switchMap, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UsuarioDTO } from '../interfaces/usuarioDto.interface';
+import { CookieService } from "ngx-cookie-service";
+import { Usuario } from "../interfaces/usuario.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +12,7 @@ import { UsuarioDTO } from '../interfaces/usuarioDto.interface';
 
 export class UsuarioService{
 
-    constructor(private http:HttpClient){}
+    constructor(private http:HttpClient, private cookies:CookieService){}
 
     private url:string="http://localhost:8082/usuarios"
 
@@ -18,8 +20,18 @@ export class UsuarioService{
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
+    // token=this.cookies.get('token')
+
+    // httpOptionsToken = {
+    //   headers: new HttpHeaders({ 'Authorization': 'Bearer '+this.token })
+    // };
+
     getUsuarios():Observable<UsuarioDTO[]>{
         return this.http.get<UsuarioDTO[]>(this.url, this.httpOptions)
+    }
+
+    getUsuarioByUsername(username:string):Observable<Usuario>{
+      return this.http.get<Usuario>(this.url+"/"+username)
     }
 
     deleteUsuario(username:string):Observable<boolean>{
@@ -51,5 +63,6 @@ export class UsuarioService{
       })
       )
     }
+
 
 }

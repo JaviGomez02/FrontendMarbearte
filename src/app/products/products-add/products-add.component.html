@@ -50,7 +50,8 @@
             </p>
         </div>
         <div class="elemento-form-select">
-            Selecciona una categoria: <select formControlName="opcionCategoria">
+            Selecciona una categoria: 
+            <select formControlName="opcionCategoria">
                 <option *ngFor="let categoria of listaCategorias" [value]="categoria.id">
                     {{categoria.nombre}}
                 </option>
