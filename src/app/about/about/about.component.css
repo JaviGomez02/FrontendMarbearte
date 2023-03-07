@@ -20,6 +20,7 @@
 }
 
 .texto1-grid{
+    text-align: left;
     grid-area: 1/1/2/3;
 }
 
@@ -32,6 +33,7 @@
 }
 
 .texto2-grid{
+    text-align: left;
     grid-area: 3/1/4/3;
 }
 
