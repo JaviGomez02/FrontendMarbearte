@@ -23,7 +23,7 @@
 <div class="productos-home-1">
   <p class="titulo-productos">Nuevos productos</p>
   <div class="grid-productos-home">
-    <div class="producto" *ngFor="let item of nuevosProductos">
+    <div class="producto" *ngFor="let item of nuevosProductos" [routerLink]="['/products', item.id]">
         <img class="img-producto" *ngIf="item.imagenes[0]" src="{{item.imagenes[0].img}}">
         <img class="img-producto" *ngIf="!item.imagenes[0]" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
         <p class="nombre-producto">{{item.nombre}} <span class="precio-producto">| {{item.price}}€</span></p>
@@ -43,7 +43,7 @@
 <div class="productos-home-1" *ngIf="masVendidos.length">
   <p class="titulo-productos">Los más vendidos</p>
   <div class="grid-productos-home">
-    <div class="producto" *ngFor="let producto of masVendidos">
+    <div class="producto" *ngFor="let producto of masVendidos" [routerLink]="['/products', producto.id]">
       <img class="img-producto" *ngIf="producto.imagenes[0]" src="{{producto.imagenes[0].img}}">
       <img class="img-producto" *ngIf="!producto.imagenes[0]" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
       <p class="nombre-producto">{{producto.nombre}} <span class="precio-producto">| {{producto.price}}€</span></p>

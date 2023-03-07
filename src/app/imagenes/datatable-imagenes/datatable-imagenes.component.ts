@@ -73,7 +73,6 @@ export class DatatableImagenesComponent implements OnInit {
     })
     
     if (file) {
-      console.log(file)
       this.servicioImagen.addImagen(file, this.idProducto)
       .subscribe({
         next: (resp)=>{
