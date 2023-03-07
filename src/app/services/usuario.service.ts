@@ -44,6 +44,16 @@ export class UsuarioService{
       )
     }
 
+    updateUsuario(username:string, contrasena:string, nombre:string, email:string, role:string, enable:boolean, verificationCode:string):Observable<boolean>{
+      return this.http.put<any>(this.url+'/'+username,{"username":username, "contrasena":contrasena, "nombre":nombre, "email":email, "role":role, "enable":enable, "verificationCode":verificationCode},this.httpOptions)
+      .pipe(switchMap(resp=>{
+        return of (true)
+      }),catchError(error=>{
+        return of (false)
+      })
+      )
+    }
+
     changeToAdmin(username:string):Observable<boolean>{
       return this.http.put<any>(this.url+'/changeToAdmin/'+username, undefined)
       .pipe( switchMap(resp => {

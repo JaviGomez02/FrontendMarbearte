@@ -21,15 +21,12 @@ export class RegisterComponent implements OnInit {
     nombre: "",
     passwordRepeat:""
   }
-  isLoggedIn!: boolean;
   
   ngOnInit(): void {
     // this.isLoggedIn = this.authService.isAuthenticated();
   }
 
-  save(){
-    console.log("enviado")
-  }
+
 
   notValid(campo: string): boolean{
     return this.myForm?.controls[campo]?.invalid &&
@@ -37,13 +34,10 @@ export class RegisterComponent implements OnInit {
   }
 
   registerSubmit():void{
-
-    console.log(this.myForm.value.username,this.myForm.value.email, this.myForm.value.password, this.myForm.value.nombre)
     this.authService.register(this.myForm.value.username,this.myForm.value.email, this.myForm.value.password, this.myForm.value.nombre )
     .subscribe({
       next: (resp) => {
         if (resp) {
-          this.isLoggedIn=true;
           Swal.fire({
             icon: 'success',
             title: 'Registrado correctamente',

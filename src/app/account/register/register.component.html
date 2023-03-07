@@ -66,7 +66,7 @@
         <p><button type="submit" class="boton"
                 [disabled]="myForm.invalid || myForm.value.password!=myForm.value.passwordRepeat"
                 [className]="myForm.invalid || myForm.value.password!=myForm.value.passwordRepeat ? 'boton-disable': 'boton'"
-                >Entrar
+                >Enviar
         </button></p>
         <p class="info-registro">Ya estás registrado? <a href="#" [routerLink]="['/account/login']">Volver al login</a></p>
       </form>
