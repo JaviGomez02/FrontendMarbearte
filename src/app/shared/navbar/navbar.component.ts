@@ -51,6 +51,7 @@ export class NavbarComponent implements OnInit {
 
   verProductos(idCategoria:number){
     this.route.navigateByUrl('products/all?idCategoria='+idCategoria)
+    
   }
 
   updateUsuario(){

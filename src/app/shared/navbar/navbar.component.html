@@ -10,10 +10,12 @@
             <li class="li">
                 <a class="enlace-navbar"  [routerLink]="['/products/all']" routerLinkActive="activo">Productos</a>
                 <div class="menu-productos" >
-                    <a class="enlace-div" *ngFor="let categoria of listaCategorias" (click)="verProductos(categoria.id)"><div class="menu-productos-categoria-1" >
-                        <img class="img-categoria" src="../../../assets/ejemplo.jpg">
-                        <p>{{categoria.nombre}}</p>
-                    </div></a>
+                    <a class="enlace-div" *ngFor="let categoria of listaCategorias" (click)="verProductos(categoria.id)">
+                        <div class="menu-productos-categoria-1">
+                            <img class="img-categoria" src="../../../assets/ejemplo.jpg">
+                            <p>{{categoria.nombre}}</p>
+                        </div>
+                    </a>
                     
                 </div>
             </li>

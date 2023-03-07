@@ -118,7 +118,8 @@ a{
   border-bottom: solid;
   border-width: 1px;
   border-color: rgb(192, 192, 192);
-
+  overflow-y: scroll;
+  height: 430px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
@@ -149,7 +150,7 @@ a{
 .enlace-div{
   text-decoration: none;
   text-transform: uppercase;
-  color: #707070;
+  color: #848484;
 
   margin: 30px;
 }

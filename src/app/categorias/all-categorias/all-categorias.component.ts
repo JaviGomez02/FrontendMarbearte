@@ -11,20 +11,17 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './all-categorias.component.html',
   styleUrls: ['./all-categorias.component.css']
 })
-export class AllCategoriasComponent implements OnInit{
+export class AllCategoriasComponent implements OnInit {
 
-  constructor(private categoriaService:categoriaService, private fb:FormBuilder, private route:Router){}
+  constructor(private categoriaService: categoriaService, private fb: FormBuilder, private route: Router) { }
 
+  nombreCategoria: string = ""
 
-
-  nombreCategoria:string=""
-
-  lista:Categoria[]=[]
+  lista: Categoria[] = []
 
   dtOptions: DataTables.Settings = {};
+
   dtTrigger: Subject<any> = new Subject<any>();
-
-
 
   ngOnInit(): void {
 
@@ -34,14 +31,14 @@ export class AllCategoriasComponent implements OnInit{
       processing: true
     };
 
-      this.categoriaService.getCategorias()
+    this.categoriaService.getCategorias()
       .subscribe({
-        next: (resp)=>{
-          this.lista=resp
+        next: (resp) => {
+          this.lista = resp
           this.dtTrigger.next(this.lista)
         },
-        error: (error)=>{
-          
+        error: (error) => {
+
         }
       })
   }
@@ -51,14 +48,14 @@ export class AllCategoriasComponent implements OnInit{
   }
 
 
-  verProductos(idCategoria:number){
-    this.route.navigateByUrl("/products/all?idCategoria="+idCategoria)
+  verProductos(idCategoria: number) {
+    this.route.navigateByUrl("/products/all?idCategoria=" + idCategoria)
   }
 
 
-  deleteCategoria(nombre:string, id:number){
+  deleteCategoria(nombre: string, id: number) {
     Swal.fire({
-      title: '¿Seguro que desea borrar la categoria '+nombre+'?',
+      title: '¿Seguro que desea borrar la categoria ' + nombre + '?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -68,25 +65,25 @@ export class AllCategoriasComponent implements OnInit{
     }).then((result) => {
       if (result.isConfirmed) {
         this.categoriaService.deleteCategoria(id)
-        .subscribe({
-          next: (resp)=>{
-            Swal.fire(
-              'Borrado!',
-              'La categoría ha sido borrada.',
-              'success'
-            ).then((resp)=>{
-              window.location.reload()
-            })
-          },
-          error: (error)=>{
-            Swal.fire(
-              'Oops!',
-              'Ocurrió un error inesperado.',
-              'error'
-            )
-          }
-        })
-        
+          .subscribe({
+            next: (resp) => {
+              Swal.fire(
+                'Borrado!',
+                'La categoría ha sido borrada.',
+                'success'
+              ).then((resp) => {
+                window.location.reload()
+              })
+            },
+            error: (error) => {
+              Swal.fire(
+                'Oops!',
+                'Ocurrió un error inesperado.',
+                'error'
+              )
+            }
+          })
+
       }
     })
   }
