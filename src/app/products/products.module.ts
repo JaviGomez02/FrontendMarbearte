@@ -9,6 +9,7 @@ import { ColorProductoComponent } from './color-producto/color-producto.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsAddComponent } from './products-add/products-add.component';
 import { ProductsEditComponent } from './products-edit/products-edit.component';
+import { ProductComponent } from './product/product.component';
 
 
 
@@ -18,7 +19,8 @@ import { ProductsEditComponent } from './products-edit/products-edit.component';
     DatatableProductComponent,
     ColorProductoComponent,
     ProductsAddComponent,
-    ProductsEditComponent
+    ProductsEditComponent,
+    ProductComponent
     
   ],
   imports: [

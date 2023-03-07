@@ -30,9 +30,9 @@
             </button>
             <ul class="dropdown-menu">
               <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/login']">Iniciar sesión</a></li>
-              <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="logout()">Logout</a></li>
-              <li *ngIf="isLoged$|async"><hr class="dropdown-divider"></li>
               <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="updateUsuario()">Ver mis datos</a></li>
+              <li *ngIf="isLoged$|async"><hr class="dropdown-divider"></li>
+              <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="logout()">Logout</a></li>
             </ul>
           </div>
         

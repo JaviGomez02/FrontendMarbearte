@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { authService } from 'src/app/auth/auth.service';
 import { Usuario } from 'src/app/interfaces/usuario.interface';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
@@ -12,9 +14,14 @@ import Swal from 'sweetalert2';
 })
 export class UpdateUsuarioComponent implements OnInit{
 
-  constructor(private servicioUsuario:UsuarioService, private activatedRoute:ActivatedRoute){}
+  constructor(private servicioUsuario:UsuarioService, private activatedRoute:ActivatedRoute,
+     private authService:authService, private cookies:CookieService, private router:Router){}
 
   usuario!:Usuario
+
+  nombreUsuario!:string
+
+  token!:string
 
   @ViewChild('myForm') myForm!: NgForm;
 
@@ -26,18 +33,42 @@ export class UpdateUsuarioComponent implements OnInit{
     passwordRepeat:""}
 
   ngOnInit(): void {
+
+    this.token=this.cookies.get('token')
+    this.nombreUsuario=this.authService.decodeJwt(this.token).sub
+
     this.servicioUsuario.getUsuarioByUsername(this.activatedRoute.snapshot.params['username'])
     .subscribe({
       next: (resp)=>{
-        this.usuario=resp
-        this.initForm = {
-          username: resp.username,
-          password: "",
-          email: resp.email,
-          nombre: resp.nombre,
-          passwordRepeat:""
+        if(resp){
+          this.usuario=resp
+          if(this.nombreUsuario!=resp.username){
+            this.router.navigateByUrl('/')
+            Swal.fire({
+              icon: 'error',
+              title: 'No tiene permiso',
+              text: 'No tiene permiso para acceder a esa ruta'
+            })
+          }
+          else{
+            this.initForm = {
+              username: resp.username,
+              password: "",
+              email: resp.email,
+              nombre: resp.nombre,
+              passwordRepeat:""
+            }
+          }
         }
-        console.log(resp)
+        else{
+          this.router.navigateByUrl('/')
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops',
+            text: 'Algo ha ido mal'
+          })
+        }
+        
       }
     })
   }

@@ -54,6 +54,7 @@ export class NavbarComponent implements OnInit {
   }
 
   updateUsuario(){
+   
     this.route.navigateByUrl('usuarios/update/'+this.usuario)
   }
 
