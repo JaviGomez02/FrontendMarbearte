@@ -21,16 +21,16 @@ import { ProductComponent } from './product/product.component';
     ProductsAddComponent,
     ProductsEditComponent,
     ProductComponent
-    
+
   ],
   imports: [
     CommonModule,
     ProductsRoutingModule,
     DataTablesModule,
     ReactiveFormsModule
-    
+
   ],
-  exports:[
+  exports: [
     AllProductsComponent
   ]
 })

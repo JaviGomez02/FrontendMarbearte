@@ -15,47 +15,47 @@ import Swal from 'sweetalert2';
 })
 export class ColorProductoComponent implements OnInit {
 
-  constructor(private servicioProducto:productService, private servicioColor:colorService,
-     private route:ActivatedRoute, private fb: FormBuilder, private router:Router){}
+  constructor(private servicioProducto: productService, private servicioColor: colorService,
+    private route: ActivatedRoute, private fb: FormBuilder, private router: Router) { }
 
 
-  
 
-  producto!:Product
 
-  listaColores:Color[]=[]
+  producto!: Product
 
-  coloresAnnadir:Color[]=[]
+  listaColores: Color[] = []
 
-  idProducto!:number
+  coloresAnnadir: Color[] = []
+
+  idProducto!: number
 
   ngOnInit(): void {
-    this.idProducto=this.route.snapshot.queryParams['idProducto']
+    this.idProducto = this.route.snapshot.queryParams['idProducto']
 
-      this.servicioProducto.getProducto(this.idProducto)
+    this.servicioProducto.getProducto(this.idProducto)
       .subscribe({
-        next: (resp)=>{
-          this.producto=resp
+        next: (resp) => {
+          this.producto = resp
 
         },
-        error: (error)=>{
+        error: (error) => {
           console.log(error)
         }
       })
 
-      this.servicioColor.getColores()
+    this.servicioColor.getColores()
       .subscribe({
-        next: (resp)=>{
-          this.listaColores=resp
+        next: (resp) => {
+          this.listaColores = resp
 
         },
-        error: (error)=>{
+        error: (error) => {
           console.log(error)
         }
       })
   }
 
-  onCheckboxPressed(colorSelected: any, target: EventTarget | null){
+  onCheckboxPressed(colorSelected: any, target: EventTarget | null) {
 
     const input = target as HTMLInputElement
 
@@ -68,33 +68,33 @@ export class ColorProductoComponent implements OnInit {
     }
   }
 
-  save(){
-    if(this.coloresAnnadir.length){
-      for(let i=0; i<this.coloresAnnadir.length;i++){
+  save() {
+    if (this.coloresAnnadir.length) {
+      for (let i = 0; i < this.coloresAnnadir.length; i++) {
         console.log(this.coloresAnnadir[i])
         this.servicioProducto.asignarColor(this.idProducto, this.coloresAnnadir[i].color)
-        .subscribe({
-          next: (resp)=>{
-            Swal.fire(
-              'Añadido!',
-              'El color/colores ha sido añadido correctamente.',
-              'success'
-            ).then((resp)=>{
-              this.router.navigateByUrl('/products/all')
-            })
-          },
-          error: (error)=>{
-            Swal.fire(
-              'Oops!',
-              'Algo ha ido mal.',
-              'error'
-            )
-          }
-        })
-  
+          .subscribe({
+            next: (resp) => {
+              Swal.fire(
+                'Añadido!',
+                'El color/colores ha sido añadido correctamente.',
+                'success'
+              ).then((resp) => {
+                this.router.navigateByUrl('/products/all')
+              })
+            },
+            error: (error) => {
+              Swal.fire(
+                'Oops!',
+                'Algo ha ido mal.',
+                'error'
+              )
+            }
+          })
+
       }
     }
-    else{
+    else {
       Swal.fire(
         'Oops!',
         'No se ha seleccionado ningún color.',

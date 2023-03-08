@@ -1,18 +1,17 @@
-
-.productos-home-1{
+.productos-home-1 {
     text-align: center;
     margin-top: 50px;
     width: 100%;
 }
 
-.titulo-productos{
+.titulo-productos {
     font-size: 20px;
     text-transform: uppercase;
     font-weight: bold;
     margin-bottom: 50px;
 }
 
-.grid-productos-home{
+.grid-productos-home {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 100px;
@@ -23,53 +22,54 @@
 
 
 
-.nombre-producto{
+.nombre-producto {
     font-weight: bold;
 }
 
-.precio-producto{
+.precio-producto {
     font-weight: normal;
 }
 
 
-.boton-producto{
+.boton-producto {
     position: relative;
 }
 
-.producto:hover{
+.producto:hover {
     cursor: pointer;
 }
 
-.producto:hover .boton-producto{
+.producto:hover .boton-producto {
     display: block;
 }
 
-.producto:hover .nombre-producto{
+.producto:hover .nombre-producto {
     display: none;
 }
 
-.producto{
+.producto {
     height: 300px;
     margin-bottom: 40px;
 
 }
 
-.img-producto{
+.img-producto {
     width: 200px;
     height: 300px;
     margin-bottom: 20px;
     object-fit: cover;
 }
 
-.boton-producto{
+.boton-producto {
     display: none;
 }
 
-.boton{
+.boton {
     position: relative;
     padding: 1em 20px;
     border-color: rgb(231, 86, 86);
-    color: rgb(231, 86, 86);;
+    color: rgb(231, 86, 86);
+    ;
     font-size: 12px;
     transition: all .1s ease-out;
     width: 100%;
@@ -78,7 +78,7 @@
     border-radius: 5px;
 }
 
-.boton:hover{
+.boton:hover {
     color: white;
     border-color: white;
     background-color: rgb(231, 86, 86);
@@ -86,20 +86,22 @@
 
 .pagination {
     display: inline-block;
-  }
-  
-  .pagination a {
+}
+
+.pagination a {
     color: black;
     float: left;
     padding: 8px 16px;
     text-decoration: none;
     transition: background-color .3s;
     cursor: pointer;
-  }
-  
-  .pagination a.active {
+}
+
+.pagination a.active {
     background-color: #4CAF50;
     color: white;
-  }
-  
-  .pagination a:hover:not(.active) {background-color: #ddd;}
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}

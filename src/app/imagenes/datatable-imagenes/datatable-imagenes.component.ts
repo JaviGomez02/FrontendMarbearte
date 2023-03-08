@@ -15,22 +15,22 @@ import { Color } from 'src/app/interfaces/page.interface';
 })
 export class DatatableImagenesComponent implements OnInit {
 
-  lista:Imagen[]=[]
+  lista: Imagen[] = []
 
 
-  producto!:Product
+  producto!: Product
 
-  idProducto!:number
+  idProducto!: number
 
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
 
-  constructor(private servicioImagen:imagenService, private route:ActivatedRoute, private servicioProducto:productService){}
+  constructor(private servicioImagen: imagenService, private route: ActivatedRoute, private servicioProducto: productService) { }
 
   ngOnInit(): void {
 
-    this.idProducto=this.route.snapshot.queryParams['idProducto']
-    
+    this.idProducto = this.route.snapshot.queryParams['idProducto']
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -38,22 +38,22 @@ export class DatatableImagenesComponent implements OnInit {
     };
 
     this.servicioProducto.getProducto(this.idProducto)
-    .subscribe({
-      next: (resp)=>{
-        this.producto=resp
-      },
-      error: (error)=>{
-
-      }
-    })
-
-      this.servicioImagen.getImagenesByProduct(this.idProducto)
       .subscribe({
-        next: (resp)=>{
-          this.lista=resp
+        next: (resp) => {
+          this.producto = resp
+        },
+        error: (error) => {
+
+        }
+      })
+
+    this.servicioImagen.getImagenesByProduct(this.idProducto)
+      .subscribe({
+        next: (resp) => {
+          this.lista = resp
           this.dtTrigger.next(this.lista)
         },
-        error:(error)=>{
+        error: (error) => {
 
         }
       })
@@ -62,7 +62,7 @@ export class DatatableImagenesComponent implements OnInit {
     this.dtTrigger.unsubscribe();
   }
 
-  async addImagen(){
+  async addImagen() {
     const { value: file } = await Swal.fire({
       title: 'Selecciona la imagen',
       input: 'file',
@@ -71,32 +71,32 @@ export class DatatableImagenesComponent implements OnInit {
         'aria-label': 'Upload your profile picture'
       }
     })
-    
+
     if (file) {
       this.servicioImagen.addImagen(file, this.idProducto)
-      .subscribe({
-        next: (resp)=>{
-          Swal.fire(
-            'Añadido!',
-            'La imagen ha sido añadida correctamente.',
-            'success'
-          ).then((resp)=>{
-            window.location.reload()
-          })
-        },
-        error: (error)=>{
-          Swal.fire(
-            'Oops!',
-            'Ocurrió un error inesperado.',
-            'error'
-          )
-        }
-      })
+        .subscribe({
+          next: (resp) => {
+            Swal.fire(
+              'Añadido!',
+              'La imagen ha sido añadida correctamente.',
+              'success'
+            ).then((resp) => {
+              window.location.reload()
+            })
+          },
+          error: (error) => {
+            Swal.fire(
+              'Oops!',
+              'Ocurrió un error inesperado.',
+              'error'
+            )
+          }
+        })
     }
 
   }
 
-  deleteImagen(imagen:Imagen){
+  deleteImagen(imagen: Imagen) {
     Swal.fire({
       title: '¿Seguro que desea borrar la imagen?',
       imageUrl: imagen.img,
@@ -108,25 +108,25 @@ export class DatatableImagenesComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.servicioImagen.deleteImagen(imagen.id)
-        .subscribe({
-          next: (resp)=>{
-            Swal.fire(
-              'Borrado!',
-              'La imagen ha sido borrada.',
-              'success'
-            ).then((resp)=>{
-              window.location.reload()
-            })
-          },
-          error: (error)=>{
-            Swal.fire(
-              'Oops!',
-              'Ocurrió un error inesperado.',
-              'error'
-            )
-          }
-        })
-        
+          .subscribe({
+            next: (resp) => {
+              Swal.fire(
+                'Borrado!',
+                'La imagen ha sido borrada.',
+                'success'
+              ).then((resp) => {
+                window.location.reload()
+              })
+            },
+            error: (error) => {
+              Swal.fire(
+                'Oops!',
+                'Ocurrió un error inesperado.',
+                'error'
+              )
+            }
+          })
+
       }
     })
   }

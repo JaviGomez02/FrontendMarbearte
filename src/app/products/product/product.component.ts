@@ -11,46 +11,46 @@ import Swal from 'sweetalert2';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit{
+export class ProductComponent implements OnInit {
 
-  constructor(private servicioProducto: productService, private activatedRoute:ActivatedRoute, private route:Router){
+  constructor(private servicioProducto: productService, private activatedRoute: ActivatedRoute, private route: Router) {
   }
 
-  producto!:Product
+  producto!: Product
 
-  fotoPrincipal!:Imagene
-  
-  listaImagenes!:Imagene[]
+  fotoPrincipal!: Imagene
+
+  listaImagenes!: Imagene[]
 
   ngOnInit(): void {
     this.servicioProducto.getProducto(this.activatedRoute.snapshot.params['id'])
-    .subscribe({
-      next: (resp)=>{
-        console.log(resp)
-        if(resp){    
-          this.producto=resp
-          this.fotoPrincipal=resp.imagenes[0]
-          this.listaImagenes=resp.imagenes
-          this.listaImagenes.shift()
-        }
-        else{
+      .subscribe({
+        next: (resp) => {
+          console.log(resp)
+          if (resp) {
+            this.producto = resp
+            this.fotoPrincipal = resp.imagenes[0]
+            this.listaImagenes = resp.imagenes
+            this.listaImagenes.shift()
+          }
+          else {
+            this.route.navigateByUrl('/')
+            Swal.fire({
+              icon: "error",
+              title: "Oops",
+              text: "Producto no encontrado"
+            })
+          }
+        },
+        error: (error) => {
           this.route.navigateByUrl('/')
           Swal.fire({
-            icon:"error",
+            icon: "error",
             title: "Oops",
             text: "Producto no encontrado"
           })
         }
-      },
-      error: (error)=>{
-        this.route.navigateByUrl('/')
-        Swal.fire({
-          icon:"error",
-          title: "Oops",
-          text: "Producto no encontrado"
-        })
-      }
-    })
+      })
   }
 
 }

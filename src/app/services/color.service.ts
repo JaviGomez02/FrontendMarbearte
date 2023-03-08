@@ -4,20 +4,20 @@ import { Observable } from 'rxjs';
 import { Color } from '../interfaces/page.interface';
 
 @Injectable({
-    providedIn: 'root'
-  })
+  providedIn: 'root'
+})
 
-export class colorService{
+export class colorService {
 
-    url:string='http://localhost:8082/color'
+  url: string = 'https://apimarbearte-production.up.railway.app/color'
 
-    constructor(private http:HttpClient){}
+  constructor(private http: HttpClient) { }
 
-    httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    getColores():Observable<Color[]>{
-      return this.http.get<Color[]>(this.url)
-    }
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  getColores(): Observable<Color[]> {
+    return this.http.get<Color[]>(this.url)
+  }
 
 }

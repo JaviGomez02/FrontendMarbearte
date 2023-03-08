@@ -1,11 +1,11 @@
-.container-login{
+.container-login {
     width: 100%;
     margin-top: 50px;
     margin-bottom: 50px;
     text-align: center;
 }
 
-.titulo-login{
+.titulo-login {
     font-size: 30px;
     text-transform: uppercase;
     font-weight: bold;
@@ -13,21 +13,21 @@
     padding-top: 30px;
 }
 
-.info-login{
+.info-login {
     color: #707070;
     font-size: 13px;
     margin-bottom: 40px;
 }
 
-.container-form{
+.container-form {
     margin: 0px auto;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     width: 800px;
-    
+
 }
 
-input{
+input {
     border: solid;
     border-width: 1px;
     border-color: rgb(207, 206, 206);
@@ -36,30 +36,31 @@ input{
     height: 35px;
 }
 
-.elemento-form{
+.elemento-form {
     height: 80px;
 }
 
-.nombre-campo{
+.nombre-campo {
     margin-top: 10px;
-    margin-bottom:2px ;
+    margin-bottom: 2px;
 }
 
-.elemento-form-textarea{
+.elemento-form-textarea {
     height: 240px;
 }
 
-.elemento-form-select{
+.elemento-form-select {
     height: 80px;
     text-align: left;
     margin-left: 100px;
 }
 
-input:hover{
-    border-color: rgb(131, 131, 131);;
+input:hover {
+    border-color: rgb(131, 131, 131);
+    ;
 }
 
-textarea{
+textarea {
     border: solid;
     border-width: 1px;
     border-color: rgb(207, 206, 206);
@@ -69,22 +70,24 @@ textarea{
     height: 200px;
 }
 
-textarea:hover{
-    border-color: rgb(131, 131, 131);;
-    
+textarea:hover {
+    border-color: rgb(131, 131, 131);
+    ;
+
     border-radius: 2px;
 }
-p{
-    margin:0;
+
+p {
+    margin: 0;
     padding: 0;
 }
 
-.info-registro{
+.info-registro {
     font-size: 13px;
     padding-bottom: 40px;
 }
 
-.grid-botones{
+.grid-botones {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
@@ -95,7 +98,7 @@ p{
 }
 
 
-.boton{
+.boton {
     grid-area: 1/1/2/2;
     text-transform: uppercase;
     position: relative;
@@ -112,12 +115,12 @@ p{
     border-radius: 5px;
 }
 
-.boton:hover{
+.boton:hover {
     background-color: rgb(205, 72, 72);
 }
 
 
-.boton-cancelar{
+.boton-cancelar {
     grid-area: 1/2/2/3;
     text-transform: uppercase;
     position: relative;
@@ -134,6 +137,6 @@ p{
     border-radius: 5px;
 }
 
-.boton-cancelar:hover{
+.boton-cancelar:hover {
     background-color: rgb(205, 72, 72);
 }

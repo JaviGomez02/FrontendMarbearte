@@ -1,79 +1,155 @@
+<!-- <div class="container-login">
+  <div class="container-form">
+    <p class="titulo-login">Actualizar datos</p>
+    <p class="info-login">Por favor rellene todos los campos.</p>
 
+    <form class="form-login" #myForm="ngForm" (ngSubmit)="updateUsuario()">
+      <div class="elemento-form">
+        <p>Username:</p>
+        <input type="text" placeholder="Nombre de usuario" [ngModel]="initForm.username" name="username" required
+          minlength="6" readonly>
+        <p class="form-text text-danger" *ngIf="notValid('username')">
+          El nombre de usuario debe tener al menos 6 letras
+        </p>
+      </div>
+      <div class="elemento-form">
+        <p>Nombre y apellidos:</p>
+        <input type="text" placeholder="Nombre y apellidos" [ngModel]="initForm.nombre" name="nombre" required
+          minlength="6">
+        <p class="form-text text-danger" *ngIf="notValid('nombre')">
+          El nombre y/o apellidos debe tener al menos 6 letras
+        </p>
+      </div>
+      <div class="elemento-form">
+        <p>Email:</p>
+        <input type="email" placeholder="Email" [ngModel]="initForm.email" name="email"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+        <p class="form-text text-danger" *ngIf="notValid('email')">
+          Email no válido
+        </p>
+      </div>
+      <div class="elemento-form">
+        <p>Contraseña:</p>
+        <input type="password" placeholder="Contraseña" name="password" [ngModel]="initForm.password" required
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+        <p class="form-text text-danger" style="margin-left: 20px; margin-right: 20px;" *ngIf="notValid('password')">
+          La contraseña debe contener un número, una mayúscula, una minúscula, y al menos 8 o más carácteres
+        </p>
+      </div>
+      <div class="elemento-form">
+        <p>Repetir contraseña:</p>
+        <input type="password" placeholder="Repetir contraseña" name="passwordRepeat" required
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" [ngModel]="initForm.passwordRepeat">
+        <p class="form-text text-danger" *ngIf="myForm.value.password!=myForm.value.passwordRepeat">
+          Las contraseñas no coinciden
+        </p>
+
+      </div>
+      <p><button type="submit" class="boton"
+          [disabled]="myForm.invalid || myForm.value.password!=myForm.value.passwordRepeat"
+          [className]="myForm.invalid || myForm.value.password!=myForm.value.passwordRepeat ? 'boton-disable': 'boton'">Guardar
+          cambios
+        </button></p>
+    </form>
+  </div>
+</div> -->
 
 <div class="container-login">
-    <div class="container-form">
-      <p class="titulo-login">Actualizar datos</p>
-      <p class="info-login">Por favor rellene todos los campos.</p>
-  
-      <form class="form-login"  #myForm="ngForm" (ngSubmit)="updateUsuario()">
-        <div class="elemento-form">
-            <p>Username:</p>
-          <input type="text" 
-                placeholder="Nombre de usuario"
-                [ngModel]="initForm.username"
-                name="username"
-                required
-                minlength="6"
-                readonly>
-                <p class="form-text text-danger" *ngIf="notValid('username')">
-                      El nombre de usuario debe tener al menos 6 letras
-                </p>
+  <p class="titulo-login">Mis datos</p>
+  <div class="container py-5" style="text-align: left; padding-top: 0px;">
+    <form class="form-login" #myForm="ngForm" (ngSubmit)="updateUsuario()">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3">{{initForm.username}}</h5>
+              <p class="text-muted mb-1">{{initForm.email}}</p>
+            </div>
+          </div>
         </div>
-        <div class="elemento-form">
-            <p>Nombre y apellidos:</p>
-          <input type="text" 
-                placeholder="Nombre y apellidos"
-                [ngModel]="initForm.nombre"
-                name="nombre"
-                required
-                minlength="6">
-                <p class="form-text text-danger" *ngIf="notValid('nombre')">
-                      El nombre y/o apellidos debe tener al menos 6 letras
-                </p>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Username</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"><input type="text" placeholder="Nombre de usuario"
+                      [ngModel]="initForm.username" name="username" required minlength="6" readonly></p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Nombre y apellidos</p>
+                </div>
+                <div class="col-sm-9">
+                  <input type="text" placeholder="Nombre y apellidos" [ngModel]="initForm.nombre" name="nombre" required
+                    minlength="6">
+                  <p class="form-text text-danger" *ngIf="notValid('nombre')">
+                    El nombre y/o apellidos debe tener al menos 6 letras
+                  </p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <input type="email" placeholder="Email" [ngModel]="initForm.email" name="email"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                  <p class="form-text text-danger" *ngIf="notValid('email')">
+                    Email no válido
+                  </p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Contraseña</p>
+                </div>
+                <div class="col-sm-9">
+                  <input type="password" placeholder="Contraseña" name="password" [ngModel]="initForm.password" required
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                  <p class="form-text text-danger" *ngIf="notValid('password')">
+                    La contraseña debe contener un número, una mayúscula, una minúscula, y al menos 8 o más carácteres
+                  </p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Repetir contraseña</p>
+                </div>
+                <div class="col-sm-9">
+                  <input type="password" placeholder="Repetir contraseña" name="passwordRepeat" required
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" [ngModel]="initForm.passwordRepeat">
+                  <p class="form-text text-danger" *ngIf="myForm.value.password!=myForm.value.passwordRepeat">
+                    Las contraseñas no coinciden
+                  </p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Guardar cambios</p>
+                </div>
+                <div class="col-sm-9">
+                  <p><button type="submit" class="boton"
+                      [disabled]="myForm.invalid || myForm.value.password!=myForm.value.passwordRepeat"
+                      [className]="myForm.invalid || myForm.value.password!=myForm.value.passwordRepeat ? 'boton-disable': 'boton'">Guardar
+                    </button></p>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
-        <div class="elemento-form">
-            <p>Email:</p>
-          <input type="email" 
-                placeholder="Email"
-                [ngModel]="initForm.email"
-                name="email"
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                required>
-                <p class="form-text text-danger" *ngIf="notValid('email')">
-                      Email no válido
-                </p>
-        </div>
-        <div class="elemento-form">
-            <p>Contraseña:</p>
-          <input type="password" 
-                  placeholder="Contraseña"
-                  name="password"
-                  [ngModel]="initForm.password"
-                  required
-                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-          <p class="form-text text-danger" style="margin-left: 20px; margin-right: 20px;" *ngIf="notValid('password')">
-            La contraseña debe contener un número, una mayúscula, una minúscula, y al menos 8 o más carácteres
-          </p>
-        </div>
-        <div class="elemento-form">
-            <p>Repetir contraseña:</p>
-          <input type="password" 
-                  placeholder="Repetir contraseña"
-                  name="passwordRepeat"
-                  required
-                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                  [ngModel]="initForm.passwordRepeat">
-          <p class="form-text text-danger" *ngIf="myForm.value.password!=myForm.value.passwordRepeat">
-            Las contraseñas no coinciden
-          </p>
-          
-        </div>
-        <p><button type="submit" class="boton"
-                [disabled]="myForm.invalid || myForm.value.password!=myForm.value.passwordRepeat"
-                [className]="myForm.invalid || myForm.value.password!=myForm.value.passwordRepeat ? 'boton-disable': 'boton'"
-                >Guardar cambios
-        </button></p>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
-  
+</div>

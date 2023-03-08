@@ -1,39 +1,41 @@
-<div id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel" style="position: relative">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="../../../assets/paisaje2.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="../../../assets/paisaje1.jpg" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="../../../assets/paisaje3.jpg" class="d-block w-100" alt="...">
-      </div>
+<div id="carouselExampleAutoplaying" class="carousel slide carousel-fade" data-bs-ride="carousel"
+  style="position: relative">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="../../../assets/paisaje2.jpg" class="d-block w-100" alt="...">
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+    <div class="carousel-item">
+      <img src="../../../assets/paisaje1.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="../../../assets/paisaje3.jpg" class="d-block w-100" alt="...">
+    </div>
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
 <div class="productos-home-1">
   <p class="titulo-productos">Nuevos productos</p>
   <div class="grid-productos-home">
     <div class="producto" *ngFor="let item of nuevosProductos" [routerLink]="['/products', item.id]">
-        <img class="img-producto" *ngIf="item.imagenes[0]" src="{{item.imagenes[0].img}}">
-        <img class="img-producto" *ngIf="!item.imagenes[0]" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
-        <p class="nombre-producto">{{item.nombre}} <span class="precio-producto">| {{item.price}}€</span></p>
-        <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
+      <img class="img-producto" *ngIf="item.imagenes[0]" src="{{item.imagenes[0].img}}">
+      <img class="img-producto" *ngIf="!item.imagenes[0]"
+        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
+      <p class="nombre-producto">{{item.nombre}} <span class="precio-producto">| {{item.price}}€</span></p>
+      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
     </div>
-    
+
   </div>
 </div>
 
-<div class="categorias-producto">
+<div class="categorias-producto" *ngIf="listaCategorias.length>=3">
   <div class="categoria" *ngFor="let categoria of listaCategorias" (click)="verProductos(categoria.id)">
     <img class="img-categoria" src="../../../assets/ejemplo.jpg">
     <p class="texto-categoria">{{categoria.nombre}}</p>
@@ -45,7 +47,8 @@
   <div class="grid-productos-home">
     <div class="producto" *ngFor="let producto of masVendidos" [routerLink]="['/products', producto.id]">
       <img class="img-producto" *ngIf="producto.imagenes[0]" src="{{producto.imagenes[0].img}}">
-      <img class="img-producto" *ngIf="!producto.imagenes[0]" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
+      <img class="img-producto" *ngIf="!producto.imagenes[0]"
+        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
       <p class="nombre-producto">{{producto.nombre}} <span class="precio-producto">| {{producto.price}}€</span></p>
       <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
     </div>

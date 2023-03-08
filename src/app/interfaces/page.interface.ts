@@ -8,34 +8,34 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface Page {
-    content:          Content[];
-    pageable:         Pageable;
-    last:             boolean;
-    totalPages:       number;
-    totalElements:    number;
-    size:             number;
-    number:           number;
-    sort:             Sort;
-    first:            boolean;
+    content: Content[];
+    pageable: Pageable;
+    last: boolean;
+    totalPages: number;
+    totalElements: number;
+    size: number;
+    number: number;
+    sort: Sort;
+    first: boolean;
     numberOfElements: number;
-    empty:            boolean;
+    empty: boolean;
 }
 
 export interface Content {
-    id:          number;
-    nombre:      string;
+    id: number;
+    nombre: string;
     descripcion: string;
-    price:       number;
-    stock:       number;
-    categoria:   Categoria;
-    imagenes:    Imagene[];
-    compras:     any[];
-    colores:     Colore[];
+    price: number;
+    stock: number;
+    categoria: Categoria;
+    imagenes: Imagene[];
+    compras: any[];
+    colores: Colore[];
 }
 
 export interface Categoria {
-    id:          number;
-    nombre:      Nombre;
+    id: number;
+    nombre: Nombre;
     descripcion: Descripcion;
 }
 
@@ -52,27 +52,27 @@ export interface Colore {
 }
 
 export interface Color {
-    color:  string;
+    color: string;
     nombre: string;
 }
 
 export interface Imagene {
-    id:  number;
+    id: number;
     img: string;
 }
 
 export interface Pageable {
-    sort:       Sort;
-    offset:     number;
+    sort: Sort;
+    offset: number;
     pageNumber: number;
-    pageSize:   number;
-    paged:      boolean;
-    unpaged:    boolean;
+    pageSize: number;
+    paged: boolean;
+    unpaged: boolean;
 }
 
 export interface Sort {
-    empty:    boolean;
-    sorted:   boolean;
+    empty: boolean;
+    sorted: boolean;
     unsorted: boolean;
 }
 
@@ -140,7 +140,7 @@ function transform(val: any, typ: any, getProps: any, key: any = '', parent: any
             const typ = typs[i];
             try {
                 return transform(val, typ, getProps);
-            } catch (_) {}
+            } catch (_) { }
         }
         return invalidValue(typs, val, key, parent);
     }
@@ -199,9 +199,9 @@ function transform(val: any, typ: any, getProps: any, key: any = '', parent: any
     if (Array.isArray(typ)) return transformEnum(typ, val);
     if (typeof typ === "object") {
         return typ.hasOwnProperty("unionMembers") ? transformUnion(typ.unionMembers, val)
-            : typ.hasOwnProperty("arrayItems")    ? transformArray(typ.arrayItems, val)
-            : typ.hasOwnProperty("props")         ? transformObject(getProps(typ), typ.additional, val)
-            : invalidValue(typ, val, key, parent);
+            : typ.hasOwnProperty("arrayItems") ? transformArray(typ.arrayItems, val)
+                : typ.hasOwnProperty("props") ? transformObject(getProps(typ), typ.additional, val)
+                    : invalidValue(typ, val, key, parent);
     }
     // Numbers can be parsed by Date but shouldn't be.
     if (typ === Date && typeof val !== "number") return transformDate(val);

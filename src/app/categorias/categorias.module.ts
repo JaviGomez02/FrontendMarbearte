@@ -28,7 +28,7 @@ import { RouterModule } from '@angular/router';
     FormsModule
 
   ],
-  exports:[
+  exports: [
     AllCategoriasComponent
   ]
 })

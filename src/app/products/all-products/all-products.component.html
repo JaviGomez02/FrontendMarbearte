@@ -1,23 +1,23 @@
-
 <div class="productos-home-1" *ngIf="!isAdmin && lista.length">
-    <p class="titulo-productos" *ngIf="!nombreCategoria">Todos nuestros productos</p>
-    <p class="titulo-productos" *ngIf="nombreCategoria">{{nombreCategoria}}</p>
-    <div class="grid-productos-home">
-      <div class="producto" *ngFor="let item of lista" [routerLink]="['/products', item.id]">
-          <img class="img-producto" *ngIf="item.imagenes[0]" src="{{item.imagenes[0].img}}">
-          <img class="img-producto" *ngIf="!item.imagenes[0]" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
-          <p class="nombre-producto">{{item.nombre}} <span class="precio-producto">| {{item.price}}€</span></p>
-          <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-      </div>  
-    </div>
-    <div class="pagination" >
-      <a (click)="previousPageNumber()">&laquo;</a>
-      <a *ngFor="let item of listaPagination" (click)="setPageNumber(item)">{{item}}</a>
-      <a (click)="nextPageNumber()">&raquo;</a>
+  <p class="titulo-productos" *ngIf="!nombreCategoria">Todos nuestros productos</p>
+  <p class="titulo-productos" *ngIf="nombreCategoria">{{nombreCategoria}}</p>
+  <div class="grid-productos-home">
+    <div class="producto" *ngFor="let item of lista" [routerLink]="['/products', item.id]">
+      <img class="img-producto" *ngIf="item.imagenes[0]" src="{{item.imagenes[0].img}}">
+      <img class="img-producto" *ngIf="!item.imagenes[0]"
+        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
+      <p class="nombre-producto">{{item.nombre}} <span class="precio-producto">| {{item.price}}€</span></p>
+      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
     </div>
   </div>
+  <div class="pagination">
+    <a (click)="previousPageNumber()">&laquo;</a>
+    <a *ngFor="let item of listaPagination" (click)="setPageNumber(item)">{{item}}</a>
+    <a (click)="nextPageNumber()">&raquo;</a>
+  </div>
+</div>
 
-<app-datatable-product *ngIf="isAdmin && lista.length" ></app-datatable-product>
+<app-datatable-product *ngIf="isAdmin && lista.length"></app-datatable-product>
 
 <div class="productos-home-1" *ngIf="!lista.length">
   <p class="titulo-productos">NO HAY PRODUCTOS</p>

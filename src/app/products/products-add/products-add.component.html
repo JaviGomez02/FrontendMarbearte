@@ -1,73 +1,53 @@
-
-
 <div class="container-login">
     <div class="container-form">
-      <p class="titulo-login">Nuevo producto</p>
-  
-      <form class="form-login" (ngSubmit)="addProduct()"  [formGroup]="myForm" autocomplete="off">
-        <div class="elemento-form">
-            <p class="nombre-campo">Nombre</p>
-            <input type="text"
-            class="input-nombre"
-            placeholder="Nombre del producto"
-            formControlName="nombre">
-            <p class="form-text text-danger"
-                *ngIf="isValidField('nombre')">
-                     El nombre debe tener 3 caracteres como mínimo
-            </p>
-        </div>
-        <div class="elemento-form">
-            <p class="nombre-campo">Precio</p>
-            <input type="number"
-            class="input-nombre"
-            placeholder="Precio del producto"
-            formControlName="price">
-            <p class="form-text text-danger"
-                *ngIf="isValidField('price')">
-                     El precio no puede ser inferior a 0
-            </p>
-        </div>
-        <div class="elemento-form">
-            <p class="nombre-campo">Stock</p>
-            <input type="number"
-            class="input-nombre"
-            placeholder="Stock del producto"
-            formControlName="stock">
-            <p class="form-text text-danger"
-                *ngIf="isValidField('stock')">
-                     El stock no puede ser inferior a 0
-            </p>
-        </div>
-        
-        <div class="elemento-form-textarea">
-            <p class="nombre-campo">Descripcion</p>
-            <textarea type="text"
-            placeholder="Descripcion del producto"
-            formControlName="descripcion"></textarea>
-            <p class="form-text text-danger"
-                *ngIf="isValidField('descripcion')">
-                    La descripción debe tener 10 caracteres como mínimo
-            </p>
-        </div>
-        <div class="elemento-form-select">
-            Selecciona una categoria: 
-            <select formControlName="opcionCategoria">
-                <option *ngFor="let categoria of listaCategorias" [value]="categoria.id">
-                    {{categoria.nombre}}
-                </option>
-            </select>
-            <p class="form-text text-danger"
-                *ngIf="isValidField('opcionCategoria')">
-                     Debe elegir una categoría
-            </p>
-        </div>
-        <div class="grid-botones">
-          <button class="boton" type="submit">Guardar cambios</button>
-          <button class="boton-cancelar" type="button" [routerLink]="['/products/all']">Cancelar</button>
-        </div>
+        <p class="titulo-login">Nuevo producto</p>
 
-      </form>
+        <form class="form-login" (ngSubmit)="addProduct()" [formGroup]="myForm" autocomplete="off">
+            <div class="elemento-form">
+                <p class="nombre-campo">Nombre</p>
+                <input type="text" class="input-nombre" placeholder="Nombre del producto" formControlName="nombre">
+                <p class="form-text text-danger" *ngIf="isValidField('nombre')">
+                    El nombre debe tener 3 caracteres como mínimo
+                </p>
+            </div>
+            <div class="elemento-form">
+                <p class="nombre-campo">Precio</p>
+                <input type="number" class="input-nombre" placeholder="Precio del producto" formControlName="price">
+                <p class="form-text text-danger" *ngIf="isValidField('price')">
+                    El precio no puede ser inferior a 0
+                </p>
+            </div>
+            <div class="elemento-form">
+                <p class="nombre-campo">Stock</p>
+                <input type="number" class="input-nombre" placeholder="Stock del producto" formControlName="stock">
+                <p class="form-text text-danger" *ngIf="isValidField('stock')">
+                    El stock no puede ser inferior a 0
+                </p>
+            </div>
+
+            <div class="elemento-form-textarea">
+                <p class="nombre-campo">Descripcion</p>
+                <textarea type="text" placeholder="Descripcion del producto" formControlName="descripcion"></textarea>
+                <p class="form-text text-danger" *ngIf="isValidField('descripcion')">
+                    La descripción debe tener 10 caracteres como mínimo
+                </p>
+            </div>
+            <div class="elemento-form-select">
+                Selecciona una categoria:
+                <select formControlName="opcionCategoria">
+                    <option *ngFor="let categoria of listaCategorias" [value]="categoria.id">
+                        {{categoria.nombre}}
+                    </option>
+                </select>
+                <p class="form-text text-danger" *ngIf="isValidField('opcionCategoria')">
+                    Debe elegir una categoría
+                </p>
+            </div>
+            <div class="grid-botones">
+                <button class="boton" type="submit">Guardar cambios</button>
+                <button class="boton-cancelar" type="button" [routerLink]="['/products/all']">Cancelar</button>
+            </div>
+
+        </form>
     </div>
-  </div>
-  
-  
+</div>

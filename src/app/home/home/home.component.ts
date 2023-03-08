@@ -12,48 +12,48 @@ import { productService } from 'src/app/services/product.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private servicioProducto: productService, private route:Router, private servicioCategoria:categoriaService) { }
+  constructor(private servicioProducto: productService, private route: Router, private servicioCategoria: categoriaService) { }
 
-  nuevosProductos:Content[]=[]
+  nuevosProductos: Content[] = []
 
-  masVendidos:Content[]=[]
+  masVendidos: Content[] = []
 
-  listaCategorias:Categoria[]=[]
+  listaCategorias: Categoria[] = []
 
 
   ngOnInit(): void {
     this.servicioProducto.getProducts(1, 8, null)
-    .subscribe({
-      next: (resp)=>{
-        this.nuevosProductos=resp.content
-      }
-    })
+      .subscribe({
+        next: (resp) => {
+          this.nuevosProductos = resp.content
+        }
+      })
 
     this.servicioProducto.getProducts(2, 8, null)
-    .subscribe({
-      next: (resp)=>{
-        this.masVendidos=resp.content
-      }
-    })
+      .subscribe({
+        next: (resp) => {
+          this.masVendidos = resp.content
+        }
+      })
 
     this.servicioCategoria.getCategorias()
-    .subscribe({
-      next: (resp)=>{
-        if(resp.length>=3){
-          for(let i = 0;i<3;i++){
-            this.listaCategorias.push(resp[i])
+      .subscribe({
+        next: (resp) => {
+          if (resp.length >= 3) {
+            for (let i = 0; i < 3; i++) {
+              this.listaCategorias.push(resp[i])
+            }
           }
-        }
-      },
-      error:(error)=>{
+        },
+        error: (error) => {
 
-      }
-    })
+        }
+      })
 
   }
 
-  verProductos(idCategoria:number){
-    this.route.navigateByUrl('products/all?idCategoria='+idCategoria)
+  verProductos(idCategoria: number) {
+    this.route.navigateByUrl('products/all?idCategoria=' + idCategoria)
   }
 
 

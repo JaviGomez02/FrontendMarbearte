@@ -9,12 +9,12 @@ import Swal from 'sweetalert2';
   templateUrl: './all-usuarios.component.html',
   styleUrls: ['./all-usuarios.component.css']
 })
-export class AllUsuariosComponent implements OnInit{
+export class AllUsuariosComponent implements OnInit {
 
-  lista:UsuarioDTO[]=[]
+  lista: UsuarioDTO[] = []
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
-  constructor(private usuarioService:UsuarioService){}
+  constructor(private usuarioService: UsuarioService) { }
 
 
 
@@ -25,14 +25,14 @@ export class AllUsuariosComponent implements OnInit{
       processing: true
     };
 
-      this.usuarioService.getUsuarios()
+    this.usuarioService.getUsuarios()
       .subscribe({
-        next: (resp)=>{
-          this.lista=resp
+        next: (resp) => {
+          this.lista = resp
           this.dtTrigger.next(this.lista)
 
         },
-        error: (error)=>{
+        error: (error) => {
 
         }
       })
@@ -42,9 +42,9 @@ export class AllUsuariosComponent implements OnInit{
     this.dtTrigger.unsubscribe();
   }
 
-  changeToUser(username:string){
+  changeToUser(username: string) {
     Swal.fire({
-      title: '¿Cambiar el rol de '+username+' a USER?',
+      title: '¿Cambiar el rol de ' + username + ' a USER?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -54,33 +54,33 @@ export class AllUsuariosComponent implements OnInit{
     }).then((result) => {
       if (result.isConfirmed) {
         this.usuarioService.changeToUser(username)
-        .subscribe({
-          next: (resp)=>{
-            Swal.fire(
-              'Exito!',
-              'Se ha cambiado el rol correctamente.',
-              'success'
-            ).then((resp)=>{
-              window.location.reload()
-            })
-          },
-          error:(error)=>{
-            Swal.fire(
-              'Oops!',
-              'Ocurrió un error inesperado.',
-              'error'
-            )
-          }
-        })
-        
+          .subscribe({
+            next: (resp) => {
+              Swal.fire(
+                'Exito!',
+                'Se ha cambiado el rol correctamente.',
+                'success'
+              ).then((resp) => {
+                window.location.reload()
+              })
+            },
+            error: (error) => {
+              Swal.fire(
+                'Oops!',
+                'Ocurrió un error inesperado.',
+                'error'
+              )
+            }
+          })
+
       }
     })
   }
 
 
-  changeToAdmin(username:string){
+  changeToAdmin(username: string) {
     Swal.fire({
-      title: '¿Cambiar el rol de '+username+' a ADMIN?',
+      title: '¿Cambiar el rol de ' + username + ' a ADMIN?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -90,34 +90,34 @@ export class AllUsuariosComponent implements OnInit{
     }).then((result) => {
       if (result.isConfirmed) {
         this.usuarioService.changeToAdmin(username)
-        .subscribe({
-          next: (resp)=>{
-            Swal.fire(
-              'Exito!',
-              'Se ha cambiado el rol correctamente.',
-              'success'
-            ).then((resp)=>{
-              window.location.reload()
-            })
-          },
-          error:(error)=>{
-            Swal.fire(
-              'Oops!',
-              'Ocurrió un error inesperado.',
-              'error'
-            )
-          }
-        })
-        
+          .subscribe({
+            next: (resp) => {
+              Swal.fire(
+                'Exito!',
+                'Se ha cambiado el rol correctamente.',
+                'success'
+              ).then((resp) => {
+                window.location.reload()
+              })
+            },
+            error: (error) => {
+              Swal.fire(
+                'Oops!',
+                'Ocurrió un error inesperado.',
+                'error'
+              )
+            }
+          })
+
       }
     })
   }
 
 
 
-  deleteUsuario(username:string){
+  deleteUsuario(username: string) {
     Swal.fire({
-      title: '¿Seguro que desea borrar el usuario '+username+'?',
+      title: '¿Seguro que desea borrar el usuario ' + username + '?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -127,25 +127,25 @@ export class AllUsuariosComponent implements OnInit{
     }).then((result) => {
       if (result.isConfirmed) {
         this.usuarioService.deleteUsuario(username)
-        .subscribe({
-          next: (resp)=>{
-            Swal.fire(
-              'Borrado!',
-              'El Usuario ha sido borrado.',
-              'success'
-            ).then((resp)=>{
-              window.location.reload()
-            })
-          },
-          error: (error)=>{
-            Swal.fire(
-              'Oops!',
-              'Ocurrió un error inesperado.',
-              'error'
-            )
-          }
-        })
-        
+          .subscribe({
+            next: (resp) => {
+              Swal.fire(
+                'Borrado!',
+                'El Usuario ha sido borrado.',
+                'success'
+              ).then((resp) => {
+                window.location.reload()
+              })
+            },
+            error: (error) => {
+              Swal.fire(
+                'Oops!',
+                'Ocurrió un error inesperado.',
+                'error'
+              )
+            }
+          })
+
       }
     })
   }

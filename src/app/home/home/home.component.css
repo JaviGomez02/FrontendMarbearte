@@ -1,18 +1,17 @@
-
-.productos-home-1{
+.productos-home-1 {
     text-align: center;
     margin-top: 50px;
     width: 100%;
 }
 
-.titulo-productos{
+.titulo-productos {
     font-size: 20px;
     text-transform: uppercase;
     font-weight: bold;
     margin-bottom: 50px;
 }
 
-.grid-productos-home{
+.grid-productos-home {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 100px;
@@ -21,52 +20,53 @@
     margin-right: 40px;
 }
 
-.nombre-producto{
+.nombre-producto {
     font-weight: bold;
 }
 
-.precio-producto{
+.precio-producto {
     font-weight: normal;
 }
 
 
-.boton-producto{
+.boton-producto {
     position: relative;
 }
 
-.producto:hover{
+.producto:hover {
     cursor: pointer;
 }
 
-.producto:hover .boton-producto{
+.producto:hover .boton-producto {
     display: block;
 }
 
-.producto:hover .nombre-producto{
+.producto:hover .nombre-producto {
     display: none;
 }
 
-.producto{
+.producto {
     height: 300px;
     margin-bottom: 40px;
 }
 
-.img-producto{
+.img-producto {
     width: 200px;
     height: 300px;
     margin-bottom: 20px;
     object-fit: cover;
 }
 
-.boton-producto{
+.boton-producto {
     display: none;
 }
 
-.boton{
+.boton {
     position: relative;
     padding: 1em 20px;
     border-color: rgb(231, 86, 86);
-    color: rgb(231, 86, 86);;
+    color: rgb(231, 86, 86);
+    ;
     font-size: 12px;
     transition: all .1s ease-out;
     width: 100%;
@@ -75,13 +75,13 @@
     border-radius: 5px;
 }
 
-.boton:hover{
+.boton:hover {
     color: white;
     border-color: white;
     background-color: rgb(231, 86, 86);
 }
 
-.categorias-producto{
+.categorias-producto {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 50px;
@@ -96,38 +96,33 @@
     border-color: rgb(192, 192, 192);
 }
 
-.img-categoria{
+.img-categoria {
     width: 100%;
 }
 
-.categoria:hover .img-categoria{
+.categoria:hover .img-categoria {
     filter: blur(2px);
 }
 
-.categoria:hover .texto-categoria{
+.categoria:hover .texto-categoria {
     visibility: visible;
 }
 
-.categoria{
+.categoria {
     position: relative;
     display: inline-block;
     text-align: center;
-    
+
     cursor: pointer;
 }
 
-.texto-categoria{
+.texto-categoria {
     visibility: hidden;
     color: white;
-    font-size: 28px;
+    font-size: 24px;
     text-transform: uppercase;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
-
-
-
-

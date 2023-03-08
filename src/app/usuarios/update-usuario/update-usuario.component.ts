@@ -12,73 +12,74 @@ import Swal from 'sweetalert2';
   templateUrl: './update-usuario.component.html',
   styleUrls: ['./update-usuario.component.css']
 })
-export class UpdateUsuarioComponent implements OnInit{
+export class UpdateUsuarioComponent implements OnInit {
 
-  constructor(private servicioUsuario:UsuarioService, private activatedRoute:ActivatedRoute,
-     private authService:authService, private cookies:CookieService, private router:Router){}
+  constructor(private servicioUsuario: UsuarioService, private activatedRoute: ActivatedRoute,
+    private authService: authService, private cookies: CookieService, private router: Router) { }
 
-  usuario!:Usuario
+  usuario!: Usuario
 
-  nombreUsuario!:string
+  nombreUsuario!: string
 
-  token!:string
+  token!: string
 
   @ViewChild('myForm') myForm!: NgForm;
 
-  initForm={
+  initForm = {
     username: "",
     password: "",
     email: "",
     nombre: "",
-    passwordRepeat:""}
+    passwordRepeat: ""
+  }
 
   ngOnInit(): void {
 
-    this.token=this.cookies.get('token')
-    this.nombreUsuario=this.authService.decodeJwt(this.token).sub
+    this.token = this.cookies.get('token')
+    this.nombreUsuario = this.authService.decodeJwt(this.token).sub
 
     this.servicioUsuario.getUsuarioByUsername(this.activatedRoute.snapshot.params['username'])
-    .subscribe({
-      next: (resp)=>{
-        if(resp){
-          this.usuario=resp
-          if(this.nombreUsuario!=resp.username){
+      .subscribe({
+        next: (resp) => {
+          if (resp) {
+            this.usuario = resp
+            if (this.nombreUsuario != resp.username) {
+              this.router.navigateByUrl('/')
+              Swal.fire({
+                icon: 'error',
+                title: 'No tiene permiso',
+                text: 'No tiene permiso para acceder a esa ruta'
+              })
+            }
+            else {
+              this.initForm = {
+                username: resp.username,
+                password: "",
+                email: resp.email,
+                nombre: resp.nombre,
+                passwordRepeat: ""
+              }
+            }
+          }
+          else {
             this.router.navigateByUrl('/')
             Swal.fire({
               icon: 'error',
-              title: 'No tiene permiso',
-              text: 'No tiene permiso para acceder a esa ruta'
+              title: 'Oops',
+              text: 'Algo ha ido mal'
             })
           }
-          else{
-            this.initForm = {
-              username: resp.username,
-              password: "",
-              email: resp.email,
-              nombre: resp.nombre,
-              passwordRepeat:""
-            }
-          }
+
         }
-        else{
-          this.router.navigateByUrl('/')
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops',
-            text: 'Algo ha ido mal'
-          })
-        }
-        
-      }
-    })
+      })
   }
 
-  notValid(campo: string): boolean{
+  notValid(campo: string): boolean {
     return this.myForm?.controls[campo]?.invalid &&
       this.myForm?.controls[campo]?.touched
   }
 
-  updateUsuario(){
+  updateUsuario() {
     this.servicioUsuario.updateUsuario(this.myForm.value.username, this.myForm.value.password, this.myForm.value.nombre,
       this.myForm.value.email, this.usuario.role, this.usuario.enable, this.usuario.verificationCode)
       .subscribe({
@@ -89,7 +90,7 @@ export class UpdateUsuarioComponent implements OnInit{
               title: 'Actualizado correctamente',
               text: 'Sus datos han sido actualizado correctamente'
             })
-            
+
           }
           else {
             Swal.fire({

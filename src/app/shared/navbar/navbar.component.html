@@ -1,42 +1,52 @@
-
 <div class="preNavBar">Informacion cualquiera</div>
-<div class="miNavbar sticky-top" >
+<div class="miNavbar sticky-top">
     <div class="divLeft">
         <img src="../../../assets/logo-sin-letras.png" class="logo">
     </div>
     <div class="divMiddle">
         <ul class="ul">
-            <li class="li"><a class="enlace-navbar" [routerLink]="['/home']" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+            <li class="li"><a class="enlace-navbar" [routerLink]="['/home']" routerLinkActive="activo"
+                    [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
             <li class="li">
-                <a class="enlace-navbar"  [routerLink]="['/products/all']" routerLinkActive="activo">Productos</a>
-                <div class="menu-productos" >
-                    <a class="enlace-div" *ngFor="let categoria of listaCategorias" (click)="verProductos(categoria.id)">
+                <a class="enlace-navbar" [routerLink]="['/products/all']" routerLinkActive="activo">Productos</a>
+                <div class="menu-productos">
+                    <a class="enlace-div" *ngFor="let categoria of listaCategorias"
+                        (click)="verProductos(categoria.id)">
                         <div class="menu-productos-categoria-1">
                             <img class="img-categoria" src="../../../assets/ejemplo.jpg">
                             <p>{{categoria.nombre}}</p>
                         </div>
                     </a>
-                    
+
                 </div>
             </li>
-            <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/contact']" routerLinkActive="activo">Contacto</a></li>
-            <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/about']" routerLinkActive="activo">Sobre nosotros</a></li>
-            <li class="li" *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/categoria']" routerLinkActive="activo">Categorias</a></li>
-            <li class="li" *ngIf="isAdmin$|async" ><a class="enlace-navbar" [routerLink]="['/usuarios']" routerLinkActive="activo">Usuarios</a></li>
+            <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/contact']"
+                    routerLinkActive="activo">Contacto</a></li>
+            <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/about']"
+                    routerLinkActive="activo">Sobre nosotros</a></li>
+            <li class="li" *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/categoria']"
+                    routerLinkActive="activo">Categorias</a></li>
+            <li class="li" *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/usuarios']"
+                    routerLinkActive="activo">Usuarios</a></li>
         </ul>
     </div>
     <div class="divRight">
         <div class="dropdown">
-            <button class="btn btn-info dropdown-toggle" style="background-color: white;border-color: white;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="../../../assets/user.png" class="img-usuario">
+            <button class="btn btn-info dropdown-toggle" style="background-color: white;border-color: white;"
+                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../../../assets/user.png" class="img-usuario">
             </button>
             <ul class="dropdown-menu">
-              <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/login']">Iniciar sesión</a></li>
-              <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="updateUsuario()">Ver mis datos</a></li>
-              <li *ngIf="isLoged$|async"><hr class="dropdown-divider"></li>
-              <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="logout()">Logout</a></li>
+                <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/login']">Iniciar
+                        sesión</a></li>
+                <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="updateUsuario()">Ver mis datos</a>
+                </li>
+                <li *ngIf="isLoged$|async">
+                    <hr class="dropdown-divider">
+                </li>
+                <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="logout()">Logout</a></li>
             </ul>
-          </div>
-        
+        </div>
+
     </div>
 </div>

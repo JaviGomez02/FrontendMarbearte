@@ -1,5 +1,5 @@
 import { Product } from './product.interface';
-export interface Imagen{
+export interface Imagen {
     id: number,
     img: string,
     articulo: Product

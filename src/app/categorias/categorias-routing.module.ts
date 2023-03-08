@@ -23,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)], //Muy importante que no se olvide el forChild
-    exports: [RouterModule]
-  })
-  export class CategoriasRoutingModule { }
+  imports: [RouterModule.forChild(routes)], //Muy importante que no se olvide el forChild
+  exports: [RouterModule]
+})
+export class CategoriasRoutingModule { }

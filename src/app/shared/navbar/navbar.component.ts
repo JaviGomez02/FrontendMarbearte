@@ -14,49 +14,49 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
 
-  constructor(private cookieService: CookieService, private authService:authService, 
-    private categoriaService:categoriaService, private route:Router) { }
+  constructor(private cookieService: CookieService, private authService: authService,
+    private categoriaService: categoriaService, private route: Router) { }
 
-  isAdmin$!:Observable<boolean> 
+  isAdmin$!: Observable<boolean>
 
-  isLoged$!:Observable<boolean>
+  isLoged$!: Observable<boolean>
 
-  listaCategorias:Categoria[]=[]
+  listaCategorias: Categoria[] = []
 
-  token!:string
+  token!: string
 
-  usuario:string=""
+  usuario: string = ""
 
   ngOnInit(): void {
-    this.isAdmin$=this.authService.isAdmin; 
-    this.isLoged$=this.authService.isLoged;
+    this.isAdmin$ = this.authService.isAdmin;
+    this.isLoged$ = this.authService.isLoged;
 
     this.categoriaService.getCategorias()
-    .subscribe({
-      next:(resp)=>{
-        this.listaCategorias=resp
-      }
-    })
+      .subscribe({
+        next: (resp) => {
+          this.listaCategorias = resp
+        }
+      })
 
-    this.token=this.cookieService.get('token')
-    if(this.token){
-      this.usuario=this.authService.decodeJwt(this.token).sub
+    this.token = this.cookieService.get('token')
+    if (this.token) {
+      this.usuario = this.authService.decodeJwt(this.token).sub
     }
   }
 
-  logout(){
+  logout() {
     this.authService.logout()
     window.location.reload()
   }
 
-  verProductos(idCategoria:number){
-    this.route.navigateByUrl('products/all?idCategoria='+idCategoria)
-    
+  verProductos(idCategoria: number) {
+    this.route.navigateByUrl('products/all?idCategoria=' + idCategoria)
+
   }
 
-  updateUsuario(){
-   
-    this.route.navigateByUrl('usuarios/update/'+this.usuario)
+  updateUsuario() {
+
+    this.route.navigateByUrl('usuarios/update/' + this.usuario)
   }
 
 }

@@ -14,7 +14,7 @@ import { DecodeToken } from '../interfaces/decode-token.interface';
 
 export class authService{
 
-    url:string = 'http://localhost:8082/auth'
+    url:string = 'https://apimarbearte-production.up.railway.app/auth'
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
@@ -24,13 +24,13 @@ export class authService{
     }
 
     constructor(private http: HttpClient, private cookieService:CookieService){
-        this.http.get('http://localhost:8082/jwt')
+        this.http.get('https://apimarbearte-production.up.railway.app/jwt')
         .subscribe({
              next:()=>this.loged.next(true),
              error:()=>this.loged.next(false)
          })
 
-        this.http.get('http://localhost:8082/jwtAdmin')
+        this.http.get('https://apimarbearte-production.up.railway.app/jwtAdmin')
         .subscribe({
              next:()=>this.admin.next(true),
               error:()=>this.admin.next(false)
@@ -60,7 +60,7 @@ export class authService{
     }
 
     verify(code: string, username: string):Observable<boolean>{
-        return this.http.get<any>('http://localhost:8082/verify?code='+code+'&username='+username, this.httpOptions)
+        return this.http.get<any>('https://apimarbearte-production.up.railway.app/verify?code='+code+'&username='+username, this.httpOptions)
         .pipe( switchMap(resp => {
                 return of(true);
             }),catchError(error => {

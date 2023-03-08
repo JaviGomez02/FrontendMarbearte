@@ -1,27 +1,27 @@
-.productos-home-1{
+.productos-home-1 {
     text-align: center;
     margin: 50px;
 }
 
-.titulo-productos{
+.titulo-productos {
     font-size: 20px;
     text-transform: uppercase;
     font-weight: bold;
     margin-bottom: 50px;
 }
 
-.div-boton{
+.div-boton {
     text-align: left;
     width: 100%;
     margin-bottom: 10px;
 }
 
-.boton{
+.boton {
     text-transform: uppercase;
     grid-area: 3/1/4/3;
     position: relative;
     padding: 1em 20px;
-    
+
     color: white;
     border-color: white;
     background-color: rgb(231, 86, 86);
@@ -33,6 +33,6 @@
 
 }
 
-.boton:hover{
+.boton:hover {
     background-color: rgb(205, 72, 72);
 }

@@ -7,72 +7,72 @@ import { CookieService } from "ngx-cookie-service";
 import { Usuario } from "../interfaces/usuario.interface";
 
 @Injectable({
-    providedIn: 'root'
-  })
+  providedIn: 'root'
+})
 
-export class UsuarioService{
+export class UsuarioService {
 
-    constructor(private http:HttpClient, private cookies:CookieService){}
+  constructor(private http: HttpClient, private cookies: CookieService) { }
 
-    private url:string="http://localhost:8082/usuarios"
+  private url: string = "https://apimarbearte-production.up.railway.app/usuarios"
 
-    httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
-    // token=this.cookies.get('token')
+  // token=this.cookies.get('token')
 
-    // httpOptionsToken = {
-    //   headers: new HttpHeaders({ 'Authorization': 'Bearer '+this.token })
-    // };
+  // httpOptionsToken = {
+  //   headers: new HttpHeaders({ 'Authorization': 'Bearer '+this.token })
+  // };
 
-    getUsuarios():Observable<UsuarioDTO[]>{
-        return this.http.get<UsuarioDTO[]>(this.url, this.httpOptions)
-    }
+  getUsuarios(): Observable<UsuarioDTO[]> {
+    return this.http.get<UsuarioDTO[]>(this.url, this.httpOptions)
+  }
 
-    getUsuarioByUsername(username:string):Observable<Usuario>{
-      return this.http.get<Usuario>(this.url+"/"+username)
-    }
+  getUsuarioByUsername(username: string): Observable<Usuario> {
+    return this.http.get<Usuario>(this.url + "/" + username)
+  }
 
-    deleteUsuario(username:string):Observable<boolean>{
-      return this.http.delete<any>(this.url+'/'+username)
-      .pipe( switchMap(resp => {
+  deleteUsuario(username: string): Observable<boolean> {
+    return this.http.delete<any>(this.url + '/' + username)
+      .pipe(switchMap(resp => {
         return of(true);
-      }),catchError(error => {
-          return of(false);
+      }), catchError(error => {
+        return of(false);
       })
       )
-    }
+  }
 
-    updateUsuario(username:string, contrasena:string, nombre:string, email:string, role:string, enable:boolean, verificationCode:string):Observable<boolean>{
-      return this.http.put<any>(this.url+'/'+username,{"username":username, "contrasena":contrasena, "nombre":nombre, "email":email, "role":role, "enable":enable, "verificationCode":verificationCode},this.httpOptions)
-      .pipe(switchMap(resp=>{
-        return of (true)
-      }),catchError(error=>{
-        return of (false)
+  updateUsuario(username: string, contrasena: string, nombre: string, email: string, role: string, enable: boolean, verificationCode: string): Observable<boolean> {
+    return this.http.put<any>(this.url + '/' + username, { "username": username, "contrasena": contrasena, "nombre": nombre, "email": email, "role": role, "enable": enable, "verificationCode": verificationCode }, this.httpOptions)
+      .pipe(switchMap(resp => {
+        return of(true)
+      }), catchError(error => {
+        return of(false)
       })
       )
-    }
+  }
 
-    changeToAdmin(username:string):Observable<boolean>{
-      return this.http.put<any>(this.url+'/changeToAdmin/'+username, undefined)
-      .pipe( switchMap(resp => {
+  changeToAdmin(username: string): Observable<boolean> {
+    return this.http.put<any>(this.url + '/changeToAdmin/' + username, undefined)
+      .pipe(switchMap(resp => {
         return of(true);
-      }),catchError(error => {
-          return of(false);
+      }), catchError(error => {
+        return of(false);
       })
       )
-    }
+  }
 
-    changeToUser(username:string):Observable<boolean>{
-      return this.http.put<any>(this.url+'/changeToUser/'+username, undefined)
-      .pipe( switchMap(resp => {
+  changeToUser(username: string): Observable<boolean> {
+    return this.http.put<any>(this.url + '/changeToUser/' + username, undefined)
+      .pipe(switchMap(resp => {
         return of(true);
-      }),catchError(error => {
-          return of(false);
+      }), catchError(error => {
+        return of(false);
       })
       )
-    }
+  }
 
 
 }

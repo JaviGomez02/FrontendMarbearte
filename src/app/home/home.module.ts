@@ -13,7 +13,7 @@ import { HomeRoutingModule } from './home-routing.module';
     CommonModule,
     HomeRoutingModule
   ],
-  exports:[
+  exports: [
     HomeComponent
   ]
 })

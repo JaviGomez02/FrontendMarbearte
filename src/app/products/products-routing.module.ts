@@ -24,7 +24,7 @@ const routes: Routes = [
         component: ProductsEditComponent
     },
     {
-        path:':id',
+        path: ':id',
         component: ProductComponent
     }
 ]
@@ -32,5 +32,5 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
-  })
-  export class ProductsRoutingModule { }
+})
+export class ProductsRoutingModule { }
