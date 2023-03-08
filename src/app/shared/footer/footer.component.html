@@ -22,15 +22,9 @@
             </div>
         </div>
         <div class="footer-section-3">
-            <div class="titulo-enlaces">Titulo enlaces</div>
-            <div class="div-enlace-footer">
-                <a class="enlace-footer" href="#">Enlace 1</a>
-            </div>
-            <div class="div-enlace-footer">
-                <a class="enlace-footer" href="#">Enlace 1</a>
-            </div>
-            <div class="div-enlace-footer">
-                <a class="enlace-footer" href="#">Enlace 1</a>
+            <div class="titulo-enlaces">Productos</div>
+            <div class="div-enlace-footer" *ngFor="let categoria of listaCategorias">
+                <a class="enlace-footer" (click)="verProductos(categoria.id)">{{categoria.nombre}}</a>
             </div>
         </div>
 
