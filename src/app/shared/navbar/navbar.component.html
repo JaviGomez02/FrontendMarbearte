@@ -9,7 +9,7 @@
                     [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
             <li class="li">
                 <a class="enlace-navbar" [routerLink]="['/products/all']" routerLinkActive="activo">Productos</a>
-                <div class="menu-productos">
+                <div class="menu-productos" *ngIf="listaCategorias.length && !(isAdmin$|async)">
                     <a class="enlace-div" *ngFor="let categoria of listaCategorias"
                         (click)="verProductos(categoria.id)">
                         <div class="menu-productos-categoria-1">

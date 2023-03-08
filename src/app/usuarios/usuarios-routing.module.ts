@@ -1,6 +1,8 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth-guard.guard';
+import { RolGuard } from '../rol-guard.guard';
 import { AllUsuariosComponent } from './all-usuarios/all-usuarios.component';
 import { UpdateUsuarioComponent } from './update-usuario/update-usuario.component';
 
@@ -9,11 +11,13 @@ const routes: Routes = [
   {
     path: '',
     component: AllUsuariosComponent,
-    pathMatch:"full"
+    pathMatch:"full",
+    canActivate:[RolGuard]
   },
   {
     path:'update/:username',
-    component: UpdateUsuarioComponent
+    component: UpdateUsuarioComponent,
+    canActivate:[AuthGuard]
   }
 ];
 

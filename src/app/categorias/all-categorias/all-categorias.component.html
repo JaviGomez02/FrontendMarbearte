@@ -4,7 +4,7 @@
         <button class="boton" [routerLink]="['/categoria/add']">Añadir nueva categoria</button>
     </div>
     <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions"
-        [dtTrigger]="dtTrigger">
+        [dtTrigger]="dtTrigger" *ngIf="lista.length">
         <thead>
             <tr>
                 <th>ID</th>

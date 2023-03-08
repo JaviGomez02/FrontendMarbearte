@@ -41,6 +41,7 @@ export class NavbarComponent implements OnInit {
     this.token = this.cookieService.get('token')
     if (this.token) {
       this.usuario = this.authService.decodeJwt(this.token).sub
+      
     }
   }
 
@@ -55,7 +56,6 @@ export class NavbarComponent implements OnInit {
   }
 
   updateUsuario() {
-
     this.route.navigateByUrl('usuarios/update/' + this.usuario)
   }
 
