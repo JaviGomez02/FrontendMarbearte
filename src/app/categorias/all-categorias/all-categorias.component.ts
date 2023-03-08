@@ -57,6 +57,7 @@ export class AllCategoriasComponent implements OnInit {
     Swal.fire({
       title: '¿Seguro que desea borrar la categoria ' + nombre + '?',
       icon: 'warning',
+      text: 'Se borraran todos los productos asociados a esa categoria',
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',

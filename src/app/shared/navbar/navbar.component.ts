@@ -47,7 +47,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authService.logout()
-    window.location.reload()
+    this.route.navigateByUrl('/')
   }
 
   verProductos(idCategoria: number) {

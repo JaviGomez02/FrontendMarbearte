@@ -4,6 +4,7 @@ import { Color, Content } from '../../interfaces/page.interface';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
+import { categoriaService } from 'src/app/services/categoria.service';
 
 @Component({
   selector: 'app-datatable-product',
@@ -12,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DatatableProductComponent implements OnInit, OnDestroy {
 
-  constructor(private productService: productService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private productService: productService, private route: ActivatedRoute, private router: Router, private servicioCategoria: categoriaService) { }
 
 
   dtOptions: DataTables.Settings = {};
@@ -20,12 +21,12 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
 
   lista: Content[] = []
 
+  nombreCategoria!: String
 
   idCategoria!: number
 
 
   ngOnInit(): void {
-
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -33,6 +34,34 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
     };
 
     this.idCategoria = this.route.snapshot.queryParams['idCategoria']
+
+    if (this.idCategoria) {
+      this.servicioCategoria.getCategoriaById(this.idCategoria)
+        .subscribe({
+          next: (resp) => {
+            if (resp) {
+              this.nombreCategoria = resp.nombre
+            }
+            else {
+              this.router.navigateByUrl('/')
+              Swal.fire({
+                icon: "error",
+                title: "Oops",
+                text: "Categoria inexistente"
+              })
+            }
+          },
+          error: (error) => {
+            this.router.navigateByUrl('/')
+            Swal.fire({
+              icon: "error",
+              title: "Oops",
+              text: "Categoria inexistente"
+            })
+          }
+
+        })
+    }
 
     this.productService.getProducts(1, 9999, this.idCategoria)
       .subscribe({

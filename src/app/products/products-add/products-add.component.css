@@ -42,6 +42,7 @@ input {
 
 .elemento-form-textarea {
     height: 240px;
+    margin-bottom:40px;
 }
 
 .elemento-form-select {
