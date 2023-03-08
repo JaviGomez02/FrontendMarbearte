@@ -19,9 +19,6 @@ export class authService {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
-    httpHeaderAuth = {
-        headers: new HttpHeaders({ 'Authorization': 'Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJKYXZpR29tZXoiLCJleHAiOjE2ODA1NDE4ODYsInJvbGUiOiJBRE1JTiIsImVtYWlsIjoiamF2aWdvbWV6MDU1QGdtYWlsLmNvbSJ9.45wSZ4qbKcpebGWll9AFGfdEw_McLqu9Ko6WexmHaHsGpeOa-LGu_BB4UjjLs5lk' })
-    }
 
     constructor(private http: HttpClient, private cookieService: CookieService) {
         this.http.get('https://apimarbearte-production.up.railway.app/jwt')
