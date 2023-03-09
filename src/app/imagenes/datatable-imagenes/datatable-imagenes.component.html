@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let imagen of lista">
-                <td><img src="{{imagen.img}}" height="200"></td>
+                <td><img src="{{imagen.img}}" height="200" alt="imagen"></td>
                 <td>
                     <button (click)="deleteImagen(imagen)" type="button" class="btn btn-outline-danger"
                         style="margin-left: 10px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

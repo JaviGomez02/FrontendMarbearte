@@ -25,9 +25,9 @@
   <p class="titulo-productos">Nuevos productos</p>
   <div class="grid-productos-home">
     <div class="producto" *ngFor="let item of nuevosProductos" [routerLink]="['/products', item.id]">
-      <img class="img-producto" *ngIf="item.imagenes[0]" src="{{item.imagenes[0].img}}">
+      <img class="img-producto" *ngIf="item.imagenes[0]" src="{{item.imagenes[0].img}}" alt="img-producto">
       <img class="img-producto" *ngIf="!item.imagenes[0]"
-        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
+        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg" alt="img-producto">
       <p class="nombre-producto">{{item.nombre}} <span class="precio-producto">| {{item.price}}€</span></p>
       <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
     </div>
@@ -37,7 +37,7 @@
 
 <div class="categorias-producto" *ngIf="listaCategorias.length>=3">
   <div class="categoria" *ngFor="let categoria of listaCategorias" (click)="verProductos(categoria.id)">
-    <img class="img-categoria" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309837/ejemplo_tfljhw.jpg">
+    <img class="img-categoria" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309837/ejemplo_tfljhw.jpg" alt="img-categoria">
     <p class="texto-categoria">{{categoria.nombre}}</p>
   </div>
 </div>
@@ -46,9 +46,9 @@
   <p class="titulo-productos">Los más vendidos</p>
   <div class="grid-productos-home">
     <div class="producto" *ngFor="let producto of masVendidos" [routerLink]="['/products', producto.id]">
-      <img class="img-producto" *ngIf="producto.imagenes[0]" src="{{producto.imagenes[0].img}}">
+      <img class="img-producto" *ngIf="producto.imagenes[0]" src="{{producto.imagenes[0].img}}"  alt="img-producto">
       <img class="img-producto" *ngIf="!producto.imagenes[0]"
-        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
+        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg" alt="img-producto">
       <p class="nombre-producto">{{producto.nombre}} <span class="precio-producto">| {{producto.price}}€</span></p>
       <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
     </div>

@@ -3,7 +3,7 @@
         <div class="foto-principal">
             <img *ngIf="fotoPrincipal" class="img-principal" src="{{fotoPrincipal.img}}">
             <img *ngIf="!fotoPrincipal" class="img-principal"
-                src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
+                src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg" alt="img-principal">
         </div>
         <div class="nombre-descrip">
             <p class="nombre">{{producto.nombre}}</p>
@@ -15,7 +15,7 @@
     </div>
     <div class="grid-imagenes" *ngIf="listaImagenes.length">
         <div class="div-imagen" *ngFor="let imagen of listaImagenes">
-            <img class="img-principal" src="{{imagen.img}}">
+            <img class="img-principal" src="{{imagen.img}}" alt="img-complementaria">
         </div>
     </div>
 </div>
