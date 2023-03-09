@@ -20,10 +20,14 @@
     width: 800px;
 }
 
+.div-color{
+    border: solid;
+    border-width: 1px;
+}
 
 .grid-colores {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     margin: 60px;
     margin-top: 20px;
@@ -32,6 +36,11 @@
 .info{
     color: grey;
     font-size: 12px;
+}
+
+.nombre-color{
+    margin: 0;
+    padding: 0;
 }
 
 .grid-botones {

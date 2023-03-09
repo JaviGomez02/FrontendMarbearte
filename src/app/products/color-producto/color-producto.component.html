@@ -4,8 +4,8 @@
     <p class="info">Puede añadir entre uno o varios colores</p>
     <div class="grid-colores">
       <span *ngFor="let color of listaColores; let i = index">
-        <div style="height: 50px; background-color: {{color.color}}; width: 100%;"></div>
-        {{color.nombre}}<br><input type="checkbox" id="color.color" value="color.color"
+        <div class="div-color" style="height: 50px; background-color: {{color.color}}; width: 100%;"></div>
+        <p class="nombre-color">{{color.nombre}}</p><input type="checkbox" id="color.color" value="color.color"
           (change)="onCheckboxPressed(color,$event.target)">
 
       </span>

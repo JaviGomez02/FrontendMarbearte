@@ -13,7 +13,7 @@
             <div class="colores" *ngIf="listaColores.length">
                 <p>Colores disponibles:</p>
                 <div class="colores-grid">
-                    <div *ngFor="let color of listaColores" style="height:30px;background-color: {{color.color.color}};"></div>
+                    <div class="div-color" *ngFor="let color of listaColores" style="height:30px;background-color: {{color.color.color}};"></div>
                 </div>
             </div>
         </div>

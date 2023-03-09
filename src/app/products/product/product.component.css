@@ -20,6 +20,11 @@
     width: 200px;
 }
 
+.div-color{
+    border: solid;
+    border-width: 1px;
+}
+
 .colores-grid{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
