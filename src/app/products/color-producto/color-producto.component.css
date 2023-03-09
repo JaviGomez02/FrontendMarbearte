@@ -26,6 +26,12 @@
     grid-template-columns: repeat(6, 1fr);
     gap: 20px;
     margin: 60px;
+    margin-top: 20px;
+}
+
+.info{
+    color: grey;
+    font-size: 12px;
 }
 
 .grid-botones {

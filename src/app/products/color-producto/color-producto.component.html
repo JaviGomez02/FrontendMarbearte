@@ -1,6 +1,7 @@
 <div class="container-login">
   <div class="container-form">
     <p class="titulo-login">Añadir colores</p>
+    <p class="info">Puede añadir entre uno o varios colores</p>
     <div class="grid-colores">
       <span *ngFor="let color of listaColores; let i = index">
         <div style="height: 50px; background-color: {{color.color}}; width: 100%;"></div>
