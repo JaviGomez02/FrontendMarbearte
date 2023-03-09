@@ -15,6 +15,17 @@
     grid-area: 1/1/2/2;
 }
 
+.colores{
+    margin-top: 50px;
+    width: 200px;
+}
+
+.colores-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
 .nombre-descrip {
     grid-area: 1/2/2/3;
     text-align: left;

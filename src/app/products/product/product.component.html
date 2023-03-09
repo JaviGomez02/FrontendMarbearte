@@ -10,7 +10,14 @@
             <p class="categoria">{{producto.categoria.nombre}}</p>
             <p class="precio">{{producto.price}} €</p>
             <p class="descripcion">{{producto.descripcion}}</p>
+            <div class="colores" *ngIf="listaColores.length">
+                <p>Colores disponibles:</p>
+                <div class="colores-grid">
+                    <div *ngFor="let color of listaColores" style="height:30px;background-color: {{color.color.color}};"></div>
+                </div>
+            </div>
         </div>
+        
 
     </div>
     <div class="grid-imagenes" *ngIf="listaImagenes.length">
