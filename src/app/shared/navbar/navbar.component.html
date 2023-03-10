@@ -1,8 +1,8 @@
 <div class="preNavBar">Se vienen cositas</div>
 <div class="miNavbar sticky-top">
     <div class="divLeft">
-        <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309884/logo-sin-letras_vuof01.png"
-            alt="logo" class="logo">
+        <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309884/logo-sin-letras_vuof01.png" alt="logo"
+            class="logo">
     </div>
     <div class="divMiddle">
         <ul class="ul">
@@ -42,6 +42,7 @@
             <ul class="dropdown-menu">
                 <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/login']">Iniciar
                         sesión</a></li>
+                <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/register']">Crear una cuenta</a></li>
                 <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="updateUsuario()">Ver mis datos</a>
                 </li>
                 <li *ngIf="isLoged$|async">
