@@ -11,6 +11,7 @@
                 <th>Nombre</th>
                 <th>Descripcion</th>
                 <th>Productos</th>
+                <th>Imagenes</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -23,6 +24,9 @@
                 <td>{{ categoria.descripcion }}</td>
                 <td><button class="btn btn-outline-primary" (click)="verProductos(categoria.id)">Ver productos</button>
                 </td>
+                <td><button type="button" (click)="verImagenes(categoria.id)"
+                    class="btn btn-outline-primary">Acceder</button></td>
+                
                 <td>
                     <button [routerLink]="['/categoria/edit', categoria.id]" type="button"
                         class="btn btn-outline-success">

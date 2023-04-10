@@ -10,6 +10,8 @@ import { Color } from '../interfaces/page.interface';
 export class colorService {
 
   url: string = 'https://apimarbearte-production.up.railway.app/color'
+  urlLocal:string='http://localhost:8082/color'
+
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +19,7 @@ export class colorService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   getColores(): Observable<Color[]> {
-    return this.http.get<Color[]>(this.url)
+    return this.http.get<Color[]>(this.urlLocal)
   }
 
 }

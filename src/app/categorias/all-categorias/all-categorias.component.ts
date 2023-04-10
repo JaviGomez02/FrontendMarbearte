@@ -52,6 +52,9 @@ export class AllCategoriasComponent implements OnInit {
     this.route.navigateByUrl("/products/all?idCategoria=" + idCategoria)
   }
 
+  verImagenes(idCategoria: number) {
+    this.route.navigateByUrl("/images/categoria?idCategoria=" + idCategoria)
+  }
 
   deleteCategoria(nombre: string, id: number) {
     Swal.fire({

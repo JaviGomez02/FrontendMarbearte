@@ -18,8 +18,10 @@ export class FooterComponent implements OnInit {
     this.categoriaService.getCategorias()
     .subscribe({
       next: (resp)=>{
-        for(let i=0; i<3; i++){
-          this.listaCategorias.push(resp[i])
+        if(resp.length>=3){
+          for(let i=0; i<3; i++){
+            this.listaCategorias.push(resp[i])
+          }
         }
       }
     })

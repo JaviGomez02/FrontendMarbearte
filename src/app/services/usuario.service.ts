@@ -15,6 +15,8 @@ export class UsuarioService {
   constructor(private http: HttpClient, private cookies: CookieService) { }
 
   private url: string = "https://apimarbearte-production.up.railway.app/usuarios"
+  urlLocal:string='http://localhost:8082/usuarios'
+
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -27,15 +29,15 @@ export class UsuarioService {
   // };
 
   getUsuarios(): Observable<UsuarioDTO[]> {
-    return this.http.get<UsuarioDTO[]>(this.url, this.httpOptions)
+    return this.http.get<UsuarioDTO[]>(this.urlLocal, this.httpOptions)
   }
 
   getUsuarioByUsername(username: string): Observable<Usuario> {
-    return this.http.get<Usuario>(this.url + "/" + username)
+    return this.http.get<Usuario>(this.urlLocal + "/" + username)
   }
 
   deleteUsuario(username: string): Observable<boolean> {
-    return this.http.delete<any>(this.url + '/' + username)
+    return this.http.delete<any>(this.urlLocal + '/' + username)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -45,7 +47,7 @@ export class UsuarioService {
   }
 
   updateUsuario(username: string, contrasena: string, nombre: string, email: string, role: string, enable: boolean, verificationCode: string): Observable<boolean> {
-    return this.http.put<any>(this.url + '/' + username, { "username": username, "contrasena": contrasena, "nombre": nombre, "email": email, "role": role, "enable": enable, "verificationCode": verificationCode }, this.httpOptions)
+    return this.http.put<any>(this.urlLocal + '/' + username, { "username": username, "contrasena": contrasena, "nombre": nombre, "email": email, "role": role, "enable": enable, "verificationCode": verificationCode }, this.httpOptions)
       .pipe(switchMap(resp => {
         return of(true)
       }), catchError(error => {
@@ -55,7 +57,7 @@ export class UsuarioService {
   }
 
   changeToAdmin(username: string): Observable<boolean> {
-    return this.http.put<any>(this.url + '/changeToAdmin/' + username, undefined)
+    return this.http.put<any>(this.urlLocal + '/changeToAdmin/' + username, undefined)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -65,7 +67,7 @@ export class UsuarioService {
   }
 
   changeToUser(username: string): Observable<boolean> {
-    return this.http.put<any>(this.url + '/changeToUser/' + username, undefined)
+    return this.http.put<any>(this.urlLocal + '/changeToUser/' + username, undefined)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {

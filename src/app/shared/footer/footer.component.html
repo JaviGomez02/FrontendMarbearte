@@ -21,7 +21,7 @@
                 <a class="enlace-footer" href="#">Sobre nosotros</a>
             </div>
         </div>
-        <div class="footer-section-3">
+        <div class="footer-section-3" *ngIf="listaCategorias.length">
             <div class="titulo-enlaces">Productos</div>
             <div class="div-enlace-footer" *ngFor="let categoria of listaCategorias">
                 <a class="enlace-footer" (click)="verProductos(categoria.id)">{{categoria.nombre}}</a>

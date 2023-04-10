@@ -10,7 +10,7 @@ import { Categoria } from '../interfaces/categoria.interface';
 export class categoriaService {
 
   url: string = 'https://apimarbearte-production.up.railway.app/categoria'
-
+  urlLocal:string='http://localhost:8082/categoria'
 
 
   constructor(private http: HttpClient) { }
@@ -19,11 +19,11 @@ export class categoriaService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   getCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(this.url)
+    return this.http.get<Categoria[]>(this.urlLocal)
   }
 
   addCategoria(nombre: string, descripcion: string): Observable<boolean> {
-    return this.http.post<any>(this.url, { "nombre": nombre, "descripcion": descripcion }, this.httpOptions)
+    return this.http.post<any>(this.urlLocal, { "nombre": nombre, "descripcion": descripcion }, this.httpOptions)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -34,7 +34,7 @@ export class categoriaService {
 
 
   deleteCategoria(id: number): Observable<boolean> {
-    return this.http.delete<any>(this.url + '/' + id)
+    return this.http.delete<any>(this.urlLocal + '/' + id)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -44,7 +44,7 @@ export class categoriaService {
   }
 
   editarCategoria(id: number, nombre: string, descripcion: string): Observable<boolean> {
-    return this.http.put<any>(this.url + '/' + id, { "nombre": nombre, "descripcion": descripcion }, this.httpOptions)
+    return this.http.put<any>(this.urlLocal + '/' + id, { "nombre": nombre, "descripcion": descripcion }, this.httpOptions)
       .pipe(switchMap(resp => {
         return of(true)
       }), catchError(error => {
@@ -54,7 +54,7 @@ export class categoriaService {
   }
 
   getCategoriaById(id: number): Observable<Categoria> {
-    return this.http.get<Categoria>(this.url + '/' + id)
+    return this.http.get<Categoria>(this.urlLocal + '/' + id)
   }
 
 
