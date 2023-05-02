@@ -21,9 +21,13 @@ export class NavbarComponent implements OnInit {
 
   isLoged$!: Observable<boolean>
 
+  carrito:boolean=false
+
   listaCategorias: Categoria[] = []
 
   token!: string
+
+  claseCarrito:string=''
 
   usuario: string = ""
 
@@ -58,5 +62,16 @@ export class NavbarComponent implements OnInit {
   updateUsuario() {
     this.route.navigateByUrl('usuarios/update/' + this.usuario)
   }
+
+  mostrarCarrito(){
+    this.carrito=true
+    this.claseCarrito='abierto'
+  }
+
+  cerrarCarrito(){
+    this.claseCarrito = 'cerrado';
+      this.carrito = false;
+  }
+  
 
 }

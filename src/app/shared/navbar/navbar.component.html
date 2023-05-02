@@ -1,5 +1,9 @@
+
+
 <div class="preNavBar">Se vienen cositas</div>
 <div class="miNavbar sticky-top">
+    <app-carrito  class="carrito" [ngClass]="claseCarrito"></app-carrito>
+    <img src="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png" class="cerrarCarrito" *ngIf="carrito" (click)="cerrarCarrito()">
     <div class="divLeft">
         <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309884/logo-sin-letras_vuof01.png" alt="logo"
             class="logo">
@@ -34,7 +38,8 @@
     </div>
     <div class="divRight">
         <div class="dropdown">
-            <img src="https://uxwing.com/wp-content/themes/uxwing/download/e-commerce-currency-shopping/shopping-cart-icon.png" class="img-carrito">
+            <img (click)="mostrarCarrito()" src="https://uxwing.com/wp-content/themes/uxwing/download/e-commerce-currency-shopping/shopping-cart-icon.png" class="img-carrito">
+            
             <button class="btn btn-info dropdown-toggle" style="background-color: white;border-color: white;"
                 type="button" data-bs-toggle="dropdown" aria-expanded="false" name="boton_dropdown">
                 <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309910/user_msk6nc.png"
@@ -52,6 +57,7 @@
                 <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="logout()">Logout</a></li>
             </ul>
         </div>
-
+        
     </div>
+    
 </div>

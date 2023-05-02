@@ -10,6 +10,9 @@ import { CarritoComponent } from './carrito/carrito.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    CarritoComponent
   ]
 })
 export class CarritoModule { }

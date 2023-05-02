@@ -14,6 +14,8 @@ a {
   cursor: pointer;
 }
 
+
+
 .miNavbar {
   background-color: rgb(255, 255, 255);
   display: grid;
@@ -61,7 +63,48 @@ a {
 
 @import url(https://fonts.googleapis.com/css?family=Lato);
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
+.carrito{
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 20;
+  animation: none;
+  display: none;
+}
+
+.abierto {
+  animation: fadeIn 0.5s ease-out forwards; /* Animación de entrada */
+  display: block;
+}
+
+/* Estilos CSS para el carrito cerrado */
+.cerrado {
+  animation: fadeOut 0.5s ease-in-out forwards; /* Animación de salida */
+}
+
+
+.cerrarCarrito{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  z-index: 21;
+  cursor: pointer;
+  animation: fadeIn 0.5s ease-out forwards;
+
+}
 
 .ul {
   display: flex;
