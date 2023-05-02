@@ -17,18 +17,29 @@
 
 .colores{
     margin-top: 50px;
-    width: 200px;
+    width: 400px;
 }
 
 .div-color{
     border: solid;
     border-width: 1px;
+    cursor: pointer;
+}
+
+.div-colorSelect{
+    border: solid;
+    border-width: 2px;
+    cursor: pointer;
 }
 
 .colores-grid{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(8, 1fr);
     gap: 10px;
+}
+
+.radio{
+    height: 30px;
 }
 
 .nombre-descrip {
@@ -40,21 +51,21 @@
 
 .nombre {
     font-weight: bold;
-    font-size: 25px;
+    font-size: 50px;
     padding: 0;
     margin-bottom: 5px;
 }
 
 .precio {
-    font-weight: bold;
-    font-size: 20px;
+    margin-top: 10px;
+    font-size: 25px;
 }
 
 .categoria {
     font-size: 13px;
     color: gray;
     padding: 0;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .img-principal {

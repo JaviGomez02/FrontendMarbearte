@@ -24,6 +24,14 @@ export class ProductComponent implements OnInit {
 
   listaColores!:Colore[]
 
+  elemento!:HTMLElement | null
+
+  listaDivs!:HTMLCollectionOf<HTMLElement> | null
+
+  color:string=""
+
+  flag:boolean=false
+
   ngOnInit(): void {
     this.servicioProducto.getProducto(this.activatedRoute.snapshot.params['id'])
       .subscribe({
@@ -54,6 +62,19 @@ export class ProductComponent implements OnInit {
           })
         }
       })
+  }
+
+
+  seleccionarColor(idColor:string){
+    
+    this.listaDivs=document.getElementsByTagName("div")
+    for(let i=0;i<this.listaDivs.length;i++){
+      this.listaDivs[i].classList.remove("div-colorSelect")
+    }
+
+    this.color=idColor
+    this.elemento=document.getElementById(idColor)
+    this.elemento?.classList.add("div-colorSelect")
   }
 
 }

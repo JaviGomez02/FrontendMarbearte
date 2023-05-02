@@ -6,14 +6,16 @@
                 src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg" alt="img-principal">
         </div>
         <div class="nombre-descrip">
-            <p class="nombre">{{producto.nombre}}</p>
             <p class="categoria">{{producto.categoria.nombre}}</p>
+            <p class="nombre">{{producto.nombre}}</p>
             <p class="precio">{{producto.price}} €</p>
             <p class="descripcion">{{producto.descripcion}}</p>
             <div class="colores" *ngIf="listaColores.length">
                 <p>Colores disponibles:</p>
                 <div class="colores-grid">
-                    <div class="div-color" *ngFor="let color of listaColores" style="height:30px;background-color: {{color.color.color}};"></div>
+                    
+                    <div class="div-color" *ngFor="let color of listaColores" id="{{color.color.color}}" (click)="seleccionarColor(color.color.color)" style="height:30px;background-color: {{color.color.color}};" ></div>
+                
                 </div>
             </div>
         </div>

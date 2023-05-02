@@ -175,6 +175,7 @@ a {
 .img-carrito {
   width: 32px;
   margin-right: 30px;
+  cursor: pointer;
 }
 
 .img-usuario {
