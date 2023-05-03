@@ -1,14 +1,14 @@
 
-
+<div class="overlay" (click)="cerrarCarrito()"></div>
 <div class="preNavBar">Se vienen cositas</div>
 <div class="miNavbar sticky-top">
     <app-carrito  class="carrito" [ngClass]="claseCarrito"></app-carrito>
     <img src="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png" class="cerrarCarrito" *ngIf="carrito" (click)="cerrarCarrito()">
-    <div class="divLeft">
+    <div class="divLeft" (click)="cerrarCarrito()">
         <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309884/logo-sin-letras_vuof01.png" alt="logo"
             class="logo">
     </div>
-    <div class="divMiddle">
+    <div class="divMiddle" (click)="cerrarCarrito()">
         <ul class="ul">
             <li class="li"><a class="enlace-navbar" [routerLink]="['/home']" routerLinkActive="activo"
                     [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>

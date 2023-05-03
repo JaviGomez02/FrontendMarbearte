@@ -65,10 +65,16 @@ export class NavbarComponent implements OnInit {
 
   mostrarCarrito(){
     this.carrito=true
+    
+    document.querySelector('.overlay')?.classList.remove("overlayCerrado")
+    document.querySelector('.overlay')?.classList.add("overlayAbierto")
     this.claseCarrito='abierto'
   }
 
   cerrarCarrito(){
+    this.carrito=true
+    document.querySelector('.overlay')?.classList.remove("overlayAbierto")
+    document.querySelector('.overlay')?.classList.add("overlayCerrado")
     this.claseCarrito = 'cerrado';
       this.carrito = false;
   }
