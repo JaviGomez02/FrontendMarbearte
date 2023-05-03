@@ -11,14 +11,15 @@ import { carritoService } from 'src/app/services/carrito.service';
 })
 export class CarritoComponent implements OnInit {
 
-  listaProductos!:ItemCarrito[]
+  listaProductos:ItemCarrito[]=this.servicioCarrito.getListaCarrito();
 
   constructor(private cookies:CookieService, private servicioCarrito:carritoService) { }
 
   ngOnInit(): void {
-    this.listaProductos=this.servicioCarrito.getListaCarrito();
-    console.log("aaa")
+
     console.log(this.listaProductos)
+
+
   }
 
 }

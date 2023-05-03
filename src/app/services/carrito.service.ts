@@ -19,6 +19,7 @@ export class carritoService {
     }
 
     getListaCarrito(){
+        this.recuperarCarrito()
         return this.listaCarrito
     }
 

@@ -38,7 +38,6 @@ export class ProductComponent implements OnInit {
     this.servicioProducto.getProducto(this.activatedRoute.snapshot.params['id'])
       .subscribe({
         next: (resp) => {
-          console.log(resp)
           if (resp) {
             this.producto = resp
             this.fotoPrincipal = resp.imagenes[0]
@@ -99,6 +98,5 @@ export class ProductComponent implements OnInit {
 
     this.producto.colores = [];
     this.carrito.añadirProducto(this.producto, cantidad)
-    window.location.reload()
   }
 }
