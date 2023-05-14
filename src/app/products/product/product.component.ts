@@ -81,20 +81,22 @@ export class ProductComponent implements OnInit {
 
 
   anadirAlCarrito(cantidad: number) {
-    // this.servicioColor.getColorById(this.color)
-    // .subscribe({
-    //   next:(resp)=>{
-    //     this.producto.colores=[resp];
-    //     this.carrito.añadirProducto(this.producto, cantidad)
-    //   },
-    //   error:(error)=>{
-    //     Swal.fire({
-    //       icon: "error",
-    //       title: "Oops",
-    //       text: "Algo ha ido mal"
-    //     })
-    //   }
-    // })
+    if (this.color != "") {
+      this.servicioColor.getColorById(this.color)
+        .subscribe({
+          next: (resp) => {
+            console.log(resp)
+          },
+          error: (error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops",
+              text: "Algo ha ido mal"
+            })
+          }
+        })
+
+    }
 
     this.producto.colores = [];
     this.carrito.añadirProducto(this.producto, cantidad)

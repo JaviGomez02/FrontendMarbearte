@@ -20,8 +20,8 @@ export class colorService {
   getColores(): Observable<Color[]> {
     return this.http.get<Color[]>(this.urlLocal)
   }
-  getColorById(id: string): Observable<Colore> {
-    return this.http.get<Colore>(this.urlLocal + '/' + id)
+  getColorById(id: string): Observable<Color> {
+    return this.http.get<Color>(this.urlLocal + '/' + id)
   }
 
 }
