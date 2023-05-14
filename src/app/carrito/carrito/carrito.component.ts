@@ -37,4 +37,9 @@ export class CarritoComponent implements OnInit {
     return unidades;
   }
 
+  eliminarProducto(idProducto:number){
+    this.servicioCarrito.eliminarProducto(idProducto)
+    this.listaProductos=this.servicioCarrito.getListaCarrito();
+  }
+
 }

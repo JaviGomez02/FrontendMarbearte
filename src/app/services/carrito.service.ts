@@ -30,6 +30,11 @@ export class carritoService {
         }
     }
 
+    eliminarProducto(idProducto:number){
+        this.listaCarrito=this.getListaCarrito().filter((itemCarrito)=>itemCarrito.producto.id!=idProducto)
+        this.cargarCarrito()
+    }
+
     añadirProducto(producto: Product, cantidad:number){
 
         let item:ItemCarrito={producto, cantidad}

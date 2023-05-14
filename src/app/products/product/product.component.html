@@ -17,7 +17,12 @@
                     <div class="div-color" *ngFor="let color of listaColores" id="{{color.color.color}}" (click)="seleccionarColor(color.color.color)" style="height:30px;background-color: {{color.color.color}};" ></div>
                 </div>
             </div>
-            <button type="button" (click)="anadirAlCarrito(1)">Añadir al carrito</button>
+            <div class="añadir">
+                
+                <p>Cantidad: <input type="number" min="1" max="99" style="width: 50px;"></p>
+                <button type="button" (click)="anadirAlCarrito(1)">Añadir al carrito</button>
+
+            </div>
         </div>
         
 
