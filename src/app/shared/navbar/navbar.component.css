@@ -113,17 +113,15 @@ a {
   animation: fadeOut 0.5s ease-in-out forwards; /* Animación de salida */
 }
 
-
 .cerrarCarrito{
   position: absolute;
-  top: 0;
+  top: 12px;
   right: 0;
   width: 30px;
   height: 30px;
   z-index: 999999999;
   cursor: pointer;
   animation: fadeIn 0.5s ease-out forwards;
-
 }
 
 .ul {

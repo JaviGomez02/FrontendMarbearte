@@ -19,7 +19,22 @@ export class CarritoComponent implements OnInit {
 
     // console.log(this.listaProductos)
 
+  }
 
+  calcularTotal():any{
+    let total=0
+    for (let i=0;i<this.listaProductos.length;i++){
+      total+=this.listaProductos[i].producto.price*this.listaProductos[i].cantidad
+    }
+    return total.toFixed(2);
+  }
+
+  calcularUnidades():number{
+    let unidades=0
+    for (let i=0;i<this.listaProductos.length;i++){
+      unidades+=this.listaProductos[i].cantidad
+    }
+    return unidades;
   }
 
 }

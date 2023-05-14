@@ -1,10 +1,33 @@
 <div class="container">
-<p class="prueba">Mi carrito asa</p>
-<span *ngFor="let item of listaProductos">
-    <p>{{item.producto.nombre}}. Cantidad: {{item.cantidad}}</p>
-</span>
+    <div class="seccion1">
 
-
-
+        <p class="titulo-carrito">Mi carrito</p>
+    </div>
+    <div class="seccion2">
+        <div class="item-carrito" *ngFor="let item of listaProductos">
+            <div class="img-item">
+                <img *ngIf="item.producto.imagenes.length>=1" class="img" src="{{item.producto.imagenes[1].img}}">
+                <img *ngIf="item.producto.imagenes.length==0" class="img" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
+            </div>
+            <div class="txt-item"> 
+                <p class="nombre">{{item.producto.nombre}}</p>
+                <p class="unidades">Unidades: {{item.cantidad}}</p>
+                <p class="precio">{{item.producto.price}} €</p>
+            </div>
+        </div>
+    </div>
+    <div class="seccion3">
+        <div class="total">
+            <p class="total-txt">Total</p>
+            <p class="unidades">Unidades</p>
+        </div>
+        <div class="precio-total">
+            <p class="precio-total-txt">{{calcularTotal()}} €</p>
+            <p class="unidades-txt">{{calcularUnidades()}}</p>
+        </div>
+        <div class="boton-comprar">
+            <button class="boton" type="submit">Comprar</button>
+        </div>
+    </div>
+    
 </div>
-
