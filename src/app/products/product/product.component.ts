@@ -110,10 +110,7 @@ export class ProductComponent implements OnInit {
 
       this.producto.colores = [];
       this.carrito.añadirProducto(this.producto, this.myForm.value.cantidad)
-      Swal.fire({
-        icon: "success",
-        title: "Producto añadido al carrito!"
-      })
+      
     }
 
 
