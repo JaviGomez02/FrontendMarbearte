@@ -3,28 +3,34 @@
         <div class="foto-principal">
             <img *ngIf="fotoPrincipal" class="img-principal" src="{{fotoPrincipal.img}}">
             <img *ngIf="!fotoPrincipal" class="img-principal"
-                src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg" alt="img-principal">
+                src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg"
+                alt="img-principal">
         </div>
         <div class="nombre-descrip">
             <p class="nombre">{{producto.nombre}}</p>
-            
+
             <p class="categoria">{{producto.categoria.nombre}}</p>
             <p class="precio">{{producto.price}} €</p>
             <p class="descripcion">{{producto.descripcion}}</p>
             <div class="colores" *ngIf="listaColores.length">
                 <p>Colores disponibles:</p>
                 <div class="colores-grid">
-                    <div class="div-color" *ngFor="let color of listaColores" id="{{color.color.color}}" (click)="seleccionarColor(color.color.color)" style="height:30px;background-color: {{color.color.color}};" ></div>
+                    <div class="div-color" *ngFor="let color of listaColores" id="{{color.color.color}}"
+                        (click)="seleccionarColor(color.color.color)"
+                        style="height:30px;background-color: {{color.color.color}};"></div>
                 </div>
             </div>
             <div class="añadir">
-                
-                <p>Cantidad: <input type="number" min="1" max="99" style="width: 50px;"></p>
-                <button type="button" (click)="anadirAlCarrito(1)">Añadir al carrito</button>
+                <form (ngSubmit)="anadirAlCarrito()" [formGroup]="myForm" autocomplete="off">
+                    <p>Cantidad: <input type="number" min="1" max="99" formControlName="cantidad" style="width: 50px;">
+                    </p>
+                    <button type="submit" class="boton" [disabled]="myForm.invalid"
+                    [className]="myForm.invalid ? 'boton-disable': 'boton'">Añadir al carrito</button>
+                </form>
 
             </div>
         </div>
-        
+
 
     </div>
     <div class="grid-imagenes" *ngIf="listaImagenes.length">

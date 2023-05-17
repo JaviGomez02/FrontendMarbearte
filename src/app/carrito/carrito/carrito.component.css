@@ -60,6 +60,10 @@
   border-radius: 4px;
 }
 
+.boton-disable{
+  cursor: not-allowed;
+}
+
 .unidades-txt{
   text-align: end;
   margin: 0;
@@ -100,6 +104,10 @@
 .boton-comprar {
   grid-area: 2/1/3/3;
   padding-top: 20px;
+}
+
+.texto-vacio{
+  margin: 15px;
 }
 
 .borrar{

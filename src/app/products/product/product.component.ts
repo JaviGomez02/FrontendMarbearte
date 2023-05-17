@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Color, Colore, Content, Imagene } from 'src/app/interfaces/page.interface';
@@ -15,7 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private servicioProducto: productService, private servicioColor: colorService, private activatedRoute: ActivatedRoute, private route: Router, private carrito: carritoService) {
+  constructor(private servicioProducto: productService, private fb: FormBuilder, private servicioColor: colorService, private activatedRoute: ActivatedRoute, private route: Router, private carrito: carritoService) {
   }
 
   producto!: Product
@@ -34,7 +35,16 @@ export class ProductComponent implements OnInit {
 
   flag: boolean = false
 
+  myForm: FormGroup = this.fb.group({
+    cantidad: ['', [Validators.required, Validators.min(1), Validators.max(99)]]
+  })
+
   ngOnInit(): void {
+
+    this.myForm.setValue({
+      cantidad: 1
+    })
+
     this.servicioProducto.getProducto(this.activatedRoute.snapshot.params['id'])
       .subscribe({
         next: (resp) => {
@@ -80,25 +90,35 @@ export class ProductComponent implements OnInit {
 
 
 
-  anadirAlCarrito(cantidad: number) {
-    if (this.color != "") {
-      this.servicioColor.getColorById(this.color)
-        .subscribe({
-          next: (resp) => {
-            console.log(resp)
-          },
-          error: (error) => {
-            Swal.fire({
-              icon: "error",
-              title: "Oops",
-              text: "Algo ha ido mal"
-            })
-          }
-        })
+  anadirAlCarrito() {
+    if (!this.myForm.invalid) {
+      if (this.color != "") {
+        this.servicioColor.getColorById(this.color)
+          .subscribe({
+            next: (resp) => {
+              console.log(resp)
+            },
+            error: (error) => {
+              Swal.fire({
+                icon: "error",
+                title: "Oops",
+                text: "Algo ha ido mal"
+              })
+            }
+          })
+      }
 
+      this.producto.colores = [];
+      this.carrito.añadirProducto(this.producto, this.myForm.value.cantidad)
+      Swal.fire({
+        icon: "success",
+        title: "Producto añadido al carrito!"
+      })
     }
 
-    this.producto.colores = [];
-    this.carrito.añadirProducto(this.producto, cantidad)
+
+
+
+
   }
 }

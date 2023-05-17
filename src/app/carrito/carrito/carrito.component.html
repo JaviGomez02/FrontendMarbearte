@@ -4,18 +4,24 @@
         <p class="titulo-carrito">Mi carrito</p>
     </div>
     <div class="seccion2">
-        <div class="item-carrito" *ngFor="let item of listaProductos">
-            <div class="img-item">
-                <img *ngIf="item.producto.imagenes.length>=1" class="img" src="{{item.producto.imagenes[1].img}}">
-                <img *ngIf="item.producto.imagenes.length==0" class="img" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
+        <span *ngIf="listaProductos.length">
+            <div class="item-carrito" *ngFor="let item of listaProductos">
+                <div class="img-item">
+                    <img *ngIf="item.producto.imagenes.length>=1" class="img" src="{{item.producto.imagenes[1].img}}">
+                    <img *ngIf="item.producto.imagenes.length==0" class="img"
+                        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
+                </div>
+                <div class="txt-item">
+                    <p class="nombre">{{item.producto.nombre}}</p>
+                    <p class="unidades">Unidades: {{item.cantidad}}</p>
+                    <p class="precio">{{item.producto.price}} €</p>
+                    <p class="borrar"><img (click)="eliminarProducto(item.producto.id)" class="img-borrar"
+                            src="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png">
+                    </p>
+                </div>
             </div>
-            <div class="txt-item"> 
-                <p class="nombre">{{item.producto.nombre}}</p>
-                <p class="unidades">Unidades: {{item.cantidad}}</p>
-                <p class="precio">{{item.producto.price}} €</p>
-                <p class="borrar"><img (click)="eliminarProducto(item.producto.id)" class="img-borrar" src="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png"></p>
-            </div>
-        </div>
+        </span>
+        <p *ngIf="!listaProductos.length" class="texto-vacio">No hay productos</p>
     </div>
     <div class="seccion3">
         <div class="total">
@@ -27,8 +33,8 @@
             <p class="unidades-txt">{{calcularUnidades()}}</p>
         </div>
         <div class="boton-comprar">
-            <button class="boton" type="submit">Comprar</button>
+            <button [ngClass]="{'boton':true,'boton-disable':!listaProductos.length}" type="submit">Comprar</button>
         </div>
     </div>
-    
+
 </div>
