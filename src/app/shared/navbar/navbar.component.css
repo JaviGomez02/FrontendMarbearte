@@ -194,6 +194,17 @@ a {
 
 .menu-productos-categoria-1 {
   grid-area: 1/1/2/2;
+  display: grid;
+  grid-template-rows: 1fr 0.1fr;
+  grid-template-columns: 1fr;
+}
+
+.categoria-imagen{
+  grid-area: 1/1/2/2;
+}
+
+.categoria-nombre{
+  grid-area: 2/1/3/2
 }
 
 .menu-productos-categoria-2 {
@@ -225,6 +236,8 @@ a {
 
 .img-categoria {
   width: 200px;
+  height: 300px;
+  object-fit: cover;
 }
 
 .activo {

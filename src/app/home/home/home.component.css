@@ -98,6 +98,8 @@
 
 .img-categoria {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .categoria:hover .img-categoria {
@@ -118,6 +120,7 @@
 
 .texto-categoria {
     visibility: hidden;
+    -webkit-text-stroke: 1px rgb(81, 81, 81);
     color: white;
     font-size: 24px;
     text-transform: uppercase;

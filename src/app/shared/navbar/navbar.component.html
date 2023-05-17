@@ -1,9 +1,9 @@
-
 <div class="overlay" (click)="cerrarCarrito()"></div>
 <div class="preNavBar">Se vienen cositas</div>
 <div class="miNavbar sticky-top">
-    <app-carrito  class="carrito" [ngClass]="claseCarrito"></app-carrito>
-    <img src="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png" class="cerrarCarrito" *ngIf="carrito" (click)="cerrarCarrito()">
+    <app-carrito class="carrito" [ngClass]="claseCarrito"></app-carrito>
+    <img src="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png" class="cerrarCarrito"
+        *ngIf="carrito" (click)="cerrarCarrito()">
     <div class="divLeft" (click)="cerrarCarrito()">
         <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309884/logo-sin-letras_vuof01.png" alt="logo"
             class="logo">
@@ -18,9 +18,15 @@
                     <a class="enlace-div" *ngFor="let categoria of listaCategorias"
                         (click)="verProductos(categoria.id)">
                         <div class="menu-productos-categoria-1">
-                            <img class="img-categoria" alt="img-categoria"
-                                src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309837/ejemplo_tfljhw.jpg">
-                            <p>{{categoria.nombre}}</p>
+                            <div class="categoria-imagen">
+                                <img *ngIf="categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
+                                    src="{{categoria.imagenes[0].img}}">
+                                <img *ngIf="!categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
+                                    src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309837/ejemplo_tfljhw.jpg">
+                            </div>
+                            <div class="categoria-nombre">
+                                <p>{{categoria.nombre}}</p>
+                            </div>
                         </div>
                     </a>
 
@@ -38,8 +44,10 @@
     </div>
     <div class="divRight">
         <div class="dropdown">
-            <img (click)="mostrarCarrito()" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1684083159/shopping_cart_FILL0_wght400_GRAD0_opsz48_ojftax.svg" class="img-carrito">
-            
+            <img (click)="mostrarCarrito()"
+                src="https://res.cloudinary.com/dplcge3sb/image/upload/v1684083159/shopping_cart_FILL0_wght400_GRAD0_opsz48_ojftax.svg"
+                class="img-carrito">
+
             <button class="btn btn-info dropdown-toggle" style="background-color: white;border-color: white;"
                 type="button" data-bs-toggle="dropdown" aria-expanded="false" name="boton_dropdown">
                 <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309910/user_msk6nc.png"
@@ -48,7 +56,8 @@
             <ul class="dropdown-menu">
                 <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/login']">Iniciar
                         sesión</a></li>
-                <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/register']">Crear una cuenta</a></li>
+                <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/register']">Crear
+                        una cuenta</a></li>
                 <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="updateUsuario()">Ver mis datos</a>
                 </li>
                 <li *ngIf="isLoged$|async">
@@ -57,7 +66,7 @@
                 <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="logout()">Logout</a></li>
             </ul>
         </div>
-        
+
     </div>
-    
+
 </div>

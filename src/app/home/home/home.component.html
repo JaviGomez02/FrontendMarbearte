@@ -2,13 +2,16 @@
   style="position: relative">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309771/paisaje2_l8pzjv.jpg" class="d-block w-100" style="height: 500px!important;object-fit: cover;" alt="...">
+      <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309771/paisaje2_l8pzjv.jpg" class="d-block w-100"
+        style="height: 500px!important;object-fit: cover;" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309807/paisaje1_njilze.jpg" class="d-block w-100" style="height: 500px!important;object-fit: cover;" alt="...">
+      <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309807/paisaje1_njilze.jpg" class="d-block w-100"
+        style="height: 500px!important;object-fit: cover;" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309810/paisaje3_gm1z6q.jpg" class="d-block w-100" style="height: 500px!important;object-fit: cover;" alt="...">
+      <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309810/paisaje3_gm1z6q.jpg" class="d-block w-100"
+        style="height: 500px!important;object-fit: cover;" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -37,7 +40,9 @@
 
 <div class="categorias-producto" *ngIf="listaCategorias.length>=3">
   <div class="categoria" *ngFor="let categoria of listaCategorias" (click)="verProductos(categoria.id)">
-    <img class="img-categoria" src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309837/ejemplo_tfljhw.jpg" alt="img-categoria">
+    <img *ngIf="categoria.imagenes[0]" class="img-categoria" alt="img-categoria" src="{{categoria.imagenes[0].img}}">
+    <img *ngIf="!categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
+      src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309837/ejemplo_tfljhw.jpg">
     <p class="texto-categoria">{{categoria.nombre}}</p>
   </div>
 </div>
@@ -46,7 +51,7 @@
   <p class="titulo-productos">Los más vendidos</p>
   <div class="grid-productos-home">
     <div class="producto" *ngFor="let producto of masVendidos" [routerLink]="['/products', producto.id]">
-      <img class="img-producto" *ngIf="producto.imagenes[0]" src="{{producto.imagenes[0].img}}"  alt="img-producto">
+      <img class="img-producto" *ngIf="producto.imagenes[0]" src="{{producto.imagenes[0].img}}" alt="img-producto">
       <img class="img-producto" *ngIf="!producto.imagenes[0]"
         src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg" alt="img-producto">
       <p class="nombre-producto">{{producto.nombre}} <span class="precio-producto">| {{producto.price}}€</span></p>
