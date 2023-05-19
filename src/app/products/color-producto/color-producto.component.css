@@ -25,6 +25,26 @@
     border-width: 1px;
 }
 
+.div-color:hover{
+    filter: brightness(0.95);
+}
+
+.img-x {
+    width: 20px;
+}
+
+.x-color {
+    position: absolute;
+    visibility: hidden;
+    cursor: pointer;
+    right: -1%;
+    top: -8%;
+}
+
+.div-color:hover .x-color {
+    visibility: visible;
+}
+
 .container-boton{
     text-align: left;
     padding-top: 40px;

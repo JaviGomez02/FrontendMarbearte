@@ -5,7 +5,10 @@
     <p class="info">Puede añadir entre uno o varios colores</p>
     <div class="grid-colores">
       <span *ngFor="let color of listaColores; let i = index">
-        <div class="div-color" style="height: 50px; background-color: {{color.color}}; width: 100%;"></div>
+        <div class="div-color" style="height: 50px; background-color: {{color.color}}; width: 100%;"><div class="x-color" (click)="eliminarColor(color.color, color.nombre)"><img
+          src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678310020/x_cwzpyx.png"
+          alt="eliminar" class="img-x"></div></div>
+        
         <p class="nombre-color">{{color.nombre}}</p><input type="checkbox" id="color.color" value="color.color"
           (change)="onCheckboxPressed(color,$event.target)">
 

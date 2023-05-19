@@ -55,6 +55,44 @@ export class ColorProductoComponent implements OnInit {
       })
   }
 
+  eliminarColor(codigoColor: string, nombre:String) {
+    let newCodigo: string = codigoColor.slice(1)
+    Swal.fire({
+      title: '¿Seguro que desea borrar el color '+nombre+'?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, Borrar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.servicioColor.deleteColor(newCodigo)
+          .subscribe({
+            next: (resp) => {
+              if (resp) {
+                Swal.fire(
+                  'Eliminado!',
+                  'Se ha eliminado el color correctamente.',
+                  'success'
+                ).then((resp) => {
+                  window.location.reload()
+                })
+              }
+              else {
+                Swal.fire(
+                  'Oops!',
+                  'Ocurrió un error inesperado.',
+                  'error'
+                )
+              }
+            }
+          })
+      }
+    })
+
+  }
+
   onCheckboxPressed(colorSelected: any, target: EventTarget | null) {
 
     const input = target as HTMLInputElement
