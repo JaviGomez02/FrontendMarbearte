@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsAddComponent } from './products-add/products-add.component';
 import { ProductsEditComponent } from './products-edit/products-edit.component';
 import { ProductComponent } from './product/product.component';
+import { ColorAddComponent } from './color-add/color-add.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 
 
@@ -20,15 +22,16 @@ import { ProductComponent } from './product/product.component';
     ColorProductoComponent,
     ProductsAddComponent,
     ProductsEditComponent,
-    ProductComponent
+    ProductComponent,
+    ColorAddComponent
 
   ],
   imports: [
     CommonModule,
     ProductsRoutingModule,
     DataTablesModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    ColorPickerModule
   ],
   exports: [
     AllProductsComponent

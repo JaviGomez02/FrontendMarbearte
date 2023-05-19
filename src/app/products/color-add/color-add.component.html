@@ -1,0 +1,26 @@
+<div class="container-login">
+    <div class="container-form">
+        <p class="titulo-login">Nueva categoria</p>
+
+        <form class="form-login" (ngSubmit)="addColor()" [formGroup]="myForm" autocomplete="off">
+            <div class="elemento-form">
+                <input type="text" class="input-nombre" placeholder="Nombre del color" formControlName="nombre">
+                <p class="form-text text-danger" *ngIf="isValidField('nombre')">
+                    Debe tener 3 caracteres como mínimo
+                </p>
+            </div>
+            <div class="elemento-form">
+                <input type="text" class="input-nombre" placeholder="Código hexadecimal del nuevo color"
+                    formControlName="color">
+                <p class="form-text text-danger" *ngIf="isValidField('color')">
+                    Código inválido
+                </p>
+            </div>
+            <div class="grid-botones">
+                <button class="boton" type="submit">Guardar cambios</button>
+                <button class="boton-cancelar" type="button" [routerLink]="['/products/all']">Cancelar</button>
+            </div>
+
+        </form>
+    </div>
+</div>

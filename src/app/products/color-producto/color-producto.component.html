@@ -1,5 +1,6 @@
 <div class="container-login">
   <div class="container-form">
+
     <p class="titulo-login">Añadir colores</p>
     <p class="info">Puede añadir entre uno o varios colores</p>
     <div class="grid-colores">
@@ -13,7 +14,9 @@
     <div class="grid-botones">
       <button class="boton" type="button" (click)="save()">Guardar cambios</button>
       <button class="boton-cancelar" type="button" [routerLink]="['/products/all']">Cancelar</button>
+      
     </div>
+    <a [routerLink]="['/products/color/add']"><p class="enlace-crear">Quiere crear un nuevo color? Pinche aquí</p></a>
 
   </div>
 </div>

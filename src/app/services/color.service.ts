@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of, switchMap } from 'rxjs';
 import { Color, Colore } from '../interfaces/page.interface';
 
 @Injectable({
@@ -23,5 +23,26 @@ export class colorService {
   getColorById(id: string): Observable<Color> {
     return this.http.get<Color>(this.urlLocal + '/' + id)
   }
+
+  addColor(color: string, nombre: string): Observable<boolean> {
+    return this.http.post<any>(this.urlLocal, { "color": color, "nombre": nombre }, this.httpOptions)
+      .pipe(switchMap(resp => {
+        return of(true);
+      }), catchError(error => {
+        return of(false);
+      })
+      )
+  }
+
+  deleteColor(id: string): Observable<boolean> {
+    return this.http.delete<any>(this.urlLocal + '/' + id)
+      .pipe(switchMap(resp => {
+        return of(true);
+      }), catchError(error => {
+        return of(false);
+      })
+      )
+  }
+
 
 }

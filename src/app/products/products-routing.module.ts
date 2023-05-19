@@ -5,6 +5,7 @@ import { ColorProductoComponent } from './color-producto/color-producto.componen
 import { ProductComponent } from './product/product.component';
 import { ProductsAddComponent } from './products-add/products-add.component';
 import { ProductsEditComponent } from './products-edit/products-edit.component';
+import { ColorAddComponent } from './color-add/color-add.component';
 
 const routes: Routes = [
     {
@@ -14,6 +15,10 @@ const routes: Routes = [
     {
         path: 'color',
         component: ColorProductoComponent
+    },
+    {
+        path: 'color/add',
+        component: ColorAddComponent
     },
     {
         path: 'add',
