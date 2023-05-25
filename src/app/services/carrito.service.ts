@@ -17,7 +17,8 @@ export class carritoService {
 
 
     cargarCarrito() {
-        this.cookies.set('carrito', JSON.stringify(this.listaCarrito))
+        localStorage.setItem('carrito',JSON.stringify(this.listaCarrito))
+        // this.cookies.set('carrito', JSON.stringify(this.listaCarrito))
     }
 
     getListaCarrito() {
@@ -26,7 +27,8 @@ export class carritoService {
     }
 
     recuperarCarrito() {
-        const carrito = this.cookies.get('carrito');
+        // const carrito = this.cookies.get('carrito');
+        const carrito = localStorage.getItem('carrito')
         if (carrito) {
             this.listaCarrito = JSON.parse(carrito)
         }
@@ -80,7 +82,6 @@ export class carritoService {
                         if (this.listaCarrito[i].producto.colores[0].color.nombre == producto.colores[0].color.nombre) {
 
                             encontrado = true
-                            console.log("existe")
                             if ((this.listaCarrito[i].cantidad + cantidad) > producto.stock) {
                                 Swal.fire({
                                     icon: "error",
@@ -112,7 +113,6 @@ export class carritoService {
                 }
             }
             if (!encontrado) {
-                console.log("no existe")
                 this.listaCarrito.push(item)
                 Swal.fire({
                     icon: "success",

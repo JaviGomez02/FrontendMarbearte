@@ -1,7 +1,9 @@
-.container{
+.contenedor{
     text-align: center;
     margin-top: 50px;
     width: 100%;
+    padding-right: 50px;
+    padding-left: 50px;
 }
 
 .titulo{
@@ -14,8 +16,9 @@
 .grid-global{
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 5fr 1fr;
+    grid-template-columns: 1.7fr 1fr;
     margin-bottom: 50px;
+    gap:50px;
 }
 
 .lista-productos{

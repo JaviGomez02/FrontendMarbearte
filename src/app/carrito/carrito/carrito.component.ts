@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ItemCarrito } from 'src/app/interfaces/itemCarrito.interface';
 import { Product } from 'src/app/interfaces/product.interface';
@@ -11,34 +12,40 @@ import { carritoService } from 'src/app/services/carrito.service';
 })
 export class CarritoComponent implements OnInit {
 
-  listaProductos:ItemCarrito[]=this.servicioCarrito.getListaCarrito();
+  listaProductos: ItemCarrito[] = this.servicioCarrito.getListaCarrito();
 
-  constructor(private cookies:CookieService, private servicioCarrito:carritoService) { }
+  constructor(private cookies: CookieService, private servicioCarrito: carritoService, private router: Router) { }
 
   ngOnInit(): void {
     // console.log(this.listaProductos)
 
   }
 
-  calcularTotal():any{
-    let total=0
-    for (let i=0;i<this.listaProductos.length;i++){
-      total+=this.listaProductos[i].producto.price*this.listaProductos[i].cantidad
+  calcularTotal(): any {
+    let total = 0
+    for (let i = 0; i < this.listaProductos.length; i++) {
+      total += this.listaProductos[i].producto.price * this.listaProductos[i].cantidad
     }
     return total.toFixed(2);
   }
 
-  calcularUnidades():number{
-    let unidades=0
-    for (let i=0;i<this.listaProductos.length;i++){
-      unidades+=this.listaProductos[i].cantidad
+  calcularUnidades(): number {
+    let unidades = 0
+    for (let i = 0; i < this.listaProductos.length; i++) {
+      unidades += this.listaProductos[i].cantidad
     }
     return unidades;
   }
 
-  eliminarProducto(item:ItemCarrito){
+  irCesta() {
+    if (this.listaProductos.length) {
+      this.router.navigateByUrl("/cart")
+    }
+  }
+
+  eliminarProducto(item: ItemCarrito) {
     this.servicioCarrito.eliminarProducto(item)
-    this.listaProductos=this.servicioCarrito.getListaCarrito();
+    this.listaProductos = this.servicioCarrito.getListaCarrito();
   }
 
 }

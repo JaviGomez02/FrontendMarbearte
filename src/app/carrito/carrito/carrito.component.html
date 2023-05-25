@@ -34,7 +34,7 @@
             <p class="unidades-txt">{{calcularUnidades()}}</p>
         </div>
         <div class="boton-comprar">
-            <button [ngClass]="{'boton':true,'boton-disable':!listaProductos.length}" type="submit">Comprar</button>
+            <button [ngClass]="{'boton':true,'boton-disable':!listaProductos.length}" (click)="irCesta()">Ir a la cesta</button>
         </div>
     </div>
 
