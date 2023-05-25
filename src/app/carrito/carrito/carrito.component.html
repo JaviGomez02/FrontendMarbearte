@@ -16,7 +16,7 @@
                     <p class="unidades">Unidades: {{item.cantidad}}</p>
                     <p *ngIf="item.producto.colores.length" class="unidades">Color: {{item.producto.colores[0].color.nombre}}</p>
                     <p class="precio">{{item.producto.price}} €</p>
-                    <p class="borrar"><img (click)="eliminarProducto(item.producto.id)" class="img-borrar"
+                    <p class="borrar"><img (click)="eliminarProducto(item)" class="img-borrar"
                             src="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png">
                     </p>
                 </div>

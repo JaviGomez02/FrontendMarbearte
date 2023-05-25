@@ -32,8 +32,20 @@ export class carritoService {
         }
     }
 
-    eliminarProducto(idProducto: number) {
-        this.listaCarrito = this.getListaCarrito().filter((itemCarrito) => itemCarrito.producto.id != idProducto)
+    eliminarProducto(item: ItemCarrito) {
+        let idProducto = item.producto.id
+        let contador = 0
+        let encontrado = false
+        for (let i = 0; i < this.listaCarrito.length; i++) {
+            if ((this.listaCarrito[i].producto.id == item.producto.id) && (this.listaCarrito[i].producto.colores[0].color.nombre == item.producto.colores[0].color.nombre)) {
+                encontrado = true
+            }
+            if (!encontrado) {
+                contador++
+            }
+        }
+        this.listaCarrito.splice(contador, 1)
+        // this.listaCarrito = this.getListaCarrito().filter((itemCarrito) => (itemCarrito.producto.id != idProducto) && (itemCarrito.producto.colores[0].color.color != item.producto.colores[0].color.color))
         this.cargarCarrito()
     }
 
