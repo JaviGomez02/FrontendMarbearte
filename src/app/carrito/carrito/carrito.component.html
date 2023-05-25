@@ -19,7 +19,7 @@
                             {{item.producto.colores[0].color.nombre}}</p>
                             
                         <p class="precioud" *ngIf="item.cantidad>1">Precio por unidad: {{item.producto.price}} €</p>
-                        <p class="precio">{{item.producto.price*item.cantidad}} €</p>
+                        <p class="precio">{{(item.producto.price*item.cantidad).toFixed(2)}} €</p>
                     </div>
                     <div class="acciones">
                         <p class="borrar"><img (click)="eliminarProducto(item)" class="img-borrar"
