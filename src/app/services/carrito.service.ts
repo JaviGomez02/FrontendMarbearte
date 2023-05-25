@@ -36,16 +36,25 @@ export class carritoService {
         let idProducto = item.producto.id
         let contador = 0
         let encontrado = false
-        for (let i = 0; i < this.listaCarrito.length; i++) {
-            if ((this.listaCarrito[i].producto.id == item.producto.id) && (this.listaCarrito[i].producto.colores[0].color.nombre == item.producto.colores[0].color.nombre)) {
-                encontrado = true
-            }
-            if (!encontrado) {
-                contador++
-            }
+        let tieneColor = false;
+        if (item.producto.colores.length) {
+            tieneColor = true
         }
-        this.listaCarrito.splice(contador, 1)
-        // this.listaCarrito = this.getListaCarrito().filter((itemCarrito) => (itemCarrito.producto.id != idProducto) && (itemCarrito.producto.colores[0].color.color != item.producto.colores[0].color.color))
+        if (tieneColor) {
+            for (let i = 0; i < this.listaCarrito.length; i++) {
+                if ((this.listaCarrito[i].producto.id == item.producto.id) && (this.listaCarrito[i].producto.colores[0].color.nombre == item.producto.colores[0].color.nombre)) {
+                    encontrado = true
+                }
+                if (!encontrado) {
+                    contador++
+                }
+            }
+            this.listaCarrito.splice(contador, 1)
+        }
+        else {
+            this.listaCarrito = this.getListaCarrito().filter((itemCarrito) => itemCarrito.producto.id != idProducto)
+        }
+
         this.cargarCarrito()
     }
 
@@ -53,6 +62,10 @@ export class carritoService {
 
         let item: ItemCarrito = { producto, cantidad }
         let encontrado = false;
+        let tieneColor = false;
+        if (producto.colores.length) {
+            tieneColor = true
+        }
         if (producto.stock < cantidad) {
             Swal.fire({
                 icon: "error",
@@ -63,24 +76,38 @@ export class carritoService {
         else {
             for (let i = 0; i < this.listaCarrito.length; i++) {
                 if ((this.listaCarrito[i].producto.id == producto.id)) {
-                    if (this.listaCarrito[i].producto.colores[0].color.nombre == producto.colores[0].color.nombre) {
+                    if (tieneColor) {
+                        if (this.listaCarrito[i].producto.colores[0].color.nombre == producto.colores[0].color.nombre) {
 
+                            encontrado = true
+                            console.log("existe")
+                            if ((this.listaCarrito[i].cantidad + cantidad) > producto.stock) {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Oops",
+                                    text: "Se ha excedido el stock del artículo"
+                                })
+                            }
+                            else {
+                                this.listaCarrito[i].cantidad += cantidad
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Producto añadido al carrito!"
+                                }).then((result) => {
+                                    window.location.reload()
+                                })
+                            }
+                        }
+                    }
+                    else {
                         encontrado = true
-                        console.log("existe")
-                        if ((this.listaCarrito[i].cantidad + cantidad) > producto.stock) {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Oops",
-                                text: "Se ha excedido el stock del artículo"
-                            })
-                        }
-                        else {
-                            this.listaCarrito[i].cantidad += cantidad
-                            Swal.fire({
-                                icon: "success",
-                                title: "Producto añadido al carrito!"
-                            })
-                        }
+                        this.listaCarrito[i].cantidad += cantidad
+                        Swal.fire({
+                            icon: "success",
+                            title: "Producto añadido al carrito!"
+                        }).then((result) => {
+                            window.location.reload()
+                        })
                     }
                 }
             }
@@ -90,6 +117,8 @@ export class carritoService {
                 Swal.fire({
                     icon: "success",
                     title: "Producto añadido al carrito!"
+                }).then((result) => {
+                    window.location.reload()
                 })
             }
             this.cargarCarrito()

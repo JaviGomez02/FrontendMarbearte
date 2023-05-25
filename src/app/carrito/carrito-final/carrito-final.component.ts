@@ -1,25 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { ItemCarrito } from 'src/app/interfaces/itemCarrito.interface';
-import { Product } from 'src/app/interfaces/product.interface';
 import { carritoService } from 'src/app/services/carrito.service';
 
 @Component({
-  selector: 'app-carrito',
-  templateUrl: './carrito.component.html',
-  styleUrls: ['./carrito.component.css']
+  selector: 'app-carrito-final',
+  templateUrl: './carrito-final.component.html',
+  styleUrls: ['./carrito-final.component.css']
 })
-export class CarritoComponent implements OnInit {
+export class CarritoFinalComponent implements OnInit{
+
+  constructor(private servicioCarrito:carritoService){}
 
   listaProductos:ItemCarrito[]=this.servicioCarrito.getListaCarrito();
 
-  constructor(private cookies:CookieService, private servicioCarrito:carritoService) { }
 
   ngOnInit(): void {
-    // console.log(this.listaProductos)
-
+    
   }
 
+  
   calcularTotal():any{
     let total=0
     for (let i=0;i<this.listaProductos.length;i++){

@@ -25,12 +25,12 @@ const routes: Routes = [
   {
     path: 'products',
     loadChildren: () => import('./products/products.module').then(m => m.ProductsModule),
-    canActivate:[AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'categoria',
     loadChildren: () => import('./categorias/categorias.module').then(m => m.CategoriasModule),
-    canActivate:[RolGuard]
+    canActivate: [RolGuard]
   },
   {
     path: 'usuarios',
@@ -39,7 +39,12 @@ const routes: Routes = [
   {
     path: 'images',
     loadChildren: () => import('./imagenes/imagenes.module').then(m => m.ImagenesModule),
-    canActivate:[RolGuard]
+    canActivate: [RolGuard]
+  },
+  {
+    path: 'cart',
+    loadChildren: () => import('./carrito/carrito.module').then(m => m.CarritoModule),
+    canActivate: [AuthGuard]
   },
   {
     path: '',

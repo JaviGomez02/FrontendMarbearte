@@ -1,18 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CarritoComponent } from './carrito/carrito.component';
+import { CarritoFinalComponent } from './carrito-final/carrito-final.component';
+import { CarritoRoutingModule } from './carrito-routing.module';
 
 
 
 @NgModule({
   declarations: [
-    CarritoComponent
+    CarritoComponent,
+    CarritoFinalComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CarritoRoutingModule
   ],
   exports: [
-    CarritoComponent
+    CarritoComponent,
+    CarritoFinalComponent
   ]
 })
 export class CarritoModule { }
