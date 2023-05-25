@@ -41,6 +41,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     this.myForm.setValue({
       cantidad: 1
     })
@@ -103,9 +104,14 @@ export class ProductComponent implements OnInit {
             .subscribe({
               next: (resp) => {
                 this.producto.colores = [{ color: resp }]
-                console.log(this.producto)
                 this.carrito.añadirProducto(this.producto, this.myForm.value.cantidad)
-
+                Swal.fire({
+                  icon: "success",
+                  title: "Añadido!",
+                  text: "Producto añadido al carrito"
+                }).then((result)=>{
+                  window.location.reload()
+                })
               },
               error: (error) => {
                 Swal.fire({

@@ -50,25 +50,30 @@ export class carritoService {
         }
         else {
             for (let i = 0; i < this.listaCarrito.length; i++) {
-                if ((this.listaCarrito[i].producto.id == producto.id) && (this.listaCarrito[i].producto.colores[0].color.nombre==producto.colores[0].color.nombre)) {
-                    encontrado = true
-                    if ((this.listaCarrito[i].cantidad + cantidad) > producto.stock) {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops",
-                            text: "Se ha excedido el stock del artículo"
-                        })
-                    }
-                    else {
-                        this.listaCarrito[i].cantidad += cantidad
-                        Swal.fire({
-                            icon: "success",
-                            title: "Producto añadido al carrito!"
-                        })
+                if ((this.listaCarrito[i].producto.id == producto.id)) {
+                    if (this.listaCarrito[i].producto.colores[0].color.nombre == producto.colores[0].color.nombre) {
+
+                        encontrado = true
+                        console.log("existe")
+                        if ((this.listaCarrito[i].cantidad + cantidad) > producto.stock) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops",
+                                text: "Se ha excedido el stock del artículo"
+                            })
+                        }
+                        else {
+                            this.listaCarrito[i].cantidad += cantidad
+                            Swal.fire({
+                                icon: "success",
+                                title: "Producto añadido al carrito!"
+                            })
+                        }
                     }
                 }
             }
             if (!encontrado) {
+                console.log("no existe")
                 this.listaCarrito.push(item)
                 Swal.fire({
                     icon: "success",
