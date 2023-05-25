@@ -60,11 +60,11 @@
   border-radius: 4px;
 }
 
-.boton-disable{
+.boton-disable {
   cursor: not-allowed;
 }
 
-.unidades-txt{
+.unidades-txt {
   text-align: end;
   margin: 0;
   padding: 0;
@@ -106,17 +106,26 @@
   padding-top: 20px;
 }
 
-.texto-vacio{
+.texto-vacio {
   margin: 15px;
 }
 
-.borrar{
+.borrar {
   margin: 0;
   padding: 0;
-  padding-left: 200px;
 }
 
-.img-borrar{
+.info{
+  grid-area: 1/1/2/2;
+}
+
+.acciones{
+  grid-area: 1/2/2/3;
+  text-align: right;
+  padding-right: 5px;
+}
+
+.img-borrar {
   width: 15px;
   cursor: pointer;
 }
@@ -138,6 +147,9 @@
 
 .txt-item {
   grid-area: 1/2/2/3;
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  grid-template-rows: 1fr;
 }
 
 .nombre {
@@ -147,6 +159,15 @@
   font-size: 13px;
   color: rgb(0, 0, 0);
   font-weight: bold;
+}
+
+.precioud{
+  margin: 0;
+  padding: 0;
+  margin-bottom: 3px;
+  font-size: 13px;
+  color: rgb(76, 76, 76);
+
 }
 
 .unidades {

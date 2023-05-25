@@ -12,13 +12,20 @@
                         src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
                 </div>
                 <div class="txt-item">
-                    <p class="nombre">{{item.producto.nombre}}</p>
-                    <p class="unidades">Unidades: {{item.cantidad}}</p>
-                    <p *ngIf="item.producto.colores.length" class="unidades">Color: {{item.producto.colores[0].color.nombre}}</p>
-                    <p class="precio">{{item.producto.price}} €</p>
-                    <p class="borrar"><img (click)="eliminarProducto(item)" class="img-borrar"
-                            src="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png">
-                    </p>
+                    <div class="infor">
+                        <p class="nombre">{{item.producto.nombre}}</p>
+                        <p class="unidades">Unidades: {{item.cantidad}}</p>
+                        <p *ngIf="item.producto.colores.length" class="unidades">Color:
+                            {{item.producto.colores[0].color.nombre}}</p>
+                            
+                        <p class="precioud" *ngIf="item.cantidad>1">Precio por unidad: {{item.producto.price}} €</p>
+                        <p class="precio">{{item.producto.price*item.cantidad}} €</p>
+                    </div>
+                    <div class="acciones">
+                        <p class="borrar"><img (click)="eliminarProducto(item)" class="img-borrar"
+                                src="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png">
+                        </p>
+                    </div>
                 </div>
             </div>
         </span>
@@ -34,7 +41,8 @@
             <p class="unidades-txt">{{calcularUnidades()}}</p>
         </div>
         <div class="boton-comprar">
-            <button [ngClass]="{'boton':true,'boton-disable':!listaProductos.length}" (click)="irCesta()">Ir a la cesta</button>
+            <button [ngClass]="{'boton':true,'boton-disable':!listaProductos.length}" (click)="irCesta()">Ir a la
+                cesta</button>
         </div>
     </div>
 

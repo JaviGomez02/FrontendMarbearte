@@ -1,4 +1,4 @@
-.contenedor{
+.contenedor {
     text-align: center;
     margin-top: 50px;
     width: 100%;
@@ -6,28 +6,221 @@
     padding-left: 50px;
 }
 
-.titulo{
+.titulo {
     font-size: 20px;
     text-transform: uppercase;
     font-weight: bold;
     margin-bottom: 50px;
 }
 
-.grid-global{
+.grid-global {
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 1.7fr 1fr;
+    grid-template-columns: 2fr 1fr;
     margin-bottom: 50px;
-    gap:50px;
+    gap: 50px;
 }
 
-.lista-productos{
+.lista-productos {
     grid-area: 1/1/2/2;
-    background-color: antiquewhite;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(141, 141, 141);
+    border-radius: 6px;
+    text-align: left;
+    overflow-y: scroll;
+    height: 597px;
 }
 
-.precio-final{
-    height: 300px;
+.resumen {
+    height: 400px;
     grid-area: 1/2/2/3;
-    background-color: aqua;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(141, 141, 141);
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 6fr 1fr;
+    text-align: left;
+    gap: 10px;
+}
+
+.texto-resumen {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-size: 24px;
+    color: gray;
+}
+
+.resumen-txt {
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+    grid-area: 1/1/2/2;
+}
+
+
+.boton {
+    text-transform: uppercase;
+    grid-area: 3/1/4/3;
+    position: relative;
+    padding: 1em 20px;
+    color: white;
+    border-color: white;
+    background-color: rgb(231, 86, 86);
+    font-size: 13px;
+    transition: all .1s ease-out;
+    width: 100%;
+    border: solid;
+    border-width: 1px;
+    border-radius: 4px;
+}
+
+.boton-disable {
+    cursor: not-allowed;
+}
+
+.boton:hover {
+    background-color: rgb(205, 72, 72);
+}
+
+.resumen-total {
+    padding-right: 20px;
+    padding-left: 20px;
+    grid-area: 2/1/3/2;
+    overflow-y: scroll;
+    
+}
+
+.prueba {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.total-txt {
+    grid-area: 1/1/2/2;
+}
+
+.total-precio {
+    grid-area: 1/2/2/3;
+    text-align: right;
+}
+
+.total-final {
+    margin-top: 10px;
+    padding-top: 10px;
+    margin-bottom: 15px;
+
+    border-top: dashed;
+    border-color: rgb(174, 174, 174);
+    border-width: 2px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.texto-total {
+    margin: 0;
+    padding: 0;
+    font-size: 21px;
+}
+
+.texto-precio {
+    margin: 0;
+    padding: 0;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.resumen-boton {
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    grid-area: 3/1/4/2;
+}
+
+.producto {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 1fr;
+    gap: 10px;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: rgb(216, 216, 216);
+}
+
+
+.img-item {
+    grid-area: 1/1/2/2;
+}
+
+.txt-item {
+    grid-area: 1/2/2/3;
+    display: grid;
+    grid-template-columns: 10fr 1fr;
+    grid-template-rows: 1fr;
+}
+
+.info {
+    grid-area: 1/1/2/2;
+}
+
+.acciones {
+    grid-area: 1/2/2/3;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.nombre {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 6px;
+    font-size: 22px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.precioud {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: rgb(76, 76, 76);
+
+
+}
+
+.unidades {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    color: rgb(76, 76, 76);
+
+}
+
+.precio {
+    margin: 0;
+    padding-top: 20px;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.borrar {
+    margin: 0;
+    padding: 0;
+}
+
+.img-borrar {
+    width: 15px;
+    cursor: pointer;
 }
