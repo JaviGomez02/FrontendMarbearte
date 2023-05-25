@@ -145,7 +145,8 @@
   padding: 0;
   margin-bottom: 3px;
   font-size: 13px;
-  color: rgb(108, 108, 108);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
 }
 
 .unidades {

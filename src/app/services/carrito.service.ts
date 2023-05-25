@@ -3,6 +3,7 @@ import { Product } from "../interfaces/product.interface";
 import { CookieService } from "ngx-cookie-service";
 import { ItemCarrito } from "../interfaces/itemCarrito.interface";
 import Swal from "sweetalert2";
+import { Color } from "../interfaces/page.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -49,7 +50,7 @@ export class carritoService {
         }
         else {
             for (let i = 0; i < this.listaCarrito.length; i++) {
-                if (this.listaCarrito[i].producto.id == producto.id) {
+                if ((this.listaCarrito[i].producto.id == producto.id) && (this.listaCarrito[i].producto.colores[0].color.nombre==producto.colores[0].color.nombre)) {
                     encontrado = true
                     if ((this.listaCarrito[i].cantidad + cantidad) > producto.stock) {
                         Swal.fire({

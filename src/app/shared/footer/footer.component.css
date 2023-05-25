@@ -84,7 +84,7 @@
 }
 
 .enlace-footer {
-
+    cursor: pointer;
     text-decoration: none;
     text-transform: uppercase;
     color: #707070;

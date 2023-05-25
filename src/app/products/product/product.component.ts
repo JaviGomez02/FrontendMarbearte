@@ -91,26 +91,42 @@ export class ProductComponent implements OnInit {
 
 
   anadirAlCarrito() {
+    
     if (!this.myForm.invalid) {
-      if (this.color != "") {
-        this.servicioColor.getColorById(this.color)
-          .subscribe({
-            next: (resp) => {
-              console.log(resp)
-            },
-            error: (error) => {
-              Swal.fire({
-                icon: "error",
-                title: "Oops",
-                text: "Algo ha ido mal"
-              })
-            }
+
+      if (!this.listaColores.length) {
+        this.carrito.añadirProducto(this.producto, this.myForm.value.cantidad)
+      }
+      else {
+        if (this.color != "") {
+          this.servicioColor.getColorById(this.color)
+            .subscribe({
+              next: (resp) => {
+                this.producto.colores = [{ color: resp }]
+                console.log(this.producto)
+                this.carrito.añadirProducto(this.producto, this.myForm.value.cantidad)
+
+              },
+              error: (error) => {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops",
+                  text: "Algo ha ido mal"
+                })
+              }
+            })
+        }
+        else{
+
+          Swal.fire({
+            icon: "error",
+            title: "Oops",
+            text: "Debe seleccionar un color"
           })
+        }
       }
 
-      this.producto.colores = [];
-      this.carrito.añadirProducto(this.producto, this.myForm.value.cantidad)
-      
+
     }
 
 

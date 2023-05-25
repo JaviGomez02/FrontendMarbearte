@@ -21,7 +21,8 @@ export class colorService {
     return this.http.get<Color[]>(this.urlLocal)
   }
   getColorById(id: string): Observable<Color> {
-    return this.http.get<Color>(this.urlLocal + '/' + id)
+    let newId=id.slice(1)
+    return this.http.get<Color>(this.urlLocal + '/' + newId)
   }
 
   addColor(color: string, nombre: string): Observable<boolean> {
