@@ -138,16 +138,6 @@ export class carritoService {
         this.listaCarrito = []
     }
 
-    realizarPedido() {
-        return this.http.post<any>(this.urlLocal + '/comprar', this.listaCarrito, this.httpOptions)
-            .pipe(switchMap(resp => {
-                return of(true);
-            }), catchError(error => {
-                return of(false);
-            })
-            )
-    }
-
 
 
 }

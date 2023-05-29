@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemCarrito } from 'src/app/interfaces/itemCarrito.interface';
 import { carritoService } from 'src/app/services/carrito.service';
+import { pedidoService } from 'src/app/services/pedido.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class CarritoFinalComponent implements OnInit {
 
-  constructor(private servicioCarrito: carritoService) { }
+  constructor(private servicioCarrito: carritoService, private servicioPedido:pedidoService) { }
 
   listaProductos: ItemCarrito[] = this.servicioCarrito.getListaCarrito();
 
@@ -42,7 +43,7 @@ export class CarritoFinalComponent implements OnInit {
 
   comprar() {
     if (this.listaProductos.length) {
-      this.servicioCarrito.realizarPedido()
+      this.servicioPedido.realizarPedido()
         .subscribe({
           next: (resp) => {
             if (resp) {
@@ -50,7 +51,6 @@ export class CarritoFinalComponent implements OnInit {
                 icon: 'success',
                 title: 'Pedido realizado correctamente!'
               })
-
               this.servicioCarrito.vaciarCarrito();
               this.listaProductos = this.servicioCarrito.getListaCarrito();
             }

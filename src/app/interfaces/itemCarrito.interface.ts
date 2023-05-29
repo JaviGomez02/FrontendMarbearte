@@ -5,3 +5,8 @@ export interface ItemCarrito {
     producto:Product,
     cantidad:number
 }
+
+export interface ItemCarritoAux{
+    idArticulo:number,
+    cantidad:number
+}
