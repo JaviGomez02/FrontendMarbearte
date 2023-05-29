@@ -4,6 +4,8 @@ import { CookieService } from "ngx-cookie-service";
 import { ItemCarrito } from "../interfaces/itemCarrito.interface";
 import Swal from "sweetalert2";
 import { Color } from "../interfaces/page.interface";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { catchError, of, switchMap } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -11,13 +13,18 @@ import { Color } from "../interfaces/page.interface";
 
 export class carritoService {
 
-    constructor(private cookies: CookieService) { }
+    constructor(private cookies: CookieService, private http: HttpClient) { }
 
+    url: string = 'https://apimarbearte-production.up.railway.app'
+    urlLocal: string = 'http://localhost:8082'
     listaCarrito: ItemCarrito[] = []
 
+    httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
 
     cargarCarrito() {
-        localStorage.setItem('carrito',JSON.stringify(this.listaCarrito))
+        localStorage.setItem('carrito', JSON.stringify(this.listaCarrito))
         // this.cookies.set('carrito', JSON.stringify(this.listaCarrito))
     }
 
@@ -129,6 +136,16 @@ export class carritoService {
 
     vaciarCarrito() {
         this.listaCarrito = []
+    }
+
+    realizarPedido() {
+        return this.http.post<any>(this.urlLocal + '/comprar', this.listaCarrito, this.httpOptions)
+            .pipe(switchMap(resp => {
+                return of(true);
+            }), catchError(error => {
+                return of(false);
+            })
+            )
     }
 
 

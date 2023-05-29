@@ -50,7 +50,7 @@
                         <p class="texto-precio">{{calcularTotal()}} €</p>
                     </div>
                 </div>
-                <button [ngClass]="{'boton':true,'boton-disable':!listaProductos.length}">Comprar</button>
+                <button [ngClass]="{'boton':true,'boton-disable':!listaProductos.length}" (click)="comprar()">Comprar</button>
             </div>
         </div>
     </div>

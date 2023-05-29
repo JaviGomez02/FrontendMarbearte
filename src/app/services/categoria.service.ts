@@ -10,7 +10,7 @@ import { Categoria } from '../interfaces/categoria.interface';
 export class categoriaService {
 
   url: string = 'https://apimarbearte-production.up.railway.app/categoria'
-  urlLocal:string='http://localhost:8082/categoria'
+  urlLocal: string = 'http://localhost:8082/categoria'
 
 
   constructor(private http: HttpClient) { }

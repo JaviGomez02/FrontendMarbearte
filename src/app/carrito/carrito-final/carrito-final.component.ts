@@ -1,43 +1,78 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemCarrito } from 'src/app/interfaces/itemCarrito.interface';
 import { carritoService } from 'src/app/services/carrito.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carrito-final',
   templateUrl: './carrito-final.component.html',
   styleUrls: ['./carrito-final.component.css']
 })
-export class CarritoFinalComponent implements OnInit{
+export class CarritoFinalComponent implements OnInit {
 
-  constructor(private servicioCarrito:carritoService){}
+  constructor(private servicioCarrito: carritoService) { }
 
-  listaProductos:ItemCarrito[]=this.servicioCarrito.getListaCarrito();
+  listaProductos: ItemCarrito[] = this.servicioCarrito.getListaCarrito();
 
 
   ngOnInit(): void {
-    console.log(this.listaProductos)
   }
 
-  
-  calcularTotal():any{
-    let total=0
-    for (let i=0;i<this.listaProductos.length;i++){
-      total+=this.listaProductos[i].producto.price*this.listaProductos[i].cantidad
+
+  calcularTotal(): any {
+    let total = 0
+    for (let i = 0; i < this.listaProductos.length; i++) {
+      total += this.listaProductos[i].producto.price * this.listaProductos[i].cantidad
     }
     return total.toFixed(2);
   }
 
-  calcularUnidades():number{
-    let unidades=0
-    for (let i=0;i<this.listaProductos.length;i++){
-      unidades+=this.listaProductos[i].cantidad
+  calcularUnidades(): number {
+    let unidades = 0
+    for (let i = 0; i < this.listaProductos.length; i++) {
+      unidades += this.listaProductos[i].cantidad
     }
     return unidades;
   }
 
-  eliminarProducto(item:ItemCarrito){
+  eliminarProducto(item: ItemCarrito) {
     this.servicioCarrito.eliminarProducto(item)
-    this.listaProductos=this.servicioCarrito.getListaCarrito();
+    this.listaProductos = this.servicioCarrito.getListaCarrito();
+  }
+
+  comprar() {
+    if (this.listaProductos.length) {
+      this.servicioCarrito.realizarPedido()
+        .subscribe({
+          next: (resp) => {
+            if (resp) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Pedido realizado correctamente!'
+              })
+
+              this.servicioCarrito.vaciarCarrito();
+              this.listaProductos = this.servicioCarrito.getListaCarrito();
+            }
+            else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Algo ha ido mal'
+              })
+            }
+
+          }
+          , error: (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Algo ha ido mal'
+            })
+          }
+        })
+    }
+
   }
 
 }
