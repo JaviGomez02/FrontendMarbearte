@@ -72,10 +72,15 @@ export class carritoService {
         let item: ItemCarrito = { producto, cantidad }
         let encontrado = false;
         let tieneColor = false;
+        let cantidadSuperior = false;
+        let cantidadTotal = 0;
+        let index = -1;
+        
         if (producto.colores.length) {
             tieneColor = true
         }
         if (producto.stock < cantidad) {
+            cantidadSuperior = true;
             Swal.fire({
                 icon: "error",
                 title: "Oops",
@@ -85,53 +90,75 @@ export class carritoService {
         else {
             for (let i = 0; i < this.listaCarrito.length; i++) {
                 if ((this.listaCarrito[i].producto.id == producto.id)) {
+                    if ((this.listaCarrito[i].cantidad + cantidad) > producto.stock) {
+                        cantidadSuperior = true
+                    }
                     if (tieneColor) {
+                        cantidadTotal = cantidadTotal + this.listaCarrito[i].cantidad
                         if (this.listaCarrito[i].producto.colores[0].color.nombre == producto.colores[0].color.nombre) {
-
                             encontrado = true
-                            if ((this.listaCarrito[i].cantidad + cantidad) > producto.stock) {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Oops",
-                                    text: "Se ha excedido el stock del artículo"
-                                })
-                            }
-                            else {
-                                this.listaCarrito[i].cantidad += cantidad
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Producto añadido al carrito!"
-                                }).then((result) => {
-                                    window.location.reload()
-                                })
-                            }
+                            index = i;
                         }
                     }
                     else {
                         encontrado = true
-                        this.listaCarrito[i].cantidad += cantidad
-                        Swal.fire({
-                            icon: "success",
-                            title: "Producto añadido al carrito!"
-                        }).then((result) => {
-                            window.location.reload()
-                        })
+                        if (cantidadSuperior) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops",
+                                text: "Se ha excedido el stock del artículo"
+                            })
+                        }
+                        else {
+                            this.listaCarrito[i].cantidad += cantidad
+                            Swal.fire({
+                                icon: "success",
+                                title: "Producto añadido al carrito!"
+                            }).then((result) => {
+                                window.location.reload()
+                            })
+                        }
                     }
                 }
             }
-            if (!encontrado) {
-                this.listaCarrito.push(item)
-                Swal.fire({
-                    icon: "success",
-                    title: "Producto añadido al carrito!"
-                }).then((result) => {
-                    window.location.reload()
-                })
+            if (encontrado && tieneColor) {
+                if ((cantidadTotal + cantidad) > producto.stock) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops",
+                        text: "Se ha excedido el stock del artículo"
+                    })
+                }
+                else {
+                    this.listaCarrito[index].cantidad += cantidad
+                    Swal.fire({
+                        icon: "success",
+                        title: "Producto añadido al carrito!"
+                    }).then((result) => {
+                        window.location.reload()
+                    })
+                }
+            }
+            else if (!encontrado) {
+                if (tieneColor && ((cantidadTotal + cantidad) > producto.stock)) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops",
+                        text: "Se ha excedido el stock del artículo"
+                    })
+                }
+                else{
+                    this.listaCarrito.push(item)
+                    Swal.fire({
+                        icon: "success",
+                        title: "Producto añadido al carrito!"
+                    }).then((result) => {
+                        window.location.reload()
+                    })
+                }
             }
             this.cargarCarrito()
         }
-
-
     }
 
     vaciarCarrito() {
