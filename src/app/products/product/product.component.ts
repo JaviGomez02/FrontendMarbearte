@@ -20,19 +20,12 @@ export class ProductComponent implements OnInit {
   }
 
   producto!: Product
-
   fotoPrincipal!: Imagene
-
   listaImagenes!: Imagene[]
-
   listaColores!: Colore[]
-
   elemento!: HTMLElement | null
-
   listaDivs!: HTMLCollectionOf<HTMLElement> | null
-
   color: string = ""
-
   flag: boolean = false
 
   myForm: FormGroup = this.fb.group({
@@ -40,11 +33,10 @@ export class ProductComponent implements OnInit {
   })
 
   ngOnInit(): void {
-
-
     this.myForm.setValue({
       cantidad: 1
     })
+
 
     this.servicioProducto.getProducto(this.activatedRoute.snapshot.params['id'])
       .subscribe({
@@ -74,6 +66,9 @@ export class ProductComponent implements OnInit {
           })
         }
       })
+
+
+
   }
 
 
@@ -92,7 +87,7 @@ export class ProductComponent implements OnInit {
 
 
   anadirAlCarrito() {
-    
+
     if (!this.myForm.invalid) {
 
       if (!this.listaColores.length) {
@@ -105,7 +100,7 @@ export class ProductComponent implements OnInit {
               next: (resp) => {
                 this.producto.colores = [{ color: resp }]
                 this.carrito.añadirProducto(this.producto, this.myForm.value.cantidad)
-                
+
               },
               error: (error) => {
                 Swal.fire({
@@ -116,8 +111,7 @@ export class ProductComponent implements OnInit {
               }
             })
         }
-        else{
-
+        else {
           Swal.fire({
             icon: "error",
             title: "Oops",
@@ -125,13 +119,6 @@ export class ProductComponent implements OnInit {
           })
         }
       }
-
-
     }
-
-
-
-
-
   }
 }

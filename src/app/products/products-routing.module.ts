@@ -13,6 +13,11 @@ const routes: Routes = [
         component: AllProductsComponent
     },
     {
+        path: '',
+        redirectTo: 'all',
+        pathMatch: 'full'
+    },
+    {
         path: 'color',
         component: ColorProductoComponent
     },

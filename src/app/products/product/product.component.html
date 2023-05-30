@@ -1,4 +1,4 @@
-<div class="about-container">
+<div class="about-container" *ngIf="producto!=null">
     <div class="grid-inicial">
         <div class="foto-principal">
             <img *ngIf="fotoPrincipal" class="img-principal" src="{{fotoPrincipal.img}}">
@@ -8,7 +8,6 @@
         </div>
         <div class="nombre-descrip">
             <p class="nombre">{{producto.nombre}}</p>
-
             <p class="categoria">{{producto.categoria.nombre}}</p>
             <p class="precio">{{producto.price}} €</p>
             <p class="descripcion">{{producto.descripcion}}</p>
