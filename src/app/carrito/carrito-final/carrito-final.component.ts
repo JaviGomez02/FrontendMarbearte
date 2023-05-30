@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ItemCarrito } from 'src/app/interfaces/itemCarrito.interface';
 import { carritoService } from 'src/app/services/carrito.service';
 import { pedidoService } from 'src/app/services/pedido.service';
@@ -11,7 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class CarritoFinalComponent implements OnInit {
 
-  constructor(private servicioCarrito: carritoService, private servicioPedido:pedidoService) { }
+  constructor(private servicioCarrito: carritoService, private servicioPedido:pedidoService, private route:Router) { }
 
   listaProductos: ItemCarrito[] = this.servicioCarrito.getListaCarrito();
 
@@ -50,7 +51,10 @@ export class CarritoFinalComponent implements OnInit {
               Swal.fire({
                 icon: 'success',
                 title: 'Pedido realizado correctamente!'
+              }).then((resp) => {
+                this.route.navigateByUrl('/home')
               })
+              
               this.servicioCarrito.vaciarCarrito();
               this.listaProductos = this.servicioCarrito.getListaCarrito();
             }

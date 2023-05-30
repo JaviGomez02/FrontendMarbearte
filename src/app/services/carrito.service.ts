@@ -163,6 +163,7 @@ export class carritoService {
 
     vaciarCarrito() {
         this.listaCarrito = []
+        this.cargarCarrito()
     }
 
 
