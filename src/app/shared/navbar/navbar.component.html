@@ -58,7 +58,9 @@
                         sesión</a></li>
                 <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/register']">Crear
                         una cuenta</a></li>
-                <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="updateUsuario()">Ver mis datos</a>
+                <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="updateUsuario()">Mis datos</a>
+                </li>
+                <li *ngIf="isLoged$|async"><a class="dropdown-item drop" [routerLink]="['/pedidos']">Mis pedidos</a>
                 </li>
                 <li *ngIf="isLoged$|async">
                     <hr class="dropdown-divider">

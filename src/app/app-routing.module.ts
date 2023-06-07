@@ -47,6 +47,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'pedidos',
+    loadChildren: () => import('./pedidos/pedidos.module').then(m => m.PedidosModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
