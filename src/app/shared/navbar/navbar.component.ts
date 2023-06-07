@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { categoriaService } from 'src/app/services/categoria.service';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -21,13 +22,13 @@ export class NavbarComponent implements OnInit {
 
   isLoged$!: Observable<boolean>
 
-  carrito:boolean=false
+  carrito: boolean = false
 
   listaCategorias: Categoria[] = []
 
   token!: string
 
-  claseCarrito:string=''
+  claseCarrito: string = ''
 
   usuario: string = ""
 
@@ -45,11 +46,12 @@ export class NavbarComponent implements OnInit {
     this.token = this.cookieService.get('token')
     if (this.token) {
       this.usuario = this.authService.decodeJwt(this.token).sub
-      
+
     }
   }
 
   logout() {
+    this.cerrarCarrito()
     this.authService.logout()
     this.route.navigateByUrl('/')
   }
@@ -63,21 +65,37 @@ export class NavbarComponent implements OnInit {
     this.route.navigateByUrl('usuarios/update/' + this.usuario)
   }
 
-  mostrarCarrito(){
-    this.carrito=true
-    
-    document.querySelector('.overlay')?.classList.remove("overlayCerrado")
-    document.querySelector('.overlay')?.classList.add("overlayAbierto")
-    this.claseCarrito='abierto'
+  mostrarCarrito() {
+    this.isLoged$
+      .subscribe({
+        next: (resp) => {
+          if (resp) {
+            this.carrito = true
+            document.querySelector('.overlay')?.classList.remove("overlayCerrado")
+            document.querySelector('.overlay')?.classList.add("overlayAbierto")
+            this.claseCarrito = 'abierto'
+          }
+          else{
+            Swal.fire({
+              icon: "info",
+              title: "Inicie sesión",
+              text: "Necesita iniciar sesión para acceder al carrito",
+              timer: 2000
+            }).then((resp)=>{
+              this.route.navigateByUrl("account/login")
+            })
+          }
+        }
+      })
+
   }
 
-  cerrarCarrito(){
-    this.carrito=true
+  cerrarCarrito() {
     document.querySelector('.overlay')?.classList.remove("overlayAbierto")
     document.querySelector('.overlay')?.classList.add("overlayCerrado")
     this.claseCarrito = 'cerrado';
-      this.carrito = false;
+    this.carrito = false;
   }
-  
+
 
 }
