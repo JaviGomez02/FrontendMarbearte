@@ -19,6 +19,7 @@ export class pedidoService {
     url: string = 'https://apimarbearte-production.up.railway.app'
     urlLocal: string = 'http://localhost:8082'
     listaCarritoAux: ItemCarritoAux[] = []
+    listaCarritoFinal: ItemCarritoAux[] = []
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -27,11 +28,24 @@ export class pedidoService {
 
     realizarPedido() {
         let listaCarrito = this.servicioCarrito.getListaCarrito()
-
+        let encontrado
         for (let i = 0; i < listaCarrito.length; i++) {
-            this.listaCarritoAux.push({ "idArticulo": listaCarrito[i].producto.id,
-                                         "cantidad": listaCarrito[i].cantidad })
+            encontrado=false
+            for (let j = 0; j < this.listaCarritoAux.length; j++) {
+                if (this.listaCarritoAux[j].idArticulo == listaCarrito[i].producto.id) {
+                    encontrado = true
+                    this.listaCarritoAux[j].cantidad += listaCarrito[i].cantidad
+                }
+            }
+            if (encontrado == false) {
+                this.listaCarritoAux.push({
+                    "idArticulo": listaCarrito[i].producto.id,
+                    "cantidad": listaCarrito[i].cantidad
+                })
+            }
         }
+
+        console.log(this.listaCarritoAux)
 
         return this.http.post<any>(this.urlLocal + '/comprar', this.listaCarritoAux, this.httpOptions)
             .pipe(switchMap(resp => {
