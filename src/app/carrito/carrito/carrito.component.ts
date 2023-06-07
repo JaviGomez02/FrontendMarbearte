@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ItemCarrito } from 'src/app/interfaces/itemCarrito.interface';
 import { Product } from 'src/app/interfaces/product.interface';
 import { carritoService } from 'src/app/services/carrito.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carrito',
@@ -40,6 +41,13 @@ export class CarritoComponent implements OnInit {
   irCesta() {
     if (this.listaProductos.length) {
       this.router.navigateByUrl("/cart")
+    }
+    else{
+      Swal.fire({
+        icon: 'error',
+        title: 'No hay productos',
+        text: 'Añada algún producto al carrito para ir a la cesta'
+      })
     }
   }
 

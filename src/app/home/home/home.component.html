@@ -23,6 +23,28 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+<div class="productos-home-1" *ngIf="masVendidos.length">
+  <p class="titulo-productos">Los más vendidos</p>
+  <div class="grid-productos-home">
+    <div class="producto" *ngFor="let producto of masVendidos" [routerLink]="['/products', producto.id]">
+      <img class="img-producto" *ngIf="producto.imagenes[0]" src="{{producto.imagenes[0].img}}" alt="img-producto">
+      <img class="img-producto" *ngIf="!producto.imagenes[0]"
+        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg" alt="img-producto">
+      <p class="nombre-producto">{{producto.nombre}} <span class="precio-producto">| {{producto.price}}€</span></p>
+      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
+    </div>
+  </div>
+</div>
+
+
+<div class="categorias-producto" *ngIf="listaCategorias.length>=3">
+  <div class="categoria" *ngFor="let categoria of listaCategorias" (click)="verProductos(categoria.id)">
+    <img *ngIf="categoria.imagenes[0]" class="img-categoria" alt="img-categoria" src="{{categoria.imagenes[0].img}}">
+    <img *ngIf="!categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
+      src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309837/ejemplo_tfljhw.jpg">
+    <p class="texto-categoria">{{categoria.nombre}}</p>
+  </div>
+</div>
 
 <div class="productos-home-1" *ngIf="nuevosProductos.length">
   <p class="titulo-productos">Nuevos productos</p>
@@ -35,27 +57,5 @@
       <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
     </div>
 
-  </div>
-</div>
-
-<div class="categorias-producto" *ngIf="listaCategorias.length>=3">
-  <div class="categoria" *ngFor="let categoria of listaCategorias" (click)="verProductos(categoria.id)">
-    <img *ngIf="categoria.imagenes[0]" class="img-categoria" alt="img-categoria" src="{{categoria.imagenes[0].img}}">
-    <img *ngIf="!categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
-      src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309837/ejemplo_tfljhw.jpg">
-    <p class="texto-categoria">{{categoria.nombre}}</p>
-  </div>
-</div>
-
-<div class="productos-home-1" *ngIf="masVendidos.length">
-  <p class="titulo-productos">Los más vendidos</p>
-  <div class="grid-productos-home">
-    <div class="producto" *ngFor="let producto of masVendidos" [routerLink]="['/products', producto.id]">
-      <img class="img-producto" *ngIf="producto.imagenes[0]" src="{{producto.imagenes[0].img}}" alt="img-producto">
-      <img class="img-producto" *ngIf="!producto.imagenes[0]"
-        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg" alt="img-producto">
-      <p class="nombre-producto">{{producto.nombre}} <span class="precio-producto">| {{producto.price}}€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
-    </div>
   </div>
 </div>
