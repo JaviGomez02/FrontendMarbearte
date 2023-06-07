@@ -27,6 +27,7 @@ export class ProductComponent implements OnInit {
   listaDivs!: HTMLCollectionOf<HTMLElement> | null
   color: string = ""
   flag: boolean = false
+  tieneStock:boolean=true
 
   myForm: FormGroup = this.fb.group({
     cantidad: ['', [Validators.required, Validators.min(1), Validators.max(99)]]
@@ -47,6 +48,9 @@ export class ProductComponent implements OnInit {
             this.listaImagenes = resp.imagenes
             this.listaImagenes.shift()
             this.listaColores = resp.colores
+            if(resp.stock<=0){
+              this.tieneStock=false
+            }
           }
           else {
             this.route.navigateByUrl('/')

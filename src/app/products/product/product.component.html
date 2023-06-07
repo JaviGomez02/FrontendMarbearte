@@ -20,13 +20,14 @@
                 </div>
             </div>
             <div class="añadir">
-                <form (ngSubmit)="anadirAlCarrito()" [formGroup]="myForm" autocomplete="off">
+                <form (ngSubmit)="anadirAlCarrito()" [formGroup]="myForm" autocomplete="off" *ngIf="tieneStock">
                     <p>Cantidad: <input type="number" min="1" max="99" formControlName="cantidad" style="width: 50px;">
                     </p>
-                    <button type="submit" class="boton" [disabled]="myForm.invalid" id="boton"
+                    <button type="submit" class="boton" [disabled]="myForm.invalid" id="boton" 
                     [className]="myForm.invalid ? 'boton-disable': 'boton'">Añadir al carrito</button>
                 </form>
-
+                <p class="noStock" *ngIf="!tieneStock">Lo sentimos, pero actualmente el producto se encuentra sin stock. Disculpen las molestias.</p>
+                <p class="ultimasUds" *ngIf="producto.stock>0 && producto.stock<=10">Dese prisa! Últimas {{producto.stock}} unidades disponibles</p>
             </div>
         </div>
 

@@ -18,6 +18,16 @@ export class CarritoFinalComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if(!this.listaProductos.length){
+      Swal.fire({
+        icon:'info',
+        title:'La cesta se encuentra vacía',
+        text: 'Redirigiendo a home...',
+        timer: 1500
+      }).then((resp)=>{         
+        this.route.navigate(["/"])
+      })
+    }
   }
 
 
@@ -52,7 +62,7 @@ export class CarritoFinalComponent implements OnInit {
                 icon: 'success',
                 title: 'Pedido realizado correctamente!'
               }).then((resp) => {
-                this.route.navigateByUrl('/home')
+                window.location.reload()
               })
               
               this.servicioCarrito.vaciarCarrito();

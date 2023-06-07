@@ -42,6 +42,18 @@
     background-color: rgb(205, 72, 72);
 }
 
+.ultimasUds{
+    color: rgb(148, 24, 24);
+    padding-top: 10px;
+    font-size: 13px;
+}
+
+.noStock{
+    color: gray;
+    padding-top: 20px;
+    
+}
+
 .boton-disable{
     cursor: not-allowed;
     text-transform: uppercase;

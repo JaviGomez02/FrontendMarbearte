@@ -164,6 +164,7 @@ export class carritoService {
     vaciarCarrito() {
         this.listaCarrito = []
         this.cargarCarrito()
+        // window.location.reload()
     }
 
 
