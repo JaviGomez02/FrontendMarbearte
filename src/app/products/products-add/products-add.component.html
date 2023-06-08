@@ -7,21 +7,21 @@
                 <p class="nombre-campo">Nombre</p>
                 <input type="text" class="input-nombre" placeholder="Nombre del producto" formControlName="nombre">
                 <p class="form-text text-danger" *ngIf="isValidField('nombre')">
-                    El nombre debe tener 3 caracteres como mínimo
+                    El nombre debe tener 3 caracteres como mínimo y 40 carácteres como máximo
                 </p>
             </div>
             <div class="elemento-form">
                 <p class="nombre-campo">Precio</p>
                 <input type="number" class="input-nombre" placeholder="Precio del producto" formControlName="price">
                 <p class="form-text text-danger" *ngIf="isValidField('price')">
-                    El precio no puede ser inferior a 0
+                    El precio no puede ser inferior a 0 ni ser mayor a 5 cifras
                 </p>
             </div>
             <div class="elemento-form">
                 <p class="nombre-campo">Stock</p>
                 <input type="number" class="input-nombre" placeholder="Stock del producto" formControlName="stock">
                 <p class="form-text text-danger" *ngIf="isValidField('stock')">
-                    El stock no puede ser inferior a 0
+                    El stock no puede ser inferior a 0 ni ser mayor a 9 cifras
                 </p>
             </div>
 

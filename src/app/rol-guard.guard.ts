@@ -19,7 +19,7 @@ export class RolGuard implements CanActivate, CanActivateChild {
       this.router.navigateByUrl('account/login')
       Swal.fire({
         icon: 'error',
-        title: 'No tiene permiso',
+        title: 'Permiso denegado',
         text: 'No tiene permiso para acceder a esa ruta'
       })
       return false

@@ -101,6 +101,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
   }
 
+
   previousPageNumber() {
     if (this.pageNumber > 1) {
       this.pageNumber = this.pageNumber - 1

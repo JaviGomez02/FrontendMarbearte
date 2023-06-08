@@ -16,7 +16,7 @@ export class UpdateCategoriaComponent implements OnInit {
   id: number = 0
 
   myForm: FormGroup = this.fb.group({
-    nombre: ['', [Validators.required, Validators.minLength(3)]],
+    nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     descripcion: [null, [Validators.required, Validators.minLength(10)]]
   })
 

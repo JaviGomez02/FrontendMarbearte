@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
       Swal.fire({
         icon: 'error',
         title: 'No esta logueado',
-        text: 'Necesita loguearse para acceder a los productos'
+        text: 'Necesita loguearse para acceder a esta página'
       })
       return false
     }

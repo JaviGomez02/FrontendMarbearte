@@ -22,10 +22,10 @@ export class ProductsEditComponent implements OnInit {
   listaCategorias: Categoria[] = []
 
   myForm: FormGroup = this.fb.group({
-    nombre: ['', [Validators.required, Validators.minLength(3)]],
+    nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
     descripcion: [null, [Validators.required, Validators.minLength(10)]],
-    price: ['', [Validators.required, Validators.min(0), Validators.max(999)]],
-    stock: ['', [Validators.required, Validators.min(0)]],
+    price: ['', [Validators.required, Validators.min(0), Validators.max(99999)]],
+    stock: ['', [Validators.required, Validators.min(0), Validators.max(999999999)]],
     opcionCategoria: ['', [Validators.required]]
   })
 

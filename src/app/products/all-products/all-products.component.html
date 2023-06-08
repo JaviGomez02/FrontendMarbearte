@@ -6,7 +6,8 @@
       <img class="img-producto" *ngIf="item.imagenes[0]" src="{{item.imagenes[0].img}}">
       <img class="img-producto" *ngIf="!item.imagenes[0]"
         src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg" alt="img-producto">
-      <p class="nombre-producto">{{item.nombre}} <span class="precio-producto">| {{item.price}}€</span></p>
+      <p class="nombre-producto" *ngIf="item.nombre.length<20">{{item.nombre}} <span class="precio-producto">| {{item.price}}€</span></p>
+      <p class="nombre-producto" *ngIf="item.nombre.length>=20">Producto <span class="precio-producto">| {{item.price}}€</span></p>
       <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
     </div>
   </div>

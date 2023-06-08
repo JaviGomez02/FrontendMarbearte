@@ -15,7 +15,7 @@ export class AddCategoriaComponent {
   constructor(private fb: FormBuilder, private categoriaService: categoriaService, private route: Router) { }
 
   myForm: FormGroup = this.fb.group({
-    nombre: ['', [Validators.required, Validators.minLength(3)]],
+    nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     descripcion: [null, [Validators.required, Validators.minLength(10)]]
   })
 
