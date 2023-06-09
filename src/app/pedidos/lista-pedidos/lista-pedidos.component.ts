@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { authService } from 'src/app/auth/auth.service';
 import { Pedido, Usuario } from 'src/app/interfaces/usuario.interface';
+import { pedidoService } from 'src/app/services/pedido.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -18,7 +19,7 @@ export class ListaPedidosComponent implements OnInit {
   listaPedidos: Pedido[] = []
   meses: string[] = ["Enero", 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
-  constructor(private cookieService: CookieService, private authService: authService, private servicioUsuario: UsuarioService, private route: Router) { }
+  constructor(private cookieService: CookieService, private servicioPedido: pedidoService, private authService: authService, private servicioUsuario: UsuarioService, private route: Router) { }
 
   ngOnInit(): void {
     this.token = this.cookieService.get('token')
@@ -63,12 +64,23 @@ export class ListaPedidosComponent implements OnInit {
     return cadena
   }
 
-  iniciarIncidencia() {
+  convertirArray(valor: unknown): string[] {
+    if (Array.isArray(valor)) {
+      return valor as string[];
+    }
+    // En caso de que el valor no sea un array, puedes manejar el error o devolver un valor por defecto.
+    throw new Error('El valor proporcionado no es un array.');
+  }
+
+  iniciarIncidencia(idPedido: number) {
     Swal.fire({
       title: 'Reportar un problema',
       html:
         '<select id="motivo" class="swal2-input" style="width:400px;">' +
         '<option value="" disabled selected hidden>Selecciona un motivo</option>' +
+        '<option value="defectuoso">El pedido ha llegado defectuoso</option>' +
+        '<option value="llegada">El pedido no ha llegado</option>' +
+        '<option value="falso">El paquete recibido no concuerda con el pedido</option>' +
         '<option value="otros">Otros</option>' +
         '</select>' +
         '<textarea id="comentario" placeholder="Introduce tu comentario" style="width:400px;" class="swal2-textarea"></textarea>',
@@ -89,14 +101,45 @@ export class ListaPedidosComponent implements OnInit {
 
     }).then((result) => {
       if (result.isConfirmed) {
-       
-        
-        Swal.fire({
-          title: 'si',
-        })
+        let array = this.convertirArray(result.value)
+
+        if ((array[0] == null || array[0] == '') || (array[1] == null || array[1] == '')) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Incidencia no reportada',
+            text: 'Debes completar los dos campos'
+          })
+        }
+        else {
+          this.servicioPedido.reportarIncidencia(this.usuario.username, idPedido, array[0], array[1])
+            .subscribe({
+              next: (resp) => {
+                if (resp) {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Incidencia reportada correctamente',
+                    text: 'La incidencia se ha reportado de forma correcta. Le contestaremos lo antes posible por via email.'
+                  })
+                }
+                else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops',
+                    text: 'Ocurrio un error inesperado.'
+                  })
+                }
+              },
+              error: (error) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops',
+                  text: 'Ocurrio un error inesperado.'
+                })
+              }
+            })
+
+        }
       }
-
-
     })
   }
 

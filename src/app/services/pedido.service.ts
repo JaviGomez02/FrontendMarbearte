@@ -26,6 +26,11 @@ export class pedidoService {
     };
 
 
+    reportarIncidencia(username:string, idPedido:number, comentario:string, motivo:string){
+        return this.http.get<any>(this.urlLocal+"/pedido/incidencia/"+idPedido+"?motivo="+motivo+"&comentario="+comentario+"&username="+username)
+    }
+
+
     realizarPedido() {
         let listaCarrito = this.servicioCarrito.getListaCarrito()
         let encontrado
