@@ -1,6 +1,5 @@
-<div class="container-grid">
+<div class="container-grid" *ngIf="listaPedidos.length">
     <p class="titulo">Mis pedidos</p>
-
     <div class="pedido" *ngFor="let pedido of listaPedidos; let i=index">
         <div class="info-pedido">
             <div class="info-fecha">
@@ -13,7 +12,7 @@
             </div>
             <div class="info-numero">
                 <p class="titulo-info">PEDIDO NUMERO {{pedido.id}}</p>
-                <a class="enlace-pedido" href="#">Problemas con tu pedido?</a>
+                <a class="enlace-pedido" (click)="iniciarIncidencia()">Problemas con tu pedido?</a>
             </div>
         </div>
         <div class="lista-pedido">
@@ -31,8 +30,8 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-
+</div>
+<div *ngIf="!listaPedidos.length" class="container-vacio">
+    <p class="titulo">No existen pedidos</p>
 </div>

@@ -11,56 +11,93 @@ import Swal from 'sweetalert2';
   templateUrl: './lista-pedidos.component.html',
   styleUrls: ['./lista-pedidos.component.css']
 })
-export class ListaPedidosComponent implements OnInit{
+export class ListaPedidosComponent implements OnInit {
 
-  token!:string
-  usuario!:Usuario
-  listaPedidos:Pedido[]=[]
-  meses:string[]=["Enero", 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+  token!: string
+  usuario!: Usuario
+  listaPedidos: Pedido[] = []
+  meses: string[] = ["Enero", 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
-  constructor(private cookieService:CookieService, private authService:authService, private servicioUsuario:UsuarioService, private route:Router){}
+  constructor(private cookieService: CookieService, private authService: authService, private servicioUsuario: UsuarioService, private route: Router) { }
 
   ngOnInit(): void {
     this.token = this.cookieService.get('token')
     if (this.token) {
       this.servicioUsuario.getUsuarioByUsername(this.authService.decodeJwt(this.token).sub)
-      .subscribe({
-        next: (resp)=>{
-          this.usuario=resp
-          this.listaPedidos=resp.pedidos
-        },
-        error: (error)=>{
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops',
-            text: 'Ocurrió un error inesperado, volviendo al home...',
-            timer: 2000
-          }).then((result)=>{
-            this.route.navigateByUrl('/')
-          })
-        }
-      })
+        .subscribe({
+          next: (resp) => {
+            this.usuario = resp
+            this.listaPedidos = resp.pedidos
+          },
+          error: (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops',
+              text: 'Ocurrió un error inesperado, volviendo al home...',
+              timer: 2000
+            }).then((result) => {
+              this.route.navigateByUrl('/')
+            })
+          }
+        })
     }
   }
 
-  devolverListaCompras(index:number){
+  devolverListaCompras(index: number) {
     return this.listaPedidos[index].compras
   }
 
-  calcularTotalPedido(index:number){
-    let total=0
-    let lista=this.devolverListaCompras(index)
-    for(let i=0;i<lista.length;i++){
-      total+=lista[i].price
+  calcularTotalPedido(index: number) {
+    let total = 0
+    let lista = this.devolverListaCompras(index)
+    for (let i = 0; i < lista.length; i++) {
+      total += lista[i].price
     }
     return total
   }
 
-  devolverFechaPedido(index:number){
+  devolverFechaPedido(index: number) {
     let fecha = new Date(this.listaPedidos[index].fecha)
-    let mes=this.meses[fecha.getMonth()]
-    let cadena= fecha.getDate() + ' de '+ mes + ' de ' +fecha.getFullYear()
+    let mes = this.meses[fecha.getMonth()]
+    let cadena = fecha.getDate() + ' de ' + mes + ' de ' + fecha.getFullYear()
     return cadena
+  }
+
+  iniciarIncidencia() {
+    Swal.fire({
+      title: 'Reportar un problema',
+      html:
+        '<select id="motivo" class="swal2-input" style="width:400px;">' +
+        '<option value="" disabled selected hidden>Selecciona un motivo</option>' +
+        '<option value="otros">Otros</option>' +
+        '</select>' +
+        '<textarea id="comentario" placeholder="Introduce tu comentario" style="width:400px;" class="swal2-textarea"></textarea>',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      focusConfirm: false,
+      width: 600,
+      position: 'bottom',
+      preConfirm: function () {
+        return new Promise(function (resolve) {
+          resolve([
+            $('#motivo').val(),
+            $('#comentario').val()
+          ])
+        })
+      },
+      showLoaderOnConfirm: true,
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+       
+        
+        Swal.fire({
+          title: 'si',
+        })
+      }
+
+
+    })
   }
 
 }
