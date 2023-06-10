@@ -5,6 +5,7 @@ import { authService } from 'src/app/auth/auth.service';
 import { Direccion } from 'src/app/interfaces/direccion.interface';
 import { ItemCarrito } from 'src/app/interfaces/itemCarrito.interface';
 import { carritoService } from 'src/app/services/carrito.service';
+import { direccionService } from 'src/app/services/direccion.service';
 import { pedidoService } from 'src/app/services/pedido.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
@@ -16,7 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class CarritoFinalComponent implements OnInit {
 
-  constructor(private servicioCarrito: carritoService, private servicioPedido: pedidoService, private authService: authService, private cookieService: CookieService, private route: Router, private servicioUsuario: UsuarioService) { }
+  constructor(private servicioCarrito: carritoService, private servicioPedido: pedidoService, private authService: authService, private cookieService: CookieService, private route: Router, private servicioUsuario: UsuarioService, private servicioDireccion: direccionService) { }
 
   listaProductos: ItemCarrito[] = this.servicioCarrito.getListaCarrito();
 
@@ -37,6 +38,10 @@ export class CarritoFinalComponent implements OnInit {
     //     this.route.navigate(["/"])
     //   })
     // }
+    this.obtenerDirecciones()
+  }
+
+  obtenerDirecciones() {
     this.token = this.cookieService.get('token')
     if (this.token) {
       this.servicioUsuario.getUsuarioByUsername(this.authService.decodeJwt(this.token).sub)
@@ -82,6 +87,129 @@ export class CarritoFinalComponent implements OnInit {
   eliminarProducto(item: ItemCarrito) {
     this.servicioCarrito.eliminarProducto(item)
     this.listaProductos = this.servicioCarrito.getListaCarrito();
+  }
+
+  convertirArray(valor: unknown): string[] {
+    if (Array.isArray(valor)) {
+      return valor as string[];
+    }
+    // En caso de que el valor no sea un array, puedes manejar el error o devolver un valor por defecto.
+    throw new Error('El valor proporcionado no es un array.');
+  }
+
+  addDireccion() {
+    Swal.fire({
+      title: 'Añadir una direccion',
+      html:
+        '<input type="text" id="ciudad" style="margin-bottom:20px;height:40px;" placeholder="Ciudad">&nbsp;&nbsp;&nbsp;' +
+        '<input type="text" id="localidad" style="height:40px;" placeholder="Localidad">' +
+        '<input type="text" id="direccion" style="height:40px;" placeholder="Calle y número">&nbsp;&nbsp;&nbsp;' +
+        '<input type="text" id="codigoPostal" style="height:40px;" placeholder="Código postal">',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      focusConfirm: false,
+      width: 600,
+      position: 'center',
+      preConfirm: function () {
+        return new Promise(function (resolve) {
+          resolve([
+            $('#ciudad').val(),
+            $('#localidad').val(),
+            $('#direccion').val(),
+            $('#codigoPostal').val()
+          ])
+        })
+      },
+      showLoaderOnConfirm: true,
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let array = this.convertirArray(result.value)
+        let codigoPostal = array[3]
+        let ciudad = array[0]
+        let localidad = array[1]
+        let direccion = array[2]
+        if (codigoPostal == '' || ciudad == '' || localidad == '' || direccion == '') {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Direccion no añadida',
+            text: 'Debes completar todos los campos'
+          })
+        }
+        else {
+          this.servicioDireccion.addDireccion(codigoPostal, ciudad, localidad, direccion)
+            .subscribe({
+              next: (resp) => {
+                if (resp) {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Direccion añadida correctamente'
+                  }).then((result) => {
+                    this.obtenerDirecciones()
+                  })
+                }
+                else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops',
+                    text: 'Ocurrio un error inesperado.'
+                  })
+                }
+              },
+              error: (error) => {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops',
+                  text: 'Ocurrio un error inesperado.'
+                })
+              }
+            })
+
+        }
+      }
+    })
+  }
+
+  borrarDireccion(id: number) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Esta seguro de que desea borrar la direccion?',
+      showCancelButton: true,
+      confirmButtonText: 'Borrar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.servicioDireccion.deleteDireccion(id)
+          .subscribe({
+            next: (resp) => {
+              if (resp) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Borrado correctamente'
+                }).then((result) => {
+                  this.obtenerDirecciones()
+                })
+              }
+              else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops',
+                  text: 'Ocurrió un error inesperado'
+                })
+              }
+            },
+            error: (error) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops',
+                text: 'Ocurrió un error inesperado'
+              })
+            }
+          })
+      }
+    })
+
   }
 
   comprar() {

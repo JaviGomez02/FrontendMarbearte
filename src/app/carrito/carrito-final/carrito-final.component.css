@@ -41,7 +41,7 @@
 }
 
 .lista-direcciones-container {
-    height: 300px;
+    height: 310px;
     grid-area: 1/2/2/3;
     border: solid;
     border-width: 1px;
@@ -78,7 +78,7 @@
 .lista-direcciones{
     grid-area: 2/1/3/3;
     margin-bottom: 20px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .direccion-row{
@@ -176,7 +176,7 @@
     padding-right: 20px;
     padding-left: 20px;
     grid-area: 2/1/3/2;
-    overflow-y: scroll;
+    overflow-y: auto;
     
 }
 

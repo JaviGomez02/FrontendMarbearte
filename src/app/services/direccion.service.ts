@@ -5,14 +5,14 @@ import { ItemCarrito, ItemCarritoAux } from "../interfaces/itemCarrito.interface
 import Swal from "sweetalert2";
 import { Color } from "../interfaces/page.interface";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { catchError, of, switchMap } from "rxjs";
+import { Observable, catchError, of, switchMap } from "rxjs";
 import { carritoService } from "./carrito.service";
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class pedidoService {
+export class direccionService {
 
     constructor(private cookies: CookieService, private http: HttpClient, private servicioCarrito: carritoService) { }
 
@@ -32,6 +32,16 @@ export class pedidoService {
             "localidad": localidad,
             "direccion": direccion
         })
+            .pipe(switchMap(resp => {
+                return of(true);
+            }), catchError(error => {
+                return of(false);
+            })
+            )
+    }
+
+    deleteDireccion(id: number): Observable<boolean> {
+        return this.http.delete<any>(this.urlLocal + '/' + id)
             .pipe(switchMap(resp => {
                 return of(true);
             }), catchError(error => {

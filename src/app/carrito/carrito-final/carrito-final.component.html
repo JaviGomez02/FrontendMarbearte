@@ -32,7 +32,7 @@
                 <p class="texto-resumen">Direccion</p>
             </div>
             <div class="direccion-add">
-                <button mat-mini-fab color="primary">
+                <button mat-mini-fab color="primary" (click)="addDireccion()">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>
@@ -47,7 +47,7 @@
                             {{item.localidad}}, {{item.codigoPostal}}. {{item.ciudad}}</p>
                     </div>
                     <div class="container-eliminar">
-                        <button mat-icon-button color="warn" aria-label="Example icon button with a home icon">
+                        <button mat-icon-button color="warn" aria-label="Example icon button with a home icon" (click)="borrarDireccion(item.id)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
