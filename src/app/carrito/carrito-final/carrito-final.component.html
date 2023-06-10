@@ -37,10 +37,10 @@
                 </button>
             </div>
             <div class="lista-direcciones">
-                <div class="direccion-row" *ngFor="let item of listaDirecciones">
+                <div class="direccion-row" *ngFor="let item of listaDirecciones;let i=index" [ngClass]="{'borde-aux':i==0}">
                     <div class="container-select">
-                        <mat-checkbox color="primary">
-                        </mat-checkbox>
+                        <mat-radio-button color="primary" value="{{item.id}}" (click)="seleccionarDireccion(item.id)">
+                        </mat-radio-button>
                     </div>
                     <div class="container-direccion-txt">
                         <p Class="direccion-txt">{{item.direccion}}<br>

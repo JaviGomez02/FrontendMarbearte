@@ -22,6 +22,8 @@ export class CarritoFinalComponent implements OnInit {
 
   listaDirecciones!: Direccion[]
 
+  idDireccion: number = 0
+
   token!: string
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class CarritoFinalComponent implements OnInit {
       this.servicioUsuario.getUsuarioByUsername(this.authService.decodeJwt(this.token).sub)
         .subscribe({
           next: (resp) => {
-            this.listaDirecciones=resp.direcciones
+            this.listaDirecciones = resp.direcciones
           },
           error: (error) => {
             Swal.fire({
@@ -54,8 +56,10 @@ export class CarritoFinalComponent implements OnInit {
           }
         })
     }
+  }
 
-
+  seleccionarDireccion(id: number) {
+    this.idDireccion = id
   }
 
 
@@ -81,38 +85,47 @@ export class CarritoFinalComponent implements OnInit {
   }
 
   comprar() {
-    if (this.listaProductos.length) {
-      this.servicioPedido.realizarPedido()
-        .subscribe({
-          next: (resp) => {
-            if (resp) {
-              Swal.fire({
-                icon: 'success',
-                title: 'Pedido realizado correctamente!'
-              }).then((resp) => {
-                window.location.reload()
-              })
 
-              this.servicioCarrito.vaciarCarrito();
-              this.listaProductos = this.servicioCarrito.getListaCarrito();
+    if (this.idDireccion == 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Selecciona una direccion',
+        text: 'Debe seleccionar una direccion para realizar su compra.'
+      })
+    }
+    else {
+      if (this.listaProductos.length) {
+        this.servicioPedido.realizarPedido()
+          .subscribe({
+            next: (resp) => {
+              if (resp) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Pedido realizado correctamente!'
+                }).then((resp) => {
+                  window.location.reload()
+                })
+
+                this.servicioCarrito.vaciarCarrito();
+                this.listaProductos = this.servicioCarrito.getListaCarrito();
+              }
+              else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Algo ha ido mal'
+                })
+              }
             }
-            else {
+            , error: (error) => {
               Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Algo ha ido mal'
               })
             }
-
-          }
-          , error: (error) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Algo ha ido mal'
-            })
-          }
-        })
+          })
+      }
     }
 
   }
