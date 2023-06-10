@@ -1,74 +1,79 @@
-<div class="overlay" (click)="cerrarCarrito()"></div>
-<div class="preNavBar">Se vienen cositas</div>
-<div class="miNavbar sticky-top">
-    <app-carrito class="carrito" [ngClass]="claseCarrito"></app-carrito>
-    <img src="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png" class="cerrarCarrito"
-        *ngIf="carrito" (click)="cerrarCarrito()">
-    <div class="divLeft" (click)="cerrarCarrito()">
-        <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309884/logo-sin-letras_vuof01.png" alt="logo"
-            class="logo">
-    </div>
-    <div class="divMiddle" (click)="cerrarCarrito()">
-        <ul class="ul">
-            <li class="li"><a class="enlace-navbar" [routerLink]="['/home']" routerLinkActive="activo"
-                    [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
-            <li class="li">
-                <a class="enlace-navbar" [routerLink]="['/products/all']" routerLinkActive="activo">Productos</a>
-                <div class="menu-productos" *ngIf="listaCategorias.length && !(isAdmin$|async)">
-                    <a class="enlace-div" *ngFor="let categoria of listaCategorias"
-                        (click)="verProductos(categoria.id)">
-                        <div class="menu-productos-categoria-1">
-                            <div class="categoria-imagen">
-                                <img *ngIf="categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
-                                    src="{{categoria.imagenes[0].img}}">
-                                <img *ngIf="!categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
-                                    src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309837/ejemplo_tfljhw.jpg">
+<nav>
+    <div class="overlay" (click)="cerrarCarrito()"></div>
+    <div class="preNavBar">Se vienen cositas</div>
+    <div class="miNavbar sticky-top">
+        <app-carrito class="carrito" [ngClass]="claseCarrito"></app-carrito>
+        <img src="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png"
+            class="cerrarCarrito" *ngIf="carrito" (click)="cerrarCarrito()">
+        <div class="divLeft" (click)="cerrarCarrito()">
+            <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309884/logo-sin-letras_vuof01.png"
+                alt="logo" class="logo">
+        </div>
+        <div class="divMiddle" (click)="cerrarCarrito()">
+            <ul class="ul">
+                <li class="li"><a class="enlace-navbar" [routerLink]="['/home']" routerLinkActive="activo"
+                        [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+                <li class="li">
+                    <a class="enlace-navbar" [routerLink]="['/products/all']" routerLinkActive="activo">Productos</a>
+                    <div class="menu-productos" *ngIf="listaCategorias.length && !(isAdmin$|async)">
+                        <a class="enlace-div" *ngFor="let categoria of listaCategorias"
+                            (click)="verProductos(categoria.id)">
+                            <div class="menu-productos-categoria-1">
+                                <div class="categoria-imagen">
+                                    <img *ngIf="categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
+                                        src="{{categoria.imagenes[0].img}}">
+                                    <img *ngIf="!categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
+                                        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309837/ejemplo_tfljhw.jpg">
+                                </div>
+                                <div class="categoria-nombre">
+                                    <p>{{categoria.nombre}}</p>
+                                </div>
                             </div>
-                            <div class="categoria-nombre">
-                                <p>{{categoria.nombre}}</p>
-                            </div>
-                        </div>
-                    </a>
+                        </a>
 
-                </div>
-            </li>
-            <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/contact']"
-                    routerLinkActive="activo">Contacto</a></li>
-            <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/about']"
-                    routerLinkActive="activo">Sobre nosotros</a></li>
-            <li class="li" *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/categoria']"
-                    routerLinkActive="activo">Categorias</a></li>
-            <li class="li" *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/usuarios']"
-                    routerLinkActive="activo">Usuarios</a></li>
-        </ul>
-    </div>
-    <div class="divRight">
-        <div class="dropdown">
-            <img (click)="mostrarCarrito()"
-                src="https://res.cloudinary.com/dplcge3sb/image/upload/v1684083159/shopping_cart_FILL0_wght400_GRAD0_opsz48_ojftax.svg"
-                class="img-carrito">
-
-            <button class="btn btn-info dropdown-toggle" style="background-color: white;border-color: white;"
-                type="button" data-bs-toggle="dropdown" aria-expanded="false" name="boton_dropdown">
-                <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309910/user_msk6nc.png"
-                    alt="img-usuario" class="img-usuario">
-            </button>
-            <ul class="dropdown-menu">
-                <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/login']">Iniciar
-                        sesión</a></li>
-                <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop" [routerLink]="['/account/register']">Crear
-                        una cuenta</a></li>
-                <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="updateUsuario()">Mis datos</a>
+                    </div>
                 </li>
-                <li *ngIf="isLoged$|async"><a class="dropdown-item drop" [routerLink]="['/pedidos']">Mis pedidos</a>
-                </li>
-                <li *ngIf="isLoged$|async">
-                    <hr class="dropdown-divider">
-                </li>
-                <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="logout()">Logout</a></li>
+                <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/contact']"
+                        routerLinkActive="activo">Contacto</a></li>
+                <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/about']"
+                        routerLinkActive="activo">Sobre nosotros</a></li>
+                <li class="li" *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/categoria']"
+                        routerLinkActive="activo">Categorias</a></li>
+                <li class="li" *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/usuarios']"
+                        routerLinkActive="activo">Usuarios</a></li>
             </ul>
+        </div>
+        <div class="divRight">
+            <div class="dropdown">
+                <img (click)="mostrarCarrito()"
+                    src="https://res.cloudinary.com/dplcge3sb/image/upload/v1684083159/shopping_cart_FILL0_wght400_GRAD0_opsz48_ojftax.svg"
+                    class="img-carrito">
+
+                <button class="btn btn-info dropdown-toggle" style="background-color: white;border-color: white;"
+                    type="button" data-bs-toggle="dropdown" aria-expanded="false" name="boton_dropdown">
+                    <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309910/user_msk6nc.png"
+                        alt="img-usuario" class="img-usuario">
+                </button>
+                <ul class="dropdown-menu">
+                    <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop"
+                            [routerLink]="['/account/login']">Iniciar
+                            sesión</a></li>
+                    <li *ngIf="!(isLoged$|async)"><a class="dropdown-item drop"
+                            [routerLink]="['/account/register']">Crear
+                            una cuenta</a></li>
+                    <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="updateUsuario()">Mis datos</a>
+                    </li>
+                    <li *ngIf="isLoged$|async"><a class="dropdown-item drop" [routerLink]="['/pedidos']">Mis
+                            pedidos</a>
+                    </li>
+                    <li *ngIf="isLoged$|async">
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li *ngIf="isLoged$|async"><a class="dropdown-item drop" (click)="logout()">Logout</a></li>
+                </ul>
+            </div>
+
         </div>
 
     </div>
-
-</div>
+</nav>

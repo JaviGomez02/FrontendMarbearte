@@ -1,62 +1,29 @@
 // To parse this data:
 //
-//   import { Convert, Usuario } from "./file";
+//   import { Convert, Direccion } from "./file";
 //
-//   const usuario = Convert.toUsuario(json);
+//   const direccion = Convert.toDireccion(json);
 //
 // These functions will throw an error if the JSON doesn't
 // match the expected interface, even if the JSON is valid.
 
-import { Direccion } from "./direccion.interface";
-import { Imagen } from "./imagen.interface";
-import { Color } from "./page.interface";
-import { Product } from "./product.interface";
-
-export interface Usuario {
-    username:              string;
-    contrasena:            string;
-    nombre:                string;
-    email:                 string;
-    role:                  string;
-    enable:                boolean;
-    verificationCode:      string;
-    direcciones:           Direccion[];
-    pedidos:               Pedido[];
-    enabled:               boolean;
-    password:              string;
-    authorities:           Authority[];
-    accountNonExpired:     boolean;
-    credentialsNonExpired: boolean;
-    accountNonLocked:      boolean;
+export interface Direccion {
+    id:           number;
+    codigoPostal: string;
+    ciudad:       string;
+    localidad:    string;
+    direccion:    string;
 }
-
-export interface Authority {
-    authority: string;
-}
-
-export interface Pedido {
-    id:      number;
-    fecha:   Date;
-    iva:     number;
-    compras: Compra[];
-}
-
-export interface Compra {
-    articulo: Product;
-    cantidad: number;
-    price:    number;
-}
-
 
 // Converts JSON strings to/from your types
 // and asserts the results of JSON.parse at runtime
 export class Convert {
-    public static toUsuario(json: string): Usuario {
-        return cast(JSON.parse(json), r("Usuario"));
+    public static toDireccion(json: string): Direccion {
+        return cast(JSON.parse(json), r("Direccion"));
     }
 
-    public static usuarioToJson(value: Usuario): string {
-        return JSON.stringify(uncast(value, r("Usuario")), null, 2);
+    public static direccionToJson(value: Direccion): string {
+        return JSON.stringify(uncast(value, r("Direccion")), null, 2);
     }
 }
 
@@ -213,55 +180,11 @@ function r(name: string) {
 }
 
 const typeMap: any = {
-    "Usuario": o([
-        { json: "username", js: "username", typ: "" },
-        { json: "contrasena", js: "contrasena", typ: "" },
-        { json: "nombre", js: "nombre", typ: "" },
-        { json: "email", js: "email", typ: "" },
-        { json: "role", js: "role", typ: "" },
-        { json: "enable", js: "enable", typ: true },
-        { json: "verificationCode", js: "verificationCode", typ: "" },
-        { json: "direcciones", js: "direcciones", typ: a("any") },
-        { json: "pedidos", js: "pedidos", typ: a(r("Pedido")) },
-        { json: "enabled", js: "enabled", typ: true },
-        { json: "password", js: "password", typ: "" },
-        { json: "authorities", js: "authorities", typ: a(r("Authority")) },
-        { json: "accountNonExpired", js: "accountNonExpired", typ: true },
-        { json: "credentialsNonExpired", js: "credentialsNonExpired", typ: true },
-        { json: "accountNonLocked", js: "accountNonLocked", typ: true },
-    ], false),
-    "Authority": o([
-        { json: "authority", js: "authority", typ: "" },
-    ], false),
-    "Pedido": o([
+    "Direccion": o([
         { json: "id", js: "id", typ: 0 },
-        { json: "fecha", js: "fecha", typ: Date },
-        { json: "iva", js: "iva", typ: 0 },
-        { json: "compras", js: "compras", typ: a(r("Compra")) },
-    ], false),
-    "Compra": o([
-        { json: "articulo", js: "articulo", typ: r("Articulo") },
-        { json: "cantidad", js: "cantidad", typ: 0 },
-        { json: "price", js: "price", typ: 3.14 },
-    ], false),
-    "Articulo": o([
-        { json: "id", js: "id", typ: 0 },
-        { json: "nombre", js: "nombre", typ: "" },
-        { json: "descripcion", js: "descripcion", typ: "" },
-        { json: "price", js: "price", typ: 3.14 },
-        { json: "stock", js: "stock", typ: 0 },
-        { json: "categoria", js: "categoria", typ: r("Categoria") },
-        { json: "imagenes", js: "imagenes", typ: a("any") },
-        { json: "colores", js: "colores", typ: a("any") },
-    ], false),
-    "Categoria": o([
-        { json: "id", js: "id", typ: 0 },
-        { json: "nombre", js: "nombre", typ: "" },
-        { json: "descripcion", js: "descripcion", typ: "" },
-        { json: "imagenes", js: "imagenes", typ: a(r("Imagene")) },
-    ], false),
-    "Imagene": o([
-        { json: "id", js: "id", typ: 0 },
-        { json: "img", js: "img", typ: "" },
+        { json: "codigoPostal", js: "codigoPostal", typ: "" },
+        { json: "ciudad", js: "ciudad", typ: "" },
+        { json: "localidad", js: "localidad", typ: "" },
+        { json: "direccion", js: "direccion", typ: "" },
     ], false),
 };

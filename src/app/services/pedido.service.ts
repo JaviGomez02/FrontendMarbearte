@@ -50,7 +50,7 @@ export class pedidoService {
             }
         }
 
-        console.log(this.listaCarritoAux)
+        // console.log(this.listaCarritoAux)
 
         return this.http.post<any>(this.urlLocal + '/comprar', this.listaCarritoAux, this.httpOptions)
             .pipe(switchMap(resp => {

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { authService } from 'src/app/auth/auth.service';
+import { Direccion } from 'src/app/interfaces/direccion.interface';
 import { ItemCarrito } from 'src/app/interfaces/itemCarrito.interface';
 import { carritoService } from 'src/app/services/carrito.service';
 import { pedidoService } from 'src/app/services/pedido.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,22 +16,46 @@ import Swal from 'sweetalert2';
 })
 export class CarritoFinalComponent implements OnInit {
 
-  constructor(private servicioCarrito: carritoService, private servicioPedido:pedidoService, private route:Router) { }
+  constructor(private servicioCarrito: carritoService, private servicioPedido: pedidoService, private authService: authService, private cookieService: CookieService, private route: Router, private servicioUsuario: UsuarioService) { }
 
   listaProductos: ItemCarrito[] = this.servicioCarrito.getListaCarrito();
 
+  listaDirecciones!: Direccion[]
+
+  token!: string
 
   ngOnInit(): void {
-    if(!this.listaProductos.length){
-      Swal.fire({
-        icon:'info',
-        title:'La cesta se encuentra vacía',
-        text: 'Redirigiendo a home...',
-        timer: 1500
-      }).then((resp)=>{         
-        this.route.navigate(["/"])
-      })
+    // if(!this.listaProductos.length){
+    //   Swal.fire({
+    //     icon:'info',
+    //     title:'La cesta se encuentra vacía',
+    //     text: 'Redirigiendo a home...',
+    //     timer: 1500
+    //   }).then((resp)=>{         
+    //     this.route.navigate(["/"])
+    //   })
+    // }
+    this.token = this.cookieService.get('token')
+    if (this.token) {
+      this.servicioUsuario.getUsuarioByUsername(this.authService.decodeJwt(this.token).sub)
+        .subscribe({
+          next: (resp) => {
+            this.listaDirecciones=resp.direcciones
+          },
+          error: (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops',
+              text: 'Ocurrió un error inesperado, volviendo al home...',
+              timer: 2000
+            }).then((result) => {
+              this.route.navigateByUrl('/')
+            })
+          }
+        })
     }
+
+
   }
 
 
@@ -64,7 +92,7 @@ export class CarritoFinalComponent implements OnInit {
               }).then((resp) => {
                 window.location.reload()
               })
-              
+
               this.servicioCarrito.vaciarCarrito();
               this.listaProductos = this.servicioCarrito.getListaCarrito();
             }

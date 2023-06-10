@@ -2,6 +2,7 @@
     <p class="titulo">Mi cesta</p>
     <div class="grid-global">
         <div class="lista-productos">
+            <p *ngIf="!listaProductos.length" class="titulo-no">No hay productos en la cesta</p>
             <div class="producto" *ngFor="let item of listaProductos">
                 <div class="img-item">
                     <img *ngIf="item.producto.imagenes.length>=1" class="img" src="{{item.producto.imagenes[1].img}}">
@@ -14,7 +15,8 @@
                         <p class="unidades">Unidades: {{item.cantidad}}</p>
                         <p *ngIf="item.producto.colores.length" class="unidades">Color:
                             {{item.producto.colores[0].color.nombre}}</p>
-                        <p class="precioud" *ngIf="item.cantidad>1">Precio por unidad: {{(item.producto.price).toFixed(2)}} €</p>
+                        <p class="precioud" *ngIf="item.cantidad>1">Precio por unidad:
+                            {{(item.producto.price).toFixed(2)}} €</p>
                         <p class="precio">{{(item.producto.price*item.cantidad).toFixed(2)}} €</p>
                     </div>
                     <div class="acciones">
@@ -25,21 +27,51 @@
                 </div>
             </div>
         </div>
+        <div class="lista-direcciones-container">
+            <div class="direccion-container">
+                <p class="texto-resumen">Direccion</p>
+            </div>
+            <div class="direccion-add">
+                <button mat-mini-fab color="primary">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+            <div class="lista-direcciones">
+                <div class="direccion-row" *ngFor="let item of listaDirecciones">
+                    <div class="container-select">
+                        <mat-checkbox color="primary">
+                        </mat-checkbox>
+                    </div>
+                    <div class="container-direccion-txt">
+                        <p Class="direccion-txt">{{item.direccion}}<br>
+                            {{item.localidad}}, {{item.codigoPostal}}. {{item.ciudad}}</p>
+                    </div>
+                    <div class="container-eliminar">
+                        <button mat-icon-button color="warn" aria-label="Example icon button with a home icon">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
         <div class="resumen">
             <div class="resumen-txt">
                 <p class="texto-resumen">Resumen</p>
             </div>
-            <div class="resumen-total" >
+            <div class="resumen-total">
                 <div class="prueba" *ngFor="let item of listaProductos">
                     <div class="total-txt">
-                        <p class="precioud">{{item.producto.nombre}}. {{item.cantidad}} unidad/es  </p>
+                        <p class="precioud">{{item.producto.nombre}}. {{item.cantidad}} unidad/es </p>
                     </div>
                     <div class="total-precio">
                         <p class="precioud" *ngIf="item.cantidad==1">{{item.producto.price}} €</p>
-                        <p class="precioud" *ngIf="item.cantidad>1">{{(item.producto.price*item.cantidad).toFixed(2)}} €</p>
+                        <p class="precioud" *ngIf="item.cantidad>1">{{(item.producto.price*item.cantidad).toFixed(2)}} €
+                        </p>
                     </div>
                 </div>
-                
+
             </div>
             <div class="resumen-boton">
                 <div class="total-final">
@@ -50,7 +82,8 @@
                         <p class="texto-precio">{{calcularTotal()}} €</p>
                     </div>
                 </div>
-                <button [ngClass]="{'boton':true,'boton-disable':!listaProductos.length}" (click)="comprar()">Comprar</button>
+                <button [ngClass]="{'boton':true,'boton-disable':!listaProductos.length}"
+                    (click)="comprar()">Comprar</button>
             </div>
         </div>
     </div>

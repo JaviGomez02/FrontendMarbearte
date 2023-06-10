@@ -15,6 +15,10 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { AuthInterceptorService } from './auth-interceptor.service';
 import { AuthGuard } from './auth-guard.guard';
 import { RolGuard } from './rol-guard.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+
+
 
 @NgModule({
   declarations: [
@@ -31,7 +35,10 @@ import { RolGuard } from './rol-guard.guard';
     AccountModule,
     HttpClientModule,
     CategoriasModule,
-    UsuariosModule
+    UsuariosModule,
+    BrowserAnimationsModule,
+    MatButtonModule
+    
   ],
   providers: [AuthGuard, RolGuard,{
     provide: HTTP_INTERCEPTORS,
