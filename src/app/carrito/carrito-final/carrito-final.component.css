@@ -37,7 +37,7 @@
     border-radius: 6px;
     text-align: left;
     overflow-y: scroll;
-    height: 560px auto;
+    height: 610px;
 }
 
 .lista-direcciones-container {
@@ -282,8 +282,6 @@
     margin-bottom: 12px;
     font-size: 16px;
     color: rgb(76, 76, 76);
-
-
 }
 
 .unidades {
@@ -291,7 +289,6 @@
     padding: 0;
     font-size: 16px;
     color: rgb(76, 76, 76);
-
 }
 
 .precio {
@@ -316,4 +313,176 @@
 .img-borrar {
     width: 15px;
     cursor: pointer;
+}
+
+/* tablet */
+@media(min-width:481px) and (max-width:768px) {
+    .grid-global {
+        display: grid;
+        grid-template-rows: 500px 1fr 1fr;
+        grid-template-columns: 1fr;
+        margin-bottom: 50px;
+        gap: 50px;
+    }
+
+    .lista-productos {
+        grid-area: 1/1/2/2;
+        border: solid;
+        border-width: 1px;
+        border-color: rgb(141, 141, 141);
+        border-radius: 6px;
+        text-align: left;
+        overflow-y: scroll;
+        height: 500px;
+    }
+
+    .lista-direcciones-container {
+        height: 280px;
+        grid-area: 2/1/3/2;
+        border: solid;
+        border-width: 1px;
+        border-color: rgb(141, 141, 141);
+        border-radius: 6px;
+        text-align: left;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 3fr;
+    }
+
+    .resumen {
+        height: 280px;
+        grid-area: 3/1/4/2;
+        border: solid;
+        border-width: 1px;
+        border-color: rgb(141, 141, 141);
+        border-radius: 6px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 6fr 1fr;
+        text-align: left;
+        gap: 10px;
+    }
+
+    .nombre {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 6px;
+        font-size: 18px;
+        text-decoration: none;
+        color: rgb(0, 159, 159);
+        font-weight: bold;
+    }
+    
+    .nombre:hover{
+        text-decoration: underline;
+        color: rgb(155, 101, 0);
+    }
+    
+    .precioud {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 12px;
+        font-size: 14px;
+        color: rgb(76, 76, 76);
+    }
+    
+    .unidades {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        color: rgb(76, 76, 76);
+    }
+    
+    .precio {
+        margin: 0;
+        padding-top: 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+}
+
+/* movil */
+@media(max-width:480px) {
+    .grid-global {
+        display: grid;
+        grid-template-rows: 400px 1fr 1fr;
+        grid-template-columns: 1fr;
+        margin-bottom: 50px;
+        gap: 50px;
+    }
+
+    .lista-productos {
+        grid-area: 1/1/2/2;
+        border: solid;
+        border-width: 1px;
+        border-color: rgb(141, 141, 141);
+        border-radius: 6px;
+        text-align: left;
+        overflow-y: scroll;
+        height: 400px;
+    }
+
+    .lista-direcciones-container {
+        height: 280px;
+        grid-area: 2/1/3/2;
+        border: solid;
+        border-width: 1px;
+        border-color: rgb(141, 141, 141);
+        border-radius: 6px;
+        text-align: left;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 3fr;
+    }
+
+    .resumen {
+        height: 280px;
+        grid-area: 3/1/4/2;
+        border: solid;
+        border-width: 1px;
+        border-color: rgb(141, 141, 141);
+        border-radius: 6px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 6fr 1fr;
+        text-align: left;
+        gap: 10px;
+    }
+
+    .nombre {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 6px;
+        font-size: 16px;
+        text-decoration: none;
+        color: rgb(0, 159, 159);
+        font-weight: bold;
+    }
+    
+    .nombre:hover{
+        text-decoration: underline;
+        color: rgb(155, 101, 0);
+    }
+    
+    .precioud {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 12px;
+        font-size: 12px;
+        color: rgb(76, 76, 76);
+    }
+    
+    .unidades {
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+        color: rgb(76, 76, 76);
+    }
+    
+    .precio {
+        margin: 0;
+        padding-top: 5px;
+        font-size: 14px;
+        font-weight: bold;
+    }
 }
