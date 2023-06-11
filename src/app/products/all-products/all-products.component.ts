@@ -38,7 +38,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   nombreCategoria!: string
 
   ngOnInit(): void {
-
+    this.nombreCategoria=''
     this.route.queryParams
       .subscribe({
         next: (queryParams) => {
@@ -82,7 +82,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
                 }
               },
               error: (error) => {
-
+                
               }
             })
 

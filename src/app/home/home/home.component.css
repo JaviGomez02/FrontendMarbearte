@@ -18,7 +18,7 @@
 .grid-productos-home {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 100px;
+    gap: 80px;
     margin-bottom: 60px;
     margin-left: 40px;
     margin-right: 40px;
@@ -140,7 +140,7 @@
     .grid-productos-home {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 100px;
+        gap: 80px;
         margin-bottom: 60px;
         margin-left: 40px;
         margin-right: 40px;
@@ -178,7 +178,7 @@
     .grid-productos-home {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
-        gap: 100px;
+        gap: 80px;
         margin-bottom: 60px;
         margin-left: 40px;
         margin-right: 40px;

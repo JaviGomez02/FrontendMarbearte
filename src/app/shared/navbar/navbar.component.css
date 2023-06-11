@@ -275,6 +275,15 @@ a {
     display: none;
   }
 
+  .btn-aux{
+    margin:0;
+    padding: 0;
+  }
+
+  .img-carrito{
+    margin-right: 10px;
+  }
+
   .responsive {
     display: none;
   }

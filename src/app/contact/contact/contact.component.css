@@ -16,8 +16,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 0.3fr 1fr 0.3fr;
-    margin-right: 250px;
-    margin-left: 250px;
+    margin-right: 180px;
+    margin-left: 180px;
     gap: 40px;
     height: 300px;
 }
@@ -34,12 +34,8 @@ textarea {
 input:hover,
 textarea:hover {
     border-color: rgb(131, 131, 131);
-    ;
-
     border-radius: 2px;
 }
-
-
 
 .input-nombre {
     grid-area: 1/1/2/2;
@@ -53,15 +49,11 @@ textarea:hover {
     grid-area: 2/1/3/3;
 }
 
-
-
-
 .boton {
     text-transform: uppercase;
     grid-area: 3/1/4/3;
     position: relative;
     padding: 1em 20px;
-
     color: white;
     border-color: white;
     background-color: rgb(231, 86, 86);
@@ -80,4 +72,102 @@ textarea:hover {
 .info-contacto {
     margin-top: 30px;
     font-size: 14px;
+    margin-left:180px;
+    margin-right: 180px;
+}
+
+/* tablet */
+@media(min-width:481px) and (max-width:768px) {
+    .formulario-contacto {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.3fr 0.3fr 1fr 0.3fr;
+        margin-right: 100px;
+        margin-left: 100px;
+        gap: 20px;
+        height: 400px;
+    }
+
+    .input-nombre {
+        grid-area: 1/1/2/2;
+    }
+
+    .input-email {
+        grid-area: 2/1/3/2;
+    }
+
+    .input-mensaje {
+        grid-area: 3/1/4/2;
+    }
+
+    .boton {
+        text-transform: uppercase;
+        grid-area: 4/1/5/2;
+        position: relative;
+        padding: 1em 20px;
+        color: white;
+        border-color: white;
+        background-color: rgb(231, 86, 86);
+        font-size: 12px;
+        transition: all .1s ease-out;
+        width: 100%;
+        border: solid;
+        border-width: 1px;
+        border-radius: 2px;
+    }
+
+    .info-contacto {
+        margin-top: 30px;
+        font-size: 14px;
+        margin-left:100px;
+        margin-right: 100px;
+    }
+}
+
+/* movil */
+@media(max-width:480px) {
+    .formulario-contacto {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.3fr 0.3fr 1fr 0.3fr;
+        margin-right: 50px;
+        margin-left: 50px;
+        gap: 20px;
+        height: 400px;
+    }
+
+    .input-nombre {
+        grid-area: 1/1/2/2;
+    }
+
+    .input-email {
+        grid-area: 2/1/3/2;
+    }
+
+    .input-mensaje {
+        grid-area: 3/1/4/2;
+    }
+
+    .boton {
+        text-transform: uppercase;
+        grid-area: 4/1/5/2;
+        position: relative;
+        padding: 1em 20px;
+        color: white;
+        border-color: white;
+        background-color: rgb(231, 86, 86);
+        font-size: 12px;
+        transition: all .1s ease-out;
+        width: 100%;
+        border: solid;
+        border-width: 1px;
+        border-radius: 2px;
+    }
+
+    .info-contacto {
+        margin-top: 30px;
+        font-size: 12px;
+        margin-left:50px;
+        margin-right: 50px;
+    }
 }
