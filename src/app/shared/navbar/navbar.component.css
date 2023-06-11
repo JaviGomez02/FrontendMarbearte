@@ -268,8 +268,6 @@ a {
   .no-responsive {
     display: none;
   }
-
-
 }
 
 @media (max-width: 768px) {

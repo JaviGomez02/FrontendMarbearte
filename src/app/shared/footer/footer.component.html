@@ -11,14 +11,17 @@
         </div>
         <div class="footer-section-2">
             <div class="titulo-enlaces">Nuestras páginas</div>
-            <div class="div-enlace-footer">
-                <a class="enlace-footer" href="#">Inicio</a>
+            <div class="div-enlace-footer grid-aux1">
+                <a class="enlace-footer" href="#" [routerLink]="['/home']">Inicio</a>
             </div>
-            <div class="div-enlace-footer">
-                <a class="enlace-footer" href="#">Contacto</a>
+            <div class="div-enlace-footer grid-aux2">
+                <a class="enlace-footer" href="#" [routerLink]="['/contact']">Contacto</a>
             </div>
-            <div class="div-enlace-footer">
-                <a class="enlace-footer" href="#">Sobre nosotros</a>
+            <div class="div-enlace-footer grid-aux3">
+                <a class="enlace-footer" href="#" [routerLink]="['/about']">Sobre nosotros</a>
+            </div>
+            <div class="div-enlace-footer grid-aux4 no-responsive">
+                <a class="enlace-footer" href="#" [routerLink]="['/products/all']">Productos</a>
             </div>
         </div>
         <div class="footer-section-3" *ngIf="listaCategorias.length">
