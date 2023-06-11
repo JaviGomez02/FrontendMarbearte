@@ -264,7 +264,7 @@ a {
 }
 
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .no-responsive {
     display: none;
   }
