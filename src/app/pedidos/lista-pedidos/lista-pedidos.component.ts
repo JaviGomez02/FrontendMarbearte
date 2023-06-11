@@ -88,7 +88,6 @@ export class ListaPedidosComponent implements OnInit {
       confirmButtonText: 'Aceptar',
       focusConfirm: false,
       width: 600,
-      position: 'bottom',
       preConfirm: function () {
         return new Promise(function (resolve) {
           resolve([

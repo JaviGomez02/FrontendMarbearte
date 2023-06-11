@@ -3,14 +3,17 @@
     <div class="pedido" *ngFor="let pedido of listaPedidos; let i=index">
         <div class="info-pedido">
             <div class="info-fecha">
+                <p class="responsive">FECHA DEL PEDIDO: {{devolverFechaPedido(i)}}</p>
                 <p class="titulo-info">FECHA DEL PEDIDO</p>
                 <p class="aux">{{devolverFechaPedido(i)}}</p>
             </div>
             <div class="info-total">
+                <p class="responsive">TOTAL: <b>{{calcularTotalPedido(i)}} €</b></p>
                 <p class="titulo-info">TOTAL</p>
                 <p class="aux"><b>{{calcularTotalPedido(i)}} €</b></p>
             </div>
             <div class="info-numero">
+                <p class="responsive">PEDIDO NUMERO {{pedido.id}} <a class="enlace-pedido-responsive" (click)="iniciarIncidencia(pedido.id)">Problemas con tu pedido?</a></p>
                 <p class="titulo-info">PEDIDO NUMERO {{pedido.id}}</p>
                 <a class="enlace-pedido" (click)="iniciarIncidencia(pedido.id)">Problemas con tu pedido?</a>
             </div>
