@@ -6,8 +6,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { RouterModule } from '@angular/router';
 import { CarritoModule } from '../carrito/carrito.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-
-
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,10 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   imports: [
     CommonModule,
     RouterModule,
-    CarritoModule
+    CarritoModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule
   ],
   exports:[
     NavbarComponent,

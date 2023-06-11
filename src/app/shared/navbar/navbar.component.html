@@ -1,53 +1,86 @@
-<nav>
-    <div class="overlay" (click)="cerrarCarrito()"></div>
+<div class="overlay" (click)="cerrarCarrito()"></div>
+<span class="fixed-top">
     <div class="preNavBar">Se vienen cositas</div>
-    <div class="miNavbar sticky-top">
+    <div class="miNavbar">
         <app-carrito class="carrito" [ngClass]="claseCarrito"></app-carrito>
         <img src="https://icons.veryicon.com/png/o/miscellaneous/medium-thin-linear-icon/cross-23.png"
             class="cerrarCarrito" *ngIf="carrito" (click)="cerrarCarrito()">
         <div class="divLeft" (click)="cerrarCarrito()">
             <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309884/logo-sin-letras_vuof01.png"
                 alt="logo" class="logo">
+            <span class="no-responsive">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item [routerLink]="['/home']">Inicio</button>
+                    <button mat-menu-item *ngIf="!(isAdmin$|async)"
+                        [matMenuTriggerFor]="menuProductos">Productos</button>
+                    <button mat-menu-item *ngIf="(isAdmin$|async)" [routerLink]="['/products/all']">Productos</button>
+                    <button mat-menu-item *ngIf="!(isAdmin$|async)" [routerLink]="['/contact']">Contacto</button>
+                    <button mat-menu-item *ngIf="!(isAdmin$|async)" [routerLink]="['/about']">Sobre nosotros</button>
+                    <button mat-menu-item *ngIf="(isAdmin$|async)" [routerLink]="['/categoria']">Categorias</button>
+                    <button mat-menu-item *ngIf="(isAdmin$|async)" [routerLink]="['/usuarios']">Usuarios</button>
+                </mat-menu>
+                <mat-menu #menuProductos="matMenu">
+                    <button mat-menu-item *ngFor="let categoria of listaCategorias"
+                        (click)="verProductos(categoria.id)">
+                        {{categoria.nombre}}
+                    </button>
+                    <button mat-menu-item [routerLink]="['/products/all']">
+                        Todos los productos
+                    </button>
+                </mat-menu>
+            </span>
+
         </div>
         <div class="divMiddle" (click)="cerrarCarrito()">
-            <ul class="ul">
-                <li class="li"><a class="enlace-navbar" [routerLink]="['/home']" routerLinkActive="activo"
-                        [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
-                <li class="li">
-                    <a class="enlace-navbar" [routerLink]="['/products/all']" routerLinkActive="activo">Productos</a>
-                    <div class="menu-productos" *ngIf="listaCategorias.length && !(isAdmin$|async)">
-                        <a class="enlace-div" *ngFor="let categoria of listaCategorias"
-                            (click)="verProductos(categoria.id)">
-                            <div class="menu-productos-categoria-1">
-                                <div class="categoria-imagen">
-                                    <img *ngIf="categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
-                                        src="{{categoria.imagenes[0].img}}">
-                                    <img *ngIf="!categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
-                                        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309837/ejemplo_tfljhw.jpg">
+            <span class="no-responsive">
+                <img src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309884/logo-sin-letras_vuof01.png"
+                    alt="logo" class="logo-aux">
+            </span>
+            <span class="responsive">
+                <ul class="ul">
+                    <li class="li"><a class="enlace-navbar" [routerLink]="['/home']" routerLinkActive="activo"
+                            [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+                    <li class="li">
+                        <a class="enlace-navbar" [routerLink]="['/products/all']"
+                            routerLinkActive="activo">Productos</a>
+                        <div class="menu-productos" *ngIf="listaCategorias.length && !(isAdmin$|async)">
+                            <a class="enlace-div" *ngFor="let categoria of listaCategorias"
+                                (click)="verProductos(categoria.id)">
+                                <div class="menu-productos-categoria-1">
+                                    <div class="categoria-imagen">
+                                        <img *ngIf="categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
+                                            src="{{categoria.imagenes[0].img}}">
+                                        <img *ngIf="!categoria.imagenes[0]" class="img-categoria" alt="img-categoria"
+                                            src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678309837/ejemplo_tfljhw.jpg">
+                                    </div>
+                                    <div class="categoria-nombre">
+                                        <p>{{categoria.nombre}}</p>
+                                    </div>
                                 </div>
-                                <div class="categoria-nombre">
-                                    <p>{{categoria.nombre}}</p>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
 
-                    </div>
-                </li>
-                <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/contact']"
-                        routerLinkActive="activo">Contacto</a></li>
-                <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/about']"
-                        routerLinkActive="activo">Sobre nosotros</a></li>
-                <li class="li" *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/categoria']"
-                        routerLinkActive="activo">Categorias</a></li>
-                <li class="li" *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/usuarios']"
-                        routerLinkActive="activo">Usuarios</a></li>
-            </ul>
+                        </div>
+                    </li>
+                    <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/contact']"
+                            routerLinkActive="activo">Contacto</a></li>
+                    <li class="li" *ngIf="!(isAdmin$|async)"><a class="enlace-navbar" [routerLink]="['/about']"
+                            routerLinkActive="activo">Sobre nosotros</a></li>
+                    <li class="li" *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/categoria']"
+                            routerLinkActive="activo">Categorias</a></li>
+                    <li class="li" *ngIf="isAdmin$|async"><a class="enlace-navbar" [routerLink]="['/usuarios']"
+                            routerLinkActive="activo">Usuarios</a></li>
+                </ul>
+            </span>
         </div>
         <div class="divRight">
             <div class="dropdown">
                 <img (click)="mostrarCarrito()"
                     src="https://res.cloudinary.com/dplcge3sb/image/upload/v1684083159/shopping_cart_FILL0_wght400_GRAD0_opsz48_ojftax.svg"
                     class="img-carrito">
+
 
                 <button class="btn btn-info dropdown-toggle" style="background-color: white;border-color: white;"
                     type="button" data-bs-toggle="dropdown" aria-expanded="false" name="boton_dropdown">
@@ -76,4 +109,4 @@
         </div>
 
     </div>
-</nav>
+</span>

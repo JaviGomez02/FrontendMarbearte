@@ -259,7 +259,49 @@ a {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 768px) {
-  /* Estilos para dispositivos pequeños */
-  /* ... */
+.boton-cuenta {
+  margin-top: 20px;
+}
+
+
+@media (min-width: 768px) {
+  .no-responsive {
+    display: none;
+  }
+
+
+}
+
+@media (max-width: 768px) {
+  .logo {
+    display: none;
+  }
+
+  .responsive {
+    display: none;
+  }
+
+  .divLeft {
+    margin-top: 20px;
+    line-height: normal;
+  }
+
+  .logo-aux{
+    height: 75px;
+  }
+
+  .miNavbar {
+    background-color: rgb(255, 255, 255);
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: 1fr;
+    height: 91px;
+    border-top: solid;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: rgb(192, 192, 192);
+    z-index: 9999;
+  }
+
+  
 }
