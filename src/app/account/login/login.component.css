@@ -125,6 +125,10 @@ input:hover{
         padding-top: 30px;
         padding-bottom: 40px;
     }
+
+    .elemento-form {
+        height: 80px;
+    }
 }
 
 /* movil */
@@ -163,5 +167,9 @@ input:hover{
         font-size: 10px;
         padding-top: 30px;
         padding-bottom: 40px;
+    }
+
+    .elemento-form {
+        height: 60px;
     }
 }
