@@ -214,15 +214,15 @@ export class CarritoFinalComponent implements OnInit {
 
   comprar() {
 
-    if (this.idDireccion == 0) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Selecciona una direccion',
-        text: 'Debe seleccionar una direccion para realizar su compra.'
-      })
-    }
-    else {
-      if (this.listaProductos.length) {
+    if (this.listaProductos.length) {
+      if (this.idDireccion == 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Selecciona una direccion',
+          text: 'Debe seleccionar una direccion para realizar su compra.'
+        })
+      }
+      else {
         this.servicioPedido.realizarPedido()
           .subscribe({
             next: (resp) => {
@@ -253,9 +253,9 @@ export class CarritoFinalComponent implements OnInit {
               })
             }
           })
+
       }
     }
-
   }
 
 }

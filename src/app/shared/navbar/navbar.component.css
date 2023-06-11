@@ -14,8 +14,6 @@ a {
   cursor: pointer;
 }
 
-
-
 .miNavbar {
   background-color: rgb(255, 255, 255);
   display: grid;
@@ -261,3 +259,7 @@ a {
   cursor: pointer;
 }
 
+@media only screen and (max-width: 768px) {
+  /* Estilos para dispositivos pequeños */
+  /* ... */
+}

@@ -5,13 +5,13 @@
             <p *ngIf="!listaProductos.length" class="titulo-no">No hay productos en la cesta</p>
             <div class="producto" *ngFor="let item of listaProductos">
                 <div class="img-item">
-                    <img *ngIf="item.producto.imagenes.length>=1" class="img" src="{{item.producto.imagenes[1].img}}">
-                    <img *ngIf="item.producto.imagenes.length==0" class="img"
+                    <img *ngIf="item.producto.imagenes.length>=1" [routerLink]="['/products', item.producto.id]" class="img" src="{{item.producto.imagenes[1].img}}">
+                    <img *ngIf="item.producto.imagenes.length==0" [routerLink]="['/products', item.producto.id]" class="img"
                         src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
                 </div>
                 <div class="txt-item">
                     <div class="info">
-                        <p class="nombre">{{item.producto.nombre}}</p>
+                        <a [routerLink]="['/products', item.producto.id]" class="nombre">{{item.producto.nombre}}</a>
                         <p class="unidades">Unidades: {{item.cantidad}}</p>
                         <p *ngIf="item.producto.colores.length" class="unidades">Color:
                             {{item.producto.colores[0].color.nombre}}</p>

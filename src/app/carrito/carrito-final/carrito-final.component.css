@@ -37,11 +37,11 @@
     border-radius: 6px;
     text-align: left;
     overflow-y: scroll;
-    height: 597px auto;
+    height: 560px auto;
 }
 
 .lista-direcciones-container {
-    height: 310px;
+    height: 280px;
     grid-area: 1/2/2/3;
     border: solid;
     border-width: 1px;
@@ -119,7 +119,7 @@
 
 
 .resumen {
-    height: 300px;
+    height: 280px;
     grid-area: 2/2/3/3;
     border: solid;
     border-width: 1px;
@@ -266,8 +266,14 @@
     padding: 0;
     margin-bottom: 6px;
     font-size: 22px;
-    color: rgb(0, 0, 0);
+    text-decoration: none;
+    color: rgb(0, 159, 159);
     font-weight: bold;
+}
+
+.nombre:hover{
+    text-decoration: underline;
+    color: rgb(155, 101, 0);
 }
 
 .precioud {
@@ -299,6 +305,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    cursor: pointer;
 }
 
 .borrar {
