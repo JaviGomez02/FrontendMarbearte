@@ -15,7 +15,7 @@
     grid-area: 1/1/2/2;
 }
 
-.colores{
+.colores {
     margin-top: 20px;
 }
 
@@ -41,19 +41,19 @@
     background-color: rgb(205, 72, 72);
 }
 
-.ultimasUds{
+.ultimasUds {
     color: rgb(148, 24, 24);
     padding-top: 10px;
     font-size: 13px;
 }
 
-.noStock{
+.noStock {
     color: gray;
     padding-top: 20px;
-    
+
 }
 
-.boton-disable{
+.boton-disable {
     cursor: not-allowed;
     text-transform: uppercase;
     grid-area: 3/1/4/3;
@@ -71,26 +71,26 @@
     border-radius: 2px;
 }
 
-.div-color{
+.div-color {
     border: solid;
     border-width: 1px;
     cursor: pointer;
 }
 
-.div-colorSelect{
+.div-colorSelect {
     border: solid;
     border-width: 2px;
     cursor: pointer;
 }
 
-.colores-grid{
+.colores-grid {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     gap: 10px;
     margin-bottom: 20px;
 }
 
-.radio{
+.radio {
     height: 30px;
 }
 
@@ -200,4 +200,3 @@
         margin-bottom: 50px;
     }
 }
-
