@@ -18,15 +18,15 @@ export class colorService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   getColores(): Observable<Color[]> {
-    return this.http.get<Color[]>(this.urlLocal)
+    return this.http.get<Color[]>(this.url)
   }
   getColorById(id: string): Observable<Color> {
     let newId=id.slice(1)
-    return this.http.get<Color>(this.urlLocal + '/' + newId)
+    return this.http.get<Color>(this.url + '/' + newId)
   }
 
   addColor(color: string, nombre: string): Observable<boolean> {
-    return this.http.post<any>(this.urlLocal, { "color": color, "nombre": nombre }, this.httpOptions)
+    return this.http.post<any>(this.url, { "color": color, "nombre": nombre }, this.httpOptions)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -36,7 +36,7 @@ export class colorService {
   }
 
   deleteColor(id: string): Observable<boolean> {
-    return this.http.delete<any>(this.urlLocal + '/' + id)
+    return this.http.delete<any>(this.url + '/' + id)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {

@@ -26,7 +26,7 @@ export class direccionService {
     };
 
     addDireccion(codigoPostal: string, ciudad: string, localidad: string, direccion: string) {
-        return this.http.post<any>(this.urlLocal, {
+        return this.http.post<any>(this.url, {
             "codigoPostal": codigoPostal,
             "ciudad": ciudad,
             "localidad": localidad,
@@ -41,7 +41,7 @@ export class direccionService {
     }
 
     deleteDireccion(id: number): Observable<boolean> {
-        return this.http.delete<any>(this.urlLocal + '/' + id)
+        return this.http.delete<any>(this.url + '/' + id)
             .pipe(switchMap(resp => {
                 return of(true);
             }), catchError(error => {

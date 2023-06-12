@@ -27,7 +27,7 @@ export class pedidoService {
 
 
     reportarIncidencia(username:string, idPedido:number, comentario:string, motivo:string){
-        return this.http.get<any>(this.urlLocal+"/pedido/incidencia/"+idPedido+"?motivo="+motivo+"&comentario="+comentario+"&username="+username)
+        return this.http.get<any>(this.url+"/pedido/incidencia/"+idPedido+"?motivo="+motivo+"&comentario="+comentario+"&username="+username)
     }
 
 
@@ -52,7 +52,7 @@ export class pedidoService {
 
         // console.log(this.listaCarritoAux)
 
-        return this.http.post<any>(this.urlLocal + '/comprar', this.listaCarritoAux, this.httpOptions)
+        return this.http.post<any>(this.url + '/comprar', this.listaCarritoAux, this.httpOptions)
             .pipe(switchMap(resp => {
                 return of(true);
             }), catchError(error => {

@@ -11,27 +11,27 @@ import { Page } from '../interfaces/page.interface';
 export class productService {
 
   url: string = 'https://apimarbearte-production.up.railway.app/articulo'
-  urlLocal:string='http://localhost:8082/articulo'
+  urlLocal: string = 'http://localhost:8082/articulo'
 
 
   constructor(private http: HttpClient) { }
 
   getProducts(pageNumber: number, sizeNumber: number, idCategoria: number | null): Observable<Page> {
     if (idCategoria) {
-      return this.http.get<Page>(this.urlLocal + '?pageNumber=' + pageNumber + '&sizeNumber=' + sizeNumber + '&idCategoria=' + idCategoria)
+      return this.http.get<Page>(this.url + '?pageNumber=' + pageNumber + '&sizeNumber=' + sizeNumber + '&idCategoria=' + idCategoria)
     }
     else {
-      return this.http.get<Page>(this.urlLocal + '?pageNumber=' + pageNumber + '&sizeNumber=' + sizeNumber)
+      return this.http.get<Page>(this.url + '?pageNumber=' + pageNumber + '&sizeNumber=' + sizeNumber)
 
     }
   }
 
   getProducto(idProducto: number): Observable<Product> {
-    return this.http.get<Product>(this.urlLocal + '/' + idProducto)
+    return this.http.get<Product>(this.url + '/' + idProducto)
   }
 
   addProduct(nombre: string, descripcion: string, price: number, stock: number, idCategoria: number): Observable<boolean> {
-    return this.http.post<any>(this.urlLocal, {
+    return this.http.post<any>(this.url, {
       "nombre": nombre,
       "descripcion": descripcion,
       "price": price,
@@ -49,7 +49,7 @@ export class productService {
   }
 
   asignarColor(idProducto: number, codigoColor: string): Observable<boolean> {
-    return this.http.put<any>(this.urlLocal + "/asignarColor/" + idProducto, { "color": codigoColor })
+    return this.http.put<any>(this.url + "/asignarColor/" + idProducto, { "color": codigoColor })
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -59,7 +59,7 @@ export class productService {
   }
 
   eliminarColor(idProducto: number, codigoColor: string): Observable<boolean> {
-    return this.http.put<any>(this.urlLocal + "/desasignarColor/" + idProducto, { "color": codigoColor })
+    return this.http.put<any>(this.url + "/desasignarColor/" + idProducto, { "color": codigoColor })
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -69,7 +69,7 @@ export class productService {
   }
 
   updateProduct(idProducto: number, nombre: string, descripcion: string, price: number, stock: number, idCategoria: number): Observable<boolean> {
-    return this.http.put<any>(this.urlLocal + '/' + idProducto, {
+    return this.http.put<any>(this.url + '/' + idProducto, {
       "nombre": nombre,
       "descripcion": descripcion,
       "price": price,
@@ -87,7 +87,7 @@ export class productService {
   }
 
   deleteArticulo(id: number): Observable<boolean> {
-    return this.http.delete<any>(this.urlLocal + '/' + id)
+    return this.http.delete<any>(this.url + '/' + id)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -95,8 +95,4 @@ export class productService {
       })
       )
   }
-
-
-
-
 }

@@ -27,11 +27,11 @@ export class imagenService {
   }
 
   getImagenesByProduct(idProducto: number): Observable<Imagen[]> {
-    return this.http.get<Imagen[]>(this.urlLocal + '/' + idProducto)
+    return this.http.get<Imagen[]>(this.url + '/' + idProducto)
   }
 
   deleteImagen(idImagen: number): Observable<boolean> {
-    return this.http.delete<any>(this.urlLocal + '/' + idImagen)
+    return this.http.delete<any>(this.url + '/' + idImagen)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -45,7 +45,7 @@ export class imagenService {
     const datos: FormData = new FormData()
     datos.append("imagen", new Blob([JSON.stringify({})], { type: 'application/json' }))
     datos.append("file", file)
-    return this.http.post<any>(this.urlLocal + "/" + idProducto, datos)
+    return this.http.post<any>(this.url + "/" + idProducto, datos)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -55,11 +55,11 @@ export class imagenService {
   }
 
   getImagenesByCategoria(idCategoria: number): Observable<ImagenCategoria[]> {
-    return this.http.get<ImagenCategoria[]>(this.urlLocal2 + '/' + idCategoria)
+    return this.http.get<ImagenCategoria[]>(this.url2 + '/' + idCategoria)
   }
 
   deleteImagenCategoria(idImagen: number): Observable<boolean> {
-    return this.http.delete<any>(this.urlLocal2 + '/' + idImagen)
+    return this.http.delete<any>(this.url2 + '/' + idImagen)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -72,7 +72,7 @@ export class imagenService {
     const datos: FormData = new FormData()
     datos.append("imagen", new Blob([JSON.stringify({})], { type: 'application/json' }))
     datos.append("file", file)
-    return this.http.post<any>(this.urlLocal2 + "/" + idCategoria, datos)
+    return this.http.post<any>(this.url2 + "/" + idCategoria, datos)
       .pipe(switchMap(resp => {
         console.log(resp)
         return of(true);

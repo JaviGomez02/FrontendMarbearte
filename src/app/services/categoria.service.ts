@@ -19,11 +19,11 @@ export class categoriaService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   getCategorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(this.urlLocal)
+    return this.http.get<Categoria[]>(this.url)
   }
 
   addCategoria(nombre: string, descripcion: string): Observable<boolean> {
-    return this.http.post<any>(this.urlLocal, { "nombre": nombre, "descripcion": descripcion }, this.httpOptions)
+    return this.http.post<any>(this.url, { "nombre": nombre, "descripcion": descripcion }, this.httpOptions)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -34,7 +34,7 @@ export class categoriaService {
 
 
   deleteCategoria(id: number): Observable<boolean> {
-    return this.http.delete<any>(this.urlLocal + '/' + id)
+    return this.http.delete<any>(this.url + '/' + id)
       .pipe(switchMap(resp => {
         return of(true);
       }), catchError(error => {
@@ -44,7 +44,7 @@ export class categoriaService {
   }
 
   editarCategoria(id: number, nombre: string, descripcion: string): Observable<boolean> {
-    return this.http.put<any>(this.urlLocal + '/' + id, { "nombre": nombre, "descripcion": descripcion }, this.httpOptions)
+    return this.http.put<any>(this.url + '/' + id, { "nombre": nombre, "descripcion": descripcion }, this.httpOptions)
       .pipe(switchMap(resp => {
         return of(true)
       }), catchError(error => {
@@ -54,7 +54,7 @@ export class categoriaService {
   }
 
   getCategoriaById(id: number): Observable<Categoria> {
-    return this.http.get<Categoria>(this.urlLocal + '/' + id)
+    return this.http.get<Categoria>(this.url + '/' + id)
   }
 
 

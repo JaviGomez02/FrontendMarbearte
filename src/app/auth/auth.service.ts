@@ -15,20 +15,24 @@ import { DecodeToken } from '../interfaces/decode-token.interface';
 export class authService {
 
     url: string = 'https://apimarbearte-production.up.railway.app/auth'
-    urlLocal:string='http://localhost:8082/auth'
+    urlLocal: string = 'http://localhost:8082/auth'
+
+    urlAuxLocal: string = 'http://localhost:8082/jwt'
+    urlAux:string = 'https://apimarbearte-production.up.railway.app/jwt'
+
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
 
 
     constructor(private http: HttpClient, private cookieService: CookieService) {
-        this.http.get('http://localhost:8082/jwt')
+        this.http.get(this.urlAux)
             .subscribe({
                 next: () => this.loged.next(true),
                 error: () => this.loged.next(false)
             })
 
-        this.http.get('http://localhost:8082/jwtAdmin')
+        this.http.get(this.urlAux+'Admin')
             .subscribe({
                 next: () => this.admin.next(true),
                 error: () => this.admin.next(false)
@@ -48,7 +52,7 @@ export class authService {
     }
 
     register(username: string, email: string, contrasena: string, nombre: string): Observable<boolean> {
-        return this.http.post<any>(this.urlLocal + "/register", { "username": username, "contrasena": contrasena, "nombre": nombre, "email": email }, this.httpOptions)
+        return this.http.post<any>(this.url + "/register", { "username": username, "contrasena": contrasena, "nombre": nombre, "email": email }, this.httpOptions)
             .pipe(switchMap(resp => {
                 return of(true);
             }), catchError(error => {
@@ -71,7 +75,7 @@ export class authService {
     login(username: string, password: string): Observable<boolean> {
         // console.log(username)
         // console.log(password)
-        return this.http.post<AuthResponse>(this.urlLocal + "/login", { username, password }, this.httpOptions)
+        return this.http.post<AuthResponse>(this.url + "/login", { username, password }, this.httpOptions)
             .pipe(switchMap(token => {
                 this.cookieService.set('token', token.token)
                 if (this.decodeJwt(token.token).role == 'ADMIN') {
