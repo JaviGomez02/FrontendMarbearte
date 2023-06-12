@@ -109,7 +109,7 @@ export class ColorProductoComponent implements OnInit {
   save() {
     if (this.coloresAnnadir.length) {
       for (let i = 0; i < this.coloresAnnadir.length; i++) {
-        console.log(this.coloresAnnadir[i])
+        // console.log(this.coloresAnnadir[i])
         this.servicioProducto.asignarColor(this.idProducto, this.coloresAnnadir[i].color)
           .subscribe({
             next: (resp) => {

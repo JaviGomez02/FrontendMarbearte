@@ -17,7 +17,7 @@ export class VerifyComponent implements OnInit {
     const code:string = (this.route.snapshot.queryParams['code'])
     const username:string=(this.route.snapshot.queryParams['username'])
     
-    console.log(code, username)
+    // console.log(code, username)
 
     this.servicio.verify(code, username)
     .subscribe({

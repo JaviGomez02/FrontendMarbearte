@@ -50,7 +50,7 @@ export class ProductsAddComponent implements OnInit {
       this.myForm.markAllAsTouched()
     }
     else {
-      console.log(this.myForm.value.nombre, this.myForm.value.descripcion, this.myForm.value.price, this.myForm.value.stock, this.myForm.value.opcionCategoria)
+      // console.log(this.myForm.value.nombre, this.myForm.value.descripcion, this.myForm.value.price, this.myForm.value.stock, this.myForm.value.opcionCategoria)
       this.productService.addProduct(this.myForm.value.nombre, this.myForm.value.descripcion, this.myForm.value.price, this.myForm.value.stock, this.myForm.value.opcionCategoria)
         .subscribe({
           next: (resp) => {

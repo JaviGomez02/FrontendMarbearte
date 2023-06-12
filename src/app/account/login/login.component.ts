@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   save(){
-    console.log("enviado")
+    // console.log("enviado")
   }
 
   notValid(campo: string): boolean{
