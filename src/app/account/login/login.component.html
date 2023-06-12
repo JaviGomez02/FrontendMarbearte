@@ -1,6 +1,3 @@
-
-
-
 <div class="container-login">
   <div class="container-form">
     <p class="titulo-login">Login</p>
@@ -8,35 +5,26 @@
 
     <form class="form-login" (ngSubmit)="signIn()" #myForm="ngForm">
       <div class="elemento-form">
-        <input type="text" 
-              placeholder="Nombre de usuario"
-              [ngModel]="initForm.username"
-              name="username"
-              required
-              minlength="6">
-              <p class="form-text text-danger" *ngIf="notValid('username')">
-                    El nombre de usuario debe tener al menos 6 letras
-              </p>
+        <input type="text" placeholder="Nombre de usuario" [ngModel]="initForm.username" name="username" required
+          minlength="6">
+        <p class="form-text text-danger aux" *ngIf="notValid('username')">
+          El nombre de usuario debe tener al menos 6 letras
+        </p>
       </div>
       <div class="elemento-form">
-        <input type="password" 
-                placeholder="********"
-                name="password"
-                [ngModel]="initForm.password"
-                required
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-        <p class="form-text text-danger" style="margin-left: 20px; margin-right: 20px;" *ngIf="notValid('password')">
+        <input type="password" placeholder="********" name="password" [ngModel]="initForm.password" required
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+        <p class="form-text text-danger aux" style="margin-left: 20px; margin-right: 20px;" *ngIf="notValid('password')">
           La contraseña debe contener un número, una mayúscula, una minúscula, y al menos 8 o más carácteres
 
         </p>
       </div>
-      <p><button type="submit" class="boton"
-              [disabled]="myForm.invalid"
-              [className]="myForm.invalid ? 'boton-disable': 'boton'">Entrar
-      </button></p>
-      <p class="info-registro">No tienes ninguna cuenta? <a href="#" [routerLink]="['/account/register']">Regístrate</a></p>
-     
+      <p><button type="submit" class="boton" [disabled]="myForm.invalid"
+          [className]="myForm.invalid ? 'boton-disable': 'boton'">Entrar
+        </button></p>
+      <p class="info-registro">No tienes ninguna cuenta? <a href="#" [routerLink]="['/account/register']">Regístrate</a>
+      </p>
+
     </form>
   </div>
 </div>
-

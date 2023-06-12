@@ -172,6 +172,16 @@ input:hover {
     }
 
     .elemento-form {
-        height: 60px;
+        height: 80px;
+    }
+
+    .aux {
+        margin-left:5px !important;
+        margin-right:5px !important;
+        padding: 0 !important;
+    }
+
+    .text-danger{
+        font-size: 10px;
     }
 }
