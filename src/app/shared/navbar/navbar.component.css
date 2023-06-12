@@ -181,12 +181,10 @@ a {
   border-bottom: solid;
   border-width: 1px;
   border-color: rgb(192, 192, 192);
-  overflow-y: scroll;
-  height: 470px;
+  overflow-y: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr;
-
 }
 
 .ul .li:hover .menu-productos {
@@ -238,7 +236,7 @@ a {
 
 .img-categoria {
   width: 200px;
-  height: 300px;
+  height: 250px;
   object-fit: cover;
 }
 
