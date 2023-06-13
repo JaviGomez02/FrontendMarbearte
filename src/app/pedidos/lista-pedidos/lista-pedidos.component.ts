@@ -29,6 +29,16 @@ export class ListaPedidosComponent implements OnInit {
           next: (resp) => {
             this.usuario = resp
             this.listaPedidos = resp.pedidos
+            // if(this.listaPedidos.length==0){
+            //   Swal.fire({
+            //     icon: 'info',
+            //     title: 'Oops',
+            //     text: 'Parece que todavía no tienes ningún pedido, volviendo...',
+            //     timer: 2000
+            //   }).then((result) => {
+            //     this.route.navigateByUrl('/')
+            //   })
+            // }
           },
           error: (error) => {
             Swal.fire({
