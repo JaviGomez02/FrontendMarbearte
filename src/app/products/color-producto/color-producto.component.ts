@@ -49,6 +49,10 @@ export class ColorProductoComponent implements OnInit {
         }
       })
 
+    this.getColores()
+  }
+
+  getColores(){
     this.servicioColor.getColores()
       .subscribe({
         next: (resp) => {
@@ -92,7 +96,7 @@ export class ColorProductoComponent implements OnInit {
                   'Se ha eliminado el color correctamente.',
                   'success'
                 ).then((resp) => {
-                  window.location.reload()
+                  this.getColores()
                 })
               }
               else {
