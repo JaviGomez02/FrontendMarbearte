@@ -200,12 +200,12 @@
     }
 
     .producto {
-        height: 500px;
+        height: 370px;
         margin-bottom: 40px;
     }
     .img-producto {
         width: 100%;
-        height: 500px;
+        height: 370px;
         margin-bottom: 20px;
         object-fit: cover;
     }
