@@ -78,10 +78,10 @@ export class ListaPedidosComponent implements OnInit {
       html:
         '<select id="motivo" class="swal2-input" style="width:400px;">' +
         '<option value="" disabled selected hidden>Selecciona un motivo</option>' +
-        '<option value="defectuoso">El pedido ha llegado defectuoso</option>' +
-        '<option value="llegada">El pedido no ha llegado</option>' +
-        '<option value="falso">El paquete recibido no concuerda con el pedido</option>' +
-        '<option value="otros">Otros</option>' +
+        '<option value="Defectuoso">El pedido ha llegado defectuoso</option>' +
+        '<option value="Llegada">El pedido no ha llegado</option>' +
+        '<option value="Falso">El paquete recibido no concuerda con el pedido</option>' +
+        '<option value="tros">Otros</option>' +
         '</select>' +
         '<textarea id="comentario" placeholder="Introduce tu comentario" style="width:400px;" class="swal2-textarea"></textarea>',
       showCancelButton: true,
