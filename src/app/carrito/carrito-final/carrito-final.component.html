@@ -6,7 +6,7 @@
             <div class="producto" *ngFor="let item of listaProductos">
                 <div class="img-item">
                     <img *ngIf="item.producto.imagenes.length>=1" [routerLink]="['/products', item.producto.id]"
-                        class="img" src="{{item.producto.imagenes[1].img}}">
+                        class="img" src="{{item.producto.imagenes[0].img}}">
                     <img *ngIf="item.producto.imagenes.length==0" [routerLink]="['/products', item.producto.id]"
                         class="img"
                         src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
