@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { categoriaService } from 'src/app/services/categoria.service';
 import { colorService } from 'src/app/services/color.service';
 import Swal from 'sweetalert2';
@@ -10,11 +10,32 @@ import Swal from 'sweetalert2';
   templateUrl: './color-add.component.html',
   styleUrls: ['./color-add.component.css']
 })
-export class ColorAddComponent {
+export class ColorAddComponent implements OnInit {
 
-  color!:string;
+  color!: string;
 
-  constructor(private fb: FormBuilder, private colorService: colorService, private route: Router) { }
+  idProducto!: number;
+
+  constructor(private fb: FormBuilder, private colorService: colorService, private router: Router, private route: ActivatedRoute) { }
+
+
+  ngOnInit(): void {
+    this.idProducto = this.route.snapshot.queryParams['idProducto']
+    if (this.idProducto <= 0 || this.idProducto == undefined) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops',
+        text: 'Ocurrió un error inesperado, volviendo...',
+        timer: 2000
+      }).then((result) => {
+        this.router.navigateByUrl('/products/all')
+      })
+    }
+  }
+
+  cancelar() {
+    this.router.navigateByUrl("/products/color?idProducto=" + this.idProducto)
+  }
 
   myForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3)]],
@@ -40,8 +61,10 @@ export class ColorAddComponent {
                 icon: 'success',
                 title: 'Color creado correctamente',
                 text: 'Nombre: ' + this.myForm.value.nombre + ', color: ' + this.myForm.value.color
+              }).then((result) => {
+                this.router.navigateByUrl("/products/color?idProducto=" + this.idProducto)
               })
-              this.route.navigate(["/products/all"])
+
             }
             else {
               Swal.fire({

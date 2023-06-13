@@ -19,7 +19,7 @@
       <button class="boton-cancelar" type="button" [routerLink]="['/products/all']">Cancelar</button>
       
     </div>
-    <a [routerLink]="['/products/color/add']"><p class="enlace-crear">Quiere crear un nuevo color? Pinche aquí</p></a>
+    <a (click)="irAnnadir()"><p class="enlace-crear">Quiere crear un nuevo color? Pinche aquí</p></a>
 
   </div>
 </div>

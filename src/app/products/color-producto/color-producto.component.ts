@@ -36,10 +36,16 @@ export class ColorProductoComponent implements OnInit {
       .subscribe({
         next: (resp) => {
           this.producto = resp
-
         },
         error: (error) => {
-          console.log(error)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops',
+            text: 'Ocurrió un error inesperado, volviendo...',
+            timer: 2000
+          }).then((result) => {
+            this.router.navigateByUrl('/products/all')
+          })
         }
       })
 
@@ -47,18 +53,28 @@ export class ColorProductoComponent implements OnInit {
       .subscribe({
         next: (resp) => {
           this.listaColores = resp
-
         },
         error: (error) => {
-          console.log(error)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops',
+            text: 'Ocurrió un error inesperado, volviendo...',
+            timer: 2000
+          }).then((result) => {
+            this.router.navigateByUrl('/products/all')
+          })
         }
       })
   }
 
-  eliminarColor(codigoColor: string, nombre:String) {
+  irAnnadir() {
+    this.router.navigateByUrl('/products/color/add?idProducto=' + this.idProducto)
+  }
+
+  eliminarColor(codigoColor: string, nombre: String) {
     let newCodigo: string = codigoColor.slice(1)
     Swal.fire({
-      title: '¿Seguro que desea borrar el color '+nombre+'?',
+      title: '¿Seguro que desea borrar el color ' + nombre + '?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
