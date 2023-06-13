@@ -77,7 +77,7 @@
         </div>
         <div class="divRight">
             <div class="dropdown">
-                <img (click)="mostrarCarrito()"
+                <img *ngIf="!(isAdmin$|async)" (click)="mostrarCarrito()"
                     src="https://res.cloudinary.com/dplcge3sb/image/upload/v1684083159/shopping_cart_FILL0_wght400_GRAD0_opsz48_ojftax.svg"
                     class="img-carrito">
                 <button class="btn btn-info dropdown-toggle btn-aux"
