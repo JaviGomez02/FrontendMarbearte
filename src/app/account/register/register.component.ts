@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Algo ha ido mal. Inténtelo de nuevo'
+            text: 'El nombre de usuario ya está en uso'
           })
         }
       }
