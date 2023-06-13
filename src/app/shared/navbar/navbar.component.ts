@@ -66,35 +66,42 @@ export class NavbarComponent implements OnInit {
   }
 
   mostrarCarrito() {
-    this.isLoged$
-      .subscribe({
-        next: (resp) => {
-          if (resp) {
-            this.carrito = true
-            document.querySelector('.overlay')?.classList.remove("overlayCerrado")
-            document.querySelector('.overlay')?.classList.add("overlayAbierto")
-            this.claseCarrito = 'abierto'
-          }
-          else{
-            Swal.fire({
-              icon: "info",
-              title: "Inicie sesión",
-              text: "Necesita iniciar sesión para acceder al carrito",
-              timer: 2000
-            }).then((resp)=>{
-              this.route.navigateByUrl("account/login")
-            })
-          }
-        }
-      })
+    // this.isLoged$
+    //   .subscribe({
+    //     next: (resp) => {
+    //       if (resp) {
+    //         this.carrito = true
+    //         document.querySelector('.overlay')?.classList.remove("overlayCerrado")
+    //         document.querySelector('.overlay')?.classList.add("overlayAbierto")
+    //         this.claseCarrito = 'abierto'
+    //       }
+    //       else {
+    //         Swal.fire({
+    //           icon: "info",
+    //           title: "Inicie sesión",
+    //           text: "Necesita iniciar sesión para acceder al carrito",
+    //           timer: 2000
+    //         }).then((resp) => {
+    //           this.route.navigateByUrl("account/login")
+    //         })
+    //       }
+    //     }
+    //   })
+
+    this.carrito = true
+    this.claseCarrito = 'abierto'
 
   }
 
   cerrarCarrito() {
-    document.querySelector('.overlay')?.classList.remove("overlayAbierto")
-    document.querySelector('.overlay')?.classList.add("overlayCerrado")
-    this.claseCarrito = 'cerrado';
     this.carrito = false;
+    this.claseCarrito = 'cerrado';
+  }
+
+  recibirEvento(flag:boolean){
+    if(flag){
+      this.cerrarCarrito()
+    }
   }
 
 

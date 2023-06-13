@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ItemCarrito } from 'src/app/interfaces/itemCarrito.interface';
@@ -15,11 +15,15 @@ export class CarritoComponent implements OnInit {
 
   listaProductos: ItemCarrito[] = this.servicioCarrito.getListaCarrito();
 
+  
+  @Output() miEvento = new EventEmitter<boolean>();
+
+
   constructor(private cookies: CookieService, private servicioCarrito: carritoService, private router: Router) { }
+
 
   ngOnInit(): void {
     // console.log(this.listaProductos)
-
   }
 
   calcularTotal(): any {
@@ -41,10 +45,11 @@ export class CarritoComponent implements OnInit {
   irCesta() {
     if (this.listaProductos.length) {
       this.router.navigateByUrl("/cart")
+      this.miEvento.emit(true)
     }
     else{
       Swal.fire({
-        icon: 'error',
+        icon: 'info',
         title: 'No hay productos',
         text: 'Añada algún producto al carrito para ir a la cesta'
       })
