@@ -93,15 +93,15 @@ export class CarritoFinalComponent implements OnInit {
         // console.log('OnCancel', data, actions);
       },
       onError: err => {
-        console.log('OnError', err);
-      },
-      onClick: (data, actions) => {
-        // console.log('onClick', data, actions);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Algo ha ido mal'
         })
+      },
+      onClick: (data, actions) => {
+        // console.log('onClick', data, actions);
+
       }
     };
   }
@@ -311,7 +311,8 @@ export class CarritoFinalComponent implements OnInit {
               if (resp) {
                 Swal.fire({
                   icon: 'success',
-                  title: 'Pedido realizado correctamente!'
+                  title: 'Pedido realizado correctamente!',
+                  text: 'Puedes revisar tu pedido en el apartado "Mis pedidos"'
                 }).then((resp) => {
                   window.location.reload()
                 })

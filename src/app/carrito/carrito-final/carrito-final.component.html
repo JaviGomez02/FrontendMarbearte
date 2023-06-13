@@ -5,8 +5,10 @@
             <p *ngIf="!listaProductos.length" class="titulo-no">No hay productos en la cesta</p>
             <div class="producto" *ngFor="let item of listaProductos">
                 <div class="img-item">
-                    <img *ngIf="item.producto.imagenes.length>=1" [routerLink]="['/products', item.producto.id]" class="img" src="{{item.producto.imagenes[1].img}}">
-                    <img *ngIf="item.producto.imagenes.length==0" [routerLink]="['/products', item.producto.id]" class="img"
+                    <img *ngIf="item.producto.imagenes.length>=1" [routerLink]="['/products', item.producto.id]"
+                        class="img" src="{{item.producto.imagenes[1].img}}">
+                    <img *ngIf="item.producto.imagenes.length==0" [routerLink]="['/products', item.producto.id]"
+                        class="img"
                         src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg">
                 </div>
                 <div class="txt-item">
@@ -37,7 +39,8 @@
                 </button>
             </div>
             <div class="lista-direcciones">
-                <div class="direccion-row" *ngFor="let item of listaDirecciones;let i=index" [ngClass]="{'borde-aux':i==0}">
+                <div class="direccion-row" *ngFor="let item of listaDirecciones;let i=index"
+                    [ngClass]="{'borde-aux':i==0}">
                     <div class="container-select">
                         <mat-radio-button color="primary" value="{{item.id}}" (click)="seleccionarDireccion(item.id)">
                         </mat-radio-button>
@@ -47,7 +50,8 @@
                             {{item.localidad}}, {{item.codigoPostal}}. {{item.ciudad}}</p>
                     </div>
                     <div class="container-eliminar">
-                        <button mat-icon-button color="warn" aria-label="Example icon button with a home icon" (click)="borrarDireccion(item.id)">
+                        <button mat-icon-button color="warn" aria-label="Example icon button with a home icon"
+                            (click)="borrarDireccion(item.id)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
@@ -84,7 +88,16 @@
                 </div>
                 <!-- <button [ngClass]="{'boton':true,'boton-disable':!listaProductos.length}"
                     (click)="comprar()">Comprar</button> -->
-                    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+
+
+                <span *ngIf='listaProductos.length'>
+                    <span *ngIf="idDireccion==0">
+                        Debes seleccionar una dirección
+                    </span>
+                    <span *ngIf="idDireccion!=0">
+                        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+                    </span>
+                </span>
             </div>
         </div>
     </div>
