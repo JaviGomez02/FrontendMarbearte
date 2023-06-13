@@ -148,6 +148,9 @@ MIT
 ngx-cookie-service
 MIT
 
+ngx-paypal
+MIT
+
 rxjs
 Apache-2.0
                                Apache License
