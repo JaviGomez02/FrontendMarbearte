@@ -8,6 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatIconModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    NgxPayPalModule
   ],
   exports: [
     CarritoComponent,

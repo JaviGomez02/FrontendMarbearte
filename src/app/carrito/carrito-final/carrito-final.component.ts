@@ -9,6 +9,11 @@ import { direccionService } from 'src/app/services/direccion.service';
 import { pedidoService } from 'src/app/services/pedido.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
+import {
+  IPayPalConfig,
+  ICreateOrderRequest
+} from 'ngx-paypal';
+
 
 @Component({
   selector: 'app-carrito-final',
@@ -27,6 +32,9 @@ export class CarritoFinalComponent implements OnInit {
 
   token!: string
 
+  public payPalConfig?: IPayPalConfig;
+
+
   ngOnInit(): void {
     // if(!this.listaProductos.length){
     //   Swal.fire({
@@ -38,7 +46,65 @@ export class CarritoFinalComponent implements OnInit {
     //     this.route.navigate(["/"])
     //   })
     // }
+    this.initConfig();
     this.obtenerDirecciones()
+  }
+
+  private initConfig(): void {
+    this.payPalConfig = {
+      currency: 'EUR',
+      clientId: 'AaQ6uY9Tnzc99eBuzOXnYkqWwxE26o7AAOn-TjoFlVmEwC4aOq0ACAA0vSah2vt8cYFmpOaDD6XqDsjW',
+      createOrderOnClient: (data) => <ICreateOrderRequest>{
+        intent: 'CAPTURE',
+        purchase_units: [{
+          amount: {
+            currency_code: 'EUR',
+            value: '9.99',
+            breakdown: {
+              item_total: {
+                currency_code: 'EUR',
+                value: '9.99'
+              }
+            }
+          },
+          items: [{
+            name: 'Enterprise Subscription',
+            quantity: '1',
+            category: 'DIGITAL_GOODS',
+            unit_amount: {
+              currency_code: 'EUR',
+              value: '9.99',
+            },
+          }]
+        }]
+      },
+      advanced: {
+        commit: 'true'
+      },
+      style: {
+        label: 'paypal',
+        layout: 'vertical'
+      },
+      onApprove: (data, actions) => {
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then((details: any) => {
+          console.log('onApprove - you can get full order details inside onApprove: ', details);
+        });
+
+      },
+      onClientAuthorization: (data) => {
+        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
+      },
+      onError: err => {
+        console.log('OnError', err);
+      },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+      }
+    };
   }
 
   obtenerDirecciones() {

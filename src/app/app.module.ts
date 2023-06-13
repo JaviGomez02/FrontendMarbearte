@@ -18,6 +18,9 @@ import { RolGuard } from './rol-guard.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 
+import { NgxPayPalModule } from 'ngx-paypal';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 
 @NgModule({
@@ -37,7 +40,9 @@ import {MatButtonModule} from '@angular/material/button';
     CategoriasModule,
     UsuariosModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxPayPalModule,
+    MatProgressSpinnerModule
     
   ],
   providers: [AuthGuard, RolGuard,{

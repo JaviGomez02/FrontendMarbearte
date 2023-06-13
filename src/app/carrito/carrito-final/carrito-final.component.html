@@ -82,8 +82,9 @@
                         <p class="texto-precio">{{calcularTotal()}} €</p>
                     </div>
                 </div>
-                <button [ngClass]="{'boton':true,'boton-disable':!listaProductos.length}"
-                    (click)="comprar()">Comprar</button>
+                <!-- <button [ngClass]="{'boton':true,'boton-disable':!listaProductos.length}"
+                    (click)="comprar()">Comprar</button> -->
+                    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
             </div>
         </div>
     </div>
