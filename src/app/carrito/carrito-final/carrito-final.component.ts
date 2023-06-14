@@ -314,7 +314,7 @@ export class CarritoFinalComponent implements OnInit {
                   title: 'Pedido realizado correctamente!',
                   text: 'Puedes revisar tu pedido en el apartado "Mis pedidos"'
                 }).then((resp) => {
-                  window.location.reload()
+                  // window.location.reload()
                 })
 
                 this.servicioCarrito.vaciarCarrito();

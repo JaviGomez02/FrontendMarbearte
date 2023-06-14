@@ -31,16 +31,22 @@ export class AllCategoriasComponent implements OnInit {
       processing: true
     };
 
-    this.categoriaService.getCategorias()
-      .subscribe({
-        next: (resp) => {
-          this.lista = resp
-          this.dtTrigger.next(this.lista)
-        },
-        error: (error) => {
+    this.getCategorias()
 
-        }
-      })
+    
+  }
+
+  getCategorias(){
+    this.categoriaService.getCategorias()
+    .subscribe({
+      next: (resp) => {
+        this.lista = resp
+        this.dtTrigger.next(this.lista)
+      },
+      error: (error) => {
+
+      }
+    })
   }
 
   ngOnDestroy(): void {
