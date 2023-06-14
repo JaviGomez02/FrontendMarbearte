@@ -180,6 +180,7 @@ export class CarritoFinalComponent implements OnInit {
   }
 
   addDireccion() {
+    const regex = /^\d+$/;
     Swal.fire({
       title: 'Añadir una direccion',
       html:
@@ -217,6 +218,13 @@ export class CarritoFinalComponent implements OnInit {
             icon: 'warning',
             title: 'Direccion no añadida',
             text: 'Debes completar todos los campos'
+          })
+        }
+        else if(!regex.test(codigoPostal)){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops',
+            text: 'Código postal incorrecto'
           })
         }
         else {
