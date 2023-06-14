@@ -10,10 +10,10 @@
                 </p>
             </div>
             <div class="elemento-form">
-                <input type="text" class="input-nombre" placeholder="Código hexadecimal del nuevo color"
+                <input type="text" class="input-nombre" placeholder="Código hexadecimal del nuevo color: #XXXXXX"
                     formControlName="color">
                 <p class="form-text text-danger" *ngIf="isValidField('color')">
-                    Código inválido
+                    El campo debe tener el formato #XXXXXX, donde X representa un dígito hexadecimal.
                 </p>
             </div>
             <div class="grid-botones">

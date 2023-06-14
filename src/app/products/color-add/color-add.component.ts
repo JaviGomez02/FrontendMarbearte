@@ -39,7 +39,7 @@ export class ColorAddComponent implements OnInit {
 
   myForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3)]],
-    color: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(7)]]
+    color: ['', [Validators.required,Validators.pattern(/^\#[0-9A-Fa-f]{6}$/)]]
   })
 
   isValidField(field: string) {

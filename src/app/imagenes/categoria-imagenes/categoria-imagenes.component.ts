@@ -71,25 +71,45 @@ export class CategoriaImagenesComponent implements OnInit {
     })
 
     if (file) {
-      this.servicioImagen.addImagenCategoria(file, this.idCategoria)
-        .subscribe({
-          next: (resp) => {
-            Swal.fire(
-              'Añadido!',
-              'La imagen ha sido añadida correctamente.',
-              'success'
-            ).then((resp) => {
-              window.location.reload()
-            })
-          },
-          error: (error) => {
-            Swal.fire(
-              'Oops!',
-              'Ocurrió un error inesperado.',
-              'error'
-            )
-          }
+      const tamañoMaximo = 1048576;
+      const nombreArchivo = file.name;
+      const extension = nombreArchivo.substring(nombreArchivo.lastIndexOf('.') + 1).toLowerCase();
+      if (file.size >= tamañoMaximo) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Tamaño superado',
+          text: 'El archivo que intentas subir es demasiado grande'
         })
+      }
+      else if (!(extension === 'jpg' || extension === 'jpeg' || extension === 'png' || extension === 'gif' || extension === 'webp')) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Tipo incorrecto',
+          text: 'El archivo que intentas subir no es una imagen'
+        })
+      }
+      else {
+        this.servicioImagen.addImagenCategoria(file, this.idCategoria)
+          .subscribe({
+            next: (resp) => {
+              Swal.fire(
+                'Añadido!',
+                'La imagen ha sido añadida correctamente.',
+                'success'
+              ).then((resp) => {
+                window.location.reload()
+              })
+            },
+            error: (error) => {
+              Swal.fire(
+                'Oops!',
+                'Ocurrió un error inesperado.',
+                'error'
+              )
+            }
+          })
+      }
+
     }
 
   }
