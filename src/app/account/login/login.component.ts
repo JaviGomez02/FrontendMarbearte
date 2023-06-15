@@ -62,7 +62,6 @@ export class LoginComponent implements OnInit {
               this.route.navigate(["/"])
             })
             this.loading = false
-
           }
           else {
             Swal.fire({

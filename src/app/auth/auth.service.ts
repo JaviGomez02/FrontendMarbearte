@@ -7,7 +7,6 @@ import jwt_decode from "jwt-decode";
 import { DecodeToken } from '../interfaces/decode-token.interface';
 
 
-
 @Injectable({
     providedIn: 'root'
 })
