@@ -77,27 +77,32 @@ export class authService {
         // console.log(password)
         return this.http.post<AuthResponse>(this.url + "/login", { username, password }, this.httpOptions)
             .pipe(switchMap(token => {
-                this.cookieService.set('token', token.token)
+                // this.cookieService.set('token', token.token)
+                localStorage.setItem('token', token.token)
+                localStorage.setItem('nombreUsuario', username)
                 if (this.decodeJwt(token.token).role == 'ADMIN') {
                     this.admin.next(true)
                 }
                 this.loged.next(true)
                 return of(true);
             }), catchError(error => {
-                this.cookieService.delete('token');
+                localStorage.removeItem('token')
+                // this.cookieService.delete('token');
                 return of(false);
             })
             )
     }
 
     logout() {
-        this.cookieService.delete('token')
+        localStorage.removeItem('token')
+        localStorage.removeItem('nombreUsuario')
+        // this.cookieService.delete('token')
         this.admin.next(false)
         this.loged.next(false)
     }
 
     isLoggedIn() {
-        if (this.cookieService.get('token')) {
+        if (localStorage.getItem('token')) {
             return true
         }
         else {
@@ -106,7 +111,8 @@ export class authService {
     }
 
     isAdminGuard() {
-        let token = this.cookieService.get('token')
+        // let token = this.cookieService.get('token')
+        let token = localStorage.getItem('token')
         if (token) {
             let rol = this.decodeJwt(token).role
             if (rol == 'ADMIN') {

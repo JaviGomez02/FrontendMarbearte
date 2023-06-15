@@ -30,7 +30,7 @@ export class CarritoFinalComponent implements OnInit {
 
   idDireccion: number = 0
 
-  token!: string
+  token!: string | null
 
   loading: boolean = false
 
@@ -127,7 +127,8 @@ export class CarritoFinalComponent implements OnInit {
 
   obtenerDirecciones() {
     this.loading = true
-    this.token = this.cookieService.get('token')
+    // this.token = this.cookieService.get('token')
+    this.token=localStorage.getItem('token')
     if (this.token) {
       this.servicioUsuario.getUsuarioByUsername(this.authService.decodeJwt(this.token).sub)
         .subscribe({

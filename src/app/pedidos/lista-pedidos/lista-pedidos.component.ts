@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export class ListaPedidosComponent implements OnInit {
 
   loading: boolean = false
-  token!: string
+  token!: string | null
   usuario!: Usuario
   listaPedidos: Pedido[] = []
   meses: string[] = ["Enero", 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
@@ -23,8 +23,8 @@ export class ListaPedidosComponent implements OnInit {
   constructor(private cookieService: CookieService, private servicioPedido: pedidoService, private authService: authService, private servicioUsuario: UsuarioService, private route: Router) { }
 
   ngOnInit(): void {
-    this.token = this.cookieService.get('token')
-
+    // this.token = this.cookieService.get('token')
+    this.token=localStorage.getItem('token')
     this.getUsuario()
   }
 

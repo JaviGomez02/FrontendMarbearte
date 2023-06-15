@@ -21,7 +21,7 @@ export class UpdateUsuarioComponent implements OnInit {
 
   nombreUsuario!: string
 
-  token!: string
+  token!: string | null
 
   loading: boolean = false
 
@@ -37,8 +37,9 @@ export class UpdateUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.token = this.cookies.get('token')
-    this.nombreUsuario = this.authService.decodeJwt(this.token).sub
+    // this.token = this.cookies.get('token')
+    this.token=localStorage.getItem('token')
+    this.nombreUsuario = this.authService.decodeJwt(this.token as string).sub
 
     this.getusuario()
   }

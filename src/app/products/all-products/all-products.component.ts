@@ -21,7 +21,7 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
   isAdmin: boolean = false
 
-  token: string = ""
+  token!:string | null
 
   lista: Content[] = []
 
@@ -54,7 +54,8 @@ export class AllProductsComponent implements OnInit, OnDestroy {
         }
       })
 
-    this.token = this.cookieService.get('token')
+    // this.token = this.cookieService.get('token')
+    this.token=localStorage.getItem('token')
     if (this.token && this.authService.decodeJwt(this.token).role == 'ADMIN') {
       this.isAdmin = true;
     }

@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
 
   listaCategorias: Categoria[] = []
 
-  token!: string
+  token!: string | null
 
   claseCarrito: string = ''
 
@@ -43,11 +43,12 @@ export class NavbarComponent implements OnInit {
         }
       })
 
-    this.token = this.cookieService.get('token')
-    if (this.token) {
-      this.usuario = this.authService.decodeJwt(this.token).sub
+    // this.token = this.cookieService.get('token')
+    // this.token=localStorage.getItem('token')
+    // if (this.token) {
+    //   this.usuario = this.authService.decodeJwt(this.token).sub
 
-    }
+    // }
   }
 
   logout() {
@@ -63,7 +64,8 @@ export class NavbarComponent implements OnInit {
 
   updateUsuario() {
     // console.log(this.usuario)
-    this.route.navigateByUrl('usuarios/update/' + this.usuario)
+    const nombreUsuario=localStorage.getItem('nombreUsuario')
+    this.route.navigateByUrl('usuarios/update/' + nombreUsuario)
   }
 
   mostrarCarrito() {

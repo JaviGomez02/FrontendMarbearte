@@ -17,8 +17,8 @@ export class AuthInterceptorService implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
   
-    const token: string | null= this.cookies.get('token');
-
+    // const token: string | null= this.cookies.get('token');
+    const token: string | null= localStorage.getItem('token')
     let request = req;
 
     if (token) {
