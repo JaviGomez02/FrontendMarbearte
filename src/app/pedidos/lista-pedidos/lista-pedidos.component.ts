@@ -63,7 +63,7 @@ export class ListaPedidosComponent implements OnInit {
     for (let i = 0; i < lista.length; i++) {
       total += lista[i].price
     }
-    return total
+    return total.toFixed(2)
   }
 
   devolverFechaPedido(index: number) {
