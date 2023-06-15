@@ -17,7 +17,7 @@
   </div>
   <div class="pagination">
     <a (click)="previousPageNumber()">&laquo;</a>
-    <a *ngFor="let item of listaPagination" (click)="setPageNumber(item)">{{item}}</a>
+    <a *ngFor="let item of listaPagination" (click)="setPageNumber(item)" [ngClass]="{'active':item==pageNumber}">{{item}}</a>
     <a (click)="nextPageNumber()">&raquo;</a>
   </div>
 </div>

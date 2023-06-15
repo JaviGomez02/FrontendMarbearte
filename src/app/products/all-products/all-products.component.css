@@ -116,11 +116,14 @@
 }
 
 .pagination a.active {
-    background-color: #4CAF50;
-    color: white;
+    /* background-color: #52468a;
+    color: white; */
+    border-bottom: solid;
+    border-color: black;
+    border-width: 2px;
 }
 
-.pagination a:hover:not(.active) {
+.pagination a:hover {
     background-color: #ddd;
 }
 
