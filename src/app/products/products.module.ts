@@ -12,6 +12,7 @@ import { ProductsEditComponent } from './products-edit/products-edit.component';
 import { ProductComponent } from './product/product.component';
 import { ColorAddComponent } from './color-add/color-add.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -31,7 +32,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     ProductsRoutingModule,
     DataTablesModule,
     ReactiveFormsModule,
-    ColorPickerModule
+    ColorPickerModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     AllProductsComponent

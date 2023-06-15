@@ -15,6 +15,8 @@ export class UpdateCategoriaComponent implements OnInit {
 
   id: number = 0
 
+  loading:boolean=false
+
   myForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     descripcion: [null, [Validators.required, Validators.minLength(10)]]
@@ -27,35 +29,43 @@ export class UpdateCategoriaComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getCategoriaById()
+
+  }
+
+  getCategoriaById(){
+    this.loading=true
     this.categoriaService.getCategoriaById(this.activatedRoute.snapshot.params['id'])
-      .subscribe({
-        next: (resp) => {
-          if (resp) {
-            this.myForm.reset({
-              nombre: resp.nombre,
-              descripcion: resp.descripcion
-            })
-          }
-          else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Algo ha ido mal'
-            }).then((resp) => {
-              this.route.navigateByUrl('/categoria')
-            })
-          }
-        }, error: (error) => {
+    .subscribe({
+      next: (resp) => {
+        if (resp) {
+          this.myForm.reset({
+            nombre: resp.nombre,
+            descripcion: resp.descripcion
+          })
+          this.loading=false
+        }
+        else {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Algo ha ido mal'
           }).then((resp) => {
+            this.loading=false
             this.route.navigateByUrl('/categoria')
           })
         }
-      })
-
+      }, error: (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo ha ido mal'
+        }).then((resp) => {
+          this.loading=false
+          this.route.navigateByUrl('/categoria')
+        })
+      }
+    })
   }
 
 
@@ -65,6 +75,7 @@ export class UpdateCategoriaComponent implements OnInit {
       this.myForm.markAllAsTouched
     }
     else {
+      this.loading=true
       this.categoriaService.editarCategoria(this.activatedRoute.snapshot.params['id'], this.myForm.value.nombre, this.myForm.value.descripcion)
         .subscribe({
           next: (resp) => {
@@ -73,6 +84,7 @@ export class UpdateCategoriaComponent implements OnInit {
               title: 'Categoria actualizada correctamente',
               text: 'Nombre: ' + this.myForm.value.nombre + ', descripcion: ' + this.myForm.value.descripcion
             })
+            this.loading=false
             this.route.navigate(["/categoria"])
           },
           error: (error) => {
@@ -81,6 +93,7 @@ export class UpdateCategoriaComponent implements OnInit {
               'Ocurrió un error inesperado.',
               'error'
             )
+            this.loading=false
           }
         })
     }

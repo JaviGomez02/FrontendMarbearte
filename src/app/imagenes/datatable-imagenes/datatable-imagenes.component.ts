@@ -17,6 +17,9 @@ export class DatatableImagenesComponent implements OnInit {
 
   lista: Imagen[] = []
 
+  loading: boolean = false
+
+  nombreProducto:string=''
 
   producto!: Product
 
@@ -37,27 +40,53 @@ export class DatatableImagenesComponent implements OnInit {
       processing: true
     };
 
+    this.getImagenes()
+
+    this.getProducto()
+
+
+  }
+
+  getProducto() {
+    this.loading = true
     this.servicioProducto.getProducto(this.idProducto)
       .subscribe({
         next: (resp) => {
           this.producto = resp
+          this.nombreProducto=resp.nombre
+          this.loading = false
         },
         error: (error) => {
-
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo ha ido mal'
+          })
+          this.loading = false
         }
       })
+  }
 
+  getImagenes() {
+    this.loading = true
     this.servicioImagen.getImagenesByProduct(this.idProducto)
       .subscribe({
         next: (resp) => {
           this.lista = resp
           this.dtTrigger.next(this.lista)
+          this.loading = false
         },
         error: (error) => {
-
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Algo ha ido mal'
+          })
+          this.loading = false
         }
       })
   }
+
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
@@ -83,7 +112,7 @@ export class DatatableImagenesComponent implements OnInit {
           text: 'El archivo que intentas subir es demasiado grande'
         })
       }
-      else if (!(extension === 'jpg' || extension === 'jpeg' || extension === 'png' || extension === 'gif' || extension==='webp')) {
+      else if (!(extension === 'jpg' || extension === 'jpeg' || extension === 'png' || extension === 'gif' || extension === 'webp')) {
         Swal.fire({
           icon: 'error',
           title: 'Tipo incorrecto',
@@ -91,6 +120,7 @@ export class DatatableImagenesComponent implements OnInit {
         })
       }
       else {
+        this.loading = true
         this.servicioImagen.addImagen(file, this.idProducto)
           .subscribe({
             next: (resp) => {
@@ -101,6 +131,7 @@ export class DatatableImagenesComponent implements OnInit {
               ).then((resp) => {
                 window.location.reload()
               })
+              this.loading = false
             },
             error: (error) => {
               Swal.fire(
@@ -108,6 +139,7 @@ export class DatatableImagenesComponent implements OnInit {
                 'Ocurrió un error inesperado.',
                 'error'
               )
+              this.loading = false
             }
           })
       }
@@ -121,6 +153,7 @@ export class DatatableImagenesComponent implements OnInit {
     Swal.fire({
       title: '¿Seguro que desea borrar la imagen?',
       imageUrl: imagen.img,
+      imageHeight: 300,
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
@@ -128,6 +161,7 @@ export class DatatableImagenesComponent implements OnInit {
       confirmButtonText: 'Si, Borrar'
     }).then((result) => {
       if (result.isConfirmed) {
+        this.loading = true
         this.servicioImagen.deleteImagen(imagen.id)
           .subscribe({
             next: (resp) => {
@@ -138,6 +172,7 @@ export class DatatableImagenesComponent implements OnInit {
               ).then((resp) => {
                 window.location.reload()
               })
+              this.loading = false
             },
             error: (error) => {
               Swal.fire(
@@ -145,6 +180,7 @@ export class DatatableImagenesComponent implements OnInit {
                 'Ocurrió un error inesperado.',
                 'error'
               )
+              this.loading = false
             }
           })
 

@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class ListaPedidosComponent implements OnInit {
 
+  loading: boolean = false
   token!: string
   usuario!: Usuario
   listaPedidos: Pedido[] = []
@@ -23,32 +24,30 @@ export class ListaPedidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.cookieService.get('token')
+
+    this.getUsuario()
+  }
+
+  getUsuario() {
     if (this.token) {
+      this.loading=true
       this.servicioUsuario.getUsuarioByUsername(this.authService.decodeJwt(this.token).sub)
         .subscribe({
           next: (resp) => {
             this.usuario = resp
             this.listaPedidos = resp.pedidos
-            // if(this.listaPedidos.length==0){
-            //   Swal.fire({
-            //     icon: 'info',
-            //     title: 'Oops',
-            //     text: 'Parece que todavía no tienes ningún pedido, volviendo...',
-            //     timer: 2000
-            //   }).then((result) => {
-            //     this.route.navigateByUrl('/')
-            //   })
-            // }
+            this.loading=false
           },
           error: (error) => {
             Swal.fire({
               icon: 'error',
-              title: 'Oops',
+              title: 'Oops...',
               text: 'Ocurrió un error inesperado, volviendo al home...',
               timer: 2000
             }).then((result) => {
               this.route.navigateByUrl('/')
             })
+            this.loading=false
           }
         })
     }
@@ -120,6 +119,7 @@ export class ListaPedidosComponent implements OnInit {
           })
         }
         else {
+          this.loading=true
           this.servicioPedido.reportarIncidencia(this.usuario.username, idPedido, array[0], array[1])
             .subscribe({
               next: (resp) => {
@@ -129,6 +129,7 @@ export class ListaPedidosComponent implements OnInit {
                     title: 'Incidencia reportada correctamente',
                     text: 'La incidencia se ha reportado de forma correcta. Le contestaremos lo antes posible por via email.'
                   })
+                  this.loading=false
                 }
                 else {
                   Swal.fire({
@@ -136,6 +137,7 @@ export class ListaPedidosComponent implements OnInit {
                     title: 'Oops',
                     text: 'Ocurrio un error inesperado.'
                   })
+                  this.loading=false
                 }
               },
               error: (error) => {
@@ -144,6 +146,7 @@ export class ListaPedidosComponent implements OnInit {
                   title: 'Oops',
                   text: 'Ocurrio un error inesperado.'
                 })
+                this.loading=false
               }
             })
 

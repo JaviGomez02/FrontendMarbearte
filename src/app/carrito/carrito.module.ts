@@ -9,7 +9,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import { NgxPayPalModule } from 'ngx-paypal';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { NgxPayPalModule } from 'ngx-paypal';
     MatSelectModule,
     MatCheckboxModule,
     MatRadioModule,
-    NgxPayPalModule
+    NgxPayPalModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     CarritoComponent,

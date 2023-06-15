@@ -18,7 +18,7 @@ export class ProductComponent implements OnInit {
 
   constructor(private servicioProducto: productService, private fb: FormBuilder, private servicioColor: colorService, private activatedRoute: ActivatedRoute, private route: Router, private carrito: carritoService) {
   }
-
+  loading: boolean = false
   producto!: Product
   fotoPrincipal!: Imagene
   listaImagenes!: Imagene[]
@@ -27,7 +27,7 @@ export class ProductComponent implements OnInit {
   listaDivs!: HTMLCollectionOf<HTMLElement> | null
   color: string = ""
   flag: boolean = false
-  tieneStock:boolean=true
+  tieneStock: boolean = true
 
   myForm: FormGroup = this.fb.group({
     cantidad: ['', [Validators.required, Validators.min(1), Validators.max(99)]]
@@ -38,7 +38,11 @@ export class ProductComponent implements OnInit {
       cantidad: 1
     })
 
+    this.getProducto()
+  }
 
+  getProducto() {
+    this.loading=true
     this.servicioProducto.getProducto(this.activatedRoute.snapshot.params['id'])
       .subscribe({
         next: (resp) => {
@@ -48,9 +52,10 @@ export class ProductComponent implements OnInit {
             this.listaImagenes = resp.imagenes
             this.listaImagenes.shift()
             this.listaColores = resp.colores
-            if(resp.stock<=0){
-              this.tieneStock=false
+            if (resp.stock <= 0) {
+              this.tieneStock = false
             }
+            this.loading=false
           }
           else {
             this.route.navigateByUrl('/')
@@ -59,6 +64,7 @@ export class ProductComponent implements OnInit {
               title: "Oops",
               text: "Producto no encontrado"
             })
+            this.loading=false
           }
         },
         error: (error) => {
@@ -68,13 +74,10 @@ export class ProductComponent implements OnInit {
             title: "Oops",
             text: "Producto no encontrado"
           })
+          this.loading=false
         }
       })
-
-
-
   }
-
 
   seleccionarColor(idColor: string) {
 
@@ -93,18 +96,18 @@ export class ProductComponent implements OnInit {
   anadirAlCarrito() {
 
     if (!this.myForm.invalid) {
-
       if (!this.listaColores.length) {
         this.carrito.añadirProducto(this.producto, this.myForm.value.cantidad)
       }
       else {
         if (this.color != "") {
+          this.loading=true
           this.servicioColor.getColorById(this.color)
             .subscribe({
               next: (resp) => {
                 this.producto.colores = [{ color: resp }]
                 this.carrito.añadirProducto(this.producto, this.myForm.value.cantidad)
-
+                this.loading=false
               },
               error: (error) => {
                 Swal.fire({
@@ -112,6 +115,7 @@ export class ProductComponent implements OnInit {
                   title: "Oops",
                   text: "Algo ha ido mal"
                 })
+                this.loading=false
               }
             })
         }
@@ -121,6 +125,7 @@ export class ProductComponent implements OnInit {
             title: "Oops",
             text: "Debe seleccionar un color"
           })
+          this.loading=false
         }
       }
     }

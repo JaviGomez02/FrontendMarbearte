@@ -14,6 +14,7 @@ export class AllUsuariosComponent implements OnInit {
   lista: UsuarioDTO[] = []
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
+  loading:boolean=false
   constructor(private usuarioService: UsuarioService) { }
 
 
@@ -25,17 +26,28 @@ export class AllUsuariosComponent implements OnInit {
       processing: true
     };
 
+    this.getUsuarios()
+    
+  }
+
+  getUsuarios(){
+    this.loading=true
     this.usuarioService.getUsuarios()
-      .subscribe({
-        next: (resp) => {
-          this.lista = resp
-          this.dtTrigger.next(this.lista)
-
-        },
-        error: (error) => {
-
-        }
-      })
+    .subscribe({
+      next: (resp) => {
+        this.lista = resp
+        this.dtTrigger.next(this.lista)
+        this.loading=false
+      },
+      error: (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo ha ido mal'
+        })
+        this.loading=false
+      }
+    })
   }
 
   ngOnDestroy(): void {
@@ -53,6 +65,7 @@ export class AllUsuariosComponent implements OnInit {
       confirmButtonText: 'Actualizar'
     }).then((result) => {
       if (result.isConfirmed) {
+        this.loading=true
         this.usuarioService.changeToUser(username)
           .subscribe({
             next: (resp) => {
@@ -63,6 +76,7 @@ export class AllUsuariosComponent implements OnInit {
               ).then((resp) => {
                 window.location.reload()
               })
+              this.loading=false
             },
             error: (error) => {
               Swal.fire(
@@ -70,6 +84,7 @@ export class AllUsuariosComponent implements OnInit {
                 'Ocurrió un error inesperado.',
                 'error'
               )
+              this.loading=false
             }
           })
 
@@ -88,6 +103,7 @@ export class AllUsuariosComponent implements OnInit {
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Actualizar'
     }).then((result) => {
+      this.loading=true
       if (result.isConfirmed) {
         this.usuarioService.changeToAdmin(username)
           .subscribe({
@@ -99,6 +115,7 @@ export class AllUsuariosComponent implements OnInit {
               ).then((resp) => {
                 window.location.reload()
               })
+              this.loading=false
             },
             error: (error) => {
               Swal.fire(
@@ -106,6 +123,7 @@ export class AllUsuariosComponent implements OnInit {
                 'Ocurrió un error inesperado.',
                 'error'
               )
+              this.loading=false
             }
           })
 
@@ -126,6 +144,7 @@ export class AllUsuariosComponent implements OnInit {
       confirmButtonText: 'Si, Borrar'
     }).then((result) => {
       if (result.isConfirmed) {
+        this.loading=true
         this.usuarioService.deleteUsuario(username)
           .subscribe({
             next: (resp) => {
@@ -136,6 +155,7 @@ export class AllUsuariosComponent implements OnInit {
               ).then((resp) => {
                 window.location.reload()
               })
+              this.loading=false
             },
             error: (error) => {
               Swal.fire(
@@ -143,6 +163,7 @@ export class AllUsuariosComponent implements OnInit {
                 'Ocurrió un error inesperado.',
                 'error'
               )
+              this.loading=false
             }
           })
 

@@ -15,7 +15,8 @@ export class CarritoComponent implements OnInit {
 
   listaProductos: ItemCarrito[] = this.servicioCarrito.getListaCarrito();
 
-  
+  loading:boolean=false
+
   @Output() miEvento = new EventEmitter<boolean>();
 
 
@@ -57,8 +58,11 @@ export class CarritoComponent implements OnInit {
   }
 
   eliminarProducto(item: ItemCarrito) {
+    this.loading=true
     this.servicioCarrito.eliminarProducto(item)
     this.listaProductos = this.servicioCarrito.getListaCarrito();
+    this.loading=false
+
   }
 
 }

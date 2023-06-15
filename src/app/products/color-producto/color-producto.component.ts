@@ -19,7 +19,7 @@ export class ColorProductoComponent implements OnInit {
     private route: ActivatedRoute, private fb: FormBuilder, private router: Router) { }
 
 
-
+  loading: boolean = false
 
   producto!: Product
 
@@ -32,31 +32,40 @@ export class ColorProductoComponent implements OnInit {
   ngOnInit(): void {
     this.idProducto = this.route.snapshot.queryParams['idProducto']
 
-    this.servicioProducto.getProducto(this.idProducto)
-      .subscribe({
-        next: (resp) => {
-          this.producto = resp
-        },
-        error: (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops',
-            text: 'Ocurrió un error inesperado, volviendo...',
-            timer: 2000
-          }).then((result) => {
-            this.router.navigateByUrl('/products/all')
-          })
-        }
-      })
+    this.getProducto()
 
     this.getColores()
   }
 
-  getColores(){
+  getProducto(){
+    this.loading=true
+    this.servicioProducto.getProducto(this.idProducto)
+    .subscribe({
+      next: (resp) => {
+        this.producto = resp
+        this.loading=false
+      },
+      error: (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops',
+          text: 'Ocurrió un error inesperado, volviendo...',
+          timer: 2000
+        }).then((result) => {
+          this.router.navigateByUrl('/products/all')
+        })
+        this.loading=false
+      }
+    })
+  }
+
+  getColores() {
+    this.loading=true
     this.servicioColor.getColores()
       .subscribe({
         next: (resp) => {
           this.listaColores = resp
+          this.loading=false
         },
         error: (error) => {
           Swal.fire({
@@ -67,6 +76,7 @@ export class ColorProductoComponent implements OnInit {
           }).then((result) => {
             this.router.navigateByUrl('/products/all')
           })
+          this.loading=false
         }
       })
   }
@@ -87,6 +97,7 @@ export class ColorProductoComponent implements OnInit {
       confirmButtonText: 'Si, Borrar'
     }).then((result) => {
       if (result.isConfirmed) {
+        this.loading=true
         this.servicioColor.deleteColor(newCodigo)
           .subscribe({
             next: (resp) => {
@@ -98,6 +109,7 @@ export class ColorProductoComponent implements OnInit {
                 ).then((resp) => {
                   this.getColores()
                 })
+                this.loading=false
               }
               else {
                 Swal.fire(
@@ -105,6 +117,7 @@ export class ColorProductoComponent implements OnInit {
                   'Ocurrió un error inesperado.',
                   'error'
                 )
+                this.loading=false
               }
             }
           })
@@ -130,6 +143,7 @@ export class ColorProductoComponent implements OnInit {
     if (this.coloresAnnadir.length) {
       for (let i = 0; i < this.coloresAnnadir.length; i++) {
         // console.log(this.coloresAnnadir[i])
+        this.loading=true
         this.servicioProducto.asignarColor(this.idProducto, this.coloresAnnadir[i].color)
           .subscribe({
             next: (resp) => {
@@ -140,6 +154,7 @@ export class ColorProductoComponent implements OnInit {
               ).then((resp) => {
                 this.router.navigateByUrl('/products/all')
               })
+              this.loading=false
             },
             error: (error) => {
               Swal.fire(
@@ -147,9 +162,9 @@ export class ColorProductoComponent implements OnInit {
                 'Algo ha ido mal.',
                 'error'
               )
+              this.loading=false
             }
           })
-
       }
     }
     else {

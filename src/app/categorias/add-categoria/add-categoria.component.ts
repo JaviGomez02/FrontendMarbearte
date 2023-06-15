@@ -14,6 +14,8 @@ export class AddCategoriaComponent {
 
   constructor(private fb: FormBuilder, private categoriaService: categoriaService, private route: Router) { }
 
+  loading:boolean=false
+
   myForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     descripcion: [null, [Validators.required, Validators.minLength(10)]]
@@ -30,6 +32,7 @@ export class AddCategoriaComponent {
       this.myForm.markAllAsTouched()
     }
     else {
+      this.loading=true
       this.categoriaService.addCategoria(this.myForm.value.nombre, this.myForm.value.descripcion)
         .subscribe({
           next: (resp) => {
@@ -39,14 +42,16 @@ export class AddCategoriaComponent {
                 title: 'Categoria añadida correctamente',
                 text: 'Nombre: ' + this.myForm.value.nombre + ', descripcion: ' + this.myForm.value.descripcion
               })
+              this.loading=false
               this.route.navigate(["/categoria"])
             }
             else {
               Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'No se pudo añadir la categoria'
+                text: 'Algo ha ido mal'
               })
+              this.loading=false
             }
           }
         })

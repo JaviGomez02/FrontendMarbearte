@@ -5,6 +5,7 @@ import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { DataTablesModule } from 'angular-datatables';
 import { UpdateUsuarioComponent } from './update-usuario/update-usuario.component';
 import { FormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     UsuariosRoutingModule,
     DataTablesModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
   ]
 })
 export class UsuariosModule { }

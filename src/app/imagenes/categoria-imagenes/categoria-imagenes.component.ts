@@ -15,8 +15,11 @@ import Swal from 'sweetalert2';
 export class CategoriaImagenesComponent implements OnInit {
   lista: ImagenCategoria[] = []
 
+  loading: boolean = false
 
   categoria!: Categoria
+
+  nombreCategoria:string=''
 
   idCategoria!: number
 
@@ -35,27 +38,53 @@ export class CategoriaImagenesComponent implements OnInit {
       processing: true
     };
 
+    this.getCategoria()
+
+    this.getImagenes()
+    
+  }
+
+  getImagenes(){
+    this.loading=true
+    this.servicioImagen.getImagenesByCategoria(this.idCategoria)
+    .subscribe({
+      next: (resp) => {
+        this.lista = resp
+        this.dtTrigger.next(this.lista)
+        this.loading=false
+      },
+      error: (error) => {
+        Swal.fire({
+          icon:'error',
+          title: 'Oops...',
+          text: 'Algo ha ido mal'
+        })
+        this.loading=false
+
+      }
+    })
+  }
+
+  getCategoria() {
+    this.loading=true
     this.servicioCategoria.getCategoriaById(this.idCategoria)
       .subscribe({
         next: (resp) => {
           this.categoria = resp
+          this.nombreCategoria=resp.nombre
+          this.loading=false
         },
         error: (error) => {
-
-        }
-      })
-
-    this.servicioImagen.getImagenesByCategoria(this.idCategoria)
-      .subscribe({
-        next: (resp) => {
-          this.lista = resp
-          this.dtTrigger.next(this.lista)
-        },
-        error: (error) => {
-
+          Swal.fire({
+            icon:'error',
+            title: 'Oops...',
+            text: 'Algo ha ido mal'
+          })
+          this.loading=false
         }
       })
   }
+
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
@@ -89,6 +118,7 @@ export class CategoriaImagenesComponent implements OnInit {
         })
       }
       else {
+        this.loading=true
         this.servicioImagen.addImagenCategoria(file, this.idCategoria)
           .subscribe({
             next: (resp) => {
@@ -99,6 +129,7 @@ export class CategoriaImagenesComponent implements OnInit {
               ).then((resp) => {
                 window.location.reload()
               })
+              this.loading=false
             },
             error: (error) => {
               Swal.fire(
@@ -106,6 +137,8 @@ export class CategoriaImagenesComponent implements OnInit {
                 'Ocurrió un error inesperado.',
                 'error'
               )
+              this.loading=false
+
             }
           })
       }
@@ -118,6 +151,7 @@ export class CategoriaImagenesComponent implements OnInit {
     Swal.fire({
       title: '¿Seguro que desea borrar la imagen?',
       imageUrl: imagen.img,
+      imageHeight: 300,
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
@@ -125,6 +159,7 @@ export class CategoriaImagenesComponent implements OnInit {
       confirmButtonText: 'Si, Borrar'
     }).then((result) => {
       if (result.isConfirmed) {
+        this.loading=true
         this.servicioImagen.deleteImagenCategoria(imagen.id)
           .subscribe({
             next: (resp) => {
@@ -135,6 +170,7 @@ export class CategoriaImagenesComponent implements OnInit {
               ).then((resp) => {
                 window.location.reload()
               })
+              this.loading=false
             },
             error: (error) => {
               Swal.fire(
@@ -142,6 +178,7 @@ export class CategoriaImagenesComponent implements OnInit {
                 'Ocurrió un error inesperado.',
                 'error'
               )
+              this.loading=false
             }
           })
 

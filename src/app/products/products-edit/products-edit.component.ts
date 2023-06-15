@@ -19,6 +19,8 @@ export class ProductsEditComponent implements OnInit {
 
   idProducto!: number
 
+  loading: boolean = false
+
   listaCategorias: Categoria[] = []
 
   myForm: FormGroup = this.fb.group({
@@ -32,6 +34,13 @@ export class ProductsEditComponent implements OnInit {
   ngOnInit(): void {
     this.idProducto = this.aRoute.snapshot.params['id']
 
+    this.getProducto()
+
+    this.getCategorias()
+  }
+
+  getProducto() {
+    this.loading=true
     this.productService.getProducto(this.idProducto)
       .subscribe({
         next: (resp) => {
@@ -43,6 +52,7 @@ export class ProductsEditComponent implements OnInit {
               stock: resp.stock,
               opcionCategoria: resp.categoria.id
             })
+            this.loading=false
           }
           else {
             Swal.fire({
@@ -52,6 +62,7 @@ export class ProductsEditComponent implements OnInit {
             }).then((resp) => {
               this.route.navigateByUrl('/products/all')
             })
+            this.loading=false
           }
         },
         error: (error) => {
@@ -62,24 +73,30 @@ export class ProductsEditComponent implements OnInit {
           }).then((resp) => {
             this.route.navigateByUrl('/products/all')
           })
+          this.loading=false
         }
       })
+  }
 
+  getCategorias() {
+    this.loading=true
     this.categoriaService.getCategorias()
-      .subscribe({
-        next: (resp) => {
-          this.listaCategorias = resp
-        },
-        error: (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Algo ha ido mal'
-          }).then((resp) => {
-            this.route.navigateByUrl('/products/all')
-          })
-        }
-      })
+    .subscribe({
+      next: (resp) => {
+        this.listaCategorias = resp
+        this.loading=false
+      },
+      error: (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo ha ido mal'
+        }).then((resp) => {
+          this.route.navigateByUrl('/products/all')
+        })
+        this.loading=false
+      }
+    })
   }
 
   isValidField(field: string) {
@@ -88,6 +105,7 @@ export class ProductsEditComponent implements OnInit {
   }
 
   updateProduct() {
+    this.loading=true
     this.productService.updateProduct(this.idProducto, this.myForm.value.nombre, this.myForm.value.descripcion, this.myForm.value.price, this.myForm.value.stock, this.myForm.value.opcionCategoria)
       .subscribe({
         next: (resp) => {
@@ -97,6 +115,8 @@ export class ProductsEditComponent implements OnInit {
               title: 'Producto actualizado correctamente',
               text: 'Nombre: ' + this.myForm.value.nombre + ', descripcion: ' + this.myForm.value.descripcion
             })
+            
+            this.loading=false
             this.route.navigate(["/products/all"])
           }
           else {
@@ -105,6 +125,8 @@ export class ProductsEditComponent implements OnInit {
               title: 'Oops...',
               text: 'No se pudo actualizar el producto'
             })
+            
+            this.loading=false
           }
         }
       })

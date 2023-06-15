@@ -16,6 +16,8 @@ export class ColorAddComponent implements OnInit {
 
   idProducto!: number;
 
+  loading:boolean=false
+
   constructor(private fb: FormBuilder, private colorService: colorService, private router: Router, private route: ActivatedRoute) { }
 
 
@@ -53,6 +55,7 @@ export class ColorAddComponent implements OnInit {
       this.myForm.markAllAsTouched()
     }
     else {
+      this.loading=true
       this.colorService.addColor(this.myForm.value.color, this.myForm.value.nombre)
         .subscribe({
           next: (resp) => {
@@ -64,6 +67,7 @@ export class ColorAddComponent implements OnInit {
               }).then((result) => {
                 this.router.navigateByUrl("/products/color?idProducto=" + this.idProducto)
               })
+              this.loading=false
 
             }
             else {
@@ -72,6 +76,7 @@ export class ColorAddComponent implements OnInit {
                 title: 'Oops...',
                 text: 'No se pudo crear el color'
               })
+              this.loading=false
             }
           }
         })

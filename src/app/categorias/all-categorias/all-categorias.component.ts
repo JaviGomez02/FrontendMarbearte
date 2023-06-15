@@ -23,6 +23,8 @@ export class AllCategoriasComponent implements OnInit {
 
   dtTrigger: Subject<any> = new Subject<any>();
 
+  loading: boolean = false
+
   ngOnInit(): void {
 
     this.dtOptions = {
@@ -30,23 +32,27 @@ export class AllCategoriasComponent implements OnInit {
       pageLength: 5,
       processing: true
     };
-
     this.getCategorias()
-
-    
   }
 
-  getCategorias(){
+  getCategorias() {
+    this.loading = true
     this.categoriaService.getCategorias()
-    .subscribe({
-      next: (resp) => {
-        this.lista = resp
-        this.dtTrigger.next(this.lista)
-      },
-      error: (error) => {
-
-      }
-    })
+      .subscribe({
+        next: (resp) => {
+          this.lista = resp
+          this.dtTrigger.next(this.lista)
+          this.loading = false
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            text: 'Algo ha ido mal'
+          })
+          this.loading = false
+        }
+      })
   }
 
   ngOnDestroy(): void {
@@ -74,6 +80,7 @@ export class AllCategoriasComponent implements OnInit {
       confirmButtonText: 'Si, Borrar'
     }).then((result) => {
       if (result.isConfirmed) {
+        this.loading = true
         this.categoriaService.deleteCategoria(id)
           .subscribe({
             next: (resp) => {
@@ -84,6 +91,8 @@ export class AllCategoriasComponent implements OnInit {
               ).then((resp) => {
                 window.location.reload()
               })
+
+              this.loading = false
             },
             error: (error) => {
               Swal.fire(
@@ -91,6 +100,7 @@ export class AllCategoriasComponent implements OnInit {
                 'Ocurrió un error inesperado.',
                 'error'
               )
+              this.loading = false
             }
           })
 

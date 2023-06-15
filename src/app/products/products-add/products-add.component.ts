@@ -15,6 +15,8 @@ export class ProductsAddComponent implements OnInit {
 
   listaCategorias: Categoria[] = []
 
+  loading:boolean=false
+
   myForm: FormGroup = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(40)]],
     descripcion: [null, [Validators.required, Validators.minLength(10)]],
@@ -29,15 +31,28 @@ export class ProductsAddComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.getCategorias()
+  }
+
+  getCategorias(){
+    this.loading=true
     this.categoriaService.getCategorias()
-      .subscribe({
-        next: (resp) => {
-          this.listaCategorias = resp
-        },
-        error: (error) => {
-          console.log(error)
-        }
-      })
+    .subscribe({
+      next: (resp) => {
+        this.listaCategorias = resp
+        this.loading=false
+      },
+      error: (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Algo ha ido mal'
+        }).then((resp) => {
+          this.route.navigateByUrl('/products/all')
+        })
+        this.loading=false
+      }
+    })
   }
 
   isValidField(field: string) {
@@ -50,6 +65,7 @@ export class ProductsAddComponent implements OnInit {
       this.myForm.markAllAsTouched()
     }
     else {
+      this.loading=true
       // console.log(this.myForm.value.nombre, this.myForm.value.descripcion, this.myForm.value.price, this.myForm.value.stock, this.myForm.value.opcionCategoria)
       this.productService.addProduct(this.myForm.value.nombre, this.myForm.value.descripcion, this.myForm.value.price, this.myForm.value.stock, this.myForm.value.opcionCategoria)
         .subscribe({
@@ -61,6 +77,7 @@ export class ProductsAddComponent implements OnInit {
                 text: 'Nombre: ' + this.myForm.value.nombre + ', descripcion: ' + this.myForm.value.descripcion
               })
               this.route.navigate(["/products/all"])
+              this.loading=false
             }
             else {
               Swal.fire({
@@ -68,6 +85,7 @@ export class ProductsAddComponent implements OnInit {
                 title: 'Oops...',
                 text: 'No se pudo añadir el producto'
               })
+              this.loading=false
             }
           }
         })

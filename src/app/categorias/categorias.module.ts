@@ -9,6 +9,7 @@ import { AddCategoriaComponent } from './add-categoria/add-categoria.component';
 import { UpdateCategoriaComponent } from './update-categoria/update-categoria.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -25,7 +26,8 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
 
   ],
   exports: [

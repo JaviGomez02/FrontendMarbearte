@@ -32,6 +32,8 @@ export class CarritoFinalComponent implements OnInit {
 
   token!: string
 
+  loading: boolean = false
+
   public payPalConfig?: IPayPalConfig;
 
 
@@ -124,12 +126,14 @@ export class CarritoFinalComponent implements OnInit {
   }
 
   obtenerDirecciones() {
+    this.loading = true
     this.token = this.cookieService.get('token')
     if (this.token) {
       this.servicioUsuario.getUsuarioByUsername(this.authService.decodeJwt(this.token).sub)
         .subscribe({
           next: (resp) => {
             this.listaDirecciones = resp.direcciones
+            this.loading = false
           },
           error: (error) => {
             Swal.fire({
@@ -138,8 +142,10 @@ export class CarritoFinalComponent implements OnInit {
               text: 'Ocurrió un error inesperado, volviendo al home...',
               timer: 2000
             }).then((result) => {
+              this.loading = false
               this.route.navigateByUrl('/')
             })
+            this.loading = false
           }
         })
     }
@@ -180,7 +186,7 @@ export class CarritoFinalComponent implements OnInit {
   }
 
   addDireccion() {
-    const regex = /^\d+$/;
+    const regex = /^\d{5}$/;
     Swal.fire({
       title: 'Añadir una direccion',
       html:
@@ -220,7 +226,7 @@ export class CarritoFinalComponent implements OnInit {
             text: 'Debes completar todos los campos'
           })
         }
-        else if(!regex.test(codigoPostal)){
+        else if (!regex.test(codigoPostal)) {
           Swal.fire({
             icon: 'error',
             title: 'Oops',
@@ -228,6 +234,7 @@ export class CarritoFinalComponent implements OnInit {
           })
         }
         else {
+          this.loading = true
           this.servicioDireccion.addDireccion(codigoPostal, ciudad, localidad, direccion)
             .subscribe({
               next: (resp) => {
@@ -237,7 +244,9 @@ export class CarritoFinalComponent implements OnInit {
                     title: 'Direccion añadida correctamente'
                   }).then((result) => {
                     this.obtenerDirecciones()
+                    this.loading = false
                   })
+                  this.loading = false
                 }
                 else {
                   Swal.fire({
@@ -245,6 +254,7 @@ export class CarritoFinalComponent implements OnInit {
                     title: 'Oops',
                     text: 'Ocurrio un error inesperado.'
                   })
+                  this.loading = false
                 }
               },
               error: (error) => {
@@ -253,6 +263,7 @@ export class CarritoFinalComponent implements OnInit {
                   title: 'Oops',
                   text: 'Ocurrio un error inesperado.'
                 })
+                this.loading = false
               }
             })
 
@@ -270,6 +281,7 @@ export class CarritoFinalComponent implements OnInit {
       cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
+        this.loading = true
         this.servicioDireccion.deleteDireccion(id)
           .subscribe({
             next: (resp) => {
@@ -279,7 +291,9 @@ export class CarritoFinalComponent implements OnInit {
                   title: 'Borrado correctamente'
                 }).then((result) => {
                   this.obtenerDirecciones()
+                  this.loading = false
                 })
+                this.loading = false
               }
               else {
                 Swal.fire({
@@ -287,6 +301,7 @@ export class CarritoFinalComponent implements OnInit {
                   title: 'Oops',
                   text: 'Ocurrió un error inesperado'
                 })
+                this.loading = false
               }
             },
             error: (error) => {
@@ -295,6 +310,7 @@ export class CarritoFinalComponent implements OnInit {
                 title: 'Oops',
                 text: 'Ocurrió un error inesperado'
               })
+              this.loading = false
             }
           })
       }
@@ -313,6 +329,7 @@ export class CarritoFinalComponent implements OnInit {
         })
       }
       else {
+        this.loading = true
         this.servicioPedido.realizarPedido()
           .subscribe({
             next: (resp) => {
@@ -323,10 +340,12 @@ export class CarritoFinalComponent implements OnInit {
                   text: 'Puedes revisar tu pedido en el apartado "Mis pedidos"'
                 }).then((resp) => {
                   // window.location.reload()
+                  this.loading = false
                 })
 
                 this.servicioCarrito.vaciarCarrito();
                 this.listaProductos = this.servicioCarrito.getListaCarrito();
+                this.loading = false
               }
               else {
                 Swal.fire({
@@ -334,6 +353,7 @@ export class CarritoFinalComponent implements OnInit {
                   title: 'Oops...',
                   text: 'Algo ha ido mal'
                 })
+                this.loading = false
               }
             }
             , error: (error) => {
@@ -342,6 +362,7 @@ export class CarritoFinalComponent implements OnInit {
                 title: 'Oops...',
                 text: 'Algo ha ido mal'
               })
+              this.loading = false
             }
           })
 

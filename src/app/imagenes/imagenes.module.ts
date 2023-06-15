@@ -4,6 +4,7 @@ import { DatatableImagenesComponent } from './datatable-imagenes/datatable-image
 import { ImagesRoutingModule } from './imagen-routing.module';
 import { DataTablesModule } from 'angular-datatables';
 import { CategoriaImagenesComponent } from './categoria-imagenes/categoria-imagenes.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -15,7 +16,8 @@ import { CategoriaImagenesComponent } from './categoria-imagenes/categoria-image
   imports: [
     CommonModule,
     ImagesRoutingModule,
-    DataTablesModule
+    DataTablesModule,
+    MatProgressSpinnerModule
   ]
 })
 export class ImagenesModule { }

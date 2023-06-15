@@ -1,5 +1,9 @@
+<div *ngIf="loading" class="overlay"></div>
+<div *ngIf="loading" class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
 <div class="productos-home-1">
-    <p class="titulo-productos">Imagenes del producto: {{producto.nombre}}</p>
+    <p class="titulo-productos">Imagenes del producto: {{nombreProducto}}</p>
     <div class="div-boton">
         <button class="boton" (click)="addImagen()">Añadir nueva imagen</button>
     </div>

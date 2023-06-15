@@ -23,6 +23,8 @@ export class UpdateUsuarioComponent implements OnInit {
 
   token!: string
 
+  loading: boolean = false
+
   @ViewChild('myForm') myForm!: NgForm;
 
   initForm = {
@@ -38,6 +40,11 @@ export class UpdateUsuarioComponent implements OnInit {
     this.token = this.cookies.get('token')
     this.nombreUsuario = this.authService.decodeJwt(this.token).sub
 
+    this.getusuario()
+  }
+
+  getusuario() {
+    this.loading=true
     this.servicioUsuario.getUsuarioByUsername(this.activatedRoute.snapshot.params['username'])
       .subscribe({
         next: (resp) => {
@@ -60,14 +67,17 @@ export class UpdateUsuarioComponent implements OnInit {
                 passwordRepeat: ""
               }
             }
+            this.loading=false
           }
           else {
-            this.router.navigateByUrl('/')
             Swal.fire({
               icon: 'error',
               title: 'Oops',
               text: 'Algo ha ido mal'
             })
+            this.loading=false
+            
+            this.router.navigateByUrl('/')
           }
 
         }
@@ -80,6 +90,7 @@ export class UpdateUsuarioComponent implements OnInit {
   }
 
   updateUsuario() {
+    this.loading=true
     this.servicioUsuario.updateUsuario(this.myForm.value.username, this.myForm.value.password, this.myForm.value.nombre,
       this.myForm.value.email, this.usuario.role, this.usuario.enable, this.usuario.verificationCode)
       .subscribe({
@@ -90,6 +101,7 @@ export class UpdateUsuarioComponent implements OnInit {
               title: 'Actualizado correctamente',
               text: 'Sus datos han sido actualizado correctamente'
             })
+            this.loading=false
 
           }
           else {
@@ -98,6 +110,7 @@ export class UpdateUsuarioComponent implements OnInit {
               title: 'Oops...',
               text: 'Algo ha ido mal. Inténtelo de nuevo'
             })
+            this.loading=false
           }
         }
       })

@@ -25,6 +25,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
 
   idCategoria!: number
 
+  loading: boolean = false
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -36,39 +37,54 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
     this.idCategoria = this.route.snapshot.queryParams['idCategoria']
 
     if (this.idCategoria) {
-      this.servicioCategoria.getCategoriaById(this.idCategoria)
-        .subscribe({
-          next: (resp) => {
-            if (resp) {
-              this.nombreCategoria = resp.nombre
-            }
-            else {
-              this.router.navigateByUrl('/')
-              Swal.fire({
-                icon: "error",
-                title: "Oops",
-                text: "Categoria inexistente"
-              })
-            }
-          },
-          error: (error) => {
+      this.getCategoria()
+    }
+
+    this.getProductos()
+
+  }
+
+  getProductos() {
+    this.loading = true
+    this.productService.getProducts(1, 9999, this.idCategoria)
+      .subscribe({
+        next: (resp) => {
+          this.lista = resp.content
+          this.dtTrigger.next(this.lista);
+          this.loading = false
+        }
+      })
+  }
+
+  getCategoria() {
+    this.loading = true
+    this.servicioCategoria.getCategoriaById(this.idCategoria)
+      .subscribe({
+        next: (resp) => {
+          if (resp) {
+            this.nombreCategoria = resp.nombre
+            this.loading = false
+          }
+          else {
             this.router.navigateByUrl('/')
             Swal.fire({
               icon: "error",
               title: "Oops",
               text: "Categoria inexistente"
             })
+            this.loading = false
           }
-
-        })
-    }
-
-    this.productService.getProducts(1, 9999, this.idCategoria)
-      .subscribe({
-        next: (resp) => {
-          this.lista = resp.content
-          this.dtTrigger.next(this.lista);
+        },
+        error: (error) => {
+          this.router.navigateByUrl('/')
+          Swal.fire({
+            icon: "error",
+            title: "Oops",
+            text: "Categoria inexistente"
+          })
+          this.loading = false
         }
+
       })
   }
 
@@ -85,6 +101,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
   }
 
   eliminarColor(idProducto: number, codigoColor: string) {
+    this.loading=true
     this.productService.eliminarColor(idProducto, codigoColor)
       .subscribe({
         next: (resp) => {
@@ -96,6 +113,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
             ).then((resp) => {
               window.location.reload()
             })
+            this.loading=false
           }
           else {
             Swal.fire(
@@ -103,6 +121,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
               'Ocurrió un error inesperado.',
               'error'
             )
+            this.loading=false
           }
         }
       })
@@ -119,6 +138,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
       confirmButtonText: 'Si, Borrar'
     }).then((result) => {
       if (result.isConfirmed) {
+        this.loading=true
         this.productService.deleteArticulo(id)
           .subscribe({
             next: (resp) => {
@@ -130,6 +150,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
                 ).then((resp) => {
                   window.location.reload()
                 })
+                this.loading=false
               }
               else {
                 Swal.fire(
@@ -137,6 +158,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
                   'Ocurrió un error inesperado.',
                   'error'
                 )
+                this.loading=false
               }
             },
             error: (error) => {
@@ -145,6 +167,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
                 'Ocurrió un error inesperado.',
                 'error'
               )
+              this.loading=false
             }
           })
 

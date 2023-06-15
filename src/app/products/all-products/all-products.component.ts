@@ -35,56 +35,20 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
   idCategoria!: number
 
-  nombreCategoria!: string
+  nombreCategoria: string = ''
+
+  loading: boolean = false
 
   ngOnInit(): void {
-    this.nombreCategoria=''
     this.route.queryParams
       .subscribe({
         next: (queryParams) => {
           this.idCategoria = queryParams['idCategoria']
           if (this.idCategoria) {
             this.listaPagination = []
-
-            this.servicioCategoria.getCategoriaById(this.idCategoria)
-              .subscribe({
-                next: (resp) => {
-                  if (resp) {
-                    this.nombreCategoria = resp.nombre
-                  }
-                  else {
-                    this.router.navigateByUrl('/')
-                    Swal.fire({
-                      icon: "error",
-                      title: "Oops",
-                      text: "Categoria inexistente"
-                    })
-                  }
-                },
-                error: (error) => {
-                  this.router.navigateByUrl('/')
-                  Swal.fire({
-                    icon: "error",
-                    title: "Oops",
-                    text: "Categoria inexistente"
-                  })
-                }
-              })
+            this.getCategoria()
           }
-          this.servicio.getProducts(this.pageNumber, this.sizeNumber, this.idCategoria)
-            .subscribe({
-              next: (resp) => {
-                this.lista = resp.content
-                this.totalPages = resp.totalPages
-
-                for (let i = 0; i < this.totalPages; i++) {
-                  this.listaPagination.push(i + 1)
-                }
-              },
-              error: (error) => {
-                
-              }
-            })
+          this.getProducts()
 
 
         }
@@ -101,18 +65,77 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
   }
 
+  getProducts() {
+    this.loading = true
+    this.servicio.getProducts(this.pageNumber, this.sizeNumber, this.idCategoria)
+      .subscribe({
+        next: (resp) => {
+          this.lista = resp.content
+          this.totalPages = resp.totalPages
+
+          for (let i = 0; i < this.totalPages; i++) {
+            this.listaPagination.push(i + 1)
+          }
+          this.loading = false
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Algo ha ido mal"
+          })
+          this.loading = false
+        }
+      })
+  }
+
+  getCategoria() {
+    this.loading = true
+    this.servicioCategoria.getCategoriaById(this.idCategoria)
+      .subscribe({
+        next: (resp) => {
+          if (resp) {
+            this.nombreCategoria = resp.nombre
+            this.loading = false
+          }
+          else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops",
+              text: "Categoria inexistente"
+            })
+            this.loading = false
+          }
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Algo ha ido mal"
+          })
+          this.loading = false
+        }
+      })
+  }
+
 
   previousPageNumber() {
     if (this.pageNumber > 1) {
       this.pageNumber = this.pageNumber - 1
-
+      this.loading = true
       this.servicio.getProducts(this.pageNumber, this.sizeNumber, this.idCategoria)
         .subscribe({
           next: (resp) => {
             this.lista = resp.content
+            this.loading = false
           },
           error: (error) => {
-
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Algo ha ido mal"
+            })
+            this.loading = false
           }
         })
     }
@@ -122,14 +145,20 @@ export class AllProductsComponent implements OnInit, OnDestroy {
   nextPageNumber() {
     if (this.pageNumber < this.totalPages) {
       this.pageNumber = this.pageNumber + 1
-
+      this.loading = true
       this.servicio.getProducts(this.pageNumber, this.sizeNumber, this.idCategoria)
         .subscribe({
           next: (resp) => {
             this.lista = resp.content
+            this.loading = false
           },
           error: (error) => {
-
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Algo ha ido mal"
+            })
+            this.loading = false
           }
         })
     }
@@ -138,14 +167,20 @@ export class AllProductsComponent implements OnInit, OnDestroy {
 
   setPageNumber(numero: number) {
     this.pageNumber = numero
-
+    this.loading = true
     this.servicio.getProducts(this.pageNumber, this.sizeNumber, this.idCategoria)
       .subscribe({
         next: (resp) => {
           this.lista = resp.content
+          this.loading = false
         },
         error: (error) => {
-
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Algo ha ido mal"
+          })
+          this.loading = false
         }
       })
   }
