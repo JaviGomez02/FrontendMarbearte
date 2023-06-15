@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Product } from "../interfaces/product.interface";
-import { CookieService } from "ngx-cookie-service";
 import { ItemCarrito, ItemCarritoAux } from "../interfaces/itemCarrito.interface";
 import Swal from "sweetalert2";
 import { Color } from "../interfaces/page.interface";
@@ -14,7 +13,7 @@ import { carritoService } from "./carrito.service";
 
 export class pedidoService {
 
-    constructor(private cookies: CookieService, private http: HttpClient, private servicioCarrito: carritoService) { }
+    constructor(private http: HttpClient, private servicioCarrito: carritoService) { }
 
     url: string = 'https://apimarbearte-production.up.railway.app'
     urlLocal: string = 'http://localhost:8082'

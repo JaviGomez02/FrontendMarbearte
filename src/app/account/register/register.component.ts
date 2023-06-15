@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 export class RegisterComponent implements OnInit {
 
   constructor(private authService:authService) { }
+  loading: boolean = false
 
   @ViewChild('myForm') myForm!: NgForm;
 
@@ -34,6 +35,7 @@ export class RegisterComponent implements OnInit {
   }
 
   registerSubmit():void{
+    this.loading=true
     this.authService.register(this.myForm.value.username,this.myForm.value.email, this.myForm.value.password, this.myForm.value.nombre )
     .subscribe({
       next: (resp) => {
@@ -43,7 +45,7 @@ export class RegisterComponent implements OnInit {
             title: 'Registrado correctamente',
             text: 'Le hemos mandado un correo de verificación. Compruebe su bandeja de entrada'
           })
-          
+          this.loading=false
         }
         else {
           Swal.fire({
@@ -51,6 +53,7 @@ export class RegisterComponent implements OnInit {
             title: 'Oops...',
             text: 'El nombre de usuario ya está en uso'
           })
+          this.loading=false
         }
       }
     })

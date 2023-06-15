@@ -20,22 +20,47 @@ export class HomeComponent implements OnInit {
 
   listaCategorias: Categoria[] = []
 
+  loading: boolean = false
 
   ngOnInit(): void {
+    this.getNuevosProductos()
+
+    this.getMasVendidos()
+
+    this.getCategorias()
+  }
+
+
+  getNuevosProductos() {
+    this.loading=true
     this.servicioProducto.getProducts(1, 8, null)
       .subscribe({
         next: (resp) => {
           this.nuevosProductos = resp.content
+          this.loading=false
+        },
+        error:(error)=>{
+          this.loading=false
         }
       })
+  }
 
+  getMasVendidos() {
+    this.loading=true
     this.servicioProducto.getProducts(2, 8, null)
       .subscribe({
         next: (resp) => {
           this.masVendidos = resp.content
+          this.loading=false
+        },
+        error:(error)=>{
+          this.loading=false
         }
       })
+  }
 
+  getCategorias() {
+    this.loading=true
     this.servicioCategoria.getCategorias()
       .subscribe({
         next: (resp) => {
@@ -44,12 +69,12 @@ export class HomeComponent implements OnInit {
               this.listaCategorias.push(resp[i])
             }
           }
+          this.loading=false
         },
         error: (error) => {
-
+          this.loading=false
         }
       })
-
   }
 
   verProductos(idCategoria: number) {

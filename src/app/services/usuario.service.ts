@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, switchMap, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UsuarioDTO } from '../interfaces/usuarioDto.interface';
-import { CookieService } from "ngx-cookie-service";
 import { Usuario } from "../interfaces/usuario.interface";
 
 @Injectable({
@@ -12,7 +11,7 @@ import { Usuario } from "../interfaces/usuario.interface";
 
 export class UsuarioService {
 
-  constructor(private http: HttpClient, private cookies: CookieService) { }
+  constructor(private http: HttpClient) { }
 
   private url: string = "https://apimarbearte-production.up.railway.app/usuarios"
   urlLocal:string='http://localhost:8082/usuarios'
