@@ -248,12 +248,12 @@ a {
 
 .img-carrito {
   width: 32px;
-  margin-right: 30px;
   cursor: pointer;
 }
 
 .img-usuario {
   width: 32px;
+  margin-left: 30px;
   cursor: pointer;
 }
 
@@ -272,12 +272,13 @@ a {
 @media (max-width: 768px) {
   .img-carrito {
     width: 28px;
-    margin-right: 10px;
+    
     cursor: pointer;
   }
 
   .img-usuario {
     width: 28px;
+    margin-left: 10px;
     cursor: pointer;
   }
 

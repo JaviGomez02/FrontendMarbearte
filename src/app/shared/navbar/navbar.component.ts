@@ -6,6 +6,7 @@ import { categoriaService } from 'src/app/services/categoria.service';
 import { Categoria } from 'src/app/interfaces/categoria.interface';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { carritoService } from 'src/app/services/carrito.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,11 +17,18 @@ export class NavbarComponent implements OnInit {
 
 
   constructor(private cookieService: CookieService, private authService: authService,
-    private categoriaService: categoriaService, private route: Router) { }
+    private categoriaService: categoriaService, private route: Router, private carritoService: carritoService) {
+    this.carritoService.cantidadTotal
+      .subscribe(cantidad => {
+        this.cantidadTotal = cantidad
+      })
+  }
 
   isAdmin$!: Observable<boolean>
 
   isLoged$!: Observable<boolean>
+
+  cantidadTotal: number = 0
 
   carrito: boolean = false
 
@@ -32,9 +40,11 @@ export class NavbarComponent implements OnInit {
 
   usuario: string = ""
 
+
   ngOnInit(): void {
     this.isAdmin$ = this.authService.isAdmin;
     this.isLoged$ = this.authService.isLoged;
+
 
     this.categoriaService.getCategorias()
       .subscribe({
@@ -42,6 +52,7 @@ export class NavbarComponent implements OnInit {
           this.listaCategorias = resp
         }
       })
+
 
     // this.token = this.cookieService.get('token')
     // this.token=localStorage.getItem('token')
@@ -64,7 +75,7 @@ export class NavbarComponent implements OnInit {
 
   updateUsuario() {
     // console.log(this.usuario)
-    const nombreUsuario=localStorage.getItem('nombreUsuario')
+    const nombreUsuario = localStorage.getItem('nombreUsuario')
     this.route.navigateByUrl('usuarios/update/' + nombreUsuario)
   }
 
@@ -101,8 +112,8 @@ export class NavbarComponent implements OnInit {
     this.claseCarrito = 'cerrado';
   }
 
-  recibirEvento(flag:boolean){
-    if(flag){
+  recibirEvento(flag: boolean) {
+    if (flag) {
       this.cerrarCarrito()
     }
   }

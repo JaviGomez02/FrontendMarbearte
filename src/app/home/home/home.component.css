@@ -156,6 +156,9 @@
 
 /* tablet */
 @media(min-width:481px) and (max-width:768px) {
+    .texto-categoria {
+        visibility: visible;
+    }
 
     .grid-productos-home {
         display: grid;
@@ -196,6 +199,10 @@
 
 /* movil */
 @media(max-width:480px) {
+    .texto-categoria {
+        visibility: visible;
+    }
+
     .grid-productos-home {
         display: grid;
         grid-template-columns: repeat(1, 1fr);

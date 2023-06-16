@@ -5,7 +5,7 @@ import { ItemCarrito } from "../interfaces/itemCarrito.interface";
 import Swal from "sweetalert2";
 import { Color } from "../interfaces/page.interface";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { catchError, of, switchMap } from "rxjs";
+import { BehaviorSubject, Subject, catchError, of, switchMap } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -13,15 +13,37 @@ import { catchError, of, switchMap } from "rxjs";
 
 export class carritoService {
 
-    constructor(private cookies: CookieService, private http: HttpClient) { }
+
 
     url: string = 'https://apimarbearte-production.up.railway.app'
     urlLocal: string = 'http://localhost:8082'
     listaCarrito: ItemCarrito[] = []
 
+    cantidadTotal: BehaviorSubject<number>
+
+    constructor(private cookies: CookieService, private http: HttpClient) {
+        const storedCantidadTotal = localStorage.getItem('cantidadTotal');
+        const initialCantidadTotal = storedCantidadTotal ? parseInt(storedCantidadTotal, 10) : 0;
+        this.cantidadTotal = new BehaviorSubject<number>(initialCantidadTotal);
+    }
+
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
+
+    private guardarCantidadTotalEnLocalStorage() {
+        localStorage.setItem('cantidadTotal', this.cantidadTotal.value.toString());
+    }
+
+
+    getCantidadTotal(): number {
+        let unidades = 0
+        for (let i = 0; i < this.listaCarrito.length; i++) {
+            unidades += this.listaCarrito[i].cantidad
+        }
+        
+        return unidades;
+    }
 
     cargarCarrito() {
         localStorage.setItem('carrito', JSON.stringify(this.listaCarrito))
@@ -65,6 +87,8 @@ export class carritoService {
         }
 
         this.cargarCarrito()
+        this.cantidadTotal.next(this.getCantidadTotal())
+        this.guardarCantidadTotalEnLocalStorage();
     }
 
     añadirProducto(producto: Product, cantidad: number) {
@@ -75,7 +99,7 @@ export class carritoService {
         let cantidadSuperior = false;
         let cantidadTotal = 0;
         let index = -1;
-        
+
         if (producto.colores.length) {
             tieneColor = true
         }
@@ -147,7 +171,7 @@ export class carritoService {
                         text: "Se ha excedido el stock del artículo"
                     })
                 }
-                else{
+                else {
                     this.listaCarrito.push(item)
                     Swal.fire({
                         icon: "success",
@@ -158,12 +182,15 @@ export class carritoService {
                 }
             }
             this.cargarCarrito()
+            this.cantidadTotal.next(this.getCantidadTotal())
+            this.guardarCantidadTotalEnLocalStorage();
         }
     }
 
     vaciarCarrito() {
         this.listaCarrito = []
         this.cargarCarrito()
+        this.cantidadTotal.next(this.getCantidadTotal())
         // window.location.reload()
     }
 

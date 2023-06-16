@@ -77,9 +77,11 @@
         </div>
         <div class="divRight">
             <div class="dropdown">
-                <img *ngIf="!(isAdmin$|async)" (click)="mostrarCarrito()"
-                    src="https://res.cloudinary.com/dplcge3sb/image/upload/v1684083159/shopping_cart_FILL0_wght400_GRAD0_opsz48_ojftax.svg"
-                    class="img-carrito">
+                <span *ngIf="!(isAdmin$|async)" matBadge="{{cantidadTotal}}">
+                    <img (click)="mostrarCarrito()"
+                        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1684083159/shopping_cart_FILL0_wght400_GRAD0_opsz48_ojftax.svg"
+                        class="img-carrito">
+                </span>
                 <button class="btn btn-info dropdown-toggle btn-aux"
                     style="background-color: white;border-color: white;" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false" name="boton_dropdown">
@@ -95,7 +97,8 @@
                             una cuenta</a></li>
                     <li *ngIf="(isLoged$|async)"><a class="dropdown-item drop" (click)="updateUsuario()">Mis datos</a>
                     </li>
-                    <li *ngIf="(isLoged$|async) && !(isAdmin$|async)"><a class="dropdown-item drop" [routerLink]="['/pedidos']">Mis
+                    <li *ngIf="(isLoged$|async) && !(isAdmin$|async)"><a class="dropdown-item drop"
+                            [routerLink]="['/pedidos']">Mis
                             pedidos</a>
                     </li>
                     <li *ngIf="(isLoged$|async)">
