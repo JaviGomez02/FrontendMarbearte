@@ -44,13 +44,15 @@ export class AllProductsComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (queryParams) => {
           this.idCategoria = queryParams['idCategoria']
+          console.log(this.idCategoria)
           if (this.idCategoria) {
             this.listaPagination = []
             this.getCategoria()
           }
+          else{
+            this.nombreCategoria=''
+          }
           this.getProducts()
-
-
         }
       })
 

@@ -28,6 +28,20 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
   loading: boolean = false
 
   ngOnInit(): void {
+    this.route.queryParams
+      .subscribe({
+        next: (queryParams) => {
+          this.idCategoria = queryParams['idCategoria']
+          console.log(this.idCategoria)
+          if (this.idCategoria) {
+            this.getCategoria()
+          }
+          else {
+            this.nombreCategoria = ''
+          }
+          this.getProductos()
+        }
+      })
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
@@ -35,12 +49,6 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
     };
 
     this.idCategoria = this.route.snapshot.queryParams['idCategoria']
-
-    if (this.idCategoria) {
-      this.getCategoria()
-    }
-
-    this.getProductos()
 
   }
 
@@ -101,7 +109,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
   }
 
   eliminarColor(idProducto: number, codigoColor: string) {
-    this.loading=true
+    this.loading = true
     this.productService.eliminarColor(idProducto, codigoColor)
       .subscribe({
         next: (resp) => {
@@ -113,7 +121,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
             ).then((resp) => {
               window.location.reload()
             })
-            this.loading=false
+            this.loading = false
           }
           else {
             Swal.fire(
@@ -121,7 +129,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
               'Ocurrió un error inesperado.',
               'error'
             )
-            this.loading=false
+            this.loading = false
           }
         }
       })
@@ -138,7 +146,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
       confirmButtonText: 'Si, Borrar'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.loading=true
+        this.loading = true
         this.productService.deleteArticulo(id)
           .subscribe({
             next: (resp) => {
@@ -150,7 +158,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
                 ).then((resp) => {
                   window.location.reload()
                 })
-                this.loading=false
+                this.loading = false
               }
               else {
                 Swal.fire(
@@ -158,7 +166,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
                   'Ocurrió un error inesperado.',
                   'error'
                 )
-                this.loading=false
+                this.loading = false
               }
             },
             error: (error) => {
@@ -167,7 +175,7 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
                 'Ocurrió un error inesperado.',
                 'error'
               )
-              this.loading=false
+              this.loading = false
             }
           })
 

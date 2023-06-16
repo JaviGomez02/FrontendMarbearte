@@ -1,31 +1,34 @@
 <div *ngIf="loading" class="overlay"></div>
 <div *ngIf="loading" class="spinner">
-    <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </div>
-<div class="productos-home-1" *ngIf="!isAdmin && lista.length">
-  <p class="titulo-productos" *ngIf="!nombreCategoria">Todos nuestros productos</p>
-  <p class="titulo-productos" *ngIf="nombreCategoria">{{nombreCategoria}}</p>
-  <div class="grid-productos-home">
-    <div class="producto" *ngFor="let item of lista" [routerLink]="['/products', item.id]">
-      <img class="img-producto" *ngIf="item.imagenes[0]" src="{{item.imagenes[0].img}}">
-      <img class="img-producto" *ngIf="!item.imagenes[0]"
-        src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg" alt="img-producto">
-      <p class="nombre-producto" *ngIf="item.nombre.length<20">{{item.nombre}} <span class="precio-producto">| {{item.price}}€</span></p>
-      <p class="nombre-producto" *ngIf="item.nombre.length>=20">Producto <span class="precio-producto">| {{item.price}}€</span></p>
-      <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
+<span *ngIf="!isAdmin">
+  <div class="productos-home-1" *ngIf="!isAdmin && lista.length">
+    <p class="titulo-productos" *ngIf="!nombreCategoria">Todos nuestros productos</p>
+    <p class="titulo-productos" *ngIf="nombreCategoria">{{nombreCategoria}}</p>
+    <div class="grid-productos-home">
+      <div class="producto" *ngFor="let item of lista" [routerLink]="['/products', item.id]">
+        <img class="img-producto" *ngIf="item.imagenes[0]" src="{{item.imagenes[0].img}}">
+        <img class="img-producto" *ngIf="!item.imagenes[0]"
+          src="https://res.cloudinary.com/dplcge3sb/image/upload/v1678193992/nophoto_mlpdrz.jpg" alt="img-producto">
+        <p class="nombre-producto" *ngIf="item.nombre.length<20">{{item.nombre}} <span class="precio-producto">|
+            {{item.price}}€</span></p>
+        <p class="nombre-producto" *ngIf="item.nombre.length>=20">Producto <span class="precio-producto">|
+            {{item.price}}€</span></p>
+        <p class="boton-producto"><button class="boton" type="submit">Ver mas</button></p>
+      </div>
+    </div>
+    <div class="pagination">
+      <a (click)="previousPageNumber()">&laquo;</a>
+      <a *ngFor="let item of listaPagination" (click)="setPageNumber(item)"
+        [ngClass]="{'active':item==pageNumber}">{{item}}</a>
+      <a (click)="nextPageNumber()">&raquo;</a>
     </div>
   </div>
-  <div class="pagination">
-    <a (click)="previousPageNumber()">&laquo;</a>
-    <a *ngFor="let item of listaPagination" (click)="setPageNumber(item)" [ngClass]="{'active':item==pageNumber}">{{item}}</a>
-    <a (click)="nextPageNumber()">&raquo;</a>
+
+  <div class="productos-home-1" *ngIf="!lista.length">
+    <p class="titulo-productos">NO HAY PRODUCTOS</p>
+    <div style="height: 100px;"></div>
   </div>
-</div>
-
-<div class="productos-home-1" *ngIf="!lista.length">
-  <p class="titulo-productos">NO HAY PRODUCTOS</p>
-  <div style="height: 100px;"></div>
-</div>
-
-<app-datatable-product *ngIf="isAdmin" ></app-datatable-product>
-
+</span>
+<app-datatable-product *ngIf="isAdmin"></app-datatable-product>

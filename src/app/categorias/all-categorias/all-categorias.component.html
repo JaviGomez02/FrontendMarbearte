@@ -7,7 +7,9 @@
     <div class="div-boton">
         <button class="boton" [routerLink]="['/categoria/add']">Añadir nueva categoria</button>
     </div>
-    <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions"
+    <p class="titulo-aux" *ngIf="!lista.length">No existen productos</p>
+
+    <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" *ngIf="lista.length"
         [dtTrigger]="dtTrigger" >
         <thead>
             <tr>

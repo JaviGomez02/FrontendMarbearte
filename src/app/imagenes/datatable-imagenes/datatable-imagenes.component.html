@@ -6,8 +6,10 @@
     <p class="titulo-productos">Imagenes del producto: {{nombreProducto}}</p>
     <div class="div-boton">
         <button class="boton" (click)="addImagen()">Añadir nueva imagen</button>
-    </div>
-    <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions"
+    </div>  
+    <p class="titulo-aux" *ngIf="!lista.length">No existen imagenes</p>
+
+    <table class="table table-bordered table-striped table-hover" datatable [dtOptions]="dtOptions" *ngIf="lista.length"
         [dtTrigger]="dtTrigger">
         <thead>
             <tr>

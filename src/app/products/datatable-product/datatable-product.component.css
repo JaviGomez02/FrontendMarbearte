@@ -17,6 +17,15 @@
     z-index: 9998;
 }
 
+
+.titulo-aux {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 150px;
+}
+
 .productos-home-1 {
     text-align: center;
     margin: 50px;
