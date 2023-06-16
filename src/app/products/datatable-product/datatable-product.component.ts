@@ -32,7 +32,6 @@ export class DatatableProductComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (queryParams) => {
           this.idCategoria = queryParams['idCategoria']
-          console.log(this.idCategoria)
           if (this.idCategoria) {
             this.getCategoria()
           }
