@@ -17,7 +17,7 @@ export class authService {
     urlLocal: string = 'http://localhost:8082/auth'
 
     urlAuxLocal: string = 'http://localhost:8082/jwt'
-    urlAux:string = 'https://apimarbearte-production.up.railway.app/jwt'
+    urlAux: string = 'https://apimarbearte-production.up.railway.app/jwt'
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,6 +30,12 @@ export class authService {
         //         next: () => this.loged.next(true),
         //         error: () => this.loged.next(false)
         //     })
+        if (localStorage.getItem('token')) {
+            this.loged.next(true)
+            if (this.decodeJwt(localStorage.getItem('token') as string).role == 'ADMIN') {
+                this.admin.next(true)
+            }
+        }
 
         // this.http.get(this.urlAux+'Admin')
         //     .subscribe({

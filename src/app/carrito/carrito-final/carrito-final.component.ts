@@ -88,7 +88,7 @@ export class CarritoFinalComponent implements OnInit {
 
       },
       onClientAuthorization: (data) => {
-        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+        // console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
         this.comprar()
       },
       onCancel: (data, actions) => {
@@ -240,6 +240,7 @@ export class CarritoFinalComponent implements OnInit {
             .subscribe({
               next: (resp) => {
                 if (resp) {
+                  this.idDireccion=0
                   Swal.fire({
                     icon: 'success',
                     title: 'Direccion añadida correctamente'
@@ -287,6 +288,7 @@ export class CarritoFinalComponent implements OnInit {
           .subscribe({
             next: (resp) => {
               if (resp) {
+                this.idDireccion=0
                 Swal.fire({
                   icon: 'success',
                   title: 'Borrado correctamente'

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnInit } from "@angular/core";
 import { Product } from "../interfaces/product.interface";
 import { CookieService } from "ngx-cookie-service";
 import { ItemCarrito } from "../interfaces/itemCarrito.interface";
@@ -11,7 +11,7 @@ import { BehaviorSubject, Subject, catchError, of, switchMap } from "rxjs";
     providedIn: 'root'
 })
 
-export class carritoService {
+export class carritoService implements OnInit{
 
 
 
@@ -25,6 +25,10 @@ export class carritoService {
         const storedCantidadTotal = localStorage.getItem('cantidadTotal');
         const initialCantidadTotal = storedCantidadTotal ? parseInt(storedCantidadTotal, 10) : 0;
         this.cantidadTotal = new BehaviorSubject<number>(initialCantidadTotal);
+    }
+
+    ngOnInit(): void {
+        this.guardarCantidadTotalEnLocalStorage()
     }
 
     httpOptions = {
