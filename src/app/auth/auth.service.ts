@@ -25,17 +25,17 @@ export class authService {
 
 
     constructor(private http: HttpClient, private cookieService: CookieService) {
-        this.http.get(this.urlAux)
-            .subscribe({
-                next: () => this.loged.next(true),
-                error: () => this.loged.next(false)
-            })
+        // this.http.get(this.urlAux)
+        //     .subscribe({
+        //         next: () => this.loged.next(true),
+        //         error: () => this.loged.next(false)
+        //     })
 
-        this.http.get(this.urlAux+'Admin')
-            .subscribe({
-                next: () => this.admin.next(true),
-                error: () => this.admin.next(false)
-            })
+        // this.http.get(this.urlAux+'Admin')
+        //     .subscribe({
+        //         next: () => this.admin.next(true),
+        //         error: () => this.admin.next(false)
+        //     })
     }
 
     private admin = new BehaviorSubject<boolean>(false);
