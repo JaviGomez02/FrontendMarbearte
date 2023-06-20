@@ -143,7 +143,7 @@ export class carritoService implements OnInit{
                                 icon: "success",
                                 title: "Producto añadido al carrito!"
                             }).then((result) => {
-                                // window.location.reload()
+                                window.location.reload()
                             })
                         }
                     }
@@ -163,7 +163,7 @@ export class carritoService implements OnInit{
                         icon: "success",
                         title: "Producto añadido al carrito!"
                     }).then((result) => {
-                        // window.location.reload()
+                        window.location.reload()
                     })
                 }
             }
@@ -181,7 +181,7 @@ export class carritoService implements OnInit{
                         icon: "success",
                         title: "Producto añadido al carrito!"
                     }).then((result) => {
-                        // window.location.reload()
+                        window.location.reload()
                     })
                 }
             }
